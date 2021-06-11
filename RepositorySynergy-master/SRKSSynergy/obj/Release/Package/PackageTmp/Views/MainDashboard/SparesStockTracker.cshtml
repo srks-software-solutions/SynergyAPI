@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Synergy - Dashboard</title>
+	@*<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/MDB.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/menu.css">
+	<script type="text/javascript" src="bootstrap/js/jquery-1.9.1.min.js"></script>*@
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var tabs = $('.tabsm > li');
+			tabs.on("click", function () {
+				tabs.removeClass('active');
+				$(this).addClass('active');
+			});
+		});
+	</script>
+</head>
+<body style="margin: 0 auto">
+	@{
+		ViewBag.Title = "Synergy";
+	}
+	<div class="bcgr" style="margin: 0 auto;min-height:600px">
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Spares Stock Tracker</p>
+		</div>
+		<div style="padding-top: 80px; padding-bottom: 80px; margin: 0 auto">
+			<table style="text-align: center; margin: 0 auto; width: 900px; height: 220px;">
+				<tr style="padding-bottom: 10px">
+
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/Inventory/InventoryMonthRep" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/quotations1_icon.png" alt='missing' />
+								<figcaption><strong>Spares Stock Entry</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/Inward/AddInward" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/inventory.png" alt='missing' />
+								<figcaption><strong>Spares Inward</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/MainDashboard/Outward" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/preferences_edit.png" alt='missing' />
+								<figcaption><strong>Spares Outward</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+
+					<td></td>
+					<td></td>
+@*					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/Warranty/Warranty" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/warranty (2).png" alt='missing' />
+								<figcaption><strong>Warranty Management</strong></figcaption>
+							</figure>
+						</a>
+					</td>*@
+
+					<td></td>
+					<td></td>
+					
+					<td></td>
+					<td></td>
+					
+
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+</body>
+</html>
+

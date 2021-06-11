@@ -1,0 +1,472 @@
+﻿@*@model IList<SRKSSynergy.Models.OutwardMFR>*@
+@model SRKSSynergy.Models.IndexViewModel
+@using SRKSSynergy.Helpers
+@{
+
+    ViewBag.Title = "Spare Status MFR Claim Report";
+    int slno = ViewBag.SlNo;
+    ViewBag.last = "is";
+}
+
+@{
+    SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+ }
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<script>
+    $(document).ready(function () {
+        $('.sss').monthpicker();
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cpnam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/MFRDurationReport/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CPName, value: item.CPName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $("#cusnam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/MFRDurationReport/Autocompletecus",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName};
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#printbutton").click(function () {
+            $("#printbutton").visible = false;
+            $("#savebutton").visible = false;
+            self.focus()
+            self.print()
+        });
+    });
+</script>
+
+<div class="bcgr" style="width:100%">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">MFR Duration Report</p>
+    </div>
+    <div class="noPrint">
+        <form action="@Url.Action("MFRDuration", "MFRDurationReport")" method="get">
+             <div style="background: #e5e5e5; min-height: 30px; min-width: 690px">
+            <div class="row" style="padding-top: 10px">
+                <div class=" row show-grid">
+                    @* Text Box for search *@
+                    <div class="span12 pad">
+                        <div class="span3 ">
+                            <div class="control-group ">
+                                <label class="control-label fntst1 ">Channel Partner Name</label>
+                                <div class="controls">
+                                    @*<input type="text" class="fntst1 excus" value="@ViewBag.Search" id="cpnam" name="cpnam" placeholder="Channel Partner Name">*@
+                                    @Html.TextBox("cpnam", null, new { @style = "height:30px", @class = "printButtonClass noPrint", @placeholder = " Search Channel Partner Name", @autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span1"></div>
+                        <div class="span3 ">
+                            <div class="control-group ">
+                                <label class="control-label fntst1 ">Customer Name</label>
+                                <div class="controls">
+                                    @*<input type="text" class="fntst1 excus" value="@ViewBag.Search" id="cpnam" name="cpnam" placeholder="Channel Partner Name">*@
+                                    @Html.TextBox("cusnam", null, new { @style = "height:30px", @class = "printButtonClass noPrint", @placeholder = " Search Customer Name", @autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                     <div class="span12 pad">
+                         <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label fntst1">Item Name</label>
+                                <div class="controls">
+                                    @Html.DropDownList("ProductModelSparesID", null, "--Select--", new { @style = "width:75%", @class = "printButtonClass noPrint fntst1" })
+                                </div>
+                            </div>
+                        </div>
+                         <div class="span1"></div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label fntst1">Dispatch Status</label>
+                                <div class="controls">
+                                    <select style="width:75%", id="dispst" name="dispst" class="printButtonClass noPrint fntst1">
+                                        <option value="">Select Option</option>
+                                        <option value="0">Open</option>
+                                        <option value="1">Close</option>
+                                        <option value="2">Reject</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12 pad">
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label fntst1">From Month</label>
+                                <div class="controls">
+                                    <input style="height:30px", type ="text" class="printButtonClass noPrint fntst1 sss" id="fm" name="fm" placeholder="Select Month" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span1"></div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label fntst1">To Month</label>
+                                <div class="controls">
+                                    <input style="height:30px", type ="text" class="printButtonClass noPrint fntst1 sss" id="tm" name="tm" placeholder="Select Month" />
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="span12 pad">
+                        <div class="span1"></div>
+                        @* Button for Search *@
+                        <div class="span3" style="padding-top: 20px">
+                            @*<input type="submit" style="width: 100px; height: 35px" value="Get Details" class="btn btn-info existingcustomer printButtonClass" />*@
+                            <button type="submit" id="gd" class="btn btn-info existingcustomer glyphicon glyphicon-paste"  > Get_Details</button>
+                        </div>
+                        @* End of buttons *@
+                        @*code added by suhas 29-08-2017 to load anchor tag for sending particular data to the export method*@
+                        <script>
+                            setTimeout(function () {
+                                var currentLocation = window.location;
+                                var currentLocation = currentLocation + "";
+                                var hrf = currentLocation.split('?');
+                                var href = "/MFRDurationReport/ExportData?"+hrf[1];
+                                $("#exporttag").attr('href', href);
+                            }, 1000);
+                        </script>
+                        <div class="span3" style="padding-top: 20px">
+                            <button class="btn btn-info printButtonClass glyphicon glyphicon-print " id="printbutton" style="width:100px;height:35px" type="button"> Print</button>
+                         <a id="exporttag" class="btn btn-success glyphicon glyphicon-download " href="/MFRDurationReport/ExportData"> Export</a>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+    <style>
+        .pad {
+        padding:3px;
+        }
+    </style>
+@* Wrong Channel Partner *@
+    @if (TempData["wrongcp"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["wrongcp"]</p>
+    }
+
+                <table class="table-hover" style="width:99%;margin-left:0%">
+                    <thead>
+                        <tr style="background: #BBBEBD">
+                           <th style="width: auto; text-align: center" class="fntst1 cal botbor pad">Serial No</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad">Customer Name</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad">Channel Partner</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad">Machine Serial No.</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad"> MFR Generated Date</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad">MFR No</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad">Item No.</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad">Spare Description</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad">Quantity</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad">No of Days taken for approved </th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad"> No. of days to dispatch the spares</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad"> No. of spares day to received Spares</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad"> No of Days Machine issued closed</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad"> Total day to close the MFR issue</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst1 cal botbor pad"> No of days Faulty board sent to BBAN</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+
+                   @* @for (int i = 0; i < Model.Count; i++)*@
+                    @foreach (var item in Model.OutwardMFR)
+                    {
+                        var objMfr = db.MFR.Where(m => m.MFRNumber == item.MFRNo).FirstOrDefault();
+                        var MFRBBan = db.MFRBBAN.Where(m => m.MFRID == objMfr.MFRID).FirstOrDefault();
+                        double c=0,c1 = 0,c2=0,c3=0,c5=0;
+                        string s="",s1="",s2="",s3="",s4="",s5="";
+                        if ((objMfr.MfrDate != null || objMfr.MfrDate != "") && (MFRBBan.MfrAdminDat != null || MFRBBan.MfrAdminDat==""))
+                        {
+                            DateTime a = Convert.ToDateTime(objMfr.MfrDate, System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                            DateTime b = Convert.ToDateTime(MFRBBan.MfrAdminDat, System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+
+                                c = (b - a).TotalDays;
+
+                             s = c.ToString() + " days";
+                        }
+                        else
+                        {
+                            s = "";
+                        }
+                        if ((item.DispatchDate != null ) && (MFRBBan.MfrAdminDat != null || MFRBBan.MfrAdminDat == ""))
+                        {
+                            DateTime a1 = Convert.ToDateTime(item.DispatchDate, System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                            DateTime b1 = Convert.ToDateTime(MFRBBan.MfrAdminDat, System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                            if (a1 > b1)
+                            {
+                                c1 = (a1 - b1).TotalDays;
+                            }
+                            else
+                            {
+                                c1 = (b1 - a1).TotalDays;
+                            }
+                            s1 = c1.ToString() + " days";
+                        }
+                        else
+                        {
+                            s1 = "";
+                        }
+
+                        if ((item.SparesRecievedDate != null) && (item.DispatchDate != null))
+                        {
+                            DateTime a2 = Convert.ToDateTime(item.SparesRecievedDate, System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                            DateTime b2 = Convert.ToDateTime(item.DispatchDate, System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                            if (a2 > b2)
+                            {
+                                c2 = (a2 - b2).TotalDays;
+                            }
+                            else
+                            {
+                                c2 = (b2 - a2).TotalDays;
+                            }
+                            s2 = c2.ToString() + " days";
+                        }
+                        else
+                        {
+                            s2 = "";
+                        }
+                        if ((item.MachineIssueDate != null) && (item.SparesRecievedDate != null))
+                        {
+                            DateTime a3 = Convert.ToDateTime(item.MachineIssueDate, System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                            DateTime b3 = Convert.ToDateTime(item.SparesRecievedDate, System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                            if (a3 > b3)
+                            {
+                                c3 = (a3 - b3).TotalDays;
+                            }
+                            else
+                            {
+                                c3 = (b3 - a3).TotalDays;
+                            }
+                            s3 = c3.ToString() + " days";
+                        }
+                        else
+                        {
+                            s3 = "";
+                        }
+
+
+                        if (s3!="")
+                        {
+                            double c4 = c3 + c2 + c1 + c;
+                            s4 = c4.ToString() + " days";
+                        }
+                        else
+                        {
+                            s4 = "";
+                        }
+                        if ((item.FaultSpareDate != null) && (item.MachineIssueDate != null))
+                        {
+                            DateTime a5 = Convert.ToDateTime(item.FaultSpareDate, System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                            DateTime b5 = Convert.ToDateTime(item.MachineIssueDate, System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                            if (a5 > b5)
+                            {
+                                c5 = (a5 - b5).TotalDays;
+                            }
+                            else
+                            {
+                                c5 = (b5 - a5).TotalDays;
+                            }
+                            s5 = c5.ToString() + " days";
+                        }
+                        else
+                        {
+                            s5 = "";
+                        }
+                           <tr>
+                            <td style="text-align: center;" class="pad">
+                                @slno
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @item.CustomerName
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @item.ChannelPartners.CPName
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                  @objMfr.MacSlNo
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @Convert.ToString(string.Format("{0:dd/MM/yyyy}", objMfr.MfrDate))
+                            </td>@*MFR Generated Date *@
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @item.MFRNo
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @item.ProductModelSpare.ProductModelSparesName
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @item.ProductModelSpare.ProductModelSparesDesc
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @item.QuantityOrdered
+                            </td>
+
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                               @s
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @s1
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @s2
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @s3
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @s4
+                            </td>
+                            <td></td>
+                            <td style="text-align: center;" class="pad">
+                                @s5
+                            </td>
+
+                        </tr>
+                        slno = slno + 1;
+                    }
+                </table>
+
+    <div style="float:initial">
+      <!-- pager -->
+				@if (Model.Pager.EndPage > 1)
+    {
+					<ul class="pagination">
+						@if (Model.Pager.CurrentPage > 1)
+      {
+							<li>
+								<a href="~/MFRDurationReport/MFRDuration?page=1&cpnam=@ViewBag.cpnam&cusnam=@ViewBag.cusnam&ProductModelSparesID=@ViewBag.prdid&dispst=@ViewBag.dispt&fm=@ViewBag.fm&tm=@ViewBag.tm">First</a>
+							</li>
+							<li>
+								<a href="~/MFRDurationReport/MFRDuration?page=@(Model.Pager.CurrentPage - 1)&cpnam=@ViewBag.cpnam&cusnam=@ViewBag.cusnam&ProductModelSparesID=@ViewBag.prdid&dispst=@ViewBag.dispt&fm=@ViewBag.fm&tm=@ViewBag.tm">Previous</a>
+							</li>
+      }
+
+						@for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+      {
+							<li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+								<a href="~/MFRDurationReport/MFRDuration?page=@page&cpnam=@ViewBag.cpnam&cusnam=@ViewBag.cusnam&ProductModelSparesID=@ViewBag.prdid&dispst=@ViewBag.dispt&fm=@ViewBag.fm&tm=@ViewBag.tm">@page</a>
+							</li>
+      }
+
+						@if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+      {
+							<li>
+								<a href="~/MFRDurationReport/MFRDuration?page=@(Model.Pager.CurrentPage + 1)&cpnam=@ViewBag.cpnam&cusnam=@ViewBag.cusnam&ProductModelSparesID=@ViewBag.prdid&dispst=@ViewBag.dispt&fm=@ViewBag.fm&tm=@ViewBag.tm">Next</a>
+							</li>
+							<li>
+								<a href="~/MFRDurationReport/MFRDuration?page=@(Model.Pager.TotalPages)&cpnam=@ViewBag.cpnam&cusnam=@ViewBag.cusnam&ProductModelSparesID=@ViewBag.prdid&dispst=@ViewBag.dispt&fm=@ViewBag.fm&tm=@ViewBag.tm">Last</a>
+							</li>
+      }
+					</ul>
+    }
+        </div>
+
+            </div>
+             @using (Html.BeginForm("ExportData", "MFRDurationReport", FormMethod.Post, new { enctype = "multipart/form-data" }))
+             {
+            <input type="text" name="cpnam" class="input-xxsmall fntst1" id="cpnam" value="@ViewBag.cpnam" style="display:none" >
+            <input type="text" name="cusnam" class="input-xxsmall fntst1" id="cusnam" value="@ViewBag.cusnam" style="display:none">
+            <input type="text" name="ProductModelSparesID" class="input-xxsmall fntst1" id="ProductModelSparesID" value="@ViewBag.prdid" style="display:none" >
+            <input type="text" class="input-xxsmall fntst1" id="dispst" name="dispst" value="@ViewBag.dispt" style="display:none" >
+            <input type="text" class="input-xxsmall fntst1" id="fm" name="fm" value="@ViewBag.fm" style="display:none" >
+            <input type="text" class="input-xxsmall fntst1" id="tm" name="tm" value="@ViewBag.tm" style="display:none" >
+
+
+                 @*<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+                <div class=" row show-grid">
+                    <div class="span10">
+                        <div class="span3">
+                            <input type="submit" style="width: 100px; height: 35px" value="Export" class="btn btn-info existingcustomer printButtonClass" />
+                           <button class="btn btn-success glyphicon glyphicon-download " value="post" type="Submit"> Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+             }
+

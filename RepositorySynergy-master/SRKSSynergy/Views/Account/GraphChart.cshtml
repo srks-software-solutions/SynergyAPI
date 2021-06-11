@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "GraphChart";
+}
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '@Url.Action("Piechart")',
+                data: '{}',
+                success: function (chartsdata) {
+
+                    // Callback that creates and populates a data table,  
+                    // instantiates the pie chart, passes in the data and  
+                    // draws it.   
+
+                    var data = new google.visualization.DataTable();
+
+                    data.addColumn('number', 'CPID');
+                    data.addColumn('number', 'TotalCount');
+
+                    for (var i = 0; i < chartsdata.length; i++) {
+                        data.addRow([chartsdata[i].CPID, chartsdata[i].TotalCount]);
+                    }
+                    // Instantiate and draw our chart, passing in some options  
+                    var chart = new google.visualization.BarChart(document.getElementById('chartdiv'));
+
+                    chart.draw(data,
+                      {
+                          title: "Show Google Chart in Asp.net",
+                          position: "top",
+                          fontsize: "14px",
+                          chartArea: { width: '50%' },
+                      });
+                },
+                error: function () {
+                    alert("Error loading data! Please try again.");
+                }
+            });
+        })
+
+</script>
+
+<div id="chartdiv" style="width: 600px; height: 350px;">
+</div>

@@ -1,0 +1,176 @@
+﻿@model IEnumerable<SRKSSynergy.Models.MFR>
+
+@{
+	ViewBag.Title = "Machine Fault Report View";
+	//string qtno = null, cunam = null;
+	ViewBag.pen = "Pending";
+	ViewBag.app = "Approved";
+	ViewBag.rej = "Rejected";
+	ViewBag.senapp = "Sent for Approval";
+}
+
+
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+@Scripts.Render("~/bundles/modernizr")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cunam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/MFR/Autocompletecp",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CPName, value: item.CPName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<input type="text" id="success" value="false" style="display: none;" />
+<form action="@Url.Action("MFRChannelView", "MFR")" method="get">
+	<div style="background: #e5e5e5;">
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Machine Fault Report View</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span12 pad ">
+					<div class="span2">
+						<div class="control-group ">
+							<label class="control-label fntst ">Channel Partner Name</label>
+							<div class="controls ">
+								<input type="text" class="fntst excus" value="@ViewBag.Search" id="cunam" name="cunam" placeholder="Channel Partner Name" style="height:30px">
+							</div>
+						</div>
+					</div>
+					<div class="span2">
+						<div class="cent3">
+							@*<input type="submit" value="Get Details" class="btn btn-info existingcustomer" onclick="javascript: return updateparent();" />*@
+							@*<input type="submit" value="Get Details" id="gd" class="btn btn-info existingcustomer"  style="margin-bottom:0px;padding-top:7%"/>*@
+                            <button type="submit" id="gd" class="btn btn-info existingcustomer glyphicon glyphicon-paste"  > Get_Details</button>
+							@*onclick="javascript: return updateparent();"*@
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+@* Wrong Channel Partner *@
+@if (TempData["oagen"] != null)
+{
+	<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["oagen"]</p>
+}
+@* MFR Generated Message *@
+@if (TempData["MFRGen"] != null)
+{
+	<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["MFRGen"]</p>
+}
+@if (ViewBag.IsSearch == true)
+{
+	<div id="getquotations">
+		<table class="table table-striped " style="width: 100%">
+			@* header *@
+			<tr align="center">
+				<th align="center" style="width: 50px; text-align: center">SL.No</th>
+				<th align="center" style="width: 120px; text-align: center">MFR No</th>
+				@*<th align="center" style="width: 100px; text-align: center">@sortLink("Order No", 2)</th>
+				<th align="center" style="width: 100px; text-align: center">@sortLink("MFR To", 3)</th>*@
+				<th align="center" style="width: 100px; text-align: center">MFR Date</th>
+
+                <th align="center" style="width: 100px; text-align: center">Channel Partner</th>
+
+                <th align="center" style="width: 100px; text-align: center">Customer Name</th>
+				@*<th align="center" style="width: 100px; text-align: center">@sortLink("Commissioned By", 5)</th>*@
+				<th align="center" style="width: 60px; text-align: center">Status</th>
+				<th align="center" style="width: 100px; text-align: center">Comments</th>
+				<th align="center" style="width: 120px; text-align: center"></th>
+			</tr>
+			@{int i = 1;
+			  int slno = 1;}
+			@foreach (var p in Model)
+			{
+				<tr>
+					<td align="center" style="width: 50px; text-align: center">@slno</td>
+					<td align="center" style="width: 120px; text-align: center">@p.MFRNumber</td>
+					<td align="center" style="width: 100px; text-align: center">@p.MfrDate</td>
+
+                    <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @if (p.CPID != null)
+                        {
+                            SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+                            var dte = db.ChannelPartners.Where(m => m.CPID == p.CPID).Select(m => m.CPName).SingleOrDefault();
+
+                           @dte
+                        }
+                    </td>
+
+                    @*<td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @if (p.MDBID != null)
+                        {
+                            SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+                            var cname = db.MachineInventory.Where(m => m.MDBID == p.MDBID).Select(m => m.CustomerName).ToList();
+                           @cname
+                        }
+                    </td>*@
+
+                    <td align="center" style="width: 120px; text-align: center">@p.MDBGeneralData.OrganizationName</td>
+
+                    <td align="center" style="width: 60px; text-align: center">
+						@if (p.ApprovalStatus == 0)
+						{
+							@ViewBag.pen
+						}
+						@if (p.ApprovalStatus == 1)
+						{
+							@ViewBag.app
+						}
+						@if (p.ApprovalStatus == 2)
+						{
+							@ViewBag.rej
+						}
+					</td>
+					<td>
+						@p.MFRComment
+					</td>
+					<td align="center" style="width: 120px; text-align: center">
+						@if (p.ApprovalStatus == 1 || p.ApprovalStatus == 2)
+						{
+							//@ViewBag.app
+							@Html.ActionLink(" Print_MFR", "MFRReport", new { mfrid = p.MFRID }, new { @align = "center", @style = "text-align:center", @class = "btn btn-info existingcustomer glyphicon glyphicon-print" })
+						}
+						@*@if (p.ApprovalStatus == 2)
+						{
+							//@ViewBag.rej
+							@Html.ActionLink("Revise MFR", "MFRRevise", new { oaid = p.MFRID }, new { @align = "center", @style = "width:50px;text-align:center", @class = "btn btn-info existingcustomer" })
+						}*@
+					</td>
+				</tr>
+	  slno++;
+			}
+
+		</table>
+
+	</div>
+}
+
+

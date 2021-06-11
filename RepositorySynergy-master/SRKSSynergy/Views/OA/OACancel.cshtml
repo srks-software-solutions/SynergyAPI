@@ -1,0 +1,109 @@
+﻿@model SRKSSynergy.Models.OAEquipGeneralData
+@{
+    ViewBag.Title = "OACancel";
+}
+
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<div class="bcgr" style="min-height: 580px">
+	@using (Html.BeginForm("OACancel", "OA", FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+
+     @Html.HiddenFor(m=>m.OAID)
+     @Html.HiddenFor(m=>m.QGID)
+     @Html.HiddenFor(m=>m.QuotationNumber)
+     @Html.HiddenFor(m=>m.OANumber)
+     @Html.HiddenFor(m=>m.CPQuotationNumber)
+     @Html.HiddenFor(m=>m.KindAttention)
+     @Html.HiddenFor(m=>m.Subjectinfo)
+     @Html.HiddenFor(m=>m.CompanyUniqueID)
+     @Html.HiddenFor(m=>m.QuotationDate)
+     @Html.HiddenFor(m=>m.OADate)
+     @Html.HiddenFor(m=>m.MDBID)
+     @Html.HiddenFor(m=>m.CreatedBy)@Html.HiddenFor(m=>m.CreatedOn)@Html.HiddenFor(m=>m.ModifiedBy)@Html.HiddenFor(m=>m.ModifiedOn)
+     @Html.HiddenFor(m=>m.Islatest)
+     @Html.HiddenFor(m=>m.CPID)
+     @Html.HiddenFor(m=>m.OAStatus)
+     @Html.HiddenFor(m=>m.ApprovalStatus)
+     @Html.HiddenFor(m=>m.Approvaldate)
+     @Html.HiddenFor(m=>m.OARejectComm)
+     @Html.HiddenFor(m=>m.TinNumber)
+     @Html.HiddenFor(m=>m.IsHOD)
+     @Html.HiddenFor(m=>m.IsMacineDispatch)
+     @Html.HiddenFor(m=>m.CPName)
+
+         <div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Cancel OA Order</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad">
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">OA Number:</label>
+							<div class="controls">								
+                                @Html.DisplayFor(model=>model.OANumber)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">Comments:</label>
+							<div class="controls">
+								<textarea id="comments" name="comments" class="fntst sss" cols="3" rows="4" required="required"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				@*<div class="span10 pad">
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">Machine Type</label>
+							<div class="controls">								
+								<select id="macty" name="macty" class="fntst" required="required">
+								  <option value="CCD">CCD Machines</option>
+								  <option value="CMOS">CMOS Machines</option>
+                                  <option value="W">WSeries</option>
+                                  <option value="ALL">All Machines</option>															 
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>*@
+			</div>
+		</div>
+		<div class="span10 pad ">
+			<div class="span3 cent" style="padding-left: 70px">
+				<button class="btn btn-info glyphicon glyphicon-remove-circle" value="Create" type="Submit">Cancel_OA</button>
+			</div>
+		</div>
+	}
+</div>
+@*<script type="text/javascript">
+	$(document).ready(function () {
+		var now = new Date();
+		var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+		$('.sss').datepicker({
+			format: 'dd/mm/yyyy',
+			onRender: function (date) {
+				return date.valueOf() > now.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			$(this).datepicker('hide');
+		});
+	});
+</script>*@
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+

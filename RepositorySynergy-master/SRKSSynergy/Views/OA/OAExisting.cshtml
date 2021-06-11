@@ -1,0 +1,173 @@
+﻿@model IList<SRKSSynergy.Models.OAEquipGeneralData>
+@{
+    ViewBag.Title = "Existing OA";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.senapp = "Sent for Approval";
+    ViewBag.pen = "Pending";
+    ViewBag.app = "Approved";
+    ViewBag.rej = "Rejected";
+   int  slno = 1;
+}
+@* End Of Paging & Sorting Code *@
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+@Scripts.Render("~/bundles/modernizr")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#qtno").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/OA/Autocompleteexisoanum",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.QuotationNumber, value: item.QuotationNumber };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cunam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/OA/Autocompleteexiscust",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<input type="text" id="success" value="false" style="display: none;" />
+<form action="@Url.Action("OAExisting", "OA")" method="get">
+    <div style="background: #e5e5e5; min-height: 100px">
+        <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">Revise Existing Orders</p>
+        </div>
+        <div class="row" style="padding-top: 10px">
+            <div class=" row show-grid">
+                <div class="span12 pad ">
+                    <div class="span3 ">
+                        <div class="control-group ">
+                            <label class="control-label fntst ">Customer Name</label>
+                            <div class="controls ">
+                                <input type="text" style="height:30px" class="fntst excus" value="@ViewBag.Search" id="cunam" name="cunam" placeholder="Customer Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="cent3">
+                            @*<input type="submit" value="Get Details" class="btn btn-info existingcustomer" onclick="javascript: return updateparent();" />*@
+                           <button type="submit" id="gd" class="btn btn-info existingcustomer glyphicon glyphicon-paste"  > Get_Details</button>
+                            @*onclick="javascript: return updateparent();"*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@if (ViewBag.IsSearch == true)
+{
+    <div id="getquotations">
+        <table class="table table-striped" style="width: 1300px">
+            @* header *@
+            @*<tr align="center">
+                <th align="center" style="width: 50px; text-align: center">@sortLink("SL.No", 1)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Order Acknowledgement No", 2)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Customer Name", 3)</th>
+                <th align="center" style="width: 150px; text-align: center">@sortLink("Subject", 4)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Channel Partner Quotation No", 5)</th>
+                <th align="center" style="width: 60px; text-align: center">@sortLink("Date", 6)</th>
+                <th align="center" style="width: 60px; text-align: center">@sortLink("Status", 7)</th>
+                <th align="center" style="width: 60px; text-align: center">Comments</th>
+                <th align="center" style="width: 120px; text-align: center"></th>
+            </tr>*@
+          @*  @{int i = 1;
+              int slno = 1;}*@
+            @foreach (var p in Model)
+            {    
+                <tr>
+                    <td align="center" style="width: 50px; text-align: center">@slno</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.OANumber</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.MDBGeneralData.OrganizationName</td>
+                    <td align="center" style="width: 150px; text-align: center">@p.Subjectinfo</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.CPQuotationNumber</td>
+                    <td align="center" style="width: 60px; text-align: center">@Html.DisplayFor(modelitem => p.OADate)</td>
+                    <td align="center" style="width: 60px; text-align: center">
+                        @if (p.ApprovalStatus == 0)
+                        { 
+                           @ViewBag.pen                        
+                        }
+                        @if (p.ApprovalStatus == 1)
+                        {
+                            @ViewBag.app
+                        }
+                        @if (p.ApprovalStatus == 2)
+                        { 
+                            @ViewBag.rej 
+                        }
+                    </td>
+                    <td style="width: 60px; text-align: center">
+
+                            @p.OARejectComm
+                       
+                    </td>
+                    <td align="center" style="width: 120px; text-align: center">
+                        @if (p.ApprovalStatus == 0)
+                        { 
+                           @ViewBag.senapp                        
+                        }
+                        @if (p.ApprovalStatus == 1)
+                        { 
+                          @Html.ActionLink("Print_OA", "OAReportGeneration", new { oaid = p.OAID }, new { @align = "center", @style = "width:100px;text-align:center", @class = "btn btn-info glyphicon glyphicon-print existingcustomer" })                        
+                        }
+                        @if (p.ApprovalStatus == 2)
+                        { 
+                           @Html.ActionLink("Revise_OA", "OARevise", new { oaid = p.OAID }, new { @align = "center", @style = "width:100px;text-align:center", @class = "btn btn-info glyphicon glyphicon-file existingcustomer" })                        
+                        }
+                        
+                    </td>
+                </tr>
+                slno++;
+            }
+
+        </table>
+
+        @*<div class="pagination" style="font-size: 18px; font-family: Calibri; float: right; padding-right: 70px">
+            Page: 
+            @pageLinks()
+        </div>*@
+    </div>
+}
+

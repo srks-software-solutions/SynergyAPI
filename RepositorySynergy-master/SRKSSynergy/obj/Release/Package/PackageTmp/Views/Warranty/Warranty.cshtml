@@ -1,0 +1,76 @@
+﻿@model IList<SRKSSynergy.Models.Warranty>
+@using SRKSSynergy.Helpers
+@{
+	
+	ViewBag.Title = "Warranty";
+	int slno = 1;
+	ViewBag.last = "is";
+}
+<div class="bcgr" style="min-width:1450px;min-height:590px">
+	@using (Html.BeginForm("Warranty", "Warranty", Model, FormMethod.Get))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Warranty Management</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div style="padding-top: 30px;padding-left:70px">
+					<table class="table-hover">
+						<thead>
+							<tr style="background: #BBBEBD">
+								<th style="width: 50px; text-align: center" class="fntst cal botbor">Serial No</th>
+								<th style="width: 130px; text-align: center" class="fntst cal botbor">Customer Number</th>
+								<th style="width: 230px; text-align: center" class="fntst cal botbor">Customer Name</th>
+								<th style="width: 150px; text-align: center" class="fntst cal botbor">Order Acknowledgement Number</th>
+								<th style="width: 150px; text-align: center" class="fntst cal botbor">Buhler order Confirmation Reference</th>
+								<th style="width: 80px; text-align: center" class="fntst cal botbor">Model Name</th>
+								<th style="width: 150px; text-align: center" class="fntst cal botbor">Machine Number</th>
+								<th style="width: 100px; text-align: center" class="fntst cal botbor">Hand Over Date</th>
+								<th style="width: 100px; text-align: center" class="fntst cal botbor">Warranty Expire Date</th>
+								<th style="width: 200px; text-align: center" class="fntst cal botbor">Channel Partner</th>
+							</tr>
+						</thead>
+						@for (int i = 0; i < Model.Count; i++)
+					{
+						<tr>
+							<td style="text-align: center;">
+								@slno
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].CustomerNumber)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].CustomerName)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].OrderNumber)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].BuhlerOrderConfirm)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].Model)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].MachineNummber)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].HandoverDate)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].WarrantyExpiry)</label>
+							</td>
+							<td style="text-align: center; width: 100px">
+								<label class="fntst">@Html.DisplayFor(m => m[i].ChannelPartners.CPName)</label>
+							</td>
+						</tr>
+						slno = slno + 1;
+					}
+						</table>
+					</div>
+				</div>
+			</div>
+	}
+	</div>

@@ -1,0 +1,1926 @@
+﻿@model SRKSSynergy.Models.QuotationSpares
+
+@{
+	ViewBag.Title = "Generate Quotation";
+}
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+<script type="text/JavaScript">
+	function newquo() {
+		window.open('/QuotationSpares/NewQuotation', 'newquo', 'toolbar=no,status=no,menubar=no,resizable=no,fullscreen=no,scrollbars=yes,width=600,height=520');
+	}
+</script>
+<script>
+	function setMDBID(MDBId) {
+		if (MDBId != null && MDBId != "") {
+			var url = '/QuotationSpares/Create?mdbid=' + MDBId;
+			window.location.href = url;
+		}
+	}
+	function setCustUniID(CustUniID, CusName) {
+		if (CustUniID != null && CustUniID != "") {
+			if (CusName != null && CusName != "") {
+				var url = '/QuotationSpares/Create?custuniqid=' + CustUniID + '&custname=' + CusName;
+				window.location.href = url;
+			}
+			else {
+				var url = '/QuotationSpares/Create?custuniqid=' + CustUniID;
+				window.location.href = url;
+			}
+		}
+		else if (CusName != null && CusName != "") {
+			var url = '/QuotationSpares/Create?custname=' + CusName;
+			window.location.href = url;
+		}
+	}
+	function setQuotationNum(QuotNum) {
+		if (QuotNum != null && QuotNum != "") {
+			var url = '/QuotationSpares/Create?QuotNum=' + QuotNum;
+			window.location.href = url;
+		}
+	}
+	function setRevisionQuotationNum(QuotNum) {
+		if (QuotNum != null && QuotNum != "") {
+			var url = '/QuotationSpares/ReviseQuotation?quotnumber=' + QuotNum;
+			window.location.href = url;
+		}
+	}
+	function setRevisionQuotationID(QuotNum) {
+		if (QuotNum != null && QuotNum != "") {
+			var url = '/QuotationSpares/ReviseQuotation?qgid=' + QuotNum;
+			window.location.href = url;
+		}
+	}
+</script>
+<script type="text/JavaScript">
+	function exsquo() {
+		window.open('/QuotationSpares/MainExistingQuotation', 'exsquo', 'toolbar=no,status=no,menubar=no,resizable=no,fullscreen=no,scrollbars=yes,width=690,height=580');
+	}
+</script>
+<script>
+	function updateparent() {
+		var CustUniID = document.getElementById("custunid").value;
+		//var CusName = document.getElementById("custnam").value;
+		if (CustUniID == "") {
+			alert('Please select a customer before generating a quotation')
+		}
+	}
+</script>
+@if (@ViewBag.NullError)
+{
+	<script>
+		alerterrormsg();
+		function alerterrormsg() {
+			alert('The Selected Customer has not been Added into the Synergy to Load the Details of it!!!!');
+		}
+	</script>
+}
+<style>
+	.validation-summary-valid {
+		display: none;
+	}
+</style>
+@{
+	List<SelectListItem> listItems1 = new List<SelectListItem>();
+	List<SelectListItem> listItems2 = new List<SelectListItem>();
+	List<SelectListItem> listItems3 = new List<SelectListItem>();
+	List<SelectListItem> listItems4 = new List<SelectListItem>();
+	List<SelectListItem> listItems5 = new List<SelectListItem>();
+	List<SelectListItem> listItems6 = new List<SelectListItem>();
+	List<SelectListItem> listItems7 = new List<SelectListItem>();
+	List<SelectListItem> listItems8 = new List<SelectListItem>();
+	listItems1.Add(new SelectListItem
+		 {
+			 Text = "1",
+			 Value = "1"
+		 });
+	listItems1.Add(new SelectListItem
+		 {
+			 Text = "2",
+			 Value = "2",
+		 });
+	listItems1.Add(new SelectListItem
+		 {
+			 Text = "3",
+			 Value = "3"
+		 });
+	listItems1.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems2
+	listItems2.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems3
+	listItems3.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems4
+	listItems4.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems5
+	listItems5.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems6
+	listItems6.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems6.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems6.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems6.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems6.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems6.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems6.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems6.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems6.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems6.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems7
+	listItems7.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems7.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems7.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems7.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems7.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems7.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems7.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems7.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems7.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems7.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems8
+	listItems8.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems8.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems8.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems8.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems8.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems8.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems8.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems8.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems8.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems8.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+
+}
+@using (Html.BeginForm("Create", "QuotationSpares", new { mdbid = @ViewBag.MDBID }, FormMethod.Post))
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true)
+	<div>
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Spare Quote Generator</p>
+		</div>
+
+		@Html.TextBoxFor(model => model.QGSpareGeneralData.QuotationDate, new { id = "quotdate", @class = "fntst", @placeholder = "Quotation Number", Value = @System.DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss tt"), @readonly = "readonly", @style = "display:none;" })
+		<div class="container" style="width: 1000px; padding-top: 3px">
+			<div style="background: #e5e5e5">
+				<div style="float: right;padding-right:15px">
+					<label class="fntst1">&nbsp;&nbsp;&nbsp;&nbsp;Date :&nbsp;&nbsp;@ViewBag.ShowQuoteDate</label>
+				</div>
+				@*<div style="border: 1px solid black;">*@
+				<div style="text-align: right; height: 160px; padding-top: 30px; padding-left: 50px">
+					<table>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">
+									M/s @ViewBag.OrganizationName
+								</label>
+							</td>
+							<td style="width: 70px"></td>
+							<td><a href="JavaScript: newquo()" style="text-decoration: none" class="btn btn-info" onmouseover="window.status='Status Bar Message';
+							return true"
+								onmouseout="window.status=''; return true">
+								@*<button class="btn btn-info newcustomer"
+									type="button" style="width: 140px; height: 30px">*@
+									New Quotation@*</button>*@</a></td>
+							<td style="width: 100px"></td>
+							<td><a href="JavaScript: exsquo()" style="text-decoration: none" class="btn btn-info" onmouseover="window.status='Status Bar Message';
+							return true"
+								onmouseout="window.status=''; return true">
+								@*<button class="btn btn-info newcustomer"
+									type="button" style="width: 140px; height: 30px">*@
+									Existing Quotation@*</button>*@</a></td>
+							@*<td>
+								<label class="fntst1">&nbsp;&nbsp;&nbsp;&nbsp;Quote Date :&nbsp;&nbsp;@ViewBag.ShowQuoteDate</label></td>*@
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.AddressLine1</label>
+								@*@ViewBag.AddressLine1*@
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.AddressLine2</label>
+								@*@Html.DisplayFor(model => model.QGEquipGeneralData.MDBGeneralData.AddressLine2, new { value = @ViewBag.AddressLine2 })*@
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.AddressLine3</label>
+								@*@Html.DisplayFor(model => model.QGEquipGeneralData.MDBGeneralData.AddressLine3, new { @value = @ViewBag.AddressLine3 })*@
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.City</label>
+								@*@Html.DisplayFor(model => model.QGEquipGeneralData.MDBGeneralData.City, new { @value = @ViewBag.City })*@
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.Pincode</label>
+								@*@Html.DisplayFor(model => model.QGEquipGeneralData.MDBGeneralData.Pincode, new { @value = @ViewBag.Pincode })*@
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.State</label>
+								@*@Html.DisplayFor(model => model.QGEquipGeneralData.MDBGeneralData.State, new { @value = @ViewBag.State })*@
+							</td>
+						</tr>
+					</table>
+				</div>
+				@* Customer Unique Id , Quotation Number and Channel Partner Unique ID  *@
+				<div class="row" style="padding-top: 40px; padding-left: 90px">
+					<div class=" row show-grid">
+						<div class="span10 pad">
+							<div class="span3">
+								<div class="control-group">
+									<label class="control-label fntst">Customer Unique ID</label>
+									<div class="controls">
+										@*<input type="text" class="fntst" id="address" placeholder="Customer Unique ID" readonly="readonly">*@
+										@Html.TextBoxFor(model => model.QGSpareGeneralData.CompanyUniqueID, new { id = "custuid", Value = @ViewBag.CompanyUniqueID, @class = "fntst", @placeholder = "Customer Unique ID", @readonly = "readonly", @required="required" })
+										@Html.ValidationMessageFor(model => model.QGSpareGeneralData.CompanyUniqueID)
+									</div>
+								</div>
+							</div>
+							<div class="span3">
+								<div class="control-group">
+									<label class="control-label fntst">Quotation Number</label>
+									<div class="controls">
+										@*<input type="text" class="fntst" id="address" placeholder="Quotation Number" readonly="readonly">*@
+										@Html.TextBoxFor(model => model.QGSpareGeneralData.QuotationNumber, new { id = "quotno", Value = @ViewBag.QuotationNumber, @class = "fntst", @placeholder = "Quotation Number", @readonly = "readonly", @required="required"  })
+										@Html.ValidationMessageFor(model => model.QGSpareGeneralData.QuotationNumber)
+									</div>
+								</div>
+							</div>
+							<div class="span"></div>
+							<div class="span3">
+								<div class="control-group">
+									<label class="control-label fntst">Channel Partner Quotation Number</label>
+									<div class="controls">
+										@*<input type="text" class="fntst" id="address" placeholder="Channel Partner Quotation number">*@
+										@Html.TextBoxFor(model => model.QGSpareGeneralData.CPQuotationNumber, new { id = "cpqn", @class = "fntst", @placeholder = "Channel Partner Quotation number" })
+										@Html.ValidationMessageFor(model => model.QGSpareGeneralData.CPQuotationNumber)
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				@* Kind Attention *@
+				<div style="padding-left: 120px; height: 40px; padding-top: 10px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntst1"><strong>Kind Attention </strong></label></td>
+							<td>
+								<label class="fntst1">
+									<strong>&nbsp;@ViewBag.ContactPersonName,
+									</strong>
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				@* Salutation and Subject *@
+				<div style="padding-left: 120px; height: 40px; padding-bottom: 70px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntst1">Dear &nbsp;@ViewBag.dear,</label>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td>
+								<label class="fntst1">Subject :</label></td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;@*<input type="text" class="input-xxxlarge fntst" id="dearsir" value="">*@
+								@Html.TextBoxFor(model => model.QGSpareGeneralData.Subject, new { id = "sub", @class = "input-xxxlarge fntst" })
+								@Html.ValidationMessageFor(model => model.QGSpareGeneralData.Subject)
+							</td>
+						</tr>
+					</table>
+                    <table>
+						<tr>
+							<td>
+								@*<input type="text" class="input-xxxlarge fntst" id="dearsir" value="">*@
+								@Html.TextBoxFor(model => model.QGSpareGeneralData.KindAttention, new { id = "salu", @class = "input-xxxlarge fntst" })
+								@Html.ValidationMessageFor(model => model.QGSpareGeneralData.KindAttention)
+							</td>
+						</tr>
+					</table>
+				</div>
+				@*<div style="background: gray; height: 2px; width: 1000px"></div>*@
+				<br />
+				@* Table Data Stats Here *@
+				<div class="row" style="padding-top: 5px; padding-left: 30px">
+					<div class=" row show-grid" style="padding-left: 32px">
+						<table class="table" style="width: 995px; padding-left: 300px">
+							<tr style="background: #BBBEBD; padding-left: 300px">
+								<th class="fntst1" style="width: 75px; text-align: center">Sl No.</th>
+								<th class="fntst1" style="width: 225px; text-align: center">Spare Part Code</th>
+								<th class="fntst1" style="width: 200px; text-align: center">Quantity</th>
+								<th class="fntst1" style="width: 190px; text-align: right;padding-right:22px">Unit Price (INR)</th>
+								<th class="fntst1" style="width: 190px; text-align: right;padding-right:22px">Total Price (INR)</th>
+								<th class="fntst1" style="width: 70px; text-align: center"></th>
+							</tr>
+						@* 1st Row *@
+						<tr>
+								<td style="width: 75px; text-align: center">
+									<input type="text" name="serialno" class="input-xxsmall fntst" id="slno" readonly="readonly" value="1"  />
+								</td>
+								<td style="width: 225px; text-align: center">
+									@Html.DropDownListFor(m => m.QGSpareTableData1.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID1"], "--Select Model--", new { id = "ProductModelID1", @required = "required" })
+								</td>
+								<td style="width: 200px; text-align: center">
+									@Html.DropDownListFor(model => model.QGSpareTableData1.Quantity, listItems1, "-- Select Quantity --", new { @id = "qty", @name = "qty", @required = "required",@disabled="disabled" })
+									@Html.TextBoxFor(model => model.QGSpareTableData1.Quantity, new { id = "qty", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 8px">
+									@Html.TextBoxFor(model => model.QGSpareTableData1.UnitPrice, new { id = "unitpr",@required = "required", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+									@Html.HiddenFor(model => model.QGSpareTableData1.UnitPrice, new { id = "unitprhid", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 8px">
+									@Html.TextBoxFor(model => model.QGSpareTableData1.TotalPrice, new { id = "totpr",  @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @style="text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center;">
+									<button type="button" id="addButton" class="btn btn-info" style="width: 50px">Add</button>
+								</td>
+							</tr>
+						</table>
+						<div style="padding-left: 100px; height: 20px; padding-bottom: 50px; display: block">
+							<table>
+								<tr>
+									<td style="width: 100px;">Description :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGSpareTableData1.Description, new { id = "moddes", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+								@*<tr>
+									<td style="width: 100px;">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGSpareTableData1.Exclusion, new { id = "exclusions", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>*@
+							</table>
+						</div>
+						@* 2nd Row Table *@
+						<div>
+						<table class="table" style="width: 900px; margin: 0 auto; display: none" id="modelrow2">
+							<tr style="padding-left: 20px">
+								<td style="width: 75px; text-align: center; padding-left: 11px">
+									<input type="text" name="serialno" class="input-xxsmall fntst" id="slno1" readonly="readonly" value="2" />
+								</td>
+								<td style="width: 225px; text-align: center; padding-left: 2px">
+									@Html.DropDownListFor(m => m.QGSpareTableData2.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID2"], "--Select Model--", new { id = "ProductModelID2", @required = "required" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 3px">
+									@Html.DropDownListFor(model => model.QGSpareTableData2.Quantity, listItems2, "-- Select Quantity --", new { @id = "qty1", @name = "qty1", @required = "required",@disabled="disabled" })
+									@Html.TextBoxFor(model => model.QGSpareTableData2.Quantity, new { id = "qty1", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 1px">
+									@Html.TextBoxFor(model => model.QGSpareTableData2.UnitPrice, new { id = "unitpr1", Value = "",@required = "required", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+									@Html.HiddenFor(model => model.QGSpareTableData2.UnitPrice, new { id = "unitpr2hid", Value = "", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 4px">
+									@Html.TextBoxFor(model => model.QGSpareTableData2.TotalPrice, new { id = "totpr1", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @style="text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center; padding-left: 3px">
+									<button type="button" id="addButton2" class="btn btn-info" style="width: 50px">Add</button>
+								</td>
+							</tr>
+						</table>
+						<div style="padding-left: 100px; height: 20px; padding-bottom: 50px; display: none" id="modelrow21">
+							<table>
+								<tr>
+									<td style="width: 100px; padding-left: 100px">Description :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGSpareTableData2.Description, new { id = "moddes1", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+								@*<tr>
+									<td style="width: 100px; padding-left: 100px">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGEquipTableData2.Exclusion, new { id = "exclusions1", @class = "input-xxxlarge fntst",  @readonly = "readonly" })
+									</td>
+								</tr>*@
+							</table>
+						</div>
+							<div class="span9"></div><div class="span"></div><a style="text-decoration:none;display:none" @*href="#"*@ id="delete_input1"><i class="icon-remove"></i></a>
+							</div>
+						@* 3rd Row Table *@
+						<div>
+						<table class="table" style="width: 900px; margin: 0 auto; display: none" id="modelrow3">
+							<tr>
+								<td style="width: 75px; text-align: center; padding-left: 11px">
+									<input type="text" name="serialno" class="input-xxsmall fntst" id="slno2" readonly="readonly" value="3"  />
+								</td>
+								<td style="width: 225px; text-align: center">
+									@Html.DropDownListFor(m => m.QGSpareTableData3.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID3"], "--Select Model--", new { id = "ProductModelID3", @required = "required" })
+								</td>
+								<td style="width: 200px; text-align: center">
+
+									@Html.DropDownListFor(model => model.QGSpareTableData3.Quantity, listItems3, "-- Select Quantity --", new { @id = "qty2", @name = "qty2", @required = "required",@disabled="disabled" })
+									@Html.TextBoxFor(model => model.QGSpareTableData3.Quantity, new { id = "qty2", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })
+								</td>
+								<td style="width: 200px; text-align: center">
+									@Html.TextBoxFor(model => model.QGSpareTableData3.UnitPrice, new { id = "unitpr2", Value = "",@required = "required", @class = "input-medium fntst", @placeholder = "Unit Price", @style="text-align:right" })
+									@Html.HiddenFor(model => model.QGSpareTableData3.UnitPrice, new { id = "unitpr3hid", Value = "", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+								</td>
+								<td style="width: 200px; text-align: center">
+									@Html.TextBoxFor(model => model.QGSpareTableData3.TotalPrice, new { id = "totpr2", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @style="text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center">
+									<button type="button" id="addButton3" class="btn btn-info" style="width: 50px">Add</button>
+								</td>
+							</tr>
+						</table>
+						<div style="padding-left: 100px; height: 20px; padding-bottom: 50px; display: none" id="modelrow31">
+							<table>
+								<tr>
+									<td style="width: 100px; padding-left: 100px">Description :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGSpareTableData3.Description, new { id = "moddes2", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+								@*<tr>
+									<td style="width: 100px; padding-left: 100px">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGEquipTableData3.Exclusion, new { id = "exclusions2", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>*@
+							</table>
+						</div>
+							<div class="span9"></div><div class="span"></div><a style="text-decoration:none;display:none" @*href="#"*@ id="delete_input2"><i class="icon-remove"></i></a>
+							</div>
+						@* 4th Row Table *@
+						<div>
+						<table class="table" style="width: 900px; margin: 0 auto; display: none" id="modelrow4">
+							<tr>
+								<td style="width: 75px; text-align: center; padding-left: 11px">
+									<input type="text" name="serialno" class="input-xxsmall fntst" id="slno3" readonly="readonly" value="4"  />
+								</td>
+								<td style="width: 225px; text-align: center">
+									@Html.DropDownListFor(m => m.QGSpareTableData4.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID4"], "--Select Model--", new { id = "ProductModelID4", @required = "required" })
+								</td>
+								<td style="width: 200px; text-align: center">
+									@Html.DropDownListFor(model => model.QGSpareTableData4.Quantity, listItems4, "-- Select Quantity --", new { @id = "qty3", @name = "qty3", @required = "required",@disabled="disabled" })
+									@Html.TextBoxFor(model => model.QGSpareTableData4.Quantity, new { id = "qty3", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })
+								</td>
+								<td style="width: 200px; text-align: center">
+									@Html.TextBoxFor(model => model.QGSpareTableData4.UnitPrice, new { id = "unitpr3", Value = "",@required = "required", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+									@Html.HiddenFor(model => model.QGSpareTableData4.UnitPrice, new { id = "unitpr4hid", Value = "", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+								</td>
+								<td style="width: 200px; text-align: center">
+									@Html.TextBoxFor(model => model.QGSpareTableData4.TotalPrice, new { id = "totpr3", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @style="text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center">
+									<button type="button" id="addButton4" class="btn btn-info" style="width: 50px">Add</button>
+
+								</td>
+							</tr>
+						</table>
+						<div style="padding-left: 100px; height: 20px; padding-bottom: 50px; display: none" id="modelrow41">
+							<table>
+								<tr>
+									<td style="width: 100px; padding-left: 100px">Description :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGSpareTableData4.Description, new { id = "moddes3", @Value = "", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+								@*<tr>
+									<td style="width: 100px; padding-left: 100px">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGEquipTableData4.Exclusion, new { id = "exclusions3", @class = "input-xxxlarge fntst",@readonly = "readonly" })
+									</td>
+								</tr>*@
+							</table>
+						</div>
+							<div class="span9"></div><div class="span"></div><a style="text-decoration:none;display:none" @*href="#"*@ id="delete_input3"><i class="icon-remove"></i></a>
+							</div>
+						@* 5th Row Table *@
+						<div>
+						<table class="table" style="width: 900px; margin: 0 auto; display: none" id="modelrow5">
+							<tr style="padding-left: 20px">
+								<td style="width: 75px; text-align: center; padding-left: 11px">
+									<input type="text" name="serialno" class="input-xxsmall fntst" id="slno4" readonly="readonly" value="5" />
+								</td>
+								<td style="width: 225px; text-align: center; padding-left: 2px">
+									@Html.DropDownListFor(m => m.QGSpareTableData5.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID5"], "--Select Model--", new { id = "ProductModelID5", @required = "required" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 3px">
+									@Html.DropDownListFor(model => model.QGSpareTableData5.Quantity, listItems5, "-- Select Quantity --", new { @id = "qty4", @name = "qty4", @required = "required",@disabled="disabled" })
+									@Html.TextBoxFor(model => model.QGSpareTableData5.Quantity, new { id = "qty4", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 1px">
+									@Html.TextBoxFor(model => model.QGSpareTableData5.UnitPrice, new { id = "unitpr4", Value = "",@required = "required", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+									@Html.HiddenFor(model => model.QGSpareTableData5.UnitPrice, new { id = "unitpr5hid", Value = "", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 4px">
+									@Html.TextBoxFor(model => model.QGSpareTableData5.TotalPrice, new { id = "totpr4", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @style="text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center; padding-left: 3px">
+									<button type="button" id="addButton5" class="btn btn-info" style="width: 50px">Add</button>
+								</td>
+							</tr>
+						</table>
+						<div style="padding-left: 100px; height: 20px; padding-bottom: 50px; display: none" id="modelrow51">
+							<table>
+								<tr>
+									<td style="width: 100px; padding-left: 100px">Description :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGSpareTableData5.Description, new { id = "moddes4", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+								@*<tr>
+									<td style="width: 100px; padding-left: 100px">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGEquipTableData2.Exclusion, new { id = "exclusions1", @class = "input-xxxlarge fntst",  @readonly = "readonly" })
+									</td>
+								</tr>*@
+							</table>
+						</div>
+							<div class="span9"></div><div class="span"></div><a style="text-decoration:none;display:none" @*href="#"*@ id="delete_input4"><i class="icon-remove"></i></a>
+							</div>
+						@* 6th Row Table *@
+						<div>
+						<table class="table" style="width: 900px; margin: 0 auto; display: none" id="modelrow6">
+							<tr style="padding-left: 20px">
+								<td style="width: 75px; text-align: center; padding-left: 11px">
+									<input type="text" name="serialno" class="input-xxsmall fntst" id="slno5" readonly="readonly" value="6" />
+								</td>
+								<td style="width: 225px; text-align: center; padding-left: 2px">
+									@Html.DropDownListFor(m => m.QGSpareTableData6.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID6"], "--Select Model--", new { id = "ProductModelID6", @required = "required" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 3px">
+									@Html.DropDownListFor(model => model.QGSpareTableData6.Quantity, listItems6, "-- Select Quantity --", new { @id = "qty5", @name = "qty5", @required = "required",@disabled="disabled" })
+									@Html.TextBoxFor(model => model.QGSpareTableData6.Quantity, new { id = "qty5", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 1px">
+									@Html.TextBoxFor(model => model.QGSpareTableData6.UnitPrice, new { id = "unitpr5", Value = "",@required = "required", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+									@Html.HiddenFor(model => model.QGSpareTableData6.UnitPrice, new { id = "unitpr6hid", Value = "", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 4px">
+									@Html.TextBoxFor(model => model.QGSpareTableData6.TotalPrice, new { id = "totpr5", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @style="text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center; padding-left: 3px">
+									<button type="button" id="addButton6" class="btn btn-info" style="width: 50px">Add</button>
+								</td>
+							</tr>
+						</table>
+						<div style="padding-left: 100px; height: 20px; padding-bottom: 50px; display: none" id="modelrow61">
+							<table>
+								<tr>
+									<td style="width: 100px; padding-left: 100px">Description :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGSpareTableData6.Description, new { id = "moddes5", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+								@*<tr>
+									<td style="width: 100px; padding-left: 100px">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGEquipTableData2.Exclusion, new { id = "exclusions1", @class = "input-xxxlarge fntst",  @readonly = "readonly" })
+									</td>
+								</tr>*@
+							</table>
+						</div>
+							<div class="span9"></div><div class="span"></div><a style="text-decoration:none;display:none" @*href="#"*@ id="delete_input5"><i class="icon-remove"></i></a>
+							</div>
+						@* 7th Row Table *@
+						<div>
+						<table class="table" style="width: 900px; margin: 0 auto; display: none" id="modelrow7">
+							<tr style="padding-left: 20px">
+								<td style="width: 75px; text-align: center; padding-left: 11px">
+									<input type="text" name="serialno" class="input-xxsmall fntst" id="slno6" readonly="readonly" value="7" />
+								</td>
+								<td style="width: 225px; text-align: center; padding-left: 2px">
+									@Html.DropDownListFor(m => m.QGSpareTableData7.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID7"], "--Select Model--", new { id = "ProductModelID7", @required = "required" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 3px">
+									@Html.DropDownListFor(model => model.QGSpareTableData7.Quantity, listItems7, "-- Select Quantity --", new { @id = "qty6", @name = "qty6", @required = "required",@disabled="disabled" })
+									@Html.TextBoxFor(model => model.QGSpareTableData7.Quantity, new { id = "qty6", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 1px">
+									@Html.TextBoxFor(model => model.QGSpareTableData7.UnitPrice, new { id = "unitpr6", Value = "",@required = "required", @class = "input-medium fntst", @placeholder = "Unit Price", @style="text-align:right" })
+									@Html.HiddenFor(model => model.QGSpareTableData7.UnitPrice, new { id = "unitpr7hid", Value = "", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 4px">
+									@Html.TextBoxFor(model => model.QGSpareTableData7.TotalPrice, new { id = "totpr6", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @style="text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center; padding-left: 3px">
+									<button type="button" id="addButton7" class="btn btn-info" style="width: 50px">Add</button>
+								</td>
+							</tr>
+						</table>
+						<div style="padding-left: 100px; height: 20px; padding-bottom: 50px; display: none" id="modelrow71">
+							<table>
+								<tr>
+									<td style="width: 100px; padding-left: 100px">Description :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGSpareTableData7.Description, new { id = "moddes6", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+								@*<tr>
+									<td style="width: 100px; padding-left: 100px">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGEquipTableData2.Exclusion, new { id = "exclusions1", @class = "input-xxxlarge fntst",  @readonly = "readonly" })
+									</td>
+								</tr>*@
+							</table>
+						</div>
+							<div class="span9"></div><div class="span"></div><a style="text-decoration:none;display:none" @*href="#"*@ id="delete_input6"><i class="icon-remove"></i></a>
+							</div>
+						@* 8th Row Table *@
+						<div>
+						<table class="table" style="width: 900px; margin: 0 auto; display: none" id="modelrow8">
+							<tr style="padding-left: 20px">
+								<td style="width: 75px; text-align: center; padding-left: 11px">
+									<input type="text" name="serialno" class="input-xxsmall fntst" id="slno7" readonly="readonly" value="8" />
+								</td>
+								<td style="width: 225px; text-align: center; padding-left: 2px">
+									@Html.DropDownListFor(m => m.QGSpareTableData8.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID8"], "--Select Model--", new { id = "ProductModelID8", @required = "required" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 3px">
+									@Html.DropDownListFor(model => model.QGSpareTableData8.Quantity, listItems8, "-- Select Quantity --", new { @id = "qty7", @name = "qty7", @required = "required",@disabled="disabled" })
+									@Html.TextBoxFor(model => model.QGSpareTableData8.Quantity, new { id = "qty7", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 1px">
+									@Html.TextBoxFor(model => model.QGSpareTableData8.UnitPrice, new { id = "unitpr7", Value = "", @required = "required",@class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+									@Html.HiddenFor(model => model.QGSpareTableData8.UnitPrice, new { id = "unitpr8hid", Value = "", @class = "input-medium fntst",  @placeholder = "Unit Price", @style="text-align:right" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 4px">
+									@Html.TextBoxFor(model => model.QGSpareTableData8.TotalPrice, new { id = "totpr7", Value = "", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @style="text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center; padding-left: 3px">
+									@*<button type="button" id="addButton8" class="btn btn-info" style="width: 50px">Add</button>*@
+								</td>
+							</tr>
+						</table>
+						<div style="padding-left: 100px; height: 20px; padding-bottom: 50px; display: none" id="modelrow81">
+							<table>
+								<tr>
+									<td style="width: 100px; padding-left: 100px">Description :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGSpareTableData8.Description, new { id = "moddes7", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+								@*<tr>
+									<td style="width: 100px; padding-left: 100px">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.QGEquipTableData2.Exclusion, new { id = "exclusions1", @class = "input-xxxlarge fntst",  @readonly = "readonly" })
+									</td>
+								</tr>*@
+							</table>
+						</div>
+							<div class="span9"></div><div class="span"></div><a style="text-decoration:none;display:none" @*href="#"*@ id="delete_input7"><i class="icon-remove"></i></a>
+							</div>
+						@* End of Row Table *@
+
+						@*Total in Words*@
+						<table>
+							<tr>
+								<td style="width: 75px; text-align: center; padding-left: 11px">
+								</td>
+								<td style="width: 225px; text-align: center">
+								</td>
+								<td style="width: 200px; text-align: center">
+
+								</td>
+								<td style="width: 200px; text-align: right">
+									<label style="font-family:Calibri;font-size:20px;text-align:right"><strong>Total Price in INR :</strong></label>
+								</td>
+								<td style="width: 200px; text-align: center">
+									@Html.TextBoxFor(model => model.QGSparePayment.overallprice, new { id = "total",@class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @style="text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center">
+								</td>
+							</tr>
+							</table>
+					</div>
+				</div>
+				<br />
+				<br />
+				<div style="background: gray; height: 2px; width: 1000px"></div>
+				<div style="padding-left: 150px; height: 270px; padding-top: 18px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><u><strong>Terms & Conditions of Sale :</strong></u></label>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Payment Terms</label></td>
+							<td align="left">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="input-xxlarge fntst" id="unitpr4" placeholder="30% advance & balance 70% against pro-forma invoice before dispatch " value="30% advance & balance 70% against pro-forma invoice before dispatch">*@
+								@Html.TextBoxFor(model => model.QGSparePayment.PaymentTerms, new { id = "payterms", @Value = "30% advance & balance 70% against pro-forma invoice before dispatch", @class = "input-xxlarge fntst", @placeholder = "30% advance & balance 70% against pro-forma invoice before dispatch", @required = "required" })
+								@Html.ValidationMessageFor(model => model.QGSparePayment.PaymentTerms)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Delivery</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="FCA, Bangalore" value="FCA, Bangalore">*@
+								@Html.TextBoxFor(model => model.QGSparePayment.Delivery, new { id = "delivery", @Value = "FCA, Bangalore", @class = "fntst", @placeholder = "FCA, Bangalore", @required = "required" })
+								@Html.ValidationMessageFor(model => model.QGSparePayment.Delivery)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Date of Dispatch</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="input-xxlarge fntst" id="unitpr4" placeholder="8 - 10 weeks after receipt of advance payment" value="8 - 10 weeks after receipt of advance payment">*@
+								@Html.TextBoxFor(model => model.QGSparePayment.DateofDispatch, new { id = "dodis", @Value = "8 - 10 weeks after receipt of advance payment", @class = "input-xxlarge fntst", @placeholder = "8 - 10 weeks after receipt of advance payment", @required = "required" })
+								@Html.ValidationMessageFor(model => model.QGSparePayment.DateofDispatch)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Mode of Transport</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="By Road" value="By Road">*@
+								@Html.TextBoxFor(model => model.QGSparePayment.Transport, new { id = "transport", @Value = "By Road", @class = "fntst", @placeholder = "By Road", @required = "required" })
+								@Html.ValidationMessageFor(model => model.QGSparePayment.Transport)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Freight</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="To Pay basis" value="To Pay basis">*@
+								@Html.TextBoxFor(model => model.QGSparePayment.Freight, new { id = "freight", @Value = "To Pay basis", @class = "fntst", @placeholder = "To Pay basis", @required = "required" })
+								@Html.ValidationMessageFor(model => model.QGSparePayment.Freight)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">GST</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="input-xxlarge fntst" id="unitpr4" placeholder="2% extra against FORM C or 5.5% without FORM C" value="2% extra against FORM C or 5.5% without FORM C">*@
+								@Html.TextBoxFor(model => model.QGSparePayment.CST, new { id = "cstpay", @Value = "2% extra against FORM C or 5.5% without FORM C", @class = "input-xxlarge fntst", @placeholder = "2% extra against FORM C or 5.5% without FORM C", @required = "required" })
+								@Html.ValidationMessageFor(model => model.QGSparePayment.CST)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Transit Insurance</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="Extra as applicable" value="Extra as applicable">*@
+								@Html.TextBoxFor(model => model.QGSparePayment.TransitInsu, new { id = "transinsu", @Value = "Extra as applicable", @class = "fntst", @placeholder = "Extra as applicable", @required = "required" })
+								@Html.ValidationMessageFor(model => model.QGSparePayment.TransitInsu)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Commodity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="Rice" value="Rice">*@
+								@Html.TextBoxFor(model => model.QGSparePayment.Commodity, new { id = "rice", @Value = "Rice", @class = "fntst", @placeholder = "Rice", @required = "required" })
+								@Html.ValidationMessageFor(model => model.QGSparePayment.Commodity)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Validity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="2 months from the date of this offer" value="2 months from the date of this offer">*@
+								@Html.TextBoxFor(model => model.QGSparePayment.Validity, new { id = "validit", @Value = "2 months from the date of this offer", @class = "fntst", @placeholder = "2 months from the date of this offer", @required = "required" })
+								@Html.ValidationMessageFor(model => model.QGSparePayment.Validity)
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 150px; padding-top: 140px">
+					@Html.TextAreaFor(model => model.QGSparePayment.annexure, new { id = "annex", rows = 2, columns = 2, @class = "input-xxxlarge fntst",  @placeholder = "Additional Comments" })
+					@Html.ValidationMessageFor(model => model.QGSparePayment.annexure)
+				</div>
+				<div style="padding-left: 100px; padding-top: 10px">
+					<label class="fntst1">Thanking You</label>
+					<label class="fntst1">With Regards,</label>
+					<label class="fntst1" style="padding-top:35px">@ViewBag.LoginName</label>
+					<label style="font-size:16px;font-family:Calibri;">@ViewBag.Designation</label>
+					@* User Name *@
+				</div>
+				<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+					<div class=" row show-grid">
+						<div class="span10">
+							<div class="span3 cent1">
+								<input type="submit" value="Submit" class="btn btn-large btn-success" onclick = "javascript: return updateparent();" />
+							</div>
+						</div>
+					</div>
+				</div>
+				@*</div>*@
+			</div>
+		</div>
+	</div>
+}
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/Javascript">
+	@* Adding and Deleting the Products in the Quotation *@
+	$(document).ready(function () {
+		var counter;
+		//Add function for row 2
+		//Starts here
+		$("#addButton").click(function () {
+			$("#modelrow2").attr("style", "display:block");
+			$("#modelrow21").attr("style", "display:block");
+			$("#delete_input1").attr("style", "display:block");
+			$("#addButton").attr("style", "display:none");
+			if (counter == 1) {
+				$("#modelrow2").attr("style", "display:block");
+				$("#modelrow21").attr("style", "display:block");
+				$("#delete_input1").attr("style", "display:block");
+			}
+			$("#slno1").val(2);
+			$("#slno2").val(3);
+			$("#slno3").val(4);
+			@{ViewBag.ShowRow1 = true;}
+		});
+
+		//Add function for row 3
+		//Starts here
+		$("#addButton2").click(function () {
+			$("#modelrow3").attr("style", "display:block");
+			$("#modelrow31").attr("style", "display:block");
+			$("#delete_input2").attr("style", "display:block");
+			$("#addButton2").attr("style", "display:none");
+			if (counter == 2) {
+				$("#modelrow3").attr("style", "display:block");
+				$("#modelrow31").attr("style", "display:block");
+				$("#delete_input2").attr("style", "display:block");
+			}
+			$("#slno2").val(3);
+			$("#slno3").val(4);
+		});
+
+		//Add function for row 4
+		//Starts here
+		$("#addButton3").click(function () {
+			$("#modelrow4").attr("style", "display:block");
+			$("#modelrow41").attr("style", "display:block");
+			$("#delete_input3").attr("style", "display:block");
+			$("#addButton3").attr("style", "display:none");
+			if (counter == 3) {
+				$("#modelrow4").attr("style", "display:block");
+				$("#modelrow41").attr("style", "display:block");
+				$("#delete_input3").attr("style", "display:block");
+			}
+			$("#slno3").val(4);
+		});
+
+		//Add function for row 5
+		//Starts here
+		$("#addButton4").click(function () {
+			$("#modelrow5").attr("style", "display:block");
+			$("#modelrow51").attr("style", "display:block");
+			$("#delete_input4").attr("style", "display:block");
+			$("#addButton4").attr("style", "display:none");
+			if (counter == 4) {
+				$("#modelrow5").attr("style", "display:block");
+				$("#modelrow51").attr("style", "display:block");
+				$("#delete_input4").attr("style", "display:block");
+			}
+			$("#slno4").val(5);
+		});
+
+		//Add function for row 6
+		//Starts here
+		$("#addButton5").click(function () {
+			$("#modelrow6").attr("style", "display:block");
+			$("#modelrow61").attr("style", "display:block");
+			$("#delete_input5").attr("style", "display:block");
+			$("#addButton5").attr("style", "display:none");
+			if (counter == 5) {
+				$("#modelrow6").attr("style", "display:block");
+				$("#modelrow61").attr("style", "display:block");
+				$("#delete_input5").attr("style", "display:block");
+			}
+			$("#slno5").val(6);
+		});
+
+		//Add function for row 7
+		//Starts here
+		$("#addButton6").click(function () {
+			$("#modelrow7").attr("style", "display:block");
+			$("#modelrow71").attr("style", "display:block");
+			$("#delete_input6").attr("style", "display:block");
+			$("#addButton6").attr("style", "display:none");
+			if (counter == 6) {
+				$("#modelrow7").attr("style", "display:block");
+				$("#modelrow71").attr("style", "display:block");
+				$("#delete_input6").attr("style", "display:block");
+			}
+			$("#slno6").val(7);
+		});
+
+		//Add function for row 8
+		//Starts here
+		$("#addButton7").click(function () {
+			$("#modelrow8").attr("style", "display:block");
+			$("#modelrow81").attr("style", "display:block");
+			$("#delete_input7").attr("style", "display:block");
+			$("#addButton7").attr("style", "display:none");
+			if (counter == 7) {
+				$("#modelrow8").attr("style", "display:block");
+				$("#modelrow81").attr("style", "display:block");
+				$("#delete_input7").attr("style", "display:block");
+			}
+			$("#slno7").val(8);
+		});
+
+		//Delete function for row 2
+		//Starts here
+		$("#delete_input1").on("click", function () {
+			//$(this).parent().remove();
+			$("#modelrow2").attr("style", "display:none");
+			$("#modelrow21").attr("style", "display:none");
+			$("#delete_input1").attr("style", "display:none");
+			if ($("#delete_input1").data('clicked')) {
+				counter = 1;
+			}
+			var row2t = accounting.unformat($("#totpr1").val());
+			var del1 = accounting.unformat($("#total").val());
+			var del1tf = del1 - row2t;
+			$("#total").val(accounting.formatMoney(del1tf));
+			$("#addButton").attr("style", "display:block");
+			$("#ProductModelID2").val('--Select Model--');
+			$("#qty1").val('--Select Option--');
+			$("#unitpr1").val('');
+			$("#totpr1").val('');
+			$("#moddes1").val('');
+			//$("#exclusions1").val('');
+			$("#slno2").val(2);
+			$("#slno3").val(3);
+			$("#qty1").attr("disabled", true);
+
+		});
+
+		//Delete function for row 3
+		//Starts here
+		$("#delete_input2").on("click", function () {
+			//$(this).parent().remove();
+			$("#modelrow3").attr("style", "display:none");
+			$("#modelrow31").attr("style", "display:none");
+			$("#delete_input2").attr("style", "display:none");
+			if ($("#delete_input2").data('clicked')) {
+				counter = 2;
+			}
+			var row3t = accounting.unformat($("#totpr2").val());
+			var del2 = accounting.unformat($("#total").val());
+			var del2tf = del2 - row3t;
+			$("#total").val(accounting.formatMoney(del2tf));
+			$("#addButton2").attr("style", "display:block");
+			$("#ProductModelID3").val('--Select Model--');
+			$("#qty2").val('Select Option');
+			$("#unitpr2").val('');
+			$("#totpr2").val('');
+			$("#moddes2").val('');
+			//$("#exclusions2").val('');
+			$("#slno3").val(3);
+			$("#qty2").attr("disabled", true);
+
+		});
+		//Delete function for row 4
+		//Starts here
+		$("#delete_input3").on("click", function () {
+			//$(this).parent().remove();
+			$("#modelrow4").attr("style", "display:none");
+			$("#modelrow41").attr("style", "display:none");
+			$("#delete_input3").attr("style", "display:none");
+			if ($("#delete_input3").data('clicked')) {
+				counter = 3;
+			}
+			var row4t = accounting.unformat($("#totpr3").val());
+			var del3 = accounting.unformat($("#total").val());
+			var del3tf = del3 - row4t;
+			$("#total").val(accounting.formatMoney(del3tf));
+			$("#addButton3").attr("style", "display:block");
+			$("#ProductModelID4").val('--Select Model--');
+			$("#qty3").val('Select Option');
+			$("#unitpr3").val('');
+			$("#totpr3").val('');
+			$("#moddes3").val('');
+			//$("#exclusions3").val('');
+			$("#qty3").attr("disabled", true);
+		});
+
+		//Delete function for row 5
+		//Starts here
+		$("#delete_input4").on("click", function () {
+			//$(this).parent().remove();
+			$("#modelrow5").attr("style", "display:none");
+			$("#modelrow51").attr("style", "display:none");
+			$("#delete_input4").attr("style", "display:none");
+			if ($("#delete_input4").data('clicked')) {
+				counter = 4;
+			}
+			var row5t = accounting.unformat($("#totpr4").val());
+			var del4 = accounting.unformat($("#total").val());
+			var del4tf = del4 - row5t;
+			$("#total").val(accounting.formatMoney(del4tf));
+			$("#addButton4").attr("style", "display:block");
+			$("#ProductModelID5").val('--Select Model--');
+			$("#qty4").val('Select Option');
+			$("#unitpr4").val('');
+			$("#totpr4").val('');
+			$("#moddes4").val('');
+			$("#qty4").attr("disabled", true);
+		});
+
+		//Delete function for row 6
+		//Starts here
+		$("#delete_input5").on("click", function () {
+			//$(this).parent().remove();
+			$("#modelrow6").attr("style", "display:none");
+			$("#modelrow61").attr("style", "display:none");
+			$("#delete_input5").attr("style", "display:none");
+			if ($("#delete_input5").data('clicked')) {
+				counter = 5;
+			}
+			var row6t = accounting.unformat($("#totpr5").val());
+			var del5 = accounting.unformat($("#total").val());
+			var del5tf = del5 - row6t;
+			$("#total").val(accounting.formatMoney(del5tf));
+			$("#addButton5").attr("style", "display:block");
+			$("#ProductModelID6").val('--Select Model--');
+			$("#qty5").val('Select Option');
+			$("#unitpr5").val('');
+			$("#totpr5").val('');
+			$("#moddes5").val('');
+			$("#qty5").attr("disabled", true);
+		});
+
+		//Delete function for row 7
+		//Starts here
+		$("#delete_input6").on("click", function () {
+			//$(this).parent().remove();
+			$("#modelrow7").attr("style", "display:none");
+			$("#modelrow71").attr("style", "display:none");
+			$("#delete_input6").attr("style", "display:none");
+			if ($("#delete_input6").data('clicked')) {
+				counter = 6;
+			}
+			var row7t = accounting.unformat($("#totpr6").val());
+			var del6 = accounting.unformat($("#total").val());
+			var del6tf = del6 - row7t;
+			$("#total").val(accounting.formatMoney(del6tf));
+			$("#addButton6").attr("style", "display:block");
+			$("#ProductModelID7").val('--Select Model--');
+			$("#qty6").val('Select Option');
+			$("#unitpr6").val('');
+			$("#totpr6").val('');
+			$("#moddes6").val('');
+			$("#qty6").attr("disabled", true);
+		});
+
+		//Delete function for row 8
+		//Starts here
+		$("#delete_input7").on("click", function () {
+			//$(this).parent().remove();
+			$("#modelrow8").attr("style", "display:none");
+			$("#modelrow81").attr("style", "display:none");
+			$("#delete_input7").attr("style", "display:none");
+			if ($("#delete_input7").data('clicked')) {
+				counter = 7;
+			}
+			var row8t = accounting.unformat($("#totpr7").val());
+			var del7 = accounting.unformat($("#total").val());
+			var del7tf = del7 - row8t;
+			$("#total").val(accounting.formatMoney(del7tf));
+			$("#addButton7").attr("style", "display:block");
+			$("#ProductModelID8").val('--Select Model--');
+			$("#qty7").val('Select Option');
+			$("#unitpr7").val('');
+			$("#totpr7").val('');
+			$("#moddes7").val('');
+			$("#qty7").attr("disabled", true);
+		});
+
+	});
+
+	@* Update the details of TotalPrice After selection *@
+	$(document).ready(function () {
+		var t1 = "";
+		var t2 = "";
+		var t3 = "";
+		var t4 = "";
+		var t5 = "";
+		var t6 = "";
+		var t7 = "";
+		var t8 = "";
+		$('#qty').change(function () {
+			var passval1 = $(':selected', this).val();
+			$('#qty').val(passval1);
+			var unitprice = $("#unitpr").val();
+			if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+				var totalprice = passval1 * accounting.unformat(unitprice);
+				$('#totpr').val(accounting.formatMoney(totalprice));
+				t1 = accounting.unformat(totalprice);
+				var t11 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t11));
+			}
+		});
+
+		$('#qty1').change(function () {
+			var passval1 = $(':selected', this).val();
+			$('#qty1').val(passval1);
+			var unitprice = $("#unitpr1").val();
+			if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+				var totalprice = passval1 * accounting.unformat(unitprice);
+				$('#totpr1').val(accounting.formatMoney(totalprice));
+				t2 = accounting.unformat(totalprice);
+				var t12 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$("#total").val(accounting.formatMoney(t12));
+			}
+		});
+
+		$('#qty2').change(function () {
+			var passval1 = $(':selected', this).val();
+			$('#qty2').val(passval1);
+			var unitprice = $("#unitpr2").val();
+			if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+				var totalprice = passval1 * accounting.unformat(unitprice);
+				$('#totpr2').val(accounting.formatMoney(totalprice));
+				t3 = accounting.unformat(totalprice);
+				var t123 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t123));
+			}
+		});
+
+		$('#qty3').change(function () {
+			var passval1 = $(':selected', this).val();
+			$('#qty3').val(passval1);
+			var unitprice = $("#unitpr3").val();
+			if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+				var totalprice = passval1 * accounting.unformat(unitprice);
+				$('#totpr3').val(accounting.formatMoney(totalprice));
+				t4 = accounting.unformat(totalprice);
+				var t1234 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t1234));
+			}
+		});
+
+		$('#qty4').change(function () {
+			var passval1 = $(':selected', this).val();
+			$('#qty4').val(passval1);
+			var unitprice = $("#unitpr4").val();
+			if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+				var totalprice = passval1 * accounting.unformat(unitprice);
+				$('#totpr4').val(accounting.formatMoney(totalprice));
+				t5 = accounting.unformat(totalprice);
+				var t12345 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t12345));
+			}
+		});
+
+		$('#qty5').change(function () {
+			var passval1 = $(':selected', this).val();
+			$('#qty5').val(passval1);
+			var unitprice = $("#unitpr5").val();
+			if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+				var totalprice = passval1 * accounting.unformat(unitprice);
+				$('#totpr5').val(accounting.formatMoney(totalprice));
+				t6 = accounting.unformat(totalprice);
+				var t123456 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t123456));
+			}
+		});
+
+		$('#qty6').change(function () {
+			var passval1 = $(':selected', this).val();
+			$('#qty6').val(passval1);
+			var unitprice = $("#unitpr6").val();
+			if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+				var totalprice = passval1 * accounting.unformat(unitprice);
+				$('#totpr6').val(accounting.formatMoney(totalprice));
+				t7 = accounting.unformat(totalprice);
+				var t1234567 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t1234567));
+			}
+		});
+
+		$('#qty7').change(function () {
+			var passval1 = $(':selected', this).val();
+			$('#qty7').val(passval1);
+			var unitprice = $("#unitpr7").val();
+			if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+				var totalprice = passval1 * accounting.unformat(unitprice);
+				$('#totpr7').val(accounting.formatMoney(totalprice));
+				t8 = accounting.unformat(totalprice);
+				var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t12345678));
+			}
+		});
+
+	});
+	@* TextBox check value *@
+	$(document).ready(function () {
+		//1st unit price
+		$("#unitpr").keyup(function () {
+			var value = accounting.unformat($("#unitpr").val());
+			$("#unitpr").val(accounting.formatMoney(value));
+		});
+		$("#unitpr").focusout(function (evt) {
+			var unit1db = accounting.unformat($("#unitprhid").val());
+			var unittxt = accounting.unformat($("#unitpr").val());
+			var qty1 = $("#qty").val();
+			if (unittxt > unit1db)
+			{
+				alert("Quote Value not to exceed INR " + unit1db);
+				$("#unitpr").val(accounting.formatMoney(unit1db));
+				var tot1 = unit1db * qty1;
+				$('#totpr').val(accounting.formatMoney(tot1));
+				var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t12345678));
+				return false;
+			}
+			var tot1 = unittxt * qty1;
+			$('#totpr').val(accounting.formatMoney(tot1));
+			var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+			$('#total').val(accounting.formatMoney(t12345678));
+		});
+	});
+	$(document).ready(function () {
+		//2nd unit price
+		$("#unitpr1").keyup(function () {
+			var value = accounting.unformat($("#unitpr1").val());
+			$("#unitpr1").val(accounting.formatMoney(value));
+		});
+		$("#unitpr1").focusout(function (evt) {
+			var unit2db = accounting.unformat($("#unitpr2hid").val());
+			var unit2txt = accounting.unformat($("#unitpr1").val());
+			var qty1 = $("#qty1").val();
+			if (unit2txt > unit2db) {
+				alert("Quote Value not to exceed INR " + unit2db);
+				$("#unitpr1").val(accounting.formatMoney(unit2db));
+				var tot1 = unit2db * qty1;
+				$('#totpr1').val(accounting.formatMoney(tot1));
+				var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t12345678));
+				return false;
+			}
+			var tot1 = unit2txt * qty1;
+			$('#totpr1').val(accounting.formatMoney(tot1));
+			var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+			$('#total').val(accounting.formatMoney(t12345678));
+		});
+	});
+	$(document).ready(function () {
+		//3rd unit price
+		$("#unitpr2").keyup(function () {
+			var value = accounting.unformat($("#unitpr2").val());
+			$("#unitpr2").val(accounting.formatMoney(value));
+		});
+		$("#unitpr2").focusout(function (evt) {
+			var unit1db = accounting.unformat($("#unitpr3hid").val());
+			var unittxt = accounting.unformat($("#unitpr2").val());
+			var qty1 = $("#qty2").val();
+			if (unittxt > unit1db) {
+				alert("Quote Value not to exceed INR " + unit1db);
+				$("#unitpr2").val(accounting.formatMoney(unit1db));
+				var tot1 = unit1db * qty1;
+				$('#totpr2').val(accounting.formatMoney(tot1));
+				var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t12345678));
+				return false;
+			}
+			var tot1 = unittxt * qty1;
+			$('#totpr2').val(accounting.formatMoney(tot1));
+			var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+			$('#total').val(accounting.formatMoney(t12345678));
+		});
+	});
+	$(document).ready(function () {
+		//4th unit price
+		$("#unitpr3").keyup(function () {
+			var value = accounting.unformat($("#unitpr3").val());
+			$("#unitpr3").val(accounting.formatMoney(value));
+		});
+		$("#unitpr3").focusout(function (evt) {
+			var unit1db = accounting.unformat($("#unitpr4hid").val());
+			var unittxt = accounting.unformat($("#unitpr3").val());
+			var qty1 = $("#qty3").val();
+			if (unittxt > unit1db) {
+				alert("Quote Value not to exceed INR " + unit1db);
+				$("#unitpr3").val(accounting.formatMoney(unit1db));
+				var tot1 = unit1db * qty1;
+				$('#totpr3').val(accounting.formatMoney(tot1));
+				var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t12345678));
+				return false;
+			}
+			var tot1 = unittxt * qty1;
+			$('#totpr3').val(accounting.formatMoney(tot1));
+			var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+			$('#total').val(accounting.formatMoney(t12345678));
+		});
+	});
+	$(document).ready(function () {
+		//5th unit price
+		$("#unitpr4").keyup(function () {
+			var value = accounting.unformat($("#unitpr4").val());
+			$("#unitpr4").val(accounting.formatMoney(value));
+		});
+		$("#unitpr4").focusout(function (evt) {
+			var unit1db = accounting.unformat($("#unitpr5hid").val());
+			var unittxt = accounting.unformat($("#unitpr4").val());
+			var qty1 = $("#qty4").val();
+			if (unittxt > unit1db) {
+				alert("Quote Value not to exceed INR " + unit1db);
+				$("#unitpr4").val(accounting.formatMoney(unit1db));
+				var tot1 = unit1db * qty1;
+				$('#totpr4').val(accounting.formatMoney(tot1));
+				var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t12345678));
+				return false;
+			}
+			var tot1 = unittxt * qty1;
+			$('#totpr4').val(accounting.formatMoney(tot1));
+			var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+			$('#total').val(accounting.formatMoney(t12345678));
+		});
+	});
+	$(document).ready(function () {
+		//6th unit price
+		$("#unitpr5").keyup(function () {
+			var value = accounting.unformat($("#unitpr5").val());
+			$("#unitpr5").val(accounting.formatMoney(value));
+		});
+		$("#unitpr5").focusout(function (evt) {
+			var unit1db = accounting.unformat($("#unitpr6hid").val());
+			var unittxt = accounting.unformat($("#unitpr5").val());
+			var qty1 = $("#qty5").val();
+			if (unittxt > unit1db) {
+				alert("Quote Value not to exceed INR " + unit1db);
+				$("#unitpr5").val(accounting.formatMoney(unit1db));
+				var tot1 = unit1db * qty1;
+				$('#totpr5').val(accounting.formatMoney(tot1));
+				var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t12345678));
+				return false;
+			}
+			var tot1 = unittxt * qty1;
+			$('#totpr5').val(accounting.formatMoney(tot1));
+			var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+			$('#total').val(accounting.formatMoney(t12345678));
+		});
+	});
+	$(document).ready(function () {
+		//7th unit price
+		$("#unitpr6").keyup(function () {
+			var value = accounting.unformat($("#unitpr6").val());
+			$("#unitpr6").val(accounting.formatMoney(value));
+		});
+		$("#unitpr6").focusout(function (evt) {
+			var unit1db = accounting.unformat($("#unitpr7hid").val());
+			var unittxt = accounting.unformat($("#unitpr6").val());
+			var qty1 = $("#qty6").val();
+			if (unittxt > unit1db) {
+				alert("Quote Value not to exceed INR " + unit1db);
+				$("#unitpr6").val(accounting.formatMoney(unit1db));
+				var tot1 = unit1db * qty1;
+				$('#totpr6').val(accounting.formatMoney(tot1));
+				var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t12345678));
+				return false;
+			}
+			var tot1 = unittxt * qty1;
+			$('#totpr6').val(accounting.formatMoney(tot1));
+			var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+			$('#total').val(accounting.formatMoney(t12345678));
+		});
+	});
+	$(document).ready(function () {
+		//8th unit price
+		$("#unitpr7").keyup(function () {
+			var value = accounting.unformat($("#unitpr7").val());
+			$("#unitpr7").val(accounting.formatMoney(value));
+		});
+		$("#unitpr7").focusout(function (evt) {
+			var unit1db = accounting.unformat($("#unitpr8hid").val());
+			var unittxt = accounting.unformat($("#unitpr7").val());
+			var qty1 = $("#qty7").val();
+			if (unittxt > unit1db) {
+				alert("Quote Value not to exceed INR " + unit1db);
+				$("#unitpr7").val(accounting.formatMoney(unit1db));
+				var tot1 = unit1db * qty1;
+				$('#totpr7').val(accounting.formatMoney(tot1));
+				var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+				$('#total').val(accounting.formatMoney(t12345678));
+				return false;
+			}
+			var tot1 = unittxt * qty1;
+			$('#totpr7').val(accounting.formatMoney(tot1));
+			var t12345678 = accounting.unformat($("#totpr").val()) + accounting.unformat($("#totpr1").val()) + accounting.unformat($("#totpr2").val()) + accounting.unformat($("#totpr3").val()) + accounting.unformat($("#totpr4").val()) + accounting.unformat($("#totpr5").val()) + accounting.unformat($("#totpr6").val()) + accounting.unformat($("#totpr7").val());
+			$('#total').val(accounting.formatMoney(t12345678));
+		});
+	});
+
+
+	@* Update the details of Product Model After selection *@
+	$(document).ready(function () {
+		$("select#ProductModelID1").change(function (evt) {
+			{
+				$("#qty").val('-- Select Quantity --');
+				$("#totpr").val('');
+				$("#qty").attr("disabled", false);
+				var selectedID = $("#ProductModelID1 option:selected").val();
+				$.getJSON("/QuotationSpares/GetProductModelDetails", { ID: selectedID }, function (data) {
+					//Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+					$("#unitpr").val(accounting.formatMoney(data.unitprice));
+					$("#unitprhid").val(accounting.formatMoney(data.unitprice));
+					$("#moddes").val(data.Desc);
+
+				});
+			}
+		});
+
+		$("select#ProductModelID2").change(function (evt) {
+			{
+				$("#qty1").val('-- Select Quantity --');
+				$("#totpr1").val('');
+				$("#qty1").attr("disabled", false);
+				var selectedID = $("#ProductModelID2 option:selected").val();
+				$.getJSON("/QuotationSpares/GetProductModelDetails", { ID: selectedID }, function (data) {
+					//Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+					$("#unitpr1").val(accounting.formatMoney(data.unitprice));
+					$("#unitpr2hid").val(accounting.formatMoney(data.unitprice));
+					$("#moddes1").val(data.Desc);
+				});
+			}
+		});
+		$("select#ProductModelID3").change(function (evt) {
+			{
+				$("#qty2").val('-- Select Quantity --');
+				$("#totpr2").val('');
+				$("#qty2").attr("disabled", false);
+				var selectedID = $("#ProductModelID3 option:selected").val();
+				$.getJSON("/QuotationSpares/GetProductModelDetails", { ID: selectedID }, function (data) {
+					//Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+					$("#unitpr2").val(accounting.formatMoney(data.unitprice));
+					$("#unitpr3hid").val(accounting.formatMoney(data.unitprice));
+					$("#moddes2").val(data.Desc);
+				});
+			}
+		});
+		$("select#ProductModelID4").change(function (evt) {
+			{
+				$("#qty3").val('-- Select Quantity --');
+				$("#totpr3").val('');
+				$("#qty3").attr("disabled", false);
+				var selectedID = $("#ProductModelID4 option:selected").val();
+				$.getJSON("/QuotationSpares/GetProductModelDetails", { ID: selectedID }, function (data) {
+					//Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+					$("#unitpr3").val(accounting.formatMoney(data.unitprice));
+					$("#unitpr4hid").val(accounting.formatMoney(data.unitprice));
+					$("#moddes3").val(data.Desc);
+				});
+			}
+		});
+
+		$("select#ProductModelID5").change(function (evt) {
+			{
+				$("#qty4").val('-- Select Quantity --');
+				$("#totpr4").val('');
+				$("#qty4").attr("disabled", false);
+				var selectedID = $("#ProductModelID5 option:selected").val();
+				$.getJSON("/QuotationSpares/GetProductModelDetails", { ID: selectedID }, function (data) {
+					//Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+					$("#unitpr4").val(accounting.formatMoney(data.unitprice));
+					$("#unitpr5hid").val(accounting.formatMoney(data.unitprice));
+					$("#moddes4").val(data.Desc);
+				});
+			}
+		});
+		$("select#ProductModelID6").change(function (evt) {
+			{
+				$("#qty5").val('-- Select Quantity --');
+				$("#totpr5").val('');
+				$("#qty5").attr("disabled", false);
+				var selectedID = $("#ProductModelID6 option:selected").val();
+				$.getJSON("/QuotationSpares/GetProductModelDetails", { ID: selectedID }, function (data) {
+					//Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+					$("#unitpr5").val(accounting.formatMoney(data.unitprice));
+					$("#unitpr6hid").val(accounting.formatMoney(data.unitprice));
+					$("#moddes5").val(data.Desc);
+				});
+			}
+		});
+		$("select#ProductModelID7").change(function (evt) {
+			{
+				$("#qty6").val('-- Select Quantity --');
+				$("#totpr6").val('');
+				$("#qty6").attr("disabled", false);
+				var selectedID = $("#ProductModelID7 option:selected").val();
+				$.getJSON("/QuotationSpares/GetProductModelDetails", { ID: selectedID }, function (data) {
+					//Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+					$("#unitpr6").val(accounting.formatMoney(data.unitprice));
+					$("#unitpr7hid").val(accounting.formatMoney(data.unitprice));
+					$("#moddes6").val(data.Desc);
+				});
+			}
+		});
+		$("select#ProductModelID8").change(function (evt) {
+			{
+				$("#qty7").val('-- Select Quantity --');
+				$("#totpr7").val('');
+				$("#qty7").attr("disabled", false);
+				var selectedID = $("#ProductModelID8 option:selected").val();
+				$.getJSON("/QuotationSpares/GetProductModelDetails", { ID: selectedID }, function (data) {
+					//Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+					$("#unitpr7").val(accounting.formatMoney(data.unitprice));
+					$("#unitpr8hid").val(accounting.formatMoney(data.unitprice));
+					$("#moddes7").val(data.Desc);
+				});
+			}
+		});
+	});
+
+	@* Update Quotation Number from DB for every 100 milli seconds *@
+	$(document).ready(function () {
+		setInterval(updatequotnumber, 100);
+		function updatequotnumber() {
+			var mdbid = '@ViewBag.MDBID';
+			if (mdbid != '') {
+				$.getJSON("/QuotationSpares/Getquotationnumber", { ID: mdbid }, function (data) {
+					if (data.quotnumb != "") {
+						$("#quotno").val(data.quotnumb);
+					}
+				});
+			}
+		}
+	});
+</script>

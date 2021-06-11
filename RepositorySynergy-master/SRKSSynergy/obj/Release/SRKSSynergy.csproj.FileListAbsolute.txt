@@ -1,0 +1,721 @@
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+C:\Sharath\Synergy\Code\SRKSSynergy BackUp On 29-12-2016 Except Issue #12\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\April_2017\Harish_18_04_2017\18_04_2017\Working  Builds\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\April_2017\20-04-2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\April_2017\21_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\April_2017\24_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\April_2017\25_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\April_2017\26_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\April_2017\28_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\May2017\02_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\May2017\03_04_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\May2017\04_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\May2017\08_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\May2017\09_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\May2017\10_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libeay32.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\mingwm10.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ssleay32.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.pdb
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Harish\May2017\11_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libeay32.dll
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\mingwm10.dll
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ssleay32.dll
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\wkhtmltox0.dll
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.pdb
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.dll
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.pdb
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.cache
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.compiled
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+C:\Sharath\HDC Latest Working\New folder\15-05-2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libeay32.dll
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\mingwm10.dll
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ssleay32.dll
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\wkhtmltox0.dll
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.pdb
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.dll
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.pdb
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.cache
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.compiled
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+C:\Sharath\HDC Latest Working\New folder\18_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libeay32.dll
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\mingwm10.dll
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ssleay32.dll
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\wkhtmltox0.dll
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.pdb
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.dll
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.pdb
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.cache
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.compiled
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+C:\Sharath\HDC Latest Working\New folder\19_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libeay32.dll
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\mingwm10.dll
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ssleay32.dll
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\wkhtmltox0.dll
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.pdb
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.dll
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.pdb
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.cache
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.compiled
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+C:\Sharath\HDC Latest Working\New folder\22_05_2017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libeay32.dll
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\mingwm10.dll
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ssleay32.dll
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.dll
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.pdb
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.cache
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.compiled
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Projects\Buhler\Code\SRKSSynergyPaginationCopy24052017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libeay32.dll
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\mingwm10.dll
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ssleay32.dll
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\wkhtmltox0.dll
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.pdb
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.dll
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.pdb
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.cache
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.compiled
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+C:\Sharath\Synergy\Code\Server Build 02122016\20062017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libeay32.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\mingwm10.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ssleay32.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll.config
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Microsoft.ReportViewer.WebForms.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Microsoft.SqlServer.Types.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.pdb
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\de\Microsoft.SqlServer.Types.resources.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\es\Microsoft.SqlServer.Types.resources.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\fr\Microsoft.SqlServer.Types.resources.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\it\Microsoft.SqlServer.Types.resources.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ja\Microsoft.SqlServer.Types.resources.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ko\Microsoft.SqlServer.Types.resources.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\pt\Microsoft.SqlServer.Types.resources.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ru\Microsoft.SqlServer.Types.resources.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Project\Synergy\27072017\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libeay32.dll
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\mingwm10.dll
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ssleay32.dll
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\wkhtmltox0.dll
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.pdb
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.dll
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Microsoft.ReportViewer.WebForms.dll
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.pdb
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial1.resources
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial2.resources
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial3.resources
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial4.resources
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial5.resources
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.cache
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.compiled
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+E:\Suhas\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial6.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial1.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial2.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial3.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial4.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial5.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial6.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial7.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial8.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial9.resources
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.Cache
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.cache
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\RdlCompile.compiled
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libeay32.dll
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\mingwm10.dll
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ssleay32.dll
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\wkhtmltox0.dll
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.dll
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\SRKSSynergy.pdb
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.dll
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Microsoft.ReportViewer.WebForms.dll
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\bin\Excel.pdb
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+E:\Suhas\projs\synergy new build 08-08-17\SRKSSynergy\SRKSSynergyPaginationCopy\SRKSSynergy\obj\Release\SRKSSynergy.csprojResolveAssemblyReference.cache
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\SqlServerTypes\x64\msvcr120.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\SqlServerTypes\x86\msvcr120.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\SqlServerTypes\x86\SqlServerSpatial140.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\libeay32.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\mingwm10.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ssleay32.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\wkhtmltox0.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll.config
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Excel.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.ReportViewer.Common.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.ReportViewer.DataVisualization.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.ReportViewer.Design.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.ReportViewer.WebForms.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.ReportViewer.WinForms.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.SqlServer.Types.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\EnvDTE.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.8.0.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\stdole.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.OLE.Interop.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.TextManager.Interop.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.VSHelp.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.9.0.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.TextManager.Interop.8.0.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.ProjectAggregator.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.ComponentModelHost.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.TemplateWizardInterface.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Debugger.InteropA.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\EnvDTE80.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Data.Services.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\VSLangProj.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.11.0.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Data.Core.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.10.0.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\VSLangProj80.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.ManagedInterfaces.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Debugger.Interop.11.0.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.GraphModel.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.MSXML.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.TextManager.Interop.10.0.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\VSLangProj2.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Excel.pdb
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\Microsoft.VisualStudio.TemplateWizardInterface.xml
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\de\Microsoft.ReportViewer.Common.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\es\Microsoft.ReportViewer.Common.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\fr\Microsoft.ReportViewer.Common.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\it\Microsoft.ReportViewer.Common.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ja\Microsoft.ReportViewer.Common.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ko\Microsoft.ReportViewer.Common.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\pt\Microsoft.ReportViewer.Common.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ru\Microsoft.ReportViewer.Common.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\de\Microsoft.ReportViewer.Design.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\es\Microsoft.ReportViewer.Design.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\fr\Microsoft.ReportViewer.Design.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\it\Microsoft.ReportViewer.Design.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ja\Microsoft.ReportViewer.Design.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ko\Microsoft.ReportViewer.Design.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\pt\Microsoft.ReportViewer.Design.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ru\Microsoft.ReportViewer.Design.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\de\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\es\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\fr\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\it\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ja\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ko\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\pt\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\ru\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojAssemblyReference.cache
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.cache
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.CoreCompileInputs.cache
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.CopyComplete
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\Suhas\Live Projects\SRKSSynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\SqlServerTypes\x64\msvcr120.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\SqlServerTypes\x86\msvcr120.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\SqlServerTypes\x86\SqlServerSpatial140.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\libeay32.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\mingwm10.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ssleay32.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\wkhtmltox0.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\SRKSSynergy.dll.config
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\SRKSSynergy.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\SRKSSynergy.pdb
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Excel.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.ReportViewer.Common.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.ReportViewer.DataVisualization.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.ReportViewer.Design.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.ReportViewer.WebForms.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.ReportViewer.WinForms.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.SqlServer.Types.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\EnvDTE.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.8.0.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\stdole.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.OLE.Interop.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.TextManager.Interop.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.VSHelp.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.9.0.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.TextManager.Interop.8.0.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.ProjectAggregator.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.ComponentModelHost.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.TemplateWizardInterface.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Debugger.InteropA.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\EnvDTE80.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Data.Services.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\VSLangProj.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.11.0.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Data.Core.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.10.0.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\VSLangProj80.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.ManagedInterfaces.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.Debugger.Interop.11.0.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.GraphModel.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.MSXML.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.TextManager.Interop.10.0.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\VSLangProj2.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Excel.pdb
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\Microsoft.VisualStudio.TemplateWizardInterface.xml
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\de\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\es\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\fr\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\it\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ja\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ko\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\pt\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ru\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\de\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\es\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\fr\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\it\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ja\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ko\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\pt\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ru\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\de\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\es\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\fr\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\it\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ja\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ko\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\pt\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\ru\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\obj\Release\SRKSSynergy.csprojAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.cache
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\obj\Release\SRKSSynergy.csproj.CopyComplete
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\obj\Release\SRKSSynergy.dll
+C:\Users\Administrator\Documents\GitHub\RepositorySynergy\SRKSSynergy\obj\Release\SRKSSynergy.pdb
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\SqlServerTypes\x64\msvcr120.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\SqlServerTypes\x86\msvcr120.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\SqlServerTypes\x86\SqlServerSpatial140.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\libeay32.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\libgcc_s_dw2-1.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\mingwm10.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ssleay32.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\wkhtmltox0.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\SRKSSynergy.dll.config
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\SRKSSynergy.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\SRKSSynergy.pdb
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Excel.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ICSharpCode.SharpZipLib.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.ReportViewer.Common.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.ReportViewer.DataVisualization.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.ReportViewer.Design.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.ReportViewer.WebForms.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.ReportViewer.WinForms.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.SqlServer.Types.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\EnvDTE.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.VisualStudio.Shell.Interop.8.0.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\stdole.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.VisualStudio.OLE.Interop.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.VisualStudio.TextManager.Interop.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.VisualStudio.TextManager.Interop.8.0.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Microsoft.MSXML.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\Excel.pdb
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\de\Microsoft.ReportViewer.Common.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\es\Microsoft.ReportViewer.Common.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\fr\Microsoft.ReportViewer.Common.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\it\Microsoft.ReportViewer.Common.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ja\Microsoft.ReportViewer.Common.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ko\Microsoft.ReportViewer.Common.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\pt\Microsoft.ReportViewer.Common.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ru\Microsoft.ReportViewer.Common.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\de\Microsoft.ReportViewer.Design.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\es\Microsoft.ReportViewer.Design.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\fr\Microsoft.ReportViewer.Design.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\it\Microsoft.ReportViewer.Design.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ja\Microsoft.ReportViewer.Design.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ko\Microsoft.ReportViewer.Design.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\pt\Microsoft.ReportViewer.Design.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ru\Microsoft.ReportViewer.Design.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\de\Microsoft.ReportViewer.WinForms.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\es\Microsoft.ReportViewer.WinForms.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\fr\Microsoft.ReportViewer.WinForms.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\it\Microsoft.ReportViewer.WinForms.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ja\Microsoft.ReportViewer.WinForms.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ko\Microsoft.ReportViewer.WinForms.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\pt\Microsoft.ReportViewer.WinForms.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\ru\Microsoft.ReportViewer.WinForms.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\bin\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\obj\Release\SRKSSynergy.csprojAssemblyReference.cache
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\obj\Release\SRKSSynergy.Migrations.initial.resources
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\obj\Release\SRKSSynergy.csproj.GenerateResource.cache
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\obj\Release\SRKSSynergy.csproj.CoreCompileInputs.cache
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\obj\Release\SRKSSynergy.csproj.CopyComplete
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\obj\Release\SRKSSynergy.dll
+D:\RepositorySynergy-master\RepositorySynergy-master\SRKSSynergy\obj\Release\SRKSSynergy.pdb

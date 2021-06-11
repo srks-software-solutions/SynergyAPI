@@ -1,0 +1,152 @@
+﻿@model SRKSSynergy.Models.ProductModelSpare
+
+@{
+	
+	
+	ViewBag.Title  = "Create - Spare Plus";
+}
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<style>
+	.validation-summary-valid {
+		display: none;
+	}
+</style>
+<script>
+	$(document).ready(function () {
+		$("#agntpr").keyup(function () {
+			var value = accounting.unformat($("#agntpr").val());
+			$("#agntpr").val(accounting.formatMoney(value));
+		});
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$("#cuspr").keyup(function () {
+			var value = accounting.unformat($("#cuspr").val());
+			$("#cuspr").val(accounting.formatMoney(value));
+		});
+	});
+</script>
+<div class="bcgr" style="min-height: 590px">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Create-Spare Plus</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Spare Part Model Name</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+								@Html.TextBoxFor(model => model.ProductModelSparesName, new { @id = "sparenme", @maxlength = "20", @class = "fntst", @placeholder = "Spare Part Model Name",@style="height:30px" })
+								@Html.ValidationMessageFor(model => model.ProductModelSparesName)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Spare Part Description</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.ProductModelSparesDesc, new { @id = "desc", @maxlength = "160", @class = "input-xxxlarge fntst", @placeholder = "Spare Part Description",@style="height:30px" })
+								@Html.ValidationMessageFor(model => model.ProductModelSparesDesc)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Quote Valid Till</label>
+							<div class="controls">
+								@*<input type="text" id="datePicker2" class="input-mini2" placeholder="Select Date">*@
+								@Html.TextBoxFor(model => model.QuoteVaildTill, new { id = "datePicker2", @class = "input-medium fntst sss", @placeholder = "Select Date", @readonly = "readonly" ,@style="height:30px"})
+								@Html.ValidationMessageFor(model => model.QuoteVaildTill)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Delivery Time</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.DeliveryTime, new { @id = "deltm", @maxlength = "40", @class = "fntst", @placeholder = "Ex: 10 days from Order confimation",@style="height:30px" })
+								@Html.ValidationMessageFor(model => model.DeliveryTime)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Agent Price in INR</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+								@Html.TextBoxFor(model => model.AgentPrice, new { @id = "agntpr", @type = "text", @class = "fntst", @placeholder = "Agent Price in INR" ,@style="height:30px"})
+								@*@Html.ValidationMessageFor(model => model.UnitPrice)*@
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Customer Price in INR</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+								@Html.TextBoxFor(model => model.CustomerPrice, new { @id = "cuspr", @type = "text", @class = "fntst", @placeholder = "Customer Price in INR" ,@style="height:30px"})
+								@*@Html.ValidationMessageFor(model => model.UnitPrice)*@
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad ">
+            <div class="span3 cent" style="padding-left: 2%">
+			    <button class="btn btn-success btn-large glyphicon glyphicon-arrow-left" style="display: inline;">@Html.ActionLink(" Back_to_List", "Index","Spare", new { @Style="color:white;text-decoration:none"})</button>
+            </div>
+            <div class="span3 cent" style="padding-left: 10%">
+				<button class="btn btn-success glyphicon glyphicon-cloud-upload" value="post" type="Submit">Save</button>
+            </div>
+		</div>
+				
+			</div>
+		</div>
+	}
+
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+	$(document).ready(function () {
+		var now = new Date();
+		var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+		$('.sss').datepicker({
+			format: 'dd/mm/yyyy',
+			onRender: function (date) {
+				return date.valueOf() < now.valueOf() ? 'disabled' : '';
+			}
+
+		}).on('changeDate', function (ev) {
+			$(this).datepicker('hide');
+		});
+	});
+</script>

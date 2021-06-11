@@ -1,0 +1,246 @@
+﻿@model  SRKSSynergy.Models.LeadFollowUptbl
+
+@{
+    ViewBag.Title = "LeadFollowUpCreate";
+}
+
+@{
+    List<SelectListItem> FollowUpList = new List<SelectListItem>();
+    FollowUpList.Add(new SelectListItem
+    {
+       Text = "One",
+       Value = "One"
+    });
+    FollowUpList.Add(new SelectListItem
+    {
+        Text = "Two",
+        Value = "Two",
+    });
+    FollowUpList.Add(new SelectListItem
+    {
+        Text = "Three",
+        Value = "Three",
+    });
+    FollowUpList.Add(new SelectListItem
+    {
+        Text = "Four",
+        Value = "Four"
+    });
+    FollowUpList.Add(new SelectListItem
+    {
+        Text = "Five",
+        Value = "Five",
+    });
+    FollowUpList.Add(new SelectListItem
+    {
+        Text = "Six",
+        Value = "Six",
+    });
+    FollowUpList.Add(new SelectListItem
+    {
+        Text = "Seven",
+        Value = "Seven"
+    });
+    FollowUpList.Add(new SelectListItem
+    {
+        Text = "Eight",
+        Value = "Eight",
+    });
+    FollowUpList.Add(new SelectListItem
+    {
+        Text = "Nine",
+        Value = "Nine",
+    });
+    FollowUpList.Add(new SelectListItem
+    {
+        Text = "Ten",
+        Value = "Ten",
+    });                                    
+}
+
+@{
+    List<SelectListItem> FollowUpTypeList = new List<SelectListItem>();
+    FollowUpTypeList.Add(new SelectListItem
+         {
+             Text = "Open",
+             Value = "Open"
+         });
+    FollowUpTypeList.Add(new SelectListItem
+         {
+             Text = "Close",
+             Value = "Close",
+         });                             
+}
+
+
+@{
+    List<SelectListItem> list5 = new List<SelectListItem>();
+
+    list5.Add(new SelectListItem
+    {
+        Text = "Less Than 3 Months",
+        Value = "Less Than 3 Months"
+    });
+    list5.Add(new SelectListItem
+    {
+        Text = "3 to 6 Months",
+        Value = "3 to 6 Months",
+    });
+    list5.Add(new SelectListItem
+    {
+        Text = "Greater Than 6 Months",
+        Value = "Greater Than 6 Months",
+    });
+
+}
+<div class="bcgr" id="mrefresh" style="min-height: 590px">
+	@using (Html.BeginForm())
+	{
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Create Follow Up </p>
+		</div>
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(false)
+		
+     <input value="@ViewBag.LEID" hidden="hidden" id="leid" name="leid" />
+		<div class="row" style="padding-left: 60px">
+			<div class=" row show-grid">
+				<div style="padding-left: 60px">
+                        <table class="table " style="padding-left: 60px;">
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Organization Name</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                           	@ViewBag.Oname
+                                        </div>
+                                    </td>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Organization Type</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                           @ViewBag.Otype
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>City</strong></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            @ViewBag.city
+                                        </div>
+                                    </td>
+
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>PinCode</strong></label>
+                                        </div>                                        
+                                    </td>
+                                    <td>
+                                        <div>
+                                            @ViewBag.pin
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>EMail ID</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                              @ViewBag.mail
+                                        </div>
+                                    </td>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Mobile No</strong></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                             @ViewBag.mobno
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Follow Up</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                              @Html.DropDownListFor(m => m.FollowUp, FollowUpList, "--Select--", new { @id = "FollowUp", @name = "FollowUp",@required="required" })
+                                        </div>
+                                    </td>
+
+                                                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>FollowUp Description</strong></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            @Html.TextAreaFor(m => m.FollowUpDescription, new { id = "FollowUpDescription",@cols=5, @name = "FollowUpDescription", @style = "width:250px" })
+                                        </div>
+                                    </td>
+
+                                   <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Follow Up Type</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                              @Html.DropDownListFor(m => m.FollowUpType, FollowUpTypeList, "--Select--", new { @id = "FollowUpType", @name = "FollowUpType",@required="required" })
+                                        </div>
+                                    </td>
+
+
+                                </tr>
+                                 <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Time Line</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                              @Html.DropDownListFor(m => m.TimeLine, list5, "--Select--", new { @id = "FollowUpType", @name = "FollowUpType",@required="required" })
+                                        </div>
+                                    </td>
+
+
+                                </tr>                         
+                                                        
+                           
+                        </table>
+                    </div>
+			</div>
+		</div>
+     
+     
+        <div class="span10 pad ">
+            <div class="span3 cent">
+                <input type="submit" name="btnapproval" value="Save" class="btn btn-large btn-success" />
+            </div>
+        </div>
+    }
+</div>
+

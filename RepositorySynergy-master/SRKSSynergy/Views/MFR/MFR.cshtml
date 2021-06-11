@@ -1,0 +1,955 @@
+﻿@model SRKSSynergy.Models.MFRALL
+@{
+    ViewBag.Title = "Machine Fault Report";
+}
+@*<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />*@
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+@*<script src="~/Content/bootstrap/js/bootstrap.js"></script>*@
+<style>
+    .validation-summary-valid {
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#oanum").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/MFR/Autocompletemfr",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.HODNumber, value: item.HODNumber };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+@{
+    List<SelectListItem> listItems1 = new List<SelectListItem>();
+    List<SelectListItem> listItems2 = new List<SelectListItem>();
+    List<SelectListItem> listItems3 = new List<SelectListItem>();
+    List<SelectListItem> listItems4 = new List<SelectListItem>();
+    List<SelectListItem> listItems5 = new List<SelectListItem>();
+    
+    listItems1.Add(new SelectListItem
+         {
+             Text = "1",
+             Value = "1"
+         });
+    listItems1.Add(new SelectListItem
+         {
+             Text = "2",
+             Value = "2",
+         });
+    listItems1.Add(new SelectListItem
+         {
+             Text = "3",
+             Value = "3"
+         });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "6",
+        Value = "6"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "7",
+        Value = "7"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "8",
+        Value = "8"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "9",
+        Value = "9"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "10",
+        Value = "10"
+    });
+    //ListItems2
+    listItems2.Add(new SelectListItem
+    {
+        Text = "1",
+        Value = "1"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "2",
+        Value = "2",
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "3",
+        Value = "3"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "6",
+        Value = "6"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "7",
+        Value = "7"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "8",
+        Value = "8"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "9",
+        Value = "9"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "10",
+        Value = "10"
+    });
+    //ListItems3
+    listItems3.Add(new SelectListItem
+    {
+        Text = "1",
+        Value = "1"
+    });
+    listItems3.Add(new SelectListItem
+    {
+        Text = "2",
+        Value = "2",
+    });
+    listItems3.Add(new SelectListItem
+    {
+        Text = "3",
+        Value = "3"
+    });
+    listItems3.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4"
+    });
+    listItems3.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+    listItems3.Add(new SelectListItem
+    {
+        Text = "6",
+        Value = "6"
+    });
+    listItems3.Add(new SelectListItem
+    {
+        Text = "7",
+        Value = "7"
+    });
+    listItems3.Add(new SelectListItem
+    {
+        Text = "8",
+        Value = "8"
+    });
+    listItems3.Add(new SelectListItem
+    {
+        Text = "9",
+        Value = "9"
+    });
+    listItems3.Add(new SelectListItem
+    {
+        Text = "10",
+        Value = "10"
+    });
+
+    //ListItems4
+    listItems4.Add(new SelectListItem
+    {
+        Text = "1",
+        Value = "1"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "2",
+        Value = "2",
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "3",
+        Value = "3"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "6",
+        Value = "6"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "7",
+        Value = "7"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "8",
+        Value = "8"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "9",
+        Value = "9"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "10",
+        Value = "10"
+    });
+    //ListItems5
+    listItems5.Add(new SelectListItem
+    {
+        Text = "1",
+        Value = "1"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "2",
+        Value = "2",
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "3",
+        Value = "3"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "6",
+        Value = "6"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "7",
+        Value = "7"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "8",
+        Value = "8"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "9",
+        Value = "9"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "10",
+        Value = "10"
+    });
+}
+<div style="background: gray; padding-bottom: 15px">
+    <p class="txtft">Machine Fault Report</p>
+</div>
+<div class="container" style="width: 1050px; padding-top: 3px">
+    <div style="background: #e5e5e5">
+
+        @* MFR Generated Message *@
+        @if (TempData["OANum"] != null)
+        {
+            <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["OANum"]</p>
+        }
+        @using (Html.BeginForm("MFR", "MFR", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="row" style="padding-top: 10px">
+                @Html.HiddenFor(m => m.MFR.OrderNum, new { id = "oanum", Value = ViewBag.OAnum })
+                @Html.HiddenFor(m => m.MFR.MDBID, new { Value = ViewBag.mdbid })
+                @Html.HiddenFor(m => m.MFR.MacSlNo, new { Value = ViewBag.Macslno })
+                @Html.HiddenFor(m => m.MFR.MfrModelNo, new { Value = ViewBag.Product })
+                <div>
+                    <!-- Row2 -->
+                    <div style="padding-left: 40px">
+                        <table class="table " style="width: 1030px; padding-left: 30px;">
+                            <div class="controls-row">
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>HOD Number :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            <input type="text" class="fntst" id="mfr_by" placeholder="HOD Number" readonly="readonly" value="@ViewBag.HodNumber">
+                                            @*@Html.TextBoxFor(model => model.MFR.MFRNumber, new { id = "mfrno", @class = "fntst",@readonly="readonly", @placeholder = "MFR Number",Value=@ViewBag.MfrNumber })*@
+                                        </div>
+                                    </td>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>MFR Number :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            @*<input type="text" class="fntst" id="mfr_by" placeholder="MFR Enetered by" readonly="readonly" value="@ViewBag.LoginName">*@
+                                            @Html.TextBoxFor(model => model.MFR.MFRNumber, new { id = "mfrno", @class = "fntst", @readonly = "readonly", @placeholder = "MFR Number", Value = @ViewBag.MfrNumber })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+
+
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>MFR Entered By :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            @*<input type="text" class="fntst" id="mfr_by" placeholder="MFR Enetered by" readonly="readonly" value="@ViewBag.LoginName">*@
+                                            @Html.TextBoxFor(model => model.MFR.MfrEnteredBy, new { id = "mfrby", @class = "fntst", @readonly = "readonly", @placeholder = "MFR Entered By ", Value = @ViewBag.LoginName })
+                                        </div>
+                                    </td>
+                                    <td class="span">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>To :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            @*<input type="text" class="fntst" id="to" placeholder="To">*@
+                                            @Html.TextBoxFor(model => model.MFR.MfrTo, new { id = "mfrto", @class = "fntst", @required = "required", @placeholder = "MFR To" })
+                                            @Html.ValidationMessageFor(model => model.MFR.MfrTo)
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Channel Partner :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            <input type="text" class="fntst" id="chanpart" readonly="readonly" value="@ViewBag.CPName" placeholder="Channel Partner">
+                                        </div>
+                                    </td>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Date :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            @Html.TextBoxFor(model => model.MFR.MfrDate, new { id = "Mfrdat", @class = "fntst dat", @readonly = "readonly" })
+                                            @*@Html.TextBoxFor(model => model.MFR.MfrDate, new { id = "Mfrdat", @class = "fntst", Value = @System.DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss tt"), @readonly = "readonly", @style = "display:none;" })
+											<input type="text" class="fntst" id="dat" value="@ViewBag.ShowQuoteDate" readonly="readonly">*@
+                                        </div>
+                                    </td>
+                                </tr>
+                            </div>
+                        </table>
+                    </div>
+                    <!-- Row31 -->
+                    <div style="padding-left: 40px">
+                        <table class="table " style="width: 1030px; padding-left: 30px;">
+                            <div class="controls-row">
+                                <tr>
+                                    <td class="span2" colspan="4">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Customer Data : </strong>(Please enter the Customer details in the space below)</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Company :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            <input type="text" class="fntst" id="cmpynm" placeholder="Company Name" readonly="readonly" value="@ViewBag.Company">
+                                        </div>
+                                    </td>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>City :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            <input type="text" class="fntst" id="city" placeholder="City" readonly="readonly" value="@ViewBag.City">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Contact :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            <input type="text" class="fntst" id="cont" placeholder="Contact Person Name" readonly="readonly" value="@ViewBag.Contact">
+                                        </div>
+                                    </td>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Mobile/Tel No :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            <input type="text" class="fntst" id="mob/tel" placeholder="Mobile/Tel No" readonly="readonly" value="@ViewBag.Phone">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </div>
+                        </table>
+                    </div>
+
+                    <div style="padding-left: 40px">
+                        <table class="table " style="width: 1030px; padding-left: 30px;">
+                            <div class="controls-row">
+                                <tr>
+                                    <td class="span2" colspan="4">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Contact Person Details During Service Visit : </strong></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Name :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                             @Html.TextBoxFor(model => model.MFR.ContactPerson, new { id = "ContactPerson", @class = "fntst" })
+                                        </div>
+                                    </td>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Contact No :</strong></label>
+                                        </div>
+
+                                         <td class="span3">
+                                        <div>
+                                         @*   @Html.TextBoxFor(model => model.MFR.ContactNo, new { id = "ContactNo", @class = "fntst",@type = "number" })*@
+                                            
+                                            @Html.TextBoxFor(model => model.MFR.ContactNo, new { id = "ContactNo", @type = "number", @class = "fntst mobilenumber", @placeholder = "Contact No",})
+                                @Html.ValidationMessageFor(model => model.MFR.ContactNo)
+                                        </div>
+                                    </td>
+
+                                    </td>
+                                   
+                                </tr>
+                                
+                            </div>
+                        </table>
+                    </div>
+
+                    <!-- Row3 -->
+                    <div style="padding-left: 40px">
+                        <table class="table " style="width: 1030px; padding-left: 30px;">
+                            <div class="controls-row">
+                                <tr>
+                                    <td class="span2" colspan="4">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Machine Data : </strong>(Please enter the machine details in the space below)</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Model :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            <input type="text" class="fntst" id="modelno" placeholder="Modelno" readonly="readonly" value="@ViewBag.Product">
+                                            @*<input type="text" class="fntst" id="model" placeholder="Model" readonly="readonly" value="@ViewBag.EModel">*@
+                                        </div>
+                                    </td>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>M/c's Sl no :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>            
+                                            <input type="text" class="fntst" id="macslno" placeholder="Machine Sl No" readonly="readonly" value="@ViewBag.Macslno">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Commissioned by :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>                                          
+                                            @Html.TextBoxFor(model => model.MFR.CommissionedBy, new { id = "commby", @class = "fntst", @placeholder = "Commissioned By", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.MFR.CommissionedBy)
+                                        </div>
+                                    </td>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Commissioning date :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            @Html.TextBoxFor(model => model.MFR.CommissionedDate, new { id = "commdat", @class = "fntst", @placeholder = "Select Date", Value = @ViewBag.CommissionDate, @readonly = "readonly" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Present M/c status :</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            <label class="checkbox">                                           
+                                                @Html.CheckBoxFor(m => m.MFR.MacBreakDown, new { id = "breakdown", @name = "breakdown", @class = "inline", @type = "checkbox" })
+                                                M/c break-down
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="span2" colspan="2">
+                                        <div>
+                                            <label class="checkbox">
+                                                @*<input type="checkbox" value="">*@
+                                                @Html.CheckBoxFor(m => m.MFR.MacOperatTemp, new { id = "opertempo", @name = "opertempo", @class = "inline", @type = "checkbox" })
+                                                M/c operating temporarily
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </div>
+                        </table>
+                    </div>
+                    <!-- Row4 -->
+                    <div style="padding-left: 40px">
+                        <table class="table " style="width: 1030px; padding-left: 30px;">
+                            <div class="controls-row">
+                                <tr>
+                                    <td class="span10">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label>
+                                                <strong>Fault 1 : </strong>
+                                                Precise nature of the fault : (In the box below, please mention briefly eg : Bearing failure) 
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span10">
+                                    @*<textarea rows="1" class="span10" type="text" id="fault1"></textarea></td>*@
+                                    @Html.TextAreaFor(m => m.MFR.Fault, new { @id = "fault", @name = "fault", rows = 6, columns = 20, @style = "width:900px", @placeholder = "Nature of Fault in Brief", @required = "required" })
+                                    @Html.ValidationMessageFor(m => m.MFR.Fault)
+                                </tr>
+                                <tr>
+                                    <td class="span10">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label>
+                                                <strong>Analysis of the possible cause of fault / failure :</strong>
+                                                (In the box below, please provide us with your observations, and analysis in as much details as possible using 5 why analysis) 
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span10">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label>
+                                                <strong>5 - Why Analysis : </strong>
+                                                Ask the concerned person 5 times why on the given situation and record the answer obtained in the same sequence.
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span10">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Why did this happen? </strong></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span10">
+                                    @Html.TextAreaFor(m => m.MFR.Ask1, new { @id = "ask1", @name = "ask1", rows = 6, columns = 20, @style = "width:900px", @placeholder = "Reason" })
+                                    @Html.ValidationMessageFor(m => m.MFR.Ask1)
+                                </tr>
+
+                                <tr>
+                                    <td class="span10">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label>
+                                                <strong>Remedial Action already taken :</strong>
+                                                (In the box below, please tell us what is the present state of the machine and what is the nature of the remnedial action taken by you based on the above 5 why analysis) 
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span10">
+                                    @*<textarea rows="1" class="span10" type="text" id="fault1"></textarea></td>*@
+                                    @Html.TextAreaFor(m => m.MFR.Remedial, new { @id = "remedial", @name = "remedial", rows = 6, columns = 20, @style = "width:900px", @required = "required", @placeholder = "Remedial Action Taken" })
+                                    @Html.ValidationMessageFor(m => m.MFR.Remedial)
+                                </tr>
+                            </div>
+                        </table>
+                    </div>
+                    <!-- Row5 -->
+                    <div style="padding-left: 40px">
+                        <table class="table" style="width: 1030px; padding-left: 30px;">
+                            <div class="controls-row">
+                                <tr>
+                                    <td colspan="4">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label>
+                                                <strong>Parts that needs to be replaced : </strong>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px; text-align: center;">No</td>
+                                    <td style="width: 50px; text-align: center;">Qty</td>
+                                    <td style="width: 200px; text-align: center;">Part Number</td>
+                                    <td style="text-align: center;">Description</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px; text-align: center;">1</td>
+                                    <td style="width: 50px; text-align: center;">
+                                        @Html.TextBoxFor(model => model.MFRParts1.Quantity, new { @id = "qty1",@style="width:100px", @name = "qty1", @validate="validate" })
+                                         @Html.ValidationMessageFor(model => model.MFRParts1.Quantity)
+                 
+                                    </td>
+                                    <td style="width: 300px; text-align: center;">
+                                        @Html.DropDownListFor(m => m.MFRParts1.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID1"], "--Select Model--", new { id = "ProductModelSparesID1"})
+                                    </td>
+                                    <td style="text-align: center;">
+                                        @Html.TextBoxFor(model => model.MFRParts1.ModelDesc, new { id = "moddes1", @type = "text", @class = "fntst", @style = "width:430px", @readonly = "readonly"})
+                                        @Html.ValidationMessageFor(model => model.MFRParts1.ModelDesc)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px; text-align: center;">2</td>
+                                    <td style="width: 50px; text-align: center;">
+                                       @Html.TextBoxFor(model => model.MFRParts2.Quantity, new {@id = "qty2",@style="width:100px", @name = "qty2", @validate="validate"})
+                                         @Html.ValidationMessageFor(model => model.MFRParts2.Quantity)
+                                    </td>
+                                    <td style="width: 300px; text-align: center;">
+                                        @Html.DropDownListFor(m => m.MFRParts2.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID2"], "--Select Model--", new { id = "ProductModelSparesID2"})
+                                    </td>
+                                    <td style="text-align: center;">
+                                        @Html.TextBoxFor(model => model.MFRParts2.ModelDesc, new { id = "moddes2", @type = "text", @style = "width:430px", @class = "fntst", @readonly = "readonly"})
+                                        @Html.ValidationMessageFor(model => model.MFRParts2.ModelDesc)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px; text-align: center;">3</td>
+                                    <td style="width: 50px; text-align: center;">
+                                        @Html.TextBoxFor(model => model.MFRParts3.Quantity, new { @id = "qty3",@style="width:100px", @name = "qty3", @validate="validate" })
+                                         @Html.ValidationMessageFor(model => model.MFRParts3.Quantity)
+                                    </td>
+                                    <td style="width: 300px; text-align: center;">
+                                        @Html.DropDownListFor(m => m.MFRParts3.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID3"], "--Select Model--", new { id = "ProductModelSparesID3" })
+                                    </td>
+                                    <td style="text-align: center;">
+                                        @Html.TextBoxFor(model => model.MFRParts3.ModelDesc, new { id = "moddes3", @type = "text", @style = "width:430px", @class = "fntst", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.MFRParts3.ModelDesc)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px; text-align: center;">4</td>
+                                    <td style="width: 50px; text-align: center;">
+                                       @Html.TextBoxFor(model => model.MFRParts4.Quantity, new {@id = "qty4",@style="width:100px", @name = "qty4" , @validate="validate"})
+                                         @Html.ValidationMessageFor(model => model.MFRParts4.Quantity)
+                                    </td>
+                                   <td style="width: 300px; text-align: center;">
+                                        @Html.DropDownListFor(m => m.MFRParts4.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID4"], "--Select Model--", new { id = "ProductModelSparesID4" })
+                                    </td>
+                                    <td style="text-align: center;">
+                                        @Html.TextBoxFor(model => model.MFRParts4.ModelDesc, new { id = "moddes4", @type = "text", @style = "width:430px", @class = "fntst", @readonly = "readonly"})
+                                        @Html.ValidationMessageFor(model => model.MFRParts4.ModelDesc)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px; text-align: center;">5</td>
+                                    <td style="width: 50px; text-align: center;">
+                                       @Html.TextBoxFor(model => model.MFRParts5.Quantity, new {@id = "qty5",@style="width:100px", @name = "qty5", @validate="validate"})
+                                         @Html.ValidationMessageFor(model => model.MFRParts5.Quantity)
+                                    </td>
+                                    
+                                   <td style="width: 300px; text-align: center;">
+                                        @Html.DropDownListFor(m => m.MFRParts5.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID5"], "--Select Model--", new { id = "ProductModelSparesID5" })
+                                    </td>
+                                    
+                                    <td style="text-align: center;">
+                                        @Html.TextBoxFor(model => model.MFRParts5.ModelDesc, new { id = "moddes5", @type = "text", @style = "width:430px", @class = "fntst", @readonly = "readonly" })
+                                         @Html.ValidationMessageFor(model => model.MFRParts5.ModelDesc)
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                   
+                                    </td>
+                                </tr>
+
+                            </div>
+                        </table>
+                        <div style="text-align: left; vertical-align: middle;padding:8px">
+                            <label>
+                                <strong>Spares taken : </strong>
+                            </label>
+                        </div>
+                                             
+
+                        <select id="sparestaken" onchange="sprchng()" >
+                            <option value="0">--Select--</option>
+                            <option value="1">Existing CP stock</option>
+                            <option value="2">BBAN stock</option>
+                        </select>
+                        <script>
+                            function sprchng() {
+                                var slct = $("#sparestaken").val();
+                                if (slct == "1") {
+                                    $("#spr1").prop("checked", true);
+                                    $("#spr2").prop("checked", false);
+                                }
+                                else if (slct == "2") {
+                                    $("#spr2").prop("checked", true);
+                                    $("#spr1").prop("checked", false);
+                                }
+                                else {
+                                    $("#spr1").prop("checked", false);
+                                    $("#spr2").prop("checked", false);
+                                }
+                            }
+
+                            function validtn() {
+                                var slct = $("#sparestaken").val();
+                                if (slct == "0")
+                                { 
+                                alert("Please select Spares taken ")
+                                return false;
+                                }
+                                else {
+                                    return true;
+                                }
+                            }
+                        </script>
+                         <input type="checkbox" id="spr1" name="spr1" class="form-control" style="display:none"> <br>
+                         <input type="checkbox" id="spr2" name="spr2" style="display:none"><br>
+
+                       @* @Html.CheckBoxFor(model=>model.MFR.IsSpareTakenFromExistingCPStock,new{id="IsSpareTakenFromExistingCPStock",name="IsSpareTakenFromExistingCPStock",@class="form-control"})*@
+
+                    </div>
+                    <!-- Row6 -->
+                    <div class="span10 pad ">
+                        <div class="span3 cent">                         
+                            <input type="submit" value="Submit" class="btn btn-large btn-success" onclick="return validtn(); javascript: return updateparent(); " />
+                        </div>
+                    </div>
+                    <!--End Of Buttons-->
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+        //$('#datePicker').datepicker({format: 'dd/mm/yyyy'}).val(today);
+        $('.dat').val(today);
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var item = new Array();
+        $("select#ProductModelSparesID1").change(function (evt) {
+            {
+                var selectedID = $("#ProductModelSparesID1 option:selected").val();
+                for (i = 0; i < item.length; i++) {
+                    if (item[i] == selectedID)
+                        alert('Select Differnt Item Code');
+                }
+                item.push(selectedID);
+
+                $.getJSON("/MFR/GetProductModelDetails", { ID: selectedID }, function (data) {
+                    //Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+                    $("#moddes1").val(data.Desc);
+                });
+            }
+        });
+        $("select#ProductModelSparesID2").change(function (evt) {
+            {
+                var selectedID = $("#ProductModelSparesID2 option:selected").val();
+                for (i = 0; i < item.length; i++) {
+                    if (item[i] == selectedID)
+                        alert('Select Differnt Item Code');
+                }
+                item.push(selectedID);
+                $.getJSON("/MFR/GetProductModelDetails", { ID: selectedID }, function (data) {
+                    //Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+                    $("#moddes2").val(data.Desc);
+                });
+            }
+        });
+        $("select#ProductModelSparesID3").change(function (evt) {
+            {
+                var selectedID = $("#ProductModelSparesID3 option:selected").val();
+                for (i = 0; i < item.length; i++) {
+                    if (item[i] == selectedID)
+                        alert('Select Differnt Item Code');
+                }
+                item.push(selectedID);
+                $.getJSON("/MFR/GetProductModelDetails", { ID: selectedID }, function (data) {
+                    //Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+                    $("#moddes3").val(data.Desc);
+                });
+            }
+        });
+
+        $("select#ProductModelSparesID4").change(function (evt) {
+            {
+                var selectedID = $("#ProductModelSparesID4 option:selected").val();
+                for (i = 0; i < item.length; i++) {
+                    if (item[i] == selectedID)
+                        alert('Select Differnt Item Code');
+                }
+                item.push(selectedID);
+                $.getJSON("/MFR/GetProductModelDetails", { ID: selectedID }, function (data) {
+                    //Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+                    $("#moddes4").val(data.Desc);
+                });
+            }
+        });
+
+        $("select#ProductModelSparesID5").change(function (evt) {
+            {
+                var selectedID = $("#ProductModelSparesID5 option:selected").val();
+                for (i = 0; i < item.length; i++) {
+                    if (item[i] == selectedID)
+                        alert('Select Differnt Item Code');
+                }
+                item.push(selectedID);
+                $.getJSON("/MFR/GetProductModelDetails", { ID: selectedID }, function (data) {
+                    //Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+                    $("#moddes5").val(data.Desc);
+                });
+            }
+        });
+    });
+
+	@* Update Quotation Number from DB for every 100 milli seconds *@
+    $(document).ready(function () {
+        setInterval(updatequotnumber, 100);
+        function updatequotnumber() {
+            var ordernum = '@ViewBag.HodNumber';
+            if (ordernum != "" && ordernum != null) {
+                $.getJSON("/MFR/Getmfrnumber", { ID: mdbid }, function (data) {
+                    if (data.quotnumb != "") {
+                        $("#mfrno").val(data.quotnumb);
+                    }
+                });
+            }
+        }
+    });
+
+    //Mobile Number Validation
+    $(".mobilenumber").keydown(function (event) {
+        if (!((event.keyCode == 46 ||
+            event.keyCode == 8 ||
+            event.keyCode == 37 ||
+            event.keyCode == 39 ||
+            event.keyCode == 9) ||
+            (event.ctrlKey && event.keyCode == 86) ||  // Edit: Added to allow ctrl+v
+            $(this).val().length < 10 &&
+            ((event.keyCode >= 48 && event.keyCode <= 57) ||
+            (event.keyCode >= 96 && event.keyCode <= 105)))) {
+            // Stop the event
+            event.preventDefault();
+            //$(this).after('<span class="error error-keyup-2" style="color:red">Enter Valid Phone Number or Mobile Number</span>');
+            return false;
+        }
+    });
+    // Edit: Added validate after copy+paste.
+    // This removes non-numeric characters and truncates the length
+    // to 10 if the user copy + pasted.
+    $(".mobilenumber").change(function (event) {
+        var value = $(this).val();
+        value = value.replace(/[^0-9]/g, '');
+        value = value.substr(0, 10);
+        $(this).val(value);
+    });
+</script>
+	

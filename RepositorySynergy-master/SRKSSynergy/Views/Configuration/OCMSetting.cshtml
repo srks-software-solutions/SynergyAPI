@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Synergy - Dashboard</title>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var tabs = $('.tabsm > li');
+			tabs.on("click", function () {
+				tabs.removeClass('active');
+				$(this).addClass('active');
+			});
+		});
+	</script>
+</head>
+<body style="margin: 0 auto">
+	@{
+		ViewBag.Title = "Synergy";
+	}
+	<div class="bcgr" style="margin: 0 auto;min-height:700px">
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">OCM Settings</p>
+		</div>
+		<div style="padding-top: 80px; padding-bottom: 100px; margin: 0 auto">
+			<table style="text-align: center; margin: 0 auto; width: 1200px; height: 400px;">
+                <tr style="padding-bottom: 10px">
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+					    <a href="/OCMMaster/OCMGrainType" style="text-decoration: none">
+							<figure>
+								@*<img src="~/Content/bootstrap/img/channel_partner_icon.png" alt='missing' />*@
+								<figcaption><strong>OCM Grain Type</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+                    <td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+					    <a href="/OCMMaster/OCMProcess" style="text-decoration: none">
+							<figure>
+								@*<img src="~/Content/bootstrap/img/channel_partner_icon.png" alt='missing' />*@
+								<figcaption><strong>OCM Process</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+					    <a href="/OCMMaster/OCMPass" style="text-decoration: none">
+							<figure>
+								@*<img src="~/Content/bootstrap/img/channel_partner_icon.png" alt='missing' />*@
+								<figcaption><strong>OCM Pass</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+                     <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+					    <a href="/OCMMaster/OCMCapacityTph" style="text-decoration: none">
+							<figure>
+								@*<img src="~/Content/bootstrap/img/channel_partner_icon.png" alt='missing' />*@
+								<figcaption><strong>OCM Capacity TPH</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+					    <a href="/OCMMaster/OCMCapacityKW" style="text-decoration: none">
+							<figure>
+								@*<img src="~/Content/bootstrap/img/channel_partner_icon.png" alt='missing' />*@
+								<figcaption><strong>OCM Capacity KW</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+
+
+                <tr style="padding-bottom: 10px">
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMMaster/OCMDriveMS" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM Drive</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMMaster/OCMStoneGrit" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM Stone </strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMMaster/OCMSieveslot" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM Sieve </strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMMaster/OCMBrakechamfer" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM Brake </strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+                     <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+					    <a href="/OCMMaster/OCMAccessoriesNew" style="text-decoration: none">
+							<figure>
+								@*<img src="~/Content/bootstrap/img/channel_partner_icon.png" alt='missing' />*@
+								<figcaption><strong>OCM Accessories</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+				</tr>
+
+
+				@*<tr style="padding-bottom: 10px">
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMMotor/Index" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM Motor</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMDrive/Index" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM Drive</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMStone/Index" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM Stone</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMSieve/Index" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM Sieve</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+                    <td></td>
+					<td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMPassageSticker/Index" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM Passage Sticker</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+
+				</tr>*@
+
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+                <tr style="padding-bottom: 10px">
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMMaster/OCMReducerRing" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM Reducer Ring</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMMaster/OCMCTCoil" style="text-decoration: none">
+							<figure>
+								<figcaption><strong>OCM CT Coil</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+
+				</tr>
+                <tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				@*<tr style="padding-bottom: 10px">
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMBrake/Index" style="text-decoration: none">
+							<figure>
+
+								<figcaption><strong>OCM Brake</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMReducerRing/Index" style="text-decoration: none">
+							<figure>
+
+								<figcaption><strong>OCM Reducer-Ring</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMCTCoil/Index" style="text-decoration: none">
+							<figure>
+
+								<figcaption><strong>OCM CT-Coil</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMAccessories/Index" style="text-decoration: none">
+							<figure>
+
+								<figcaption><strong>OCM Accessories</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+                    <td></td>
+					<td></td>
+
+						<a href="/Configuration/Setting1" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/ts2.png" alt='missing' />
+								<figcaption><strong>Setting</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+				</tr>*@
+			</table>
+		</div>
+	</div>
+</body>
+</html>

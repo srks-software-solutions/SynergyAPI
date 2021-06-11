@@ -1,0 +1,87 @@
+﻿@{
+	ViewBag.Title = "Commissioned Machines - Report";
+}
+
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<div class="bcgr" style="min-height: 580px">
+	@using (Html.BeginForm("EquipSalesByVol", "Reports", FormMethod.Get))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Commissioned Machines Report</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad">
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">From Date :</label>
+							<div class="controls">
+								<input style="height:30px" type="text" class="fntst sss" id="fromdat" name="fromdat" value="" placeholder="Select From Date" required="required">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">To Date :</label>
+							<div class="controls">
+								<input style="height:30px" type="text" class="fntst sss" id="todat" name="todat" value="" placeholder="Select To Date" required="required">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">Machine Type</label>
+							<div class="controls">
+								@*<input type="text" class="fntst sss" id="todat" name="todat" value="" placeholder="Select To Date" required="required">*@
+								<select id="macty" name="macty" class="fntst" required="required">
+								  <option value="CCD">CCD Machines</option>
+								  <option value="CMOS">CMOS Machines</option>
+                                  <option value="W">WSeries</option>
+								  <option value="ALL">All Machines</option>
+								  @*<option value="mercedes">Mercedes</option>
+								  <option value="audi">Audi</option>*@
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="span10 pad ">
+			<div class="span3 cent" style="padding-left: 70px">
+				<button class="btn btn-success glyphicon glyphicon-copy " value="Create" type="Submit"> Generate Report</button>
+			</div>
+		</div>
+	}
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var now = new Date();
+		var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+		$('.sss').datepicker({
+			format: 'dd/mm/yyyy',
+			onRender: function (date) {
+				return date.valueOf() > now.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			$(this).datepicker('hide');
+		});
+	});
+</script>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+

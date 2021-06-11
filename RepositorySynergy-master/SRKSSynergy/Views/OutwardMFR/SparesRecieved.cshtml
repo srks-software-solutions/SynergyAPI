@@ -1,0 +1,101 @@
+﻿@model  SRKSSynergy.Models.OutwardMFR
+@{
+    ViewBag.Title = "SparesRecieved";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+
+    List<SelectListItem> YesNo = new List<SelectListItem>();
+
+    YesNo.Add(new SelectListItem
+    {
+        Text = "No",
+        Value = "0",
+    });
+
+    YesNo.Add(new SelectListItem
+    {
+        Text = "Yes",
+        Value = "1"
+    });
+
+
+ }
+
+<div class="bcgr" style="min-height: 590px">
+	@using (Html.BeginForm("SparesRecieved", "OutwardMFR", Model, FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Spares Received </p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+
+                <div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst"  style="font-size: 16px;line-height: 1.428;">Spares Recieving Date</label>
+							<div class="controls">
+                                @Html.TextBoxFor(model => model.SparesRecievedDate,"{0:yyyy-MM-dd}",new { @id="SparesRecievedDate",@name="SparesRecievedDate",@class="fntst sss",@data_format = "dd/MM/yyyy",@required = "required"})
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="span10 pad" style="display:none">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst" style="font-size: 16px;line-height: 1.428;">Is Spares Received</label>
+							<div class="controls">
+                                @* @Html.DropDownListFor(model => model.IsSparesRecieved, YesNo, "-- Select Yes/No --", new { @id = "IsSparesRecieved", @name = "IsSparesRecieved", @required = "required" })*@
+							 @Html.DropDownListFor(model => model.IsSparesRecieved, YesNo, new { @id = "IsSparesRecieved", @name = "IsSparesRecieved", @required = "required" })
+                            </div>
+						</div>
+					</div>
+				</div>
+
+                <div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+
+							<div class="controls">
+
+                                 @if ( Model.SparesRecievedDate == null)
+                                          {
+                                <input type="submit" id="Submit" name="Submit" value="Submit" class="btn btn-primary "/>
+                                 }else{
+                                 <input type="submit" id="Submit" name="Submit" value="Submit" class="btn btn-primary disabled" onclick="return false;"/>
+                                 }
+
+                                <a href="~/OutwardMFR/Index" id="Back"  class="btn btn-primary " style="padding-top: 6px;padding-bottom: 6px;">Back</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+
+</div>
+
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+        $('.sss').datepicker({
+            format: 'yyyy-mm-dd',
+            //onRender: function (date) {
+            //	return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            //}
+
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    });
+</script>

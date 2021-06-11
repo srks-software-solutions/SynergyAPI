@@ -1,0 +1,59 @@
+﻿@model  SRKSSynergy.Models.Zone
+
+@{
+	ViewBag.Title = "Delete ZoneManager";
+}
+
+
+
+<div class="bcgr" id="mrefresh" style="min-height: 590px">
+	@using (Html.BeginForm())
+	{
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Delete ZonalManager</p>
+		</div>
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(false)
+		@Html.HiddenFor(m => m.ZonalMangerName)
+		@Html.HiddenFor(m => m.ZoneName)
+		@Html.HiddenFor(m => m.ZoneID)
+
+		@*<p class="txtft">Are you sure you want to Deactivate this?</p>*@
+		<div class="row">
+			<div class=" row show-grid">
+				<div class="span12 pad">
+					<p class="pad txtal" style="padding-bottom:30px">Are you sure you want to Delete this ZonalManager?</p>
+					<div class="span3" style="padding-left:40px">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Zonal Manager Name:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.ZonalMangerName)
+							</div>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Zone:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.ZoneName)
+							</div>
+						</div>
+					</div>
+				</div>
+				@* Buttons *@
+				<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+					<div class=" row show-grid">
+						<div class="span10">
+							<div class="span3 cent1">
+								<input type="submit" name="Yes" value="Yes" class="btn btn-success" />
+								<input type="submit" name="No" value="No" class="btn btn-success" />
+							</div>
+						</div>
+					</div>
+				</div>
+				@* End of Buttons *@
+			</div>
+		</div>
+	}
+</div>
+

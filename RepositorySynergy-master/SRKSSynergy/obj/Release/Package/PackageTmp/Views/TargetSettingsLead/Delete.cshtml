@@ -1,0 +1,124 @@
+﻿@model  SRKSSynergy.Models.TargetSettingsLead
+@{
+    ViewBag.Title = "Delete";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<div class="bcgr" id="mrefresh" style="min-height: 590px">
+	@using (Html.BeginForm())
+	{
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Delete Target Lead</p>
+		</div>
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(false)
+
+		@Html.HiddenFor(m => m.TSID)		
+		@Html.HiddenFor(m => m.CPID)
+		@Html.HiddenFor(m => m.Month)	
+        @Html.HiddenFor(m => m.MachineType)		
+        @Html.HiddenFor(m => m.TargetType)	
+		@Html.HiddenFor(m => m.MonthId)
+		@Html.HiddenFor(m => m.Targets)	 
+        @Html.HiddenFor(m => m.Year)	       
+        @Html.HiddenFor(m => m.CreatedBy)
+		@Html.HiddenFor(m => m.CreatedOn)
+        @Html.HiddenFor(m => m.ModifiedBy)
+		@Html.HiddenFor(m => m.ModifiedOn)  	  
+      
+		@*<p class="txtft">Are you sure you want to Deactivate this?</p>*@
+		<div class="row">
+			<div class=" row show-grid">
+				<div class="span12 pad">
+					<p class="pad txtal" style="padding-bottom:30px">Are you sure you want to Delete?</p>
+
+					<div class="span3" style="padding-left:40px">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Machine Type:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.MachineType)                                
+							</div>
+						</div>
+					</div>
+
+                    <div class="span3" style="padding-left:40px">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Target Type:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.TargetType)                                
+							</div>
+						</div>
+					</div>
+
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Channel Partner:</strong></label>
+                            <div class="controls">
+                                @{               
+                                SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+                                }
+                                @{
+                                   var name = db.ChannelPartners.Where(m => m.CPID == Model.CPID).Select(m => m.CPName).SingleOrDefault();
+                                   ViewBag.drp1 = name;
+                                }
+                                @ViewBag.drp1
+                            </div>
+						</div>
+					</div>
+
+                    <div class="span3" style="padding-left:40px">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Year:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.Year)                                
+							</div>
+						</div>
+					</div>
+
+                    <div class="span3" style="padding-left:40px">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Month:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.Month)                                
+							</div>
+						</div>
+					</div>
+
+                    <div class="span3" style="padding-left:40px">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Targets:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.Targets)                                
+							</div>
+						</div>
+					</div>
+					</div>
+				@* Buttons *@
+				<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+					<div class=" row show-grid">
+						<div class="span10">
+							<div class="span3 cent1">
+								<input type="submit" name="Yes" value="Yes" class="btn btn-success glyphicon glyphicon-ok" />
+								<input type="submit" name="No" value="No" class="btn btn-success glyphicon glyphicon-remove-circle" />
+							</div>
+						</div>
+					</div>
+				</div>
+				@* End of Buttons *@
+			</div>
+		</div>
+	}
+</div>
+

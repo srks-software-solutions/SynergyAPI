@@ -1,0 +1,264 @@
+﻿@model SRKSSynergy.Models.OutwardSpare
+
+@{
+    ViewBag.Title = "Dispatch Outward";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-min.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+<style>
+    .validation-summary-valid {
+        display: none;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('#startdate').monthpicker();
+
+    });
+</script>
+
+@{
+    List<SelectListItem> listItems1 = new List<SelectListItem>();
+    listItems1.Add(new SelectListItem
+         {
+             Text = "1",
+             Value = "1"
+         });
+    listItems1.Add(new SelectListItem
+         {
+             Text = "2",
+             Value = "2",
+         });
+    listItems1.Add(new SelectListItem
+         {
+             Text = "3",
+             Value = "3"
+         });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "6",
+        Value = "6"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "7",
+        Value = "7"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "8",
+        Value = "8"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "9",
+        Value = "9"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "10",
+        Value = "10"
+    });
+}
+
+<div class="bcgr" style="min-height: 590px">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">Dispatch Spare Against Invoice</p>
+        </div>
+@*<div class="bcgr">*@ 
+        <div class="row" style="padding-top: 10px">
+            <div class=" rowgrid">
+                <div class="span10 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label" style="color: red">@ViewBag.NotInwarded</label>
+                            <label class="control-label fntst">Month</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.OutwardMonth, new { @id = "startdate", @name = "startdate", @placeholder = "Select Month", @class = "fntst date-picker" })
+                            </div>
+                        </div>
+                    </div>
+                    @Html.TextBoxFor(model => model.OutwardID, new { @id = "outwardid", @name = "outwardid", @placeholder = "Select Month", @class = "hidden" })
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Order Number</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.OrderNo, new { @id = "equip", @maxlength = "20", @class = "fntst", @placeholder = "Equipment Name" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span10 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">customer Name</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.CustomerName, new { @id = "custno", @maxlength = "20", @class = "fntst", @placeholder = "Customer Name" })
+                                @Html.HiddenFor(m =>m.CPID)
+                                @Html.HiddenFor(m =>m.QuantityOrdered)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span10 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Item Code</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.ProductModelSparesID, (SelectList)ViewData["SparesID"], "--Select Item Code--", new { @id = "exclu", @maxlength = "16", @class = "input fntst", @placeholder = "Equipment Exclusions" })
+                                @Html.TextBoxFor(model => model.ProductModelSparesID, new { @id = "ItemId", @style = "display:none" })
+                                @Html.ValidationMessageFor(model => model.ProductModelSparesID)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Item Description</label>
+                            <div class="controls">
+                                <input type="text" class="fntst" id="desc" name="desc" value="@ViewBag.ItemDesc" style="width:800px;" disabled="disabled" placeholder="Item Description">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span20 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Quantity</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.Quantity, new { @id = "Quantity", @maxlength = "20", @class = "fntst", @style = "width:100px", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Agent Price</label>
+                            <div class="controls">
+                                <input type="text" class="fntst" id="Agent" name="Agent" value="@ViewBag.Agentprice" disabled="disabled" placeholder="Agent price">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Total Value</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.TotalValue, new { @id = "TotVal", @maxlength = "20", @class = "fntst", @placeholder = "Total Value", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span28 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">InvoiceNo</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.InvoiceNo, new { @id = "TotVal", @maxlength = "20", @class = "fntst", @placeholder = "Invoice No" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Invoice Date</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.InvoiceDate, new { @id = "datePicker2", @class = " fntst sss", @placeholder = "Select Date", })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Dispatch Date</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.DispatchDate, new { @id = "datePicker3", @class = " fntst sss", @placeholder = "Select Date", })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span10 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Remarks</label>
+                            <div class="controls">
+                                @Html.TextAreaFor(model => model.Remarks, new { @id = "remarks", @maxlength = "20", @class = "fntst", @placeholder = "Remarks" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span10 pad ">
+                    <div class="span3 cent" style="padding-left: 300px">
+                        <button class="btn btn-success" value="create" type="submit">Save Outward</button>
+                    </div>
+                    <p style="color: red; font-family: Calibri; font-size: 18px; font-weight: 900">
+                        @Html.Label("", Convert.ToString((string)ViewBag.Duplicate))
+                    </p>
+                </div>
+                @if (TempData["nostock"] != null)
+                {
+                    <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["nostock"]</p>
+                }
+            </div>
+        </div>
+    }
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+<style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var mon = now.getMonth() + 1;
+        if (mon < 10)
+            mon = "0" + mon;
+        var dat = now.getDate();
+        if (dat < 10)
+            dat = "0" + dat;
+        var today = now.getFullYear() + '/' + mon + '/' + dat;
+        var tod = now.getFullYear() + '-' + mon + '-' + dat;
+        $('.sss').val(today);
+        $('.sss').datepicker({
+            format: 'yyyy-mm-dd',
+            onRender: function (date) {
+                return date.valueOf() > now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    });
+</script>
+

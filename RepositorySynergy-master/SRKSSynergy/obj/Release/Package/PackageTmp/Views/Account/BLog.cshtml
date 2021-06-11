@@ -1,0 +1,53 @@
+﻿<html>
+    @{
+        Layout = null;
+    }
+<head>
+   @* <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+    <script src="http://pincodes.co.in/public/scripts/pincode.js" type="text/javascript"> </script>
+    <script type="text/javascript">load_pincode('RP-PIN-526', 'countryfield', '0', '0', '0', '10'); </script>*@
+
+
+    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+<script src="http://pincodes.co.in/public/scripts/pincode.js" type="text/javascript" language="javascript"> </script>
+<script type="text/javascript" > load_pincode('RP-PIN-526', 'country_id', '0', '0', '0', '10'); </script>
+</head>
+<body onload="load_pincode('RP-PIN-526', 'country_id', '0', '0', '0', '10'); ">
+
+    @*<select name="country" id="countryfield" onchange="load_pincode('RP-PIN-526','statefield','City_id','pincode_id',this.value,'0','1');">
+        <option value="">Please select Country</option>
+    </select>*@
+
+    <select name="country" id="country_id" onChange="load_pincode('RP-PIN-526','State_id','City_id','pincode_id',this.value,'0','1');"> <option value="">Please select Country</option> </select>
+
+    <select name="state" id="State_id" onChange="load_pincode('RP-PIN-526','State_id','City_id','0',this.value,'1');"> <option value="">Please select State</option> </select>
+
+    <select name="city" id="City_id" onChange="load_pincode('RP-PIN-526','State_id','City_id','pincode_id',this.value,'2');"> <option value="">Please select City</option> </select>
+
+    If user fills correct pincode you can auto select the state and city. Add this code:<p id="pincode_id"><input type="text" name="pincode" class="textfield" onBlur="load_pincode('RP-PIN-526','State_id','City_id','pincode_id',this.value,'3','country_id');"> </p>
+
+    @*<select name="state" id="statefield" onchange="load_pincode('RP-PIN-526','statefield','cityfields','0',this.value,'1');">
+        <option value="">Please select State</option>
+    </select>
+
+    <select name="city" id="cityfields" onchange="load_pincode('RP-PIN-526','statefield','cityfields','pincode',this.value,'2');">
+        <option value="">Please select City</option>
+    </select>
+
+    If user fills correct pincode you can auto select the state and city. Add this code:<p id="pincode_id">
+        <input type="text" name="pincode" class="textfield" onblur="load_pincode('RP-PIN-526','State_id','City_id','pincode_id',this.value,'3','country_id');">
+    </p>
+
+    <div style='overflow: hidden; height: 220px; width: 150px;' id="map">
+        <div id='gmap_canvas' style='height: 220px; width: 150px;'></div>
+        <style>
+            #gmap_canvas img {
+                max-width: none!important;
+                background: none!important;
+            }
+        </style>
+    </div>*@
+
+
+</body>
+</html>

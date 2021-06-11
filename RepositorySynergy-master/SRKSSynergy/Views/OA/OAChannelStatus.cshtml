@@ -1,0 +1,176 @@
+﻿@model IList<SRKSSynergy.Models.OAEquipGeneralData>
+
+@{
+	ViewBag.Title = "OAChannelStatus";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	int slno = 1;
+	ViewBag.pen = "Pending";
+	ViewBag.app = "Approved";
+	ViewBag.rej = "Rejected";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#printbutton").click(function () {
+			$("#printbutton").visible = false;
+			$("#savebutton").visible = false;
+			self.focus()
+			self.print()
+		});
+	});
+</script>
+<div class="bcgr" style="min-height: 580px;">
+	<div style="background: gray; padding-bottom: 15px">
+		<p class="txtft">Order Status Tracker</p>
+	</div>
+	<form action="@Url.Action("OAChannelStatus", "OA")" method="get">
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				@* Text Box for search *@
+				<div class="span12 pad">
+					@*<div class="span3 ">
+						<div class="control-group ">
+							<label class="control-label fntst ">Channel Partner Name</label>
+							<div class="controls">
+								@Html.TextBox("cpnam", null, new { @class = "printButtonClass noPrint", @placeholder = " Search Channel Partner Name" })
+							</div>
+						</div>
+					</div>*@
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Status</label>
+							<div class="controls">
+								<select id="status" name="status" class="input-medium fntst">
+									<option value="">Select Option</option>
+									<option value="0">Pending</option>
+									<option value="1">Approved</option>
+									<option value="2">Rejected</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					@* Button for Search *@
+					<div class="span3" style="padding-top: 20px">
+						<input type="submit" style="width: 100px; height: 35px" value="Get Details" class="btn btn-info existingcustomer printButtonClass" />
+					</div>
+					@* End of buttons *@
+				</div>
+			</div>
+		</div>
+	</form>
+	@* Status Chances *@
+	@if (TempData["status"] != null)
+	{
+		<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["status"]</p>
+	}
+	@* Status Chances *@
+	@if (TempData["nostatus"] != null)
+	{
+		<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["nostatus"]</p>
+	}
+	
+	<div class="row">
+		<div class=" row show-grid">
+			<div style="padding-top: 30px; padding-left: 65px">
+				<table class="table-hover" style="width:1300px">
+					<thead>
+						<tr style="background: #BBBEBD">
+							<th style="width: 70px; text-align: center" class="fntst cal botbor">Serial No</th>
+							<th style="width: 100px; text-align: center" class="fntst cal botbor">Order Acknowledgement No</th>
+							<th style="width: 200px; text-align: center" class="fntst cal botbor">Subject</th>
+							<th style="width: 200px; text-align: center" class="fntst cal botbor">Customer Name</th>
+							<th style="width: 100px; text-align: center" class="fntst cal botbor">Quotation Number</th>
+							<th style="width: 70px; text-align: center" class="fntst cal botbor">OA Date</th>
+							<th style="width: 60px; text-align: center" class="fntst cal botbor">Status</th>
+							@*<th style="width: 80px; text-align: center" class="fntst cal botbor">BYJT Chances(%)</th>
+							<th style="width: 130px; text-align: center" class="fntst cal botbor">Expected Order Month</th>
+							<th style="width: 230px; text-align: center" class="fntst cal botbor">Additional Comments</th>*@
+						</tr>
+					</thead>
+					@*@foreach (var item in Model)*@
+					@*@for (int i = 0; i < Model.Count; i++)
+					{
+						<tr>
+							<td style="text-align: center;">
+								@slno
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].OANumber)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].Subjectinfo)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].MDBGeneralData.OrganizationName)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].QuotationNumber)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].OADate)</label>
+							</td>
+							@*<td style="text-align: center;">
+								
+							</td>
+						</tr>
+								slno = slno + 1;
+					}*@
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td style="text-align: center;">
+								@slno
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@item.OANumber</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@item.Subjectinfo</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@item.MDBGeneralData.OrganizationName</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@item.QuotationNumber</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(modelitem => item.OADate)</label>
+							</td>
+							<td style="text-align: center;">
+								@if (item.ApprovalStatus == 0)
+								{ 
+								   @ViewBag.pen                        
+								}
+								@if (item.ApprovalStatus == 1)
+								{
+									@ViewBag.app
+								}
+								@if (item.ApprovalStatus == 2)
+								{ 
+									@ViewBag.rej 
+								}
+							</td>
+						</tr>
+								slno = slno + 1;
+					}
+				</table>
+			</div>
+			<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+				<div class=" row show-grid">
+					<div class="span10">
+						<div class="span3 cent">
+							<button class="btn btn-large btn-success printButtonClass" id="printbutton" type="button">Print</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

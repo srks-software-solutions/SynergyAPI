@@ -1,0 +1,165 @@
+﻿@model IEnumerable<SRKSSynergy.Models.SOTRM>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "SOTRM List";
+    int slno = 1;
+}
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("LEIndexRevised", "LeadEnquiry", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a>
+    if (id == ViewBag.sortBy)
+    {
+    <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}
+
+@* End Of Paging & Sorting Code *@
+
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#custnm").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/SOTRM/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<div class="bcgr" style="min-height: 700px; min-width: 1300px">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Sales Opportunity Tracker</p>
+    </div>
+
+    <form method="post">
+        <br />
+        @if (TempData["Success"] != null)
+        {
+            <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["Success"]</p>
+        }
+
+        @if (TempData["fail"] != null)
+        {
+            <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["fail"]</p>
+        }
+
+        @if (TempData["msg"] != null)
+{
+    <script>alert('No Data Available for this Quotation...!')</script>
+}
+
+        <div class="row">
+            <div class=" row show-grid">
+                <div class="span12 pad ">
+                    <div class="span12">
+                        <div class="control-group ">
+                            <div style="padding-left: 70px; padding-top: 23px;">
+                                @Html.TextBox("custnm", null, new { @class = "fntst", @placeholder = "Company Name", @style="display:inline;height:30px;"})
+
+                                <input type="submit" style="background: #5BB75B; width: 150px; height: 30px;display:inline;padding-left:5px" value="Search Customer" class="btn btn-info" />
+
+                                 @Html.ActionLink("SOT Order Conversion List", "SOTRMConversionList", "SOTRM", new { @class = "btn btn-primary", @id = "cnlead", @name = "cnlead", @style = "text-decoration:none;float:right;display:inline;width: 200px; height: 30px;"  })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-hover" style="width: 97%; margin-left: 1%">
+            <tr style="background: #BBBEBD; width: 97%">
+                <th style="width: 10%; text-align: left" class="fntst cal botbor">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No</span>
+                </th>
+                <th style="width: 20%; text-align: left" class="fntst cal botbor">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Company Name</span>
+                </th>
+                <th style="width: 20%; text-align: left" class="fntst cal botbor">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Sales Engg Name</span>
+                </th>
+                <th style="width: 10%; text-align: left" class="fntst cal botbor">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Quotation No</span>
+                </th>
+                <th style="width: 15%; text-align: left" class="fntst cal botbor">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Action</span>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 15%; text-align: left;">
+                        @slno
+                    </td>
+                    <td style="width: 20%; text-align: left;">
+                        <label class="fntst">@Html.DisplayFor(m => item.QGEquipGeneralData.MDBGeneralData.OrganizationName)</label>
+                    </td>
+                    <td style="width: 20%; text-align: left;">
+                        <label class="fntst">@Html.DisplayFor(m => item.QGEquipGeneralData.SalesName)</label>
+                    </td>
+                    <td style="width: 15%; text-align: left;">
+                        <label class="fntst">@Html.DisplayFor(m => item.QGEquipGeneralData.QuotationNumber)</label>
+                    </td>
+                    <td style="width: 20%; text-align: left;">
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            @Html.ActionLink("Get_Details", "SOTListAdmin", new { QGid = item.QGID }, new { @align = "center", @style = "width:120px;text-align:center", @class = "btn btn-info glyphicon glyphicon-paste " })
+                                     }
+                        @if (User.IsInRole("ZonalManager"))
+                        {
+                            @Html.ActionLink("Get_Details", "SOTListAdmin", new { QGid = item.QGID }, new { @align = "center", @style = "width:120px;text-align:center", @class = "btn btn-info  glyphicon glyphicon-paste" })
+                                     }
+                        @if (User.IsInRole("ChannelPartnerUser") || User.IsInRole("ChannelPartnerAdmin"))
+                        {
+                            @Html.ActionLink("Get_Details", "Sotrmcplist", new { QGid = item.QGID }, new { @align = "center", @style = "width:120px;text-align:center", @class = "btn btn-info glyphicon glyphicon-paste" })
+                                     }
+                    </td>
+                    <td style="text-align: left;">
+                        @Html.TextBoxFor(m => item.QGID, new { @style = "display:none;" })
+                        @Html.TextBoxFor(m => item.SOTRMID, new { @style = "display:none;" })
+                        @Html.TextBoxFor(m => item.CPID, new { @style = "display:none;" })
+                        @Html.TextBoxFor(m => item.Equipment, new { @style = "display:none;" })
+                        @Html.TextBoxFor(m => item.Quantity, new { @style = "display:none;" })
+                    </td>
+                </tr>
+                        slno++;
+                        }
+        </table>
+    </form>
+</div>

@@ -1,0 +1,86 @@
+﻿@model  SRKSSynergy.Models.MDBGeneralData
+
+@{
+	ViewBag.Title = "Deactivate Customer";
+}
+
+
+
+<div class="bcgr" id="mrefresh" style="min-height: 590px">
+	@using (Html.BeginForm())
+	{
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Deactivate Customer</p>
+		</div>
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(false)
+		@Html.HiddenFor(m => m.MDBID)
+		@Html.HiddenFor(m => m.OrganizationName)
+		@Html.HiddenFor(m => m.Address)
+		@Html.HiddenFor(m => m.AddressLine1)
+		@Html.HiddenFor(m => m.AddressLine2)
+		@Html.HiddenFor(m => m.AddressLine3)
+		@Html.HiddenFor(m => m.AddressLine4)
+		@Html.HiddenFor(m => m.City)
+		@Html.HiddenFor(m => m.CompanyUniqueID)
+		@Html.HiddenFor(m => m.ContactNumLL2)
+		@Html.HiddenFor(m => m.Country)
+		@Html.HiddenFor(m => m.CPID)
+		@Html.HiddenFor(m => m.EmailID)
+		@Html.HiddenFor(m => m.EmailID2)
+		@Html.HiddenFor(m => m.FAX)
+		@Html.HiddenFor(m => m.Isd1)
+		@Html.HiddenFor(m => m.Isd2)
+		@Html.HiddenFor(m => m.Isdf)
+		@Html.HiddenFor(m => m.LandLine1)
+		@Html.HiddenFor(m => m.LandLine2)
+		@Html.HiddenFor(m => m.OrganizationType)
+		@Html.HiddenFor(m => m.OrganizationTypeothers)
+		@Html.HiddenFor(m => m.PhoneLL1)
+		@Html.HiddenFor(m => m.Pincode)
+		@Html.HiddenFor(m => m.PostalCourier)
+		@Html.HiddenFor(m => m.State)
+		@Html.HiddenFor(m => m.Std1)
+		@Html.HiddenFor(m => m.Std2)
+		@Html.HiddenFor(m => m.Stdf)
+		@Html.HiddenFor(m => m.Website)
+
+		@*<p class="txtft">Are you sure you want to Deactivate this?</p>*@
+		<div class="row">
+			<div class=" row show-grid">
+				<div class="span12 pad">
+					<p class="pad txtal" style="padding-bottom:30px;padding-left:170px">Are you sure you want to Discontinue this Customer?</p>
+					<div class="span3" style="padding-left:400px">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Company Unique ID:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.CompanyUniqueID)
+							</div>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Customer Name:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.OrganizationName)
+							</div>
+						</div>
+					</div>
+				</div>
+				@* Buttons *@
+				<div class="row" style="padding-top: 20px; padding-left: 500px; padding-bottom: 20px">
+					<div class=" row show-grid">
+						<div class="span10">
+							<div class="span3 cent1">
+								<input type="submit" name="Yes" value="Yes" class="btn btn-success" />
+								<input type="submit" name="No" value="No" class="btn btn-success" />
+							</div>
+						</div>
+					</div>
+				</div>
+				@* End of Buttons *@
+			</div>
+		</div>
+	}
+</div>
+

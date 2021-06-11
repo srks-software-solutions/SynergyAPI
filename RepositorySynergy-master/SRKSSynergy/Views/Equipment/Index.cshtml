@@ -1,0 +1,235 @@
+﻿@model IEnumerable<SRKSSynergy.Models.ProductModel>
+
+@{
+    ViewBag.Title = "Equipment Plus";
+    int slno = 1;
+}
+
+@* Paging & Sorting Code  *@
+
+@*@helper buildLinks(int start, int end, string innerContent)
+{
+    for (int i = start; i <= end; i++)
+    {
+    <a class="@(i == ViewBag.CurrentPage ? "current" : "")"  href="@Url.Action("Index", "Equipment", new { page = i, sortBy = ViewBag.sortBy, isAsc = ViewBag.isAsc.ToString().ToLower(), search = ViewBag.Search })">@(innerContent ?? i.ToString())</a>      
+    }
+    
+}
+
+
+@helper pageLinks()
+{
+    const int maxPages = 11;
+
+    if (ViewBag.TotalPages <= maxPages)
+    {
+    @buildLinks(1, (int)ViewBag.TotalPages, null)
+        return;
+    }
+
+    int pagesAfter = ViewBag.TotalPages - ViewBag.CurrentPage; // Number of pages after current
+    int pagesBefore = ViewBag.CurrentPage - 1; // Number of pages before current
+
+    if (pagesAfter <= 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st page
+
+        int pageSubset = ViewBag.TotalPages - maxPages - 1 > 1 ? ViewBag.TotalPages - maxPages - 1 : 2;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages - maxPages + 3, ViewBag.TotalPages, null) // Show last pages
+
+        return; // Exit
+    }
+
+    if (pagesBefore <= 4)
+    {
+    @buildLinks(1, maxPages - 2, null) // Show 1st pages
+
+
+        int pageSubset = maxPages + 2 < ViewBag.TotalPages ? maxPages + 2 : ViewBag.TotalPages - 1;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }
+
+    if (pagesAfter > 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st pages
+
+        int pageSubset1 = ViewBag.CurrentPage - 7 > 1 ? ViewBag.CurrentPage - 7 : 2;
+        int pageSubset2 = ViewBag.CurrentPage + 7 < ViewBag.TotalPages ? ViewBag.CurrentPage + 7 : ViewBag.TotalPages - 1;
+
+    @buildLinks(pageSubset1, pageSubset1, pageSubset1 == ViewBag.CurrentPage - 4 ? null : "...") // Show 1st page subset (...)
+
+    @buildLinks(ViewBag.CurrentPage - 3, ViewBag.CurrentPage + 3, null) // Show middle pages
+
+        // Show 2nd page subset (...)
+        // only show ... if page is contigous to the previous one.
+    @buildLinks(pageSubset2, pageSubset2, pageSubset2 == ViewBag.CurrentPage + 4 ? null : "...")
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }    
+}
+
+@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("Index", "Equipment", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a> 
+    if (id == ViewBag.sortBy)
+    {
+    <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}*@
+
+@* End Of Paging & Sorting Code *@
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#equipname").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Equipment/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.ProductModelName, value: item.ProductModelName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+<div class="bcgr" style="min-height:590px;min-width:1410px">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Equipment Plus</p>
+    </div>
+    <form action="@Url.Action("Index", "Equipment")" method="post">
+        @* Create Equipment Link *@
+        <div style="padding-left: 20px;padding-top:10px">
+            @Html.ActionLink("Add", "Create", "Equipment", new { @class = "btn btn-primary glyphicon glyphicon-plus", @Style = "text-decoration:none" })
+        </div>
+
+        @* Searching for a particular Model view *@
+        <div class="row">
+            <div class=" row show-grid">
+                @* Text Box for search *@
+                <div class="span12 pad ">
+                    <div class="span3 ">
+                        <div class="control-group ">
+                            @*<label class="control-label fntst ">Customer Name</label>*@
+                            <div class="controls" style="padding-left: 70px; padding-top: 23px">
+                                @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="equipname" name="equipname" placeholder="Equipment Name">*@
+                                @Html.TextBox("equipname", null, new { @placeholder="Search for Equipment Name" ,@style="height:30px"})
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="span"></div>*@
+                    @* Button for Search *@
+                    <div class="span3" style="padding-top:20px">
+                            <input type="submit" style="width: 70px;height:35px" value="Search" class="btn btn-info glyphicon glyphicon-search" />
+                    </div>
+                    @* End of buttons *@
+                    <span id="rData"></span>
+                </div>
+            </div>
+        </div>
+
+        @* Table for Equipment *@
+        <table class="table table-hover" style="width: 1410px;">
+            <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No.</span>
+                </th>
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Commodity Name</span>
+                </th>
+                <th style="width: 130px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Equipment Name</span>
+                </th>
+                <th style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    @Html.DisplayNameFor(model => model.ProductModelDesc)
+                </th>
+                <th style="width: 250px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Equipment Exclusion</span>
+                </th>
+                <th style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    @Html.DisplayNameFor(model => model.QuoteVaildTill)
+                </th>
+                <th style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    @Html.DisplayNameFor(model => model.DeliveryTime)
+                </th>
+                <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Unit Price In INR</span>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.Products.ProductName)
+                    </td>
+                    <td style="width: 130px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.ProductModelName)
+                    </td>
+                    <td style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.ProductModelDesc)
+                    </td>
+                    <td style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.ProductModelExclusion)
+                    </td>
+                    <td style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.QuoteVaildTill)
+                    </td>
+                    <td style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.DeliveryTime)
+                    </td>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.ProductModelID })*@
+                        @Html.ActionLink("Edit", "Edit", "Equipment", new { id = item.ProductModelID }, new { @class = "btn btn-primary glyphicon glyphicon-pencil", @Style = "text-decoration:none" }) |
+                        @*@Html.ActionLink("Details", "Details", new { id=item.ProductModelID }) |*@
+                        @Html.ActionLink("Discontinue", "Discontinue","Equipment", new { id=item.ProductModelID }, new { @class = "btn btn-danger glyphicon glyphicon-remove", @Style = "text-decoration:none" })
+                    </td>
+                </tr>
+                slno++;
+            }
+
+        </table>
+        @*<div class="pagination" style="font-size: 18px; font-family: Calibri;float:right;padding-right:70px">
+            Page: 
+            @pageLinks()
+        </div>*@
+    </form>
+</div>

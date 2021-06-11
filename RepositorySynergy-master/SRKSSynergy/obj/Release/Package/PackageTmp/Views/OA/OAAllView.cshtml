@@ -1,0 +1,356 @@
+﻿@model IList<SRKSSynergy.Models.OAEquipGeneralData>
+@using SRKSSynergy.Helpers
+@{
+    ViewBag.Title = "OAAllView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int slno = 1;
+    ViewBag.pen = "Pending";
+    ViewBag.cancel = "Cancelled";
+    ViewBag.app = "Approved";
+    ViewBag.rej = "Rejected";
+    var status = ViewBag.status;
+}
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#frommonth').monthpicker();
+    });
+    $(document).ready(function () {
+        $('#tomonth').monthpicker();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cpnam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/OA/Autocompleteview",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CPName, value: item.CPName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#equip").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/OA/AutocompleteEquipModel",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.ProductModelName, value: item.ProductModelName};
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#printbutton").click(function () {
+            //$("#form1").attr("hidden", "true");
+            $("#printbutton").visible = false;
+            $("#savebutton").visible = false;
+            self.focus()
+            self.print()
+
+        });
+    });
+</script>
+
+<div style="min-height: 580px; min-width: 850px; background: #e5e5e5;">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Order Status Tracker</p>
+    </div>
+    <form action="@Url.Action("OAAllView", "OA")" method="get">
+        <div class="row noPrint" style="padding-top: 10px">
+            <div class=" row show-grid">
+                <div class="span12 pad">
+                    <div class="span3">
+                        <div class="control-group ">
+                            <label class="control-label fntst ">Channel Partner Name</label>
+                            <div class="controls">
+                                @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="cpnam" name="cpnam" placeholder="Channel Partner Name">*@
+                                @Html.TextBox("cpnam", null, new {@style="height:30px" , @class = "printButtonClass noPrint", @placeholder = " Search Channel Partner Name", @autocomplete = "off" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span4">
+                        <div class="control-group ">
+                            <label class="control-label fntst">Status</label>
+                            <div class="controls">
+                                <select style="height:100%"  id="status" name="status" class="input-large fntst">
+                                    <option value="">Select Option</option>
+                                    <option value="0">Pending</option>
+                                    <option value="1">Approved</option>
+                                    <option value="2">Rejected</option>
+                                    <option value="3">Cancelled</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>               
+                   <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Model Number</label>
+                              <div class="controls">
+                            @*@Html.TextBox("equip", null, new { @class = "printButtonClass noPrint", @placeholder = "Model Number",id="equip", name="equip"})*@
+                           <input style="height:30px"   type="text" class="printButtonClass noPrint fntst sss" id="equip" name="equip" placeholder="Model Number" />
+                            </div>
+                        </div>
+                    </div>
+               </div>
+                <div class="span12 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">From Month</label>
+                            <div class="controls">
+                                <input style="height:30px"  type="text" class="printButtonClass noPrint fntst sss" id="frommonth" name="frommonth" placeholder="Select Month" />
+                            </div>
+                        </div>
+                    </div>
+                       <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">To Month</label>
+                            <div class="controls">
+                                <input style="height:30px"  type="text" class="printButtonClass noPrint fntst sss" id="tomonth" name="tomonth" placeholder="Select Month" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span12 pad">
+                    <div class="span1"></div>
+                    @* Button for Search *@
+                    <div class="span3" style="padding-top: 20px">
+                        @*<input type="submit" style="width: 100px; height: 35px" value="Get Details" class="btn btn-info existingcustomer printButtonClass" />*@
+                        <button type="submit" id="gd" class="btn btn-info existingcustomer glyphicon glyphicon-paste"  > Get_Details</button>
+                    </div>
+                    @* End of buttons *@
+
+                    <div class="span3" style="padding-top: 20px">
+                        <button class="btn btn-info printButtonClass glyphicon glyphicon-print " id="printbutton" style="width: 100px; height: 35px" type="button"> Print</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    @* Wrong Channel Partner *@
+    @if (TempData["wrong"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["wrong"]</p>
+    }
+@* Status Chances *@
+    @if (TempData["byjt"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["byjt"]</p>
+    }
+@* Wrong Channel Partner *@
+    @if (TempData["cp&byjt"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["cp&byjt"]</p>
+    }
+@* Expected Month *@
+    @if (TempData["expmonth"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["expmonth"] @ViewBag.expmon @ViewBag.last </p>
+    }
+@* No Expected Month *@
+    @if (TempData["noexpmonth"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["noexpmonth"]</p>
+    }
+    @if (ViewBag.IsSearch == true)
+    {
+        <div class="row">
+            <div class=" row show-grid">
+                <div style="text-align: right; height: 60px; padding-left: 50px">
+                    <table>
+                        <tr>
+                            <td style="text-align: left; padding-left: 70px">
+                                <label class="fntst1">
+                                    M/s @ViewBag.OrganizationName
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding-left: 70px">
+                                <label class="fntst1">
+                                    @ViewBag.AddressLine1 , @ViewBag.AddressLine2 , @ViewBag.AddressLine3
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding-left: 70px">
+                                <label class="fntst1">
+                                    @ViewBag.City - @ViewBag.Pincode , @ViewBag.State
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class=" row show-grid">
+            <div style="padding-top: 30px; padding-left: 65px">
+                <table class="table-hover" style="width:97%">
+                    <thead>
+                        <tr style="background: #BBBEBD">
+                            <th style="width: 70px; text-align: center" class="fntst cal botbor">Serial No</th>
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">Customer Name</th>
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">Channel Partner Name</th>
+                            <th style="width: 80px; text-align: center" class="fntst cal botbor">Order Acknowledgement No</th>
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">Subject</th>
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">Equipment Model Name</th>
+                            <th style="width: 70px; text-align: center" class="fntst cal botbor">OA Date</th>
+                            <th style="width: 60px; text-align: center" class="fntst cal botbor">Comments</th>
+                            <th style="width: 170px; text-align: center" class="fntst cal botbor">Status</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align: center;">
+                                @slno
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.MDBGeneralData.OrganizationName</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.ChannelPartners.CPName</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.OANumber</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.Subjectinfo</label>
+                            </td>
+                            <td style="text-align: center;">
+                                @if (item.OAID != null)
+                                {
+                                    string nme = null;
+                                    int i = 0;
+                                    SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+                                    var equipname = db.OAEquipTableData.Where(m => m.OAID == item.OAID).ToList();
+                                    string[] epnm = new string[equipname.Count];
+                                    foreach (var s in equipname)
+                                    {
+                                        var ename = db.ProductModel.Where(m => m.ProductModelID == s.ProductModelID).Select(m => m.ProductModelName).SingleOrDefault();
+                                        string a = ename.ToString();
+                                        epnm[i] = a;
+                                        i++;
+                                    }
+                                    if (equipname.Count == 1)
+                                    {
+                                        nme = epnm[0];
+                                    }
+                                    else
+                                    {
+                                        nme = epnm[0];
+                                        for (int j = 1; j < equipname.Count; j++)
+                                        {
+                                            //if (j > 1)
+                                            //{
+                                            nme = nme + "," + epnm[j];
+                                            //}
+                                        }
+                                    }
+                                    @nme                                
+                                }
+                            </td>
+
+                            <td style="text-align: center;">
+                                <label class="fntst">@Html.DisplayFor(modelitem => item.OADate)</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@Html.DisplayFor(modelitem => item.OARejectComm)</label>
+                            </td>
+                            <td style="text-align: center;">
+                                @if (item.ApprovalStatus == 0)
+                                { 
+                                    @ViewBag.pen                        
+                                }
+                                @if (item.ApprovalStatus == 1)
+                                {
+                                    @ViewBag.app
+                                }
+                                @if (item.ApprovalStatus == 2)
+                                { 
+                                    @ViewBag.rej 
+                                }
+                                @if (item.ApprovalStatus == 3)
+                                { 
+                                    @ViewBag.cancel
+                                }
+                            </td>
+                         @*   <td style="text-align: center;">
+                                <label class="fntst">@ViewBag.OrganizationName</label>
+                            </td>*@
+                        </tr>
+                                slno = slno + 1;
+                    }
+                </table>
+            </div>
+        </div>
+        @using (Html.BeginForm("ExportData", "OA", FormMethod.Get, new { enctype = "multipart/form-data" }))
+        {
+            <input type="text" name="cpnam" class="input-xxsmall fntst" id="cpnam" value="@ViewBag.OrganizationName" style="display:none" >	
+            <input type="text" name="status" class="input-xxsmall fntst" id="status" value="@ViewBag.status" style="display:none">
+            <input type="text" name="frommonth" class="input-xxsmall fntst" id="frommonth" value="@ViewBag.fromdte" style="display:none" >
+            <input type="text" name="tomonth" class="input-xxsmall fntst" id="tomonth" value="@ViewBag.todate" style="display:none">
+            <input type="text" name="equip" class="input-xxsmall fntst" id="equip" value="@ViewBag.equip" style="display:none" >
+        @*<input type="text" name="status" class="input-xxsmall fntst" id="status1" value=" @ViewBag.pen,@ViewBag.app,@ViewBag.rej" style="display:none" >*@
+            	
+            <div class="row" style="padding-top: 20px; padding-left: 630px; padding-bottom: 20px">
+                <div class=" row show-grid">
+                    <div class="span10">
+                        <div class="span2">
+
+                            <input type="submit" style="width: 100px; height: 35px" value="Export" class="btn btn-info existingcustomer printButtonClass" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

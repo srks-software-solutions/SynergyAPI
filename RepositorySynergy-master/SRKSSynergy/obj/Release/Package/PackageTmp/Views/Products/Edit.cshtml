@@ -1,0 +1,77 @@
+﻿@model SRKSSynergy.Models.Products
+
+@{
+	ViewBag.Title = "Update Machine";
+}
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<div class="bcgr" style="min-height: 580px">
+	@*<h4></h4>*@
+	<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+
+		<div style="background: gray; padding-bottom: 7px">
+			<p class="txtft">Update-Machine</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad" style="padding-top:30px">
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">Section Type</label>
+							<div class="controls">
+								@Html.DropDownListFor(m => m.MasterProductID, (SelectList)ViewData["MasterProductID"], "--Select Model--", new { id = "MasterProductID", @required = "required" })
+								@Html.HiddenFor(m =>m.MasterProductID)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">Machine Name</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="addr1" placeholder="Address (Line1)">*@
+								@Html.TextBoxFor(model => model.ProductName, new { @id = "prdnm",@maxlength="20", @class = "fntst", @placeholder = "Commodity Name",@style="height:30px" })
+								@Html.ValidationMessageFor(model => model.ProductName)
+								@Html.HiddenFor(model => model.ProductID)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">Machine Description</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="addr2" placeholder="Address (Line2)">*@
+								@Html.TextBoxFor(model => model.ProductDescriptor, new { @id = "prddes",@maxlength="160", @class = "input-xxlarge fntst", @placeholder = "Commoditys Description",@style="height:30px" })
+								@Html.ValidationMessageFor(model => model.ProductDescriptor)
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+     
+		<div class="span10 pad ">
+            <div class="span3 cent" style="padding-left: 2%">
+			    <button class="btn btn-success btn-large glyphicon glyphicon-arrow-left" style="display: inline;">@Html.ActionLink(" Back_to_List", "Index","MasterProduct", new { @Style="color:white;text-decoration:none"})</button>
+            </div>
+            <div class="span3 cent" style="padding-left: 10%">
+				<button class="btn btn-success glyphicon glyphicon-cloud-upload" value="post" type="Submit"> Update</button>
+            </div>
+		</div>
+
+	}
+
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

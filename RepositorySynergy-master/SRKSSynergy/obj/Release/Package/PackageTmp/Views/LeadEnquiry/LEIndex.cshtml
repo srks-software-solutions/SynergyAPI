@@ -1,0 +1,140 @@
+﻿@model IEnumerable<SRKSSynergy.Models.LeadEnquiry>
+@{
+    ViewBag.Title = "LEIndex";
+    int slno = 1;
+}
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+
+<script type="text/javascript">
+    ShowPopUp = function () {        
+        window.showModalDialog('/LeadEnquiry/LESearch', "WindowPopup", 'fullscreen=yes');
+}
+</script>
+
+<div class="bcgr" style="min-height:590px;min-width:1300px">
+	<div style="background: gray; padding-bottom: 15px">
+		<p class="txtft">BSOH Lead Enquiry List</p>
+	</div>
+        
+	<form method="post">
+		@* Create Equipment Link *@
+		<div style="padding-left: 20px;padding-top:10px" class="noPrint">
+            @*<input type="button" class="btn btn-success" name="Search Lead" value="Search Lead" onclick="ShowPopUp();" />*@
+			@Html.ActionLink("Search Lead", "LESearch", "LeadEnquiry", new { @class = "btn btn-success", @Style = "text-decoration:none" })
+            @*@Html.ActionLink("Add New Enquiry", "LECreate", "LeadEnquiry", new { @class = "btn btn-success", @Style = "text-decoration:none" })*@
+		</div>
+       
+           <br />
+             @*Success Message*@
+        @if (TempData["Success"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["Success"]</p>
+		}
+
+		@* Table for Equipment *@
+		<table class="table table-hover" style="width: 1400px;">
+			<tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+				<th style="width: 30px; text-align: center">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No.</span>
+				</th>
+				<th style="width: 120px; text-align: center">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Org Name</span>
+				</th>
+				<th style="width: 80px; text-align: center">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Org Type</span>
+				</th>                
+                <th style="width: 80px; text-align: center;">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Contact No</span>
+				</th>
+                <th style="width: 70px; text-align: center;">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Email-ID</span>
+				</th>
+                <th style="width: 50px; text-align: center">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Suggested Model</span>
+				</th>
+				<th style="width: 50px; text-align: center;">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">State</span>
+				</th>				
+				<th style="width: 50px; text-align: center">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">City</span>
+				</th>                
+				<th style="width: 300px;" class="noPrint"></th>
+			</tr>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td style="width: 30px; text-align: center; font-family: Calibri; font-size: 18px">
+						@slno
+					</td>
+					<td style="width: 120px; text-align: center; font-family: Calibri; font-size: 18px">
+						@Html.DisplayFor(modelItem => item.OrganizationName)
+					</td>
+					<td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+						@Html.DisplayFor(modelItem => item.OrganizationType)
+					</td>                   
+                     <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+						+@Html.DisplayFor(modelItem => item.Isdm1):@Html.DisplayFor(modelItem => item.Mobile1)
+					</td>
+                    <td style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px">
+						@Html.DisplayFor(modelItem => item.EmailID)
+					</td>
+                    <td style="width: 50px; text-align: center; font-family: Calibri; font-size: 18px">
+						@Html.DisplayFor(modelItem => item.SuggestedModel)
+					</td>
+					<td style="width: 50px; text-align: center; font-family: Calibri; font-size: 18px">
+						@Html.DisplayFor(modelItem => item.State)
+					</td>					
+					<td style="width: 50px; text-align: center; font-family: Calibri; font-size: 18px">
+						@Html.DisplayFor(modelItem => item.City)
+                        </td>				  
+					<td class="noPrint" style="width: 110px">
+                      @*  @Html.ActionLink("Convert", "ConvertToMDB","LeadEnquiry", new { id=item.LEID }, new { @class = "btn btn-success", @Style = "text-decoration:none" }) |*@
+                     
+                        @if(item.IsStatus==1)
+                     {
+                         <span style="color:red">Lead Qualified</span>
+                     }                     
+                      else if (item.IsStatus == 3)
+                      {
+                         <span style="color:red">Quotation Generated</span>
+                      }
+                      else if (item.IsStatus == 4)
+                      {
+                         <span style="color:red">Order Generated</span>
+                      }
+                     else
+                     {
+                        <span>|</span>  
+                         if (item.IsStatus == 2)
+                         {
+                          @Html.ActionLink("Enable", "EnableEnquiry", "LeadEnquiry", new { id = item.LEID }, new { @class = "btn btn-success", @Style = "text-decoration:none" })
+                         }
+                         else
+                         {                      
+                          @Html.ActionLink("Convert", "ConvertToMDB", "LeadEnquiry", new { id = item.LEID }, new { @class = "btn btn-success", @Style = "text-decoration:none" })                                          
+                             <span>|</span>
+                          @Html.ActionLink("Drop", "DropEnquiry", "LeadEnquiry", new { id = item.LEID }, new { @class = "btn btn-success", @Style = "text-decoration:none" })                         
+                         }                       
+						
+                        <span>|</span> @Html.ActionLink("Edit", "LEEdit", "LeadEnquiry", new { id = item.LEID }, new { @class = "btn btn-success", @Style = "text-decoration:none" }) <span>|</span>				
+						  @Html.ActionLink("Delete", "LEDelete", "LeadEnquiry", new { id = item.LEID }, new { @class = "btn btn-success", @Style = "text-decoration:none" })
+                     }
+					</td>
+				</tr>
+				slno++;
+				
+			}
+
+
+        </table>
+    </form>
+</div>
+

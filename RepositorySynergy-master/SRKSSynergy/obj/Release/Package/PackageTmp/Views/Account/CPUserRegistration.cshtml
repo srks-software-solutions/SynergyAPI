@@ -1,0 +1,169 @@
+﻿@model SRKSSynergy.Models.UserRegistration
+
+@{
+    
+    ViewBag.Title= "UserLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>UserLogin</h2>*@
+
+<script type="text/javascript">
+    function checkvalue(val) {
+            document.getElementById("secque1").value = val;
+    }
+</script>
+<div class="bcgr">
+@using (Html.BeginForm())
+{
+    <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">User Registration</p>
+        </div>
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+    @Html.HiddenFor(mbox=>mbox.UserLogin.CPID, new{Value=ViewBag.CPID})
+    <div class="row">
+        <div class=" row show-grid">
+            <div class="span12 pad">
+                <p class="pad txtal">User Details</p>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">First Name</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.UserLogin.FirstName, new { @id = "fname", @class = "fntst", @placeholder = "First Name", Value=ViewBag.FirstName })
+                            @Html.ValidationMessageFor(model => model.UserLogin.FirstName)
+                        </div>
+                    </div>
+                </div>
+                <div class="sapn1"></div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Middle Name</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.UserLogin.MiddleName, new { @id = "mname", @class = "fntst", @placeholder = "Middle Name", Value=ViewBag.MiddleName })
+                            @Html.ValidationMessageFor(model => model.UserLogin.MiddleName)
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Last Name</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.UserLogin.LastName, new { @id = "lname", @class = "fntst", @placeholder = "Last Name", Value=ViewBag.LastName })
+                            @Html.ValidationMessageFor(model => model.UserLogin.LastName)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span10 pad">
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Email ID</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.RegisterModel.Email, new { @id = "email", @class = "fntst", @placeholder = "Email ID", Value=ViewBag.Email })
+                            @Html.ValidationMessageFor(model => model.RegisterModel.Email)
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Designation</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.UserLogin.Designation, new { @id = "Text", @class = "fntst", @placeholder = "Designation", Value=ViewBag.Designation })
+                            @Html.ValidationMessageFor(model => model.UserLogin.Designation)
+                        </div>
+                    </div>
+                </div>
+                @*<div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Phone No</label>
+                        <div class="controls">
+                            <span>+@Html.TextBoxFor(model => model.UserLogin.Isd1, new { @id = "isd", @class = "fntst", @placeholder = "ISD" })
+                                @Html.ValidationMessageFor(model => model.UserLogin.PhoneNo)
+                            </span>
+                            <span>
+                                @Html.TextBoxFor(model => model.UserLogin.Std1, new { @id = "std", @class = "fntst", @placeholder = "STD" })
+                                @Html.ValidationMessageFor(model => model.UserLogin.PhoneNo)
+                            </span>
+                            <span>
+                                @Html.TextBoxFor(model => model.UserLogin.PhoneNo, new { @id = "phone", @class = "fntst", @placeholder = "Direct" })
+                                @Html.ValidationMessageFor(model => model.UserLogin.PhoneNo)
+                            </span>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+            <div class="span12 pad">
+                <p class="pad txtal">Login Details</p>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">UserName</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.RegisterModel.UserName, new { @id = "usrnam", @class = "fntst", @placeholder = "UserName" })
+                            @Html.ValidationMessageFor(model => model.RegisterModel.UserName)
+                        </div>
+                    </div>
+                </div>
+                <div class="sapn1"></div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Password</label>
+                        <div class="controls">
+                            @Html.PasswordFor(model => model.RegisterModel.Password, new { @id = "pass", @class = "fntst", @placeholder = "Password" })
+                            @Html.ValidationMessageFor(model => model.RegisterModel.Password)
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Confirm Password</label>
+                        <div class="controls">
+                            @Html.PasswordFor(model => model.RegisterModel.ConfirmPassword, new { @id = "compass", @class = "fntst", @placeholder = "Confirm Password" })
+                            @Html.ValidationMessageFor(model => model.RegisterModel.ConfirmPassword)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span10 pad">
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Security Question</label>
+                        <div class="controls">
+                            <select id="secque" name="secque" class="input-xxlarge fntst" onchange='checkvalue(this.value)' required="required">
+                                <option value="">--Select--</option>
+                                <option value="What is your first school name?">What is your first school name?</option>
+                                <option value="What is the name of your Favourite Teacher?">What is the name of your Favourite Teacher?</option>
+                                <option value="What was your childhood nickname? ">What was your childhood nickname? </option>
+                                <option value="In what city or town was your first job?">In what city or town was your first job?</option>
+                                <option value="What was your favorite place to visit as a child?">What was your favorite place to visit as a child?</option>
+                            </select>
+                            @Html.TextBoxFor(model => model.RegisterModel.Question, new { @id = "secque1", @class = "fntst", @style = "display:none;" })
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                    <div class="span10 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Security Answer</label>
+                            <div class="controls">
+                                @Html.PasswordFor(model => model.RegisterModel.Answer, new { @id = "secans", @class = "fntst", @placeholder = "Security Answer", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.RegisterModel.Answer)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*Buttons*@
+                <div class="span10 pad ">
+                    <div class="span3 cent">
+                        <input type="submit" value="Generate User" class="btn btn-large btn-success" />
+                    </div>
+                </div>
+                @*End Of Buttons*@
+            </div>
+        </div>
+}
+ </div>    

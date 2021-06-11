@@ -1,0 +1,789 @@
+﻿@model SRKSSynergy.Models.Inward
+
+@{
+    ViewBag.Title = "Create Inward";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+@*<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />*@
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+@*<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>*@
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+<style>
+    .validation-summary-valid {
+        display: none;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('#startdate1').monthpicker();
+        $('#startdate2').monthpicker();
+        $('#startdate3').monthpicker();
+        $('#startdate4').monthpicker();
+        $('#startdate5').monthpicker();
+    });
+</script>
+
+@{
+    List<SelectListItem> listItems1 = new List<SelectListItem>();
+    listItems1.Add(new SelectListItem
+    {
+        Text = "1",
+        Value = "1"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "2",
+        Value = "2",
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "3",
+        Value = "3"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "6",
+        Value = "6"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "7",
+        Value = "7"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "8",
+        Value = "8"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "9",
+        Value = "9"
+    });
+    listItems1.Add(new SelectListItem
+    {
+        Text = "10",
+        Value = "10"
+    });
+}
+
+@{
+    List<SelectListItem> listItems2 = new List<SelectListItem>();
+    listItems2.Add(new SelectListItem
+    {
+        Text = "PO",
+        Value = "PO"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "FOC",
+        Value = "FOC",
+    });
+}
+
+<div class="bcgr" style="min-height: 590px">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">Create Inward Spare</p>
+        </div>
+        //line1
+        <div class=" row show-grid" style="padding-left: 32px">
+            <label class="control-label fntst">Line1</label>
+            <div class="span12">
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Item Code</label>
+                        <div class="controls">
+                           @Html.DropDownListFor(model => model.InwardSpare1.ProductModelSparesID, (SelectList)ViewData["SparesID"], "--Select Item Code--", new { @id = "exclu1", @maxlength = "16", @class = "input fntst", @placeholder = "Equipment Exclusions"})
+                            @Html.TextBoxFor(model => model.InwardSpare1.ProductModelSparesID, new { @id = "ItemId1", @style = "display:none" })
+
+                            @Html.ValidationMessageFor(model => model.InwardSpare1.ProductModelSparesID)
+
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span1">
+                    <div class="control-group">
+                        <label class="control-label fntst">Month</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare1.InwardMonth, new { @id = "startdate1", @name = "startdate1", @style = "width:100px", @placeholder = "Select Month", @class = "fntst date-picker", @required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span1">
+                    <div class="control-group">
+                        <label class="control-label fntst">PO No</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare1.PONumber, new { @id = "equip1", @maxlength = "20", @class = "fntst", @style = "width:80px", @placeholder = "PO Number" ,@required = "required"})
+                            @Html.ValidationMessageFor(model => model.InwardSpare1.PONumber)
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Inward Type</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.InwardSpare1.InwardType, listItems2, "-- Select --", new { @id = "InType1", @name = "InType1", @style = "width:100px", @required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="span2"></div>
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Qty Ordered</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare1.QuantityOrdered, new { @id = "quantity1", @maxlength = "20", @class = "fntst", @style = "width:50px", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.InwardSpare1.QuantityOrdered)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class=" row show-grid" style="padding-left: 32px">
+            <div class="span12">
+                <div class="span3" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">ItemDescription</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="desc1" name="desc1" style="width: 250px;" readonly="true" placeholder="Item Description">
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">PresentStock</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="presentstock1" name="presentstock1" style="width: 60px" readonly="true">
+                        </div>
+                    </div>
+                </div>
+                @* <div class="span1"></div>*@
+
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">Agent Price</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="Agent1" name="Agent1" style="width: 100px" readonly="true" placeholder="Agent price">
+                        </div>
+                    </div>
+                </div>
+                @* <div class="span1"></div>*@
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">Total Value</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare1.TotalValue, new { @id = "TotVal1", @maxlength = "20", @class = "fntst", @placeholder = "Total Value", @style = "width: 80px", @readonly = "readonly", @required = "required" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span1"></div>
+            </div>
+        </div> 
+
+        //line2
+        <div class=" row show-grid" style="padding-left: 32px">
+            <label class="control-label fntst">Line2</label>
+            <div class="span12">
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Item Code</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.InwardSpare2.ProductModelSparesID, (SelectList)ViewData["SparesID"], "--Select Item Code--", new { @id = "exclu2", @maxlength = "16", @class = "input fntst", @placeholder = "Equipment Exclusions"})
+                            @Html.TextBoxFor(model => model.InwardSpare2.ProductModelSparesID, new { @id = "ItemId2", @style = "display:none" })
+
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare2.ProductModelSparesID)*@
+
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span1">
+                    <div class="control-group">
+                        <label class="control-label fntst">Month</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare2.InwardMonth, new { @id = "startdate2", @name = "startdate2", @style = "width:100px", @placeholder = "Select Month", @class = "fntst date-picker"})
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span1">
+                    <div class="control-group">
+                        <label class="control-label fntst">PO No</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare2.PONumber, new { @id = "equip1", @maxlength = "20", @class = "fntst", @style = "width:80px", @placeholder = "PO Number" })
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare2.PONumber)*@
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Inward Type</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.InwardSpare2.InwardType, listItems2, "-- Select --", new { @id = "InType2", @name = "InType2", @style = "width:100px"})
+                        </div>
+                    </div>
+                </div>
+                <div class="span2"></div>
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Qty Ordered</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare2.QuantityOrdered, new { @id = "quantity2", @maxlength = "20", @class = "fntst", @style = "width:50px"})
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare2.QuantityOrdered)*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+         <div class=" row show-grid" style="padding-left: 32px">
+            <div class="span12">
+                <div class="span3" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">ItemDescription</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="desc2" name="desc2" style="width: 250px;" readonly="true" placeholder="Item Description">
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">PresentStock</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="presentstock2" name="presentstock2" style="width: 60px" readonly="true">
+                        </div>
+                    </div>
+                </div>
+                @* <div class="span1"></div>*@
+
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">Agent Price</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="Agent2" name="Agent2" style="width: 100px" readonly="true" placeholder="Agent price">
+                        </div>
+                    </div>
+                </div>
+                @* <div class="span1"></div>*@
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">Total Value</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare2.TotalValue, new { @id = "TotVal2", @maxlength = "20", @class = "fntst", @placeholder = "Total Value", @style = "width: 80px", @readonly = "readonly"})
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span1"></div>
+            </div>
+        </div>     
+                
+        //line3
+         <div class=" row show-grid" style="padding-left: 32px">
+            <label class="control-label fntst">Line3</label>
+            <div class="span12">
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Item Code</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.InwardSpare3.ProductModelSparesID, (SelectList)ViewData["SparesID"], "--Select Item Code--", new { @id = "exclu3", @maxlength = "16", @class = "input fntst", @placeholder = "Equipment Exclusions"})
+                            @Html.TextBoxFor(model => model.InwardSpare3.ProductModelSparesID, new { @id = "ItemId3", @style = "display:none" })
+
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare3.ProductModelSparesID)*@
+
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span1">
+                    <div class="control-group">
+                        <label class="control-label fntst">Month</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare3.InwardMonth, new { @id = "startdate3", @name = "startdate3", @style = "width:100px", @placeholder = "Select Month", @class = "fntst date-picker"})
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span1">
+                    <div class="control-group">
+                        <label class="control-label fntst">PO No</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare3.PONumber, new { @id = "equip3", @maxlength = "20", @class = "fntst", @style = "width:80px", @placeholder = "PO Number"})
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare3.PONumber)*@
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Inward Type</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.InwardSpare3.InwardType, listItems2, "-- Select --", new { @id = "InType3", @name = "InType3", @style = "width:100px"})
+                        </div>
+                    </div>
+                </div>
+                <div class="span2"></div>
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Qty Ordered</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare3.QuantityOrdered, new { @id = "quantity3", @maxlength = "20", @class = "fntst", @style = "width:50px"})
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare3.QuantityOrdered)*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+         <div class=" row show-grid" style="padding-left: 32px">
+            <div class="span12">
+                <div class="span3" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">ItemDescription</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="desc3" name="desc3" style="width: 250px;" readonly="true" placeholder="Item Description">
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">PresentStock</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="presentstock3" name="presentstock3" style="width: 60px" readonly="true">
+                        </div>
+                    </div>
+                </div>
+                @* <div class="span1"></div>*@
+
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">Agent Price</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="Agent3" name="Agent3" style="width: 100px" readonly="true" placeholder="Agent price">
+                        </div>
+                    </div>
+                </div>
+                @* <div class="span1"></div>*@
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">Total Value</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare3.TotalValue, new { @id = "TotVal3", @maxlength = "20", @class = "fntst", @placeholder = "Total Value", @style = "width: 80px",@required = "required", @readonly = "readonly"})
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span1"></div>
+            </div>
+        </div>   
+                 
+        //line4
+        <div class=" row show-grid" style="padding-left: 32px">
+            <label class="control-label fntst">Line4</label>
+            <div class="span12">
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Item Code</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.InwardSpare4.ProductModelSparesID, (SelectList)ViewData["SparesID"], "--Select Item Code--", new { @id = "exclu4", @maxlength = "16", @class = "input fntst", @placeholder = "Equipment Exclusions"})
+                            @Html.TextBoxFor(model => model.InwardSpare4.ProductModelSparesID, new { @id = "ItemId4", @style = "display:none" })
+
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare4.ProductModelSparesID)*@
+
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span1">
+                    <div class="control-group">
+                        <label class="control-label fntst">Month</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare4.InwardMonth, new { @id = "startdate4", @name = "startdate4", @style = "width:100px", @placeholder = "Select Month", @class = "fntst date-picker"})
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span1">
+                    <div class="control-group">
+                        <label class="control-label fntst">PO No</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare4.PONumber, new { @id = "equip4", @maxlength = "20", @class = "fntst", @style = "width:80px", @placeholder = "PO Number" })
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare4.PONumber)*@
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Inward Type</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.InwardSpare4.InwardType, listItems2, "-- Select --", new { @id = "InType4", @name = "InType4", @style = "width:100px"})
+                        </div>
+                    </div>
+                </div>
+                <div class="span2"></div>
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Qty Ordered</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare4.QuantityOrdered, new { @id = "quantity4", @maxlength = "20", @class = "fntst", @style = "width:50px"})
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare4.QuantityOrdered)*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+         <div class=" row show-grid" style="padding-left: 32px">
+            <div class="span12">
+                <div class="span3" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">ItemDescription</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="desc4" name="desc4" style="width: 250px;" readonly="true" placeholder="Item Description">
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">PresentStock</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="presentstock4" name="presentstock4" style="width: 60px" readonly="true">
+                        </div>
+                    </div>
+                </div>
+                @* <div class="span1"></div>*@
+
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">Agent Price</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="Agent4" name="Agent4" style="width: 100px" readonly="true" placeholder="Agent price">
+                        </div>
+                    </div>
+                </div>
+                @* <div class="span1"></div>*@
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">Total Value</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare4.TotalValue, new { @id = "TotVal4", @maxlength = "20", @class = "fntst", @placeholder = "Total Value", @style = "width: 80px", @readonly = "readonly"})
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span1"></div>
+            </div>
+        </div>  
+           
+        //line5
+        <div class=" row show-grid" style="padding-left: 32px">
+            <label class="control-label fntst">Line5</label>
+            <div class="span12">
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Item Code</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.InwardSpare5.ProductModelSparesID, (SelectList)ViewData["SparesID"], "--Select Item Code--", new { @id = "exclu5", @maxlength = "16", @class = "input fntst", @placeholder = "Equipment Exclusions"})
+                            @Html.TextBoxFor(model => model.InwardSpare5.ProductModelSparesID, new { @id = "ItemId5", @style = "display:none" })
+
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare5.ProductModelSparesID)*@
+
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span1">
+                    <div class="control-group">
+                        <label class="control-label fntst">Month</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare5.InwardMonth, new { @id = "startdate5", @name = "startdate5", @style = "width:100px", @placeholder = "Select Month", @class = "fntst date-picker"})
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span1">
+                    <div class="control-group">
+                        <label class="control-label fntst">PO No</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare5.PONumber, new { @id = "equip5", @maxlength = "20", @class = "fntst", @style = "width:80px", @placeholder = "PO Number"})
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare5.PONumber)*@
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Inward Type</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.InwardSpare5.InwardType, listItems2, "-- Select --", new { @id = "InType5", @name = "InType5", @style = "width:100px"})
+                        </div>
+                    </div>
+                </div>
+                <div class="span2"></div>
+                <div class="span2">
+                    <div class="control-group">
+                        <label class="control-label fntst">Qty Ordered</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.InwardSpare5.QuantityOrdered, new { @id = "quantity5", @maxlength = "20", @class = "fntst", @style = "width:50px"})
+                            @*@Html.ValidationMessageFor(model => model.InwardSpare5.QuantityOrdered)*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+         <div class=" row show-grid" style="padding-left: 32px">
+            <div class="span12">
+                <div class="span3" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">ItemDescription</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="desc5" name="desc5" style="width: 250px;" readonly="true" placeholder="Item Description">
+                        </div>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">PresentStock</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="presentstock5" name="presentstock5" style="width: 60px" readonly="true">
+                        </div>
+                    </div>
+                </div>
+                @* <div class="span1"></div>*@
+
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">Agent Price</label>
+                        <div class="controls">
+                            <input type="text" class="fntst" id="Agent5" name="Agent5" style="width: 100px" readonly="true" placeholder="Agent price">
+                        </div>
+                    </div>
+                </div>
+                @* <div class="span1"></div>*@
+                <div class="span2" hidden="hidden">
+                    <div class="control-group">
+                        <label class="control-label fntst">Total Value</label>
+                        <div class="controls">SSSSSSS
+                            @Html.TextBoxFor(model => model.InwardSpare5.TotalValue, new { @id = "TotVal5", @maxlength = "20", @class = "fntst", @placeholder = "Total Value", @style = "width: 80px", @readonly = "readonly"})
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span1"></div>
+            </div>     
+            <div class="span10 pad ">
+                <div class="span3 cent" style="padding-left: 300px">
+                      <button class="btn btn-success glyphicon glyphicon-cloud-upload" value="create" type="submit">Save Inward</button>
+                </div>
+                <p style="color: red; font-family: Calibri; font-size: 18px; font-weight: 900">
+                    @Html.Label("", Convert.ToString((string)ViewBag.Duplicate))
+                </p>
+                <div>
+                   @*<button class="btn btn-info"> @Html.ActionLink("Back to List", "Index", new { @Style="color:white;text-decoration:none"})</button>*@
+                    <button  class="btn btn-info" style="height:30px;margin-top:10px"> @Html.ActionLink("Back_to_List", "Index", "Inward", new { @style="color:white"}) </button>
+                </div>
+            </div>
+        </div>
+            
+    }
+    </div>
+    <style>
+        .ui-datepicker-calendar {
+            display: none;
+        }
+    </style>
+    <script>
+        var item = new Array();
+        $("#exclu1").change(function (evt) {
+            {
+                $("#desc1").val('-- Item Description --');
+                $("#Agent1").val('');
+                $("#exclu1").attr("disabled", false);
+                var selectedID1 = $("#exclu1 option:selected").val();
+                for (i = 0; i < item.length; i++) {
+                    if (item[i] == selectedID1)
+                        alert('select other item');
+                }
+                item.push(selectedID1);
+                $.getJSON("/Inward/GetItemDescription", { ID: selectedID1 }, function (data) {
+                    $("#presentstock1").val(data.presentstock);
+                    $("#desc1").val(data.Desc);
+                    $("#Agent1").val(accounting.formatMoney(data.unitprice));
+                    $("#quantity1").attr("disabled", false);
+                    $("#TotVal1").val(' ');
+                    $("#quantity1").val(' ');
+                });
+
+            }
+        });
+
+        $("#exclu2").change(function (evt) {
+            {
+                $("#desc2").val('-- Item Description --');
+                $("#Agent2").val('');
+                $("#exclu2").attr("disabled", false);
+                var selectedID2 = $("#exclu2 option:selected").val();
+                for (i = 0; i < item.length; i++) {
+                    if (item[i] == selectedID2)
+                        alert('Select Differnt Item Code');
+                }
+                item.push(selectedID2);
+                $.getJSON("/Inward/GetItemDescription", { ID: selectedID2 }, function (data) {
+                    $("#presentstock2").val(data.presentstock);
+                    $("#desc2").val(data.Desc);
+                    $("#Agent2").val(accounting.formatMoney(data.unitprice));
+                    $("#quantity2").attr("disabled", false);
+
+                    $("#TotVal2").val(' ');
+                    $("#quantity2").val(' ');
+                });
+            }
+        });
+
+        $("#exclu3").change(function (evt) {
+            {
+                $("#desc3").val('-- Item Description --');
+                $("#Agent3").val('');
+                $("#exclu3").attr("disabled", false);
+                var selectedID3 = $("#exclu3 option:selected").val();
+                for (i = 0; i < item.length; i++) {
+                    if (item[i] == selectedID3)
+                        alert('Select Differnt Item Code');
+                }
+                item.push(selectedID3);
+                $.getJSON("/Inward/GetItemDescription", { ID: selectedID3 }, function (data) {
+                    $("#presentstock3").val(data.presentstock);
+                    $("#desc3").val(data.Desc);
+                    $("#Agent3").val(accounting.formatMoney(data.unitprice));
+                    $("#quantity3").attr("disabled", false);
+                    $("#TotVal3").val(' ');
+                    $("#quantity3").val(' ');
+                });
+            }
+        });
+
+        $("#exclu4").change(function (evt) {
+            {
+                $("#desc4").val('-- Item Description --');
+                $("#Agent4").val('');
+                $("#exclu4").attr("disabled", false);
+                var selectedID4 = $("#exclu4 option:selected").val();
+                for (i = 0; i < item.length; i++) {
+                    if (item[i] == selectedID4)
+                        alert('Select Differnt Item Code');
+                }
+                item.push(selectedID4);
+                $.getJSON("/Inward/GetItemDescription", { ID: selectedID4 }, function (data) {
+                    $("#presentstock4").val(data.presentstock);
+                    $("#desc4").val(data.Desc);
+                    $("#Agent4").val(accounting.formatMoney(data.unitprice));
+                    $("#quantity").attr("disabled", false);
+                    $("#TotVal4").val(' ');
+                    $("#quantity4").val(' ');
+                });
+            }
+        });
+
+        $("#exclu5").change(function (evt) {
+            {
+                $("#desc5").val('-- Item Description --');
+                $("#Agent5").val('');
+                $("#exclu5").attr("disabled", false);
+                var selectedID5 = $("#exclu5 option:selected").val();
+                for (i = 0; i < item.length; i++) {
+                    if (item[i] == selectedID5)
+                        alert('Select Differnt Item Code');
+                }
+                item.push(selectedID5);
+                $.getJSON("/Inward/GetItemDescription", { ID: selectedID5 }, function (data) {
+                    $("#presentstock5").val(data.presentstock);
+                    $("#desc5").val(data.Desc);
+                    $("#Agent5").val(accounting.formatMoney(data.unitprice));
+                    $("#quantity5").attr("disabled", false);
+                    $("#TotVal5").val(' ');
+                    $("#quantity5").val(' ');
+                });
+            }
+        });
+
+    </script>
+    <script>
+        $("#quantity1").change(function (evt) {
+            var passval = $("#quantity1").val();
+            var unitprice = $("#Agent1").val();
+            if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+                var totalprice = passval * accounting.unformat(unitprice);
+                $("#TotVal1").val(accounting.formatMoney(totalprice));
+            }
+        });
+        $("#quantity2").change(function (evt) {
+
+            var passval = $("#quantity2").val();
+            var unitprice = $("#Agent2").val();
+            if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+                var totalprice = passval * accounting.unformat(unitprice);
+                $("#TotVal2").val(accounting.formatMoney(totalprice));
+                $('#TotVal2').value = "";
+            }
+        });
+        $("#quantity3").change(function (evt) {
+
+            var passval = $("#quantity3").val();
+            var unitprice = $("#Agent3").val();
+            if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+                var totalprice = passval * accounting.unformat(unitprice);
+                $("#TotVal3").val(accounting.formatMoney(totalprice));
+                $('#TotVal3').value = "";
+            }
+        });
+        $("#quantity4").change(function (evt) {
+
+            var passval = $("#quantity4").val();
+            var unitprice = $("#Agent4").val();
+            if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+                var totalprice = passval * accounting.unformat(unitprice);
+                $("#TotVal4").val(accounting.formatMoney(totalprice));
+                $('#TotVal4').value = "";
+            }
+        });
+        $("#quantity5").change(function (evt) {
+
+            var passval = $("#quantity5").val();
+            var unitprice = $("#Agent5").val();
+            if (accounting.unformat(unitprice) != null || accounting.unformat(unitprice) != "" || accounting.unformat(unitprice) != 0) {
+                var totalprice = passval * accounting.unformat(unitprice);
+                $("#TotVal5").val(accounting.formatMoney(totalprice));
+                $('#TotVal5').value = "";
+            }
+        });
+    </script>

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Synergy - Dashboard</title>
+    @*<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/MDB.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/menu.css">
+    <script type="text/javascript" src="bootstrap/js/jquery-1.9.1.min.js"></script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var tabs = $('.tabsm > li');
+            tabs.on("click", function () {
+                tabs.removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
+</head>
+    @{
+        ViewBag.Title = "Synergy";
+    }
+<body>
+    <div class="bcgr" style="margin: 0 auto;min-height:700px" >
+        <div style="padding-top: 60px; padding-bottom: 150px; margin: 0 auto">
+            <table style="text-align: center; margin: 0 auto; width: 800px; height: 320px;">
+                <tr style="padding-bottom: 10px">
+
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/MainDashboard/EquipmentSalesMang" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/Generate-tables-icon.png" alt='missing' />
+                                <figcaption><strong>Equipment Sales Management</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/MainDashboard/SalesOrderProcess" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/approvals.png" alt='missing' />
+                                <figcaption><strong>Sales Order Processing</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>
+                    @*<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/MainDashboard/SparesServiceMang" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/support-and-maintenance.png" alt='missing' />
+                                <figcaption><strong>Spares & Service Management</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>*@
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/MainDashboard/AnalyticalReports" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/report.png" alt='missing' />
+                                <figcaption><strong>Analytical Reports</strong></figcaption>
+                            </figure>
+                        </a>
+                        @*<a href="/MainDashboard/AnalyticalReports" style="text-decoration: none">*@
+                   </td>
+                    @*<td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/Configuratio
+                    </td>*@
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/MainDashboard/MachineDetails" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/custom_software_development.png" alt='missing' />
+                                <figcaption><strong>Machine Management</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/MainDashboard/SparesServiceMang" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/support-and-maintenance.png" alt='missing' />
+                                <figcaption><strong>Spares & Service Management</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/Configuration/Configuration" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/Config.png" alt='missing' />
+                                <figcaption><strong>Configuration</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</body>
+</html>

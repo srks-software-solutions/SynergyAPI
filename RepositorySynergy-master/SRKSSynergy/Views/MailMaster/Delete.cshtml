@@ -1,0 +1,35 @@
+﻿@model SRKSSynergy.Models.MailMasters
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="bcgr">
+    <h2 style="padding-left: 50px;"><span class="label label-warning">Delete Email</span></h2>
+    <div class="container" style="font-size: large">
+        @using (Html.BeginForm("Delete", "MailMaster", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <br />
+            <h4 style="padding-left: 10px;">Are you sure you want to delete this?</h4>
+
+            <div class="row">
+                <br />
+                <div class='col-xs-1' style="font-weight: bold;">
+                    <label>Email Address</label>
+                </div>
+                <div class='col-xs-1' style="padding-left: 70px;">
+                    @Html.DisplayFor(model => model.EmailAddress)
+                </div>
+            </div>
+            <p>
+                <button type="submit" class="btn btn-primary " id="sit">Submit</button>
+            </p>
+              
+        }
+        <form action="/MailMaster/Index">
+            <button type="submit" class="btn btn-primary " id="sit1">Back To List</button>
+        </form>
+    </div>
+</div>
+

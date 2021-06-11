@@ -1,0 +1,153 @@
+﻿@model IEnumerable<SRKSSynergy.Models.OAEquipGeneralData>
+@{
+    ViewBag.Title = "OrdersGeneratedWithDateRange";
+    Layout = null;
+    int slno = 1;
+}
+
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+
+<div class="bcgr" style="min-height: 590px; min-width: 1300px;">
+    <div class="navbar-fixed-top" style="background: gray;">
+        <p class="txtft">Generated Leads</p>
+        <div class="navbar navbar-fixed-top" style="margin: -1px -1px 0;">
+            <ul class="nav pull-right" style="padding-right: 50px">
+                <li style="padding-top: 10px; font: 20px; color: white;">
+                    <a href="/Account/Login" class="btn" style="width: 50px; height: 15px; background: #009B91; text-decoration: none; font-size: 14px; color: white;"><strong>Logout</strong></a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar navbar-fixed-top" style="margin: -1px -1px 0;">
+            <ul class="nav pull-left " style="padding-right: 50px">
+                <li style="padding-top: 7%; font: 20px; color: white;">
+                    <a href="/Account/LiveDashBoard" class="btn" style="width: 50px; height: 15px; background: #009B91; text-decoration: none; font-size: 14px; color: white; display: inline;">Live DashBoard</a>
+                    <a href="/MainDashboard/MainDashboard" class="btn" style="width: 50px; height: 15px; background: #009B91; text-decoration: none; font-size: 14px; color: white; display: inline">Main DashBoard</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="background: #BBBEBD; padding-top: 4%; height: 40px;">
+        <p class="txtft1" style="font-size: 22px"><a href="/LeadEnquiry/OpenCloseLeads" class="btn" style="width: 50px; height: 15px; background: #009B91; text-decoration: none; font-size: 14px; color: white;">Back</a>
+            Period    &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;
+                      From:- @ViewBag.Fromdateshow&nbsp;&nbsp; &nbsp; &nbsp;To:- @ViewBag.Todateshow&nbsp;&nbsp; &nbsp; &nbsp;
+        </p>
+
+    </div>
+
+    <form action="@Url.Action("OrdersGeneratedWithDateRange", "LeadEnquiry")" method="post">
+
+        @*Success Message*@
+        @if (TempData["Success"] != null)
+        {
+            <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["Success"]</p>
+        }
+
+@* Table for Equipment *@
+        <table class="table table-hover" style="width: 1400px;">
+            <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No.</span>
+                </th>
+                <th style="width: 160px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Channal Partner</span>
+                </th>
+                <th style="width: 160px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Total Generated Orders</span>
+                </th>
+                <th style="width: 100px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Approved Orders</span>
+                </th>
+                <th style="width: 100px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Rejected Orders</span>
+                </th>
+                                
+                <th style="width: 250px;" class="noPrint"></th>
+            </tr>
+            @{
+                SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+                
+                DateTime dtt = ViewBag.Fromdate;
+                DateTime dtt1 = ViewBag.Todate;               
+               
+                String frda1 = dtt.ToString("yyyy-MM-dd");
+                String toda1 = dtt1.ToString("yyyy-MM-dd");
+
+                DateTime frda = DateTime.Parse(frda1).Date;
+                DateTime toda = DateTime.Parse(toda1).Date;
+
+                var startDate = frda;
+                var enddate1 = toda;
+                int tlg = 0, tol = 0, tcl = 0, tqg = 0, tdl = 0;     
+             }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td> 
+                    <td style="width: 120px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @if (item.CPID != 0)
+                        {
+                            {
+                                var name = db.ChannelPartners.Where(m => m.CPID == item.CPID).Select(m => m.CPName).SingleOrDefault();
+                                ViewBag.drp1 = name;
+                            }                        
+                            @ViewBag.drp1
+                        }
+                        else
+                        {
+                            <label style="font-family: Calibri; font-size: 18px;">Buhler India Pvt Ltd</label>
+                        }
+                    </td>
+                    <td style="width: 150px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @{
+                  var tl = db.OAEquipGeneralData.Where(m => m.ApprovalStatus == 1 || m.ApprovalStatus==2).Where(m => m.OAStatus == 1).Where(m => m.CPID == item.CPID).Where(m => m.OADate >= frda && m.OADate <= toda).Count();
+                        ViewBag.tl = tl;
+
+                        tlg = tlg + tl;
+                        ViewBag.tlg = tlg;
+                        }
+                        @ViewBag.tl
+                        @*@Html.DisplayFor(modelItem => item.IsStatus)*@
+                    </td>
+                    <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @{
+                     var op = db.OAEquipGeneralData.Where(m => m.ApprovalStatus == 1 ).Where(m => m.OAStatus == 1).Where(m => m.CPID == item.CPID).Where(m => m.OADate >= frda && m.OADate <= toda).Count();
+                        ViewBag.op = op;
+
+                        tol = tol + op;
+                        ViewBag.tol = tol;
+                        }
+                        @ViewBag.op
+                        @*@Html.DisplayFor(modelItem => item.IsStatus)*@
+                    </td>
+
+                    <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @{
+                    var drp = db.OAEquipGeneralData.Where(m => m.ApprovalStatus == 2).Where(m => m.OAStatus == 1).Where(m => m.CPID == item.CPID).Where(m => m.OADate >= frda && m.OADate <= toda).Count();
+                        ViewBag.drp = drp;
+
+                        //tdl = tdl + drp;
+                        //ViewBag.tdl = tdl;                            
+                        }
+                        @ViewBag.drp
+                        @*@Html.DisplayFor(modelItem => item.IsDrop)*@
+                    </td>
+                                      
+                </tr>                 
+                        slno++;
+            }
+        </table>
+</div>
+
+
+

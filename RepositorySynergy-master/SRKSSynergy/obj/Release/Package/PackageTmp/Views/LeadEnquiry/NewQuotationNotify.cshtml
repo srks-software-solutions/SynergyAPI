@@ -1,0 +1,102 @@
+﻿@model IEnumerable<SRKSSynergy.Models.QGEquipGeneralData>
+@{
+    ViewBag.Title = "NewQuotationNotify";
+    Layout = null;
+    int slno = 1;
+}
+
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+
+<div class="bcgr" style="height:1000px;width:1000px">
+	<div style="background: gray; padding-bottom: 15px">
+		<p class="txtft">New Quotation Notification</p>
+	</div>
+    
+	<form action="@Url.Action("LEIndex", "LeadEnquiry")" method="post">	
+       
+		@* Table for Equipment *@
+		<table class="table table-hover" style="width: 1400px;">
+			<tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+				<th style="width: 30px; text-align: center">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No.</span>
+				</th>
+				<th style="width: 120px; text-align: center">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Channel Partner Name</span>
+				</th>
+                <th style="width: 90px; text-align: center">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Customer Name</span>
+				</th>
+				<th style="width: 90px; text-align: center">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Quotation Number</span>
+				</th>
+                
+                <th style="width: 90px; text-align: center;">
+					<span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Quotation Date</span>
+				</th>               				
+				<th style="width: 250px;" class="noPrint"></th>
+			</tr>
+             @{
+                DateTime now = DateTime.Now;
+                var startDate = new DateTime(now.Year, now.Month, 1);
+                var enddate = System.DateTime.Now;
+                var enddate1 = startDate.AddMonths(1).AddDays(-1);
+                var yesterday = DateTime.Today.AddDays(-1);
+                SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+             } 
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td style="width: 30px; text-align: center; font-family: Calibri; font-size: 18px">
+						@slno
+					</td>
+                    <td style="width: 120px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @if (item.CPID != 0)
+                        {
+                            {
+                                var name = db.ChannelPartners.Where(m => m.CPID == item.CPID).Select(m => m.CPName).SingleOrDefault();
+                                ViewBag.drp = name;
+                            }                        
+                            @ViewBag.drp
+                        }
+                        else
+                        {
+                            <label style="font-family:Calibri;font-size:18px;">Buhler India Pvt Ltd</label>
+                        }
+                    </td>                    
+                    <td style="width: 120px; text-align: center; font-family: Calibri; font-size: 18px">
+						 @{
+                       var name1 = db.MDBGeneralData.Where(m => m.MDBID == item.MDBID).Select(m => m.OrganizationName).SingleOrDefault();
+                      ViewBag.drp1 = name1;                
+                        }                        
+                        @ViewBag.drp1
+					</td>                   
+                                       
+					<td style="width: 90px; text-align: center; font-family: Calibri; font-size: 18px">
+						@Html.DisplayFor(modelItem => item.QuotationNumber)
+					</td>                 
+                    <td style="width: 90px; text-align: center; font-family: Calibri; font-size: 18px">
+						@{
+                var created = db.QGEquipGeneralData.Where(m => m.IsRiceMill == 0).Where(m => m.QGID == item.QGID).Where(m => m.QuotationDate > startDate && m.QuotationDate < enddate1).Select(m => m.QuotationDate).SingleOrDefault();               
+                DateTime td = Convert.ToDateTime(created);
+                string dd = td.ToString("dd-MM-yyyy");
+                ViewBag.drp = dd;                
+                        }                        
+                        @ViewBag.drp
+					</td>							
+				</tr>
+				slno++;
+				
+			}
+
+
+		</table>       	
+        </div>
+

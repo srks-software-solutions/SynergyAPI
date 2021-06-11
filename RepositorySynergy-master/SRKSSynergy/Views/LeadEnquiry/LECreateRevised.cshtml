@@ -1,0 +1,2640 @@
+﻿@model SRKSSynergy.Models.LeadEnquiryRevised
+@{
+    ViewBag.Title = "Lead Create";
+}
+
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery-2.1.4.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="~/Content/bootstrap/js/jValidations.js"></script>
+
+@{
+    List<SelectListItem> list2 = new List<SelectListItem>();
+    list2.Add(new SelectListItem
+    {
+        Text = "Yes",
+        Value = "Yes"
+    });
+    list2.Add(new SelectListItem
+    {
+        Text = "No",
+        Value = "No",
+    });
+}
+
+@{
+    List<SelectListItem> list3 = new List<SelectListItem>();
+    list3.Add(new SelectListItem
+    {
+        Text = "Less Than 4TPH",
+        Value = "Less Than 4TPH"
+    });
+    list3.Add(new SelectListItem
+    {
+        Text = "4 to 8 TPH",
+        Value = "4 to 8 TPH",
+    });
+    list3.Add(new SelectListItem
+    {
+        Text = "Greater than 8 TPH",
+        Value = "Greater than 8 TPH",
+    });
+}
+
+
+@{
+    List<SelectListItem> list4 = new List<SelectListItem>();
+    list4.Add(new SelectListItem
+    {
+        Text = "Machines",
+        Value = "Machines"
+    });
+    list4.Add(new SelectListItem
+    {
+        Text = "Projects",
+        Value = "Projects",
+    });
+    list4.Add(new SelectListItem
+    {
+        Text = "Sorters",
+        Value = "Sorters",
+    });
+}
+
+@*supplier names list*@
+@{
+    List<SelectListItem> suppliername = new List<SelectListItem>();
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Milltec",
+        Value = "Milltec"
+    });
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Buhler",
+        Value = "Buhler",
+    });
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Satake",
+        Value = "Satake",
+    });
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Chinese",
+        Value = "Chinese"
+    });
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Cone Polisher",
+        Value = "Cone Polisher",
+    });
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Sona Foods",
+        Value = "Sona Foods",
+    });
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Damodar",
+        Value = "Damodar",
+    });
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Dandekar",
+        Value = "Dandekar",
+    });
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Mix & Match",
+        Value = "Mix & Match",
+    });
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Suri",
+        Value = "Suri",
+    });
+    suppliername.Add(new SelectListItem
+    {
+        Text = "Local",
+        Value = "Local",
+    });
+}
+
+@{
+    List<SelectListItem> list5 = new List<SelectListItem>();
+
+    list5.Add(new SelectListItem
+    {
+        Text = "Less Than 3 Months",
+        Value = "Less Than 3 Months"
+    });
+    list5.Add(new SelectListItem
+    {
+        Text = "3 to 6 Months",
+        Value = "3 to 6 Months",
+    });
+    list5.Add(new SelectListItem
+    {
+        Text = "Greater Than 6 Months",
+        Value = "Greater Than 6 Months",
+    });
+
+}
+
+@{
+    List<SelectListItem> EnquiryHandledByList = new List<SelectListItem>();
+    EnquiryHandledByList.Add(new SelectListItem
+    {
+        Text = "Buhler Sales",
+        Value = "Buhler Sales"
+    });
+    EnquiryHandledByList.Add(new SelectListItem
+    {
+        Text = "Channel Partner Sales",
+        Value = "Channel Partner Sales"
+    });
+
+}
+
+@{
+    List<SelectListItem> ModelSelectionList = new List<SelectListItem>();
+    //ModelSelectionList.Add(new SelectListItem
+    //{
+    //    Text = "CMOS",
+    //    Value = "CMOS"
+    //});
+
+    //ModelSelectionList.Add(new SelectListItem
+    //{
+    //    Text = "CLV",
+    //    Value = "CLV"
+    //});
+
+    ModelSelectionList.Add(new SelectListItem
+    {
+        Text = "WLV",
+        Value = "WLV"
+    });
+
+    ModelSelectionList.Add(new SelectListItem
+    {
+        Text = "WVV",
+        Value = "WVV"
+    });
+
+    ModelSelectionList.Add(new SelectListItem
+    {
+        Text = "B Mono",
+        Value = "B Mono"
+    });
+
+    ModelSelectionList.Add(new SelectListItem
+    {
+        Text = "A5 Mono",
+        Value = "A5 Mono"
+    });
+    ModelSelectionList.Add(new SelectListItem
+    {
+        Text = "DX Multi Vision",
+        Value = "DX Multi Vision"
+    });
+
+    ModelSelectionList.Add(new SelectListItem
+    {
+        Text = "DA Multi Vision",
+        Value = "DA Multi Vision"
+    });
+
+}
+
+@{
+    List<SelectListItem> listItemsst = new List<SelectListItem>();
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Andhra Pradesh (AP)",
+        Value = "Andhra Pradesh (AP)"
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Arunachal Pradesh (AR)",
+        Value = "Arunachal Pradesh (AR)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Andaman and Nicobar Islands(AN)",
+        Value = "Andaman and Nicobar Islands(AN)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Assam (AS)",
+        Value = "Assam (AS)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Bihar (BR)",
+        Value = "Bihar (BR)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Chhattisgarh (CG)",
+        Value = "Chhattisgarh (CG)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Chandigarh (CH)",
+        Value = "Chandigarh (CH)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Delhi (DEL)",
+        Value = "Delhi (DEL)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Dadra and Nagar Haveli (DN)",
+        Value = "Dadra and Nagar Haveli (DN)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Daman and Diu (DD)",
+        Value = "Daman and Diu (DD)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Goa (GA)",
+        Value = "Goa (GA)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Gujarat (GJ)",
+        Value = "Gujarat (GJ)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Haryana (HR)",
+        Value = "Haryana (HR)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Himachal Pradesh (HP)",
+        Value = "Himachal Pradesh (HP)"
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Jammu and Kashmir (JK)",
+        Value = "Jammu and Kashmir (JK)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Jharkhand (JH)",
+        Value = "Jharkhand (JH)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Karnataka (KA)",
+        Value = "Karnataka (KA)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Kerala (KL)",
+        Value = "Kerala (KL)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Madhya Pradesh (MP)",
+        Value = "Madhya Pradesh (MP)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Maharashtra (MH)",
+        Value = "Maharashtra (MH)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Manipur (MN)",
+        Value = "Manipur (MN)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Meghalaya (ML)",
+        Value = "Meghalaya (ML)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Mizoram (MZ)",
+        Value = "Mizoram (MZ)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Nagaland (NL)",
+        Value = "Nagaland (NL)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "National Capital Territory of Delhi (DL)",
+        Value = "National Capital Territory of Delhi (DL)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Odisha(OR)",
+        Value = "Odisha(OR)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Punjab (PB)",
+        Value = "Punjab (PB)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Rajasthan (RJ)",
+        Value = "Rajasthan (RJ)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Sikkim (SK)",
+        Value = "Sikkim (SK)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Tamil Nadu (TN)",
+        Value = "Tamil Nadu (TN)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Tripura (TR)",
+        Value = "Tripura (TR)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Uttar Pradesh (UP)",
+        Value = "Uttar Pradesh (UP)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Uttarakhand (UK)",
+        Value = "Uttarakhand (UK)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "West Bengal (WB)",
+        Value = "West Bengal (WB)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Lakshadweep (LD)",
+        Value = "Lakshadweep (LD)",
+    });
+    listItemsst.Add(new SelectListItem
+    {
+        Text = "Pondicherry (PY)",
+        Value = "Pondicherry (PY)",
+    });
+}
+
+@{
+    List<SelectListItem> CommodityTypeList = new List<SelectListItem>();
+    CommodityTypeList.Add(new SelectListItem
+    {
+        Text = "Wheat & Rye ( WR)",
+        Value = "Wheat & Rye ( WR)"
+    });
+    CommodityTypeList.Add(new SelectListItem
+    {
+        Text = "Special Grains & Pulses (GP)",
+        Value = "Special Grains & Pulses (GP)",
+    });
+    CommodityTypeList.Add(new SelectListItem
+    {
+        Text = "Grain Storage (GS)",
+        Value = "Grain Storage (GS)",
+    });
+    CommodityTypeList.Add(new SelectListItem
+    {
+        Text = "Rice Solutions (RS)",
+        Value = "Rice Solutions (RS)",
+    });
+    CommodityTypeList.Add(new SelectListItem
+    {
+        Text = "Feed (FE)",
+        Value = "Feed (FE)",
+    });
+    CommodityTypeList.Add(new SelectListItem
+    {
+        Text = "Oil Processing (OL)",
+        Value = "Oil Processing (OL)",
+    });
+    CommodityTypeList.Add(new SelectListItem
+    {
+        Text = "Sortex (SO)",
+        Value = "Sortex (SO)"
+    });
+}
+
+@* Year Installer *@
+
+@{
+    List<SelectListItem> YearInstalled = new List<SelectListItem>();
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "Before 1990",
+        Value = "Before 1990"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "1990",
+        Value = "1990"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "1991",
+        Value = "1991"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "1992",
+        Value = "1992"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "1993",
+        Value = "1993"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "1994",
+        Value = "1994"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "1995",
+        Value = "1995"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "1996",
+        Value = "1996"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "1997",
+        Value = "1997"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "1998",
+        Value = "1998"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "1999",
+        Value = "1999"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2000",
+        Value = "2000"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2001",
+        Value = "2001"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2002",
+        Value = "2002"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2003",
+        Value = "2003"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2004",
+        Value = "2004"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2005",
+        Value = "2005"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2006",
+        Value = "2006"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2007",
+        Value = "2007"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2008",
+        Value = "2008"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2009",
+        Value = "2009"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2010",
+        Value = "2010"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2011",
+        Value = "2011"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2012",
+        Value = "2012"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2013",
+        Value = "2013"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2014",
+        Value = "2014"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2015",
+        Value = "2015"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2016",
+        Value = "2016"
+    });
+    YearInstalled.Add(new SelectListItem
+    {
+        Text = "2017",
+        Value = "2017"
+    });
+}
+
+@*color sorter supplier names list*@
+@{
+    List<SelectListItem> Colorsortersuppliernamelist = new List<SelectListItem>();
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Satake",
+        Value = "Satake",
+    });
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Milltec",
+        Value = "Milltec"
+    });
+
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Unique",
+        Value = "Unique"
+    });
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Ancoo",
+        Value = "Ancoo"
+    });
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Anzhai",
+        Value = "Anzhai"
+    });
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Orange",
+        Value = "Orange"
+    });
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Mark",
+        Value = "Mark"
+    });
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Faso",
+        Value = "Faso"
+    });
+
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Vetal",
+        Value = "Vetal"
+    });
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "QED",
+        Value = "QED"
+    });
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Taiho",
+        Value = "Taiho"
+    });
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Apple",
+        Value = "Apple"
+    });
+    Colorsortersuppliernamelist.Add(new SelectListItem
+    {
+        Text = "Buhler",
+        Value = "Buhler"
+    });
+}
+
+
+@{
+    List<SelectListItem> GMCompitator = new List<SelectListItem>();
+    GMCompitator.Add(new SelectListItem
+    {
+        Text = "Alapala, Turkey",
+        Value = "Alapala, Turkey"
+    });
+    GMCompitator.Add(new SelectListItem
+    {
+        Text = "UGUR Makina, Turkey",
+        Value = "UGUR Makina, Turkey",
+    });
+    GMCompitator.Add(new SelectListItem
+    {
+        Text = "Golfetto Sangati, Italy",
+        Value = "Golfetto Sangati, Italy",
+    });
+    GMCompitator.Add(new SelectListItem
+    {
+        Text = "Pingle Flour Machinery, China",
+        Value = "Pingle Flour Machinery, China",
+    });
+    GMCompitator.Add(new SelectListItem
+    {
+        Text = "Selis, Turkey",
+        Value = "Selis, Turkey",
+    });
+    GMCompitator.Add(new SelectListItem
+    {
+        Text = "Satake, Japan",
+        Value = "Satake, Japan",
+    });
+    GMCompitator.Add(new SelectListItem
+    {
+        Text = "Ocrim, Italy",
+        Value = "Ocrim, Italy",
+    });
+    GMCompitator.Add(new SelectListItem
+    {
+        Text = "Local",
+        Value = "Local",
+    });
+}
+
+@{
+    List<SelectListItem> GLCompitator = new List<SelectListItem>();
+    GLCompitator.Add(new SelectListItem
+    {
+        Text = "Cimberia/GSI",
+        Value = "Cimberia/GSI"
+    });
+    GLCompitator.Add(new SelectListItem
+    {
+        Text = "Fowler Westrup",
+        Value = "Fowler Westrup",
+    });
+    GLCompitator.Add(new SelectListItem
+    {
+        Text = "My Silo",
+        Value = "My Silo",
+    });
+    GLCompitator.Add(new SelectListItem
+    {
+        Text = "Milltec",
+        Value = "Milltec",
+    });
+    GLCompitator.Add(new SelectListItem
+    {
+        Text = "Petkus",
+        Value = "Petkus",
+    });
+    GLCompitator.Add(new SelectListItem
+    {
+        Text = "Damas",
+        Value = "Damas",
+    });
+    GLCompitator.Add(new SelectListItem
+    {
+        Text = "Local",
+        Value = "Local",
+    });
+}
+
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $("#Statename").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/LeadEnquiry/GettingStateNames",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.State, value: item.State };
+                            }))
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        });
+    </script>*@
+
+
+<div style="background: gray; padding-bottom: 15px; width: 1500px">
+    <p class="txtft">Single Machine Business Leads</p>
+</div>
+<div class="container" style="width: 1500px; padding-top: 3px">
+    <div style="background: #e5e5e5">
+        @using (Html.BeginForm("LECreateRevised", "LeadEnquiry", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="row" style="padding-top: 10px">
+
+                @if (TempData["date"] != null)
+                {
+                    <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["date"]</p>
+                }
+
+                @if (Session["WrongPincode"] != null)
+                {
+                    <div class="ErrorMsg">
+                        <p style="color: red; font-size: 4vh; font-weight: 900; text-align: center">@Session["WrongPincode"]</p>
+                    </div>
+                    Session["WrongPincode"] = null;
+                }
+                <div>
+                    <div style="padding-left: 40px">
+                        <table class="table " style="width: 1500px; padding-left: 30px;">
+
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Name of Collector</strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.TextBoxFor(model => model.NameofCollector, new { id = "mfrto", @class = "fntst text1", @placeholder = "Name of Collector", @required = "required" })
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Date</strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.TextBoxFor(model => model.LeadDate, new { @id = "LeadDate", @name = "LeadDate", @class = "fntst", @readonly = "readonly", Value = @ViewBag.date })
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Mill Name </strong></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @Html.TextBoxFor(model => model.MillName, new { id = "mfrto", @class = "fntst millname text1", @placeholder = "Mill Name", @required = "required" })
+                                    </div>
+                                </td>
+
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Mill Type</strong></label>
+                                    </div>
+                                    <div class="controls">
+                                        @{
+                                            List<SelectListItem> listItems1 = new List<SelectListItem>();
+                                            listItems1.Add(new SelectListItem
+                                            {
+                                                Text = "Private Limited",
+                                                Value = "Private Limited"
+                                            });
+                                            listItems1.Add(new SelectListItem
+                                            {
+                                                Text = "Government",
+                                                Value = "Government",
+                                            });
+                                            listItems1.Add(new SelectListItem
+                                            {
+                                                Text = "Public Listed",
+                                                Value = "Public Listed"
+                                            });
+                                            listItems1.Add(new SelectListItem
+                                            {
+                                                Text = "Sole Proprietorship",
+                                                Value = "Sole Proprietorship"
+                                            });
+                                            listItems1.Add(new SelectListItem
+                                            {
+                                                Text = "Others",
+                                                Value = "others1"
+                                            });
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @Html.DropDownListFor(model => model.MillType, listItems1, "-- Select Type --", new { @id = "orgty", @name = "orype", @class = "fntst", @required = "required" })
+                                        @*@Html.TextBoxFor(model => model.MillType, new { @class = "fntst", @style = "display: none", @id = "orype" , @required = "required" })*@
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Address Line 1 </strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.TextBoxFor(model => model.AddressLine1, new { id = "mfrto", @class = "fntst", @placeholder = "Address Line 1", @required = "required" })
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Address Line 2</strong></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @Html.TextBoxFor(model => model.AddressLine2, new { id = "mfrto", @class = "fntst text1", @placeholder = "Landmark ", @required = "required" })
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>State </strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.DropDownListFor(m => m.State, (SelectList)ViewData["State"], "--Select State--", new { id = "Stateid", @name = "Stateid", @required = "required" })
+                                        @Html.CheckBox("addcitypinchk", new { id = "addcitypinchk", @name = "addcitypinchk", @class = "inline", @type = "checkbox" }) To Add City and PIN Code
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Country</strong></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @Html.TextBoxFor(model => model.Country, new { id = "Country", Value = "INDIA", @class = "fntst text", @placeholder = "Enter Country", @required = "required", @readonly = "readonly" })
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr id="citypindropdown1">
+                                <td class="span2">
+                                    <div>
+                                        <label><strong>City </strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.DropDownListFor(m => m.City, (SelectList)ViewData["District"], "--Select City--", new { id = "citydrp", @required = "required" })
+                                        <input type="text" id="citytxt" name="citytxt" class="fntst text1" placeholder="City Name" style="display:none" />
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div>
+                                        <label><strong>Pin Code</strong></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @Html.DropDownListFor(m => m.Pincode, (SelectList)ViewData["PINCode"], "--Select PIN Code--", new { id = "pindrp", @required = "required" })
+                                        <input type="text" id="pincodetxt" name="pincodetxt" class="fntst inputmin input quantity keyup-limit-6" placeholder="PIN Code" style="display:none" maxlength="6" />
+                                    </div>
+                                </td>
+                            </tr>
+
+                            @*<tr id="citypintext" style="display:none">
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>City </strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            <input type="text" id="citytxt" name="citytxt" class="fntst" placeholder="City Name" />
+                                        </div>
+                                    </td>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Pin Code</strong></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="text" id="pincodetxt" name="pincodetxt" class="fntst" placeholder="PIN Code" />
+                                        </div>
+                                    </td>
+                                </tr>*@
+
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Owner Name</strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div class="controls">
+                                        @{
+                                            List<SelectListItem> listItems2 = new List<SelectListItem>();
+                                            listItems2.Add(new SelectListItem
+                                            {
+                                                Text = "Mr",
+                                                Value = "Mr"
+                                            });
+                                            listItems2.Add(new SelectListItem
+                                            {
+                                                Text = "Miss",
+                                                Value = "Miss",
+                                            });
+                                            listItems2.Add(new SelectListItem
+                                            {
+                                                Text = "Mrs",
+                                                Value = "Mrs"
+                                            });
+                                            listItems2.Add(new SelectListItem
+                                            {
+                                                Text = "Dr",
+                                                Value = "Dr"
+                                            });
+                                            listItems2.Add(new SelectListItem
+                                            {
+                                                Text = "Prof.",
+                                                Value = "Prof."
+                                            });
+                                            listItems2.Add(new SelectListItem
+                                            {
+                                                Text = "Others",
+                                                Value = "othersc1"
+                                            });
+                                        }
+
+                                    </div>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(model => model.Prefix, listItems2, "Prefix", new { @id = "cp1ty", @name = "orype", @style = "width:70px", @class = "fntst", @required = "required" })
+                                        @*@Html.TextBoxFor(model => model.Prefix, new { @class = "fntst dis", @style = "display: none;width:60px", @id = "c1" })*@
+                                    </div>
+                                    <div>
+                                        @Html.TextBoxFor(model => model.OwnerName, new { id = "mfrto", @class = "fntst text1", @placeholder = "Owner Name", @required = "required" })
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Mobile Number</strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.TextBoxFor(model => model.MobNo, new { id = "mfrto", @class = "fntst inputmin input quantity keyup-limit-10", @required = "required", @placeholder = "Enter Mobile Number", @maxlength = 10, @minlength = 10 })
+                                        @Html.ValidationMessageFor(m => m.MobNo)
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Email ID</strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.TextBoxFor(model => model.EmailId, new { id = "mfrto", @class = "fntst keyup-email", @placeholder = "Enter EmailId", @required = "required" })
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Telephone Number</strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        <span>
+                                            +@Html.TextBoxFor(model => model.Isd, new { id = "isd1", @Value = "91", @type = "number", @class = "input-mini3 fntst", @placeholder = "ISD" })
+                                            @Html.ValidationMessageFor(model => model.Isd)
+                                        </span>
+                                        <span>
+                                            @Html.TextBoxFor(model => model.Std, new { id = "std1", @type = "number", @class = "input-mini3 fntst", @placeholder = "STD" })
+                                            @Html.ValidationMessageFor(model => model.Std)
+                                        </span>
+                                        <span>
+                                            @Html.TextBoxFor(model => model.TelNo, new { id = "telno", @class = "input-medium1 fntst quantity", @placeholder = "Number", @maxlength = 8 })
+                                            @Html.ValidationMessageFor(model => model.TelNo)
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <hr style="border: solid;" />
+
+                    <div style="padding-left: 40px">
+                        <table class="table " style="width: 1500px; padding-left: 30px;">
+                            <tr>
+                                <td class="span3">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <strong>Business Unit :</strong> &nbsp;
+                                        @Html.DropDownListFor(model => model.CommodityType, CommodityTypeList, "--Business Unit--", new { @id = "CommodityTypedrp", @name = "CommodityTypedrp", @style = "width:250px", @class = "fntst", @required = "required" })
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <hr style="border: solid;" />
+
+                    <div style="padding-left: 40px;display:none;" id="EnquiryTypeDiv1">
+                        <table class="table " style="width: 1500px;padding-left:60px">
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Enquiry Type </strong>Machinery Required for</label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.CheckBoxFor(m => m.EnquiryTypeExistingMill, new { id = "etexisting", @name = "etexisting", @class = "inline", @type = "checkbox" }) An Existing Mill
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        @Html.CheckBoxFor(m => m.EnquiryTypeNewMill, new { id = "newmill", @name = "newmill", @class = "inline", @type = "checkbox" }) A New Mill
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.CheckBoxFor(m => m.EnquiryTypeCustomerServiceUpgrade, new { id = "custservice", @name = "custservice", @class = "inline", @type = "checkbox" })Customer Service/Upgrade Option
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Type of Mill</strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.CheckBoxFor(m => m.TypeOfMillPaddytoRice, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" })Paddy to Rice
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        @Html.CheckBoxFor(m => m.TypeOfMillBrownRiceToWhiteRice, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" }) Brown Rice to White Rice
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.CheckBoxFor(m => m.TypeOfMillReprocess, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" })Re-Processing (White to White)
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Type of Paddy to be Process</strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.CheckBoxFor(m => m.TypeOfPaddyProcessLongGrain, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" }) Long Grain
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        @Html.CheckBoxFor(m => m.TypeOfPaddyProcessMediumGrain, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" }) Medium Grain
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.CheckBoxFor(m => m.TypeOfPaddyProcessRountGrain, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" })Round Grain
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Conditioning</strong></label>
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div>
+                                        @Html.CheckBoxFor(m => m.ConditioningRaw, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" }) Raw
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        @Html.CheckBoxFor(m => m.ConditioningSteamed, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" }) Steamed
+                                    </div>
+                                </td>
+                                <td class="span8">
+                                    <div>
+                                        @Html.CheckBoxFor(m => m.ConditioningParBoiled, new { id = "chkparboiled", @name = "chkparboiled", @class = "inline", @type = "checkbox" })Par Boiled
+                                        @*&nbsp; Paddy Moisture &nbsp;
+                                            @Html.TextBoxFor(m => m.ConditioningParBoiledPaddyMoisture, new {id="txtparboiledmoisture",@name="txtparboiledmoisture", @style="width:50px",@disabled="disabled" }) %, &nbsp; Bulk Density @Html.TextBoxFor(m => m.ConditioningParBoiledBulkDensity, new {id="txtparboileddensity",@name="txtparboiledmoisture", @style="width:50px" ,@disabled="disabled"}) &nbsp;kgs/m3*@
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        <label><strong>Paddy Variety</strong></label>
+                                    </div>
+                                </td>
+                                <td class="span3">
+                                    <div>
+                                        @Html.CheckBoxFor(m => m.PaddyVarietyBasmati, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" }) Basmati
+                                    </div>
+                                </td>
+                                <td class="span2">
+                                    <div style="text-align: left; vertical-align: middle;">
+                                        @Html.CheckBoxFor(m => m.PaddyVarietyNonBasmati, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" }) Non-Basmati
+                                    </div>
+                                </td>
+                                @*<td class="span3">
+                                        <div>
+                                            Variety Name: &nbsp;@Html.TextBoxFor(m => m.ConditioningParBoiledBulkDensity, new {id="buyldensity" , @class="fntst"})
+                                        </div>
+                                    </td>*@
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <hr style="border: solid; display: none;" id="line1" />
+
+                    <div id="hideonnewmill">
+                        <div id="compitator" style="padding-left:40px">
+                            <div class="pulseShow" style="text-align: left;display: none" id="div_GMCompitator">
+                                <strong>Compitator:</strong> &nbsp;@Html.DropDownListFor(m => m.GMCompitator, GMCompitator, "--Select--", new { @id = "GMCompitator", @name = "GMCompitator" })
+                            </div>
+                            <div class="pulseShow" style="text-align: left;display: none" id="div_GLCompitator">
+                                <strong>Compitator:</strong> &nbsp;@Html.DropDownListFor(m => m.GLCompitator, GLCompitator, "--Select--", new { @id = "GLCompitator", @name = "GLCompitator" })
+                            </div>
+                        </div>
+                        <div style="display: none;padding-right:50px;" id="ExistingMillDetailsDiv2">
+                            <table class="table " style="width: 1500px;">
+
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Existing Mill Details </strong></label>
+                                        </div>
+                                    </td>
+                                    @* <td class="span2">
+                                            <div>
+                                                <strong>Processing Capacity: @Html.CheckBoxFor(m => m.EMDProcessingCapacityMill, new { id = "chkmill", @name = "chkmill", @class = "inline", @type = "checkbox" }) Mill &nbsp;@Html.TextBoxFor(m => m.EMDProcessingCapacityMillTPH, new { id = "txtmilltph", @name = "txtmilltph", @disabled = "disabled", @class = "fntst", @style = "width:60px" })&nbsp;TPH,
+                                            </div>
+                                        </td>*@
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <strong>Mill Operating Details :</strong> &nbsp;@Html.TextBoxFor(m => m.EMDMillOperatingDetailsHoursPerDay, new { id = "buyldensity", @class = "fntst quantity", @style = "width:60px" })&nbsp; Hrs/Day.
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        @*capacity*@
+                                        <div class="pulseShow" style="text-align: left;display: none" id="capacity">
+                                            <strong>Capacity:</strong> &nbsp;@Html.DropDownListFor(m => m.Capacity, list3, "--Select--", new { @id = "capcty", @name = "capcty" })
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                @*<tr>
+                                        <td class="span3">
+                                            <div style="text-align: left; vertical-align: middle;">
+                                                @Html.CheckBoxFor(m => m.PreCleaningCapacity, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" }) &nbsp;Pre-Cleaning Capacity
+                                            </div>
+                                        </td>
+                                        <td class="span2">
+                                            <div>
+                                                @Html.CheckBoxFor(m => m.TPH2025, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" }) 20-25 TPH
+                                            </div>
+                                        </td>
+                                        <td class="span2">
+                                            <div>
+                                                @Html.CheckBoxFor(m => m.TPH4050, new { id = "paddytorice", @name = "paddytorice", @class = "inline", @type = "checkbox" }) 40-50 TPH
+                                            </div>
+                                        </td>
+                                        <td class="span3">
+                                            <div style="text-align: left; vertical-align: middle;">
+                                                @Html.CheckBoxFor(m => m.Others, new { id = "chkothers", @name = "chkothers", @class = "inline", @type = "checkbox" })<strong>Others :</strong> &nbsp;@Html.TextBoxFor(m => m.OthersTPH, new { id = "txtotherstph", @name = "txtotherstph", @disabled = "disabled", @style = "width:60px" })&nbsp; TPH.
+                                            </div>
+                                        </td>
+                                    </tr>*@
+
+                                @*<tr>
+                                        <td class="span2">
+                                            <div style="text-align: left; vertical-align: middle;">
+                                                Paddy Storage (Silos)
+                                            </div>
+                                        </td>
+                                        <td class="span3">
+                                            <div>
+                                        @Html.TextBoxFor(m => m.PaddyStorageMTTotal, new { id = "paddytorice", @name = "paddytorice",@style="width:60px" }) MT Total
+                                            </div>
+                                        </td>
+                                        <td class="span5">
+                                            <div>
+                                    Total @Html.TextBoxFor(m => m.TotalMT, new { id = "paddytorice", @name = "paddytorice",@style="width:60px" }) &nbsp; MT each X @Html.TextBoxFor(m => m.NoOfSilos, new { id = "paddytorice", @name = "paddytorice",@style="width:60px" }) No of Silos.
+                                            </div>
+                                        </td>
+                                    </tr>*@
+
+                                <tr>
+                                    <td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Mill Details</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span4">
+                                        <div>
+                                            Existing Mill Supplier
+                                            @Html.DropDownListFor(model => model.MillDetailsSuppliersName, suppliername, "--Suppliers Names--", new { @id = "MillDetailsSuppliersName", @name = "MillDetailsSuppliersName", @class = "fntst" })
+                                        </div>
+                                    </td>
+                                    <td class="span3">
+                                        <div>
+                                            Year Installed@* @Html.TextBoxFor(m => m.YearInstalled, new { id = "paddytorice", @name = "paddytorice", @style = "width:60px" })*@
+                                            @Html.DropDownListFor(model => model.YearInstalled, YearInstalled, "--Year Installed--", new { @id = "YearInstalled", @name = "YearInstalled", @style = "width:150px", @class = "fntst" })
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                @* <tr>*@
+                                @*<td class="span2">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label><strong>Cleaning Section / Make</strong></label>
+                                        </div>
+                                    </td>
+                                    <td class="span6">
+                                        <div>
+                                            @Html.CheckBoxFor(m => m.Cleaner, new { id = "Cleaner", @name = "Cleaner" })&nbsp; Cleaner &nbsp;@Html.TextBoxFor(m => m.CleanerNo, new { id = "CleanerNo", @name = "CleanerNo", @disabled = "disabled", @style = "width:60px" }) &nbsp;@Html.CheckBoxFor(m => m.Magnet, new { id = "Magnet", @name = "Magnet" })&nbsp; Magnet &nbsp;@Html.TextBoxFor(m => m.MagnetNo, new { id = "MagnetNo", @name = "MagnetNo", @disabled = "disabled", @style = "width:60px" }) &nbsp;@Html.CheckBoxFor(m => m.DeStoner, new { id = "DeStoner", @name = "DeStoner" })&nbsp; De-Stoner &nbsp;@Html.TextBoxFor(m => m.DeStonerNo, new { id = "DeStonerNo", @name = "DeStonerNo", @disabled = "disabled", @style = "width:60px" })
+                                        </div>
+                                    </td>*@
+                                @*<td class="span3">
+                                        <div>
+                                     @Html.CheckBoxFor(m => m.MillSectionHullSeperate, new { id = "chkhullseperate", @name = "chkhullseperate" }) Hull Seperator @Html.TextBoxFor(m => m.MillSectionHullSeperateNos, new { id = "txthullno", @name = "txthullno",@disabled="disabled",@style="width:60px" }) Nos.
+                                        </div>
+                                    </td>*@
+                                @* </tr>*@
+
+                                @* <tr>
+                                        <td class="span2">
+                                            <div style="text-align: left; vertical-align: middle;">
+                                                <label><strong>Mill Section Details</strong></label>
+                                            </div>
+                                        </td>
+                                        <td class="span4">
+                                            <div>
+                                                @Html.CheckBoxFor(m => m.MillSectionHuller, new { id = "chkhuller", @name = "chkhuller" })&nbsp; Huller &nbsp;@Html.TextBoxFor(m => m.MillSectionNos, new { id = "txthellernos", @name = "txthellernos", @disabled = "disabled", @style = "width:60px" }) Nos,&nbsp;
+                                                @Html.TextBoxFor(m => m.MillSectionKW, new { id = "txthellerkw", @name = "txthellerkw",@disabled="disabled",@style="width:60px" }) KW.
+                                            </div>
+                                        </td>
+                                        <td class="span3">
+                                            <div>
+                                                @Html.CheckBoxFor(m => m.MillSectionHullSeperate, new { id = "chkhullseperate", @name = "chkhullseperate" }) Hull Seperator @Html.TextBoxFor(m => m.MillSectionHullSeperateNos, new { id = "txthullno", @name = "txthullno", @disabled = "disabled", @style = "width:60px" }) Nos.
+                                            </div>
+                                        </td>
+                                    </tr>*@
+
+                            </table>
+                        </div>
+
+                        <div style="display: none;" id="SectionsDiv3">
+                            <table class="table" style="width: 1350px;">
+                                <tr>
+                                    @* <td class="span7">
+                                            <div style="text-align: left; vertical-align: middle;">
+                                                @Html.CheckBoxFor(m => m.PaddyTable, new { id = "chkpaddytbl", @name = "chkpaddytbl" }) &nbsp;Paddy Table &nbsp;@Html.TextBoxFor(m => m.PaddyTableNos, new { id = "txtpaddytblnos", @name = "txtpaddytblnos", @disabled = "disabled" }) &nbsp; Nos.
+                                            </div>
+                                        </td>*@
+                                    @*<td class="span7">
+                                            <div>
+                                        @Html.CheckBoxFor(m => m.ThinThickGrader, new { id = "chkthinthickgrade", @name = "chkthinthickgrade" }) Thin/Thick Grader @Html.TextBoxFor(m => m.ThinThickGraderNos, new { id = "txtthinthickgradeno", @name = "txtthinthickgradeno", @disabled="disabled" ,@style="width:60px"}) &nbsp; Nos.@Html.TextBoxFor(m => m.ThinThickGraderDumps, new { id = "txtthinthickgradedrums", @name = "txtthinthickgradedrums" , @disabled="disabled",@style="width:60px"}) &nbsp; Drums Each.
+                                            </div>
+                                        </td>*@
+                                </tr>
+
+                                <tr>
+                                    <td class="span6">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <strong>
+                                                Whitener Section :
+                                            </strong>@Html.CheckBoxFor(m => m.Whitner, new { id = "chkwhitner", @name = "chkwhitner" }) &nbsp;Whitener @Html.TextBoxFor(m => m.WhitnerNos, new { id = "txtwhitnerno", @name = "txtwhitnerno", @disabled = "disabled", @style = "width:60px" })&nbsp; Nos, &nbsp; @Html.TextBoxFor(m => m.WhitnerKW, new { id = "txtwhitnerkw", @name = "txtwhitnerkw", @disabled = "disabled", @style = "width:60px" }) &nbsp; KW  &nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <strong>
+                                                Whitener Supplier Name :
+
+                                            </strong> @Html.DropDownListFor(model => model.WhitenerSupplierName, suppliername, "--Suppliers Names--", new { @id = "WhitenerSupplierName", @name = "WhitenerSupplierName", @class = "fntst" })
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <strong>Year Installed :</strong>
+                                            @Html.DropDownListFor(model => model.WhitnerYear, YearInstalled, "--Year Installed--", new { @id = "WhitnerYear", @name = "WhitnerYear", @style = "width:150px", @class = "fntst" })
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="span8">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <strong>Huller Section : </strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  @Html.CheckBoxFor(m => m.Huller, new { id = "chkhusker", @name = "chkhusker" }) &nbsp;Huller &nbsp;@Html.TextBoxFor(m => m.HullerNos, new { id = "txthuskerno", @name = "txthuskerno", @disabled = "disabled", @style = "width:60px" }) &nbsp; Nos, &nbsp;@Html.TextBoxFor(m => m.HullerKW, new { id = "txthuskerkw", @name = "txthuskerkw", @disabled = "disabled", @style = "width:60px" }) &nbsp; KW  &nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <strong>Huller Supplier Name :</strong>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;@Html.DropDownListFor(model => model.HullerSupplierName, suppliername, "--Suppliers Names--", new { @id = "HullerSupplierName", @name = "HullerSupplierName", @class = "fntst" })
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <strong>Year Installed :</strong> @Html.DropDownListFor(model => model.HullerYear, YearInstalled, "--Year Installed--", new { @id = "HullerYear", @name = "HullerYear", @style = "width:150px", @class = "fntst" })
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="span8">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <strong>Polisher Section : </strong>@Html.CheckBoxFor(m => m.Polisher, new { id = "chkpolisher", @name = "chkpolisher" }) &nbsp;Polisher &nbsp;@Html.TextBoxFor(m => m.PolisherNos, new { id = "txtpolisherno", @name = "txtpolisherno", @disabled = "disabled", @style = "width:60px" }) &nbsp; Nos, &nbsp;@Html.TextBoxFor(m => m.PolisherKW, new { id = "txtpolisherkw", @name = "txtpolisherkw", @disabled = "disabled", @style = "width:60px" }) &nbsp; KW  &nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <strong>Polisher Supplier Name :</strong> &nbsp;&nbsp; @Html.DropDownListFor(model => model.PolisherSupplierName, suppliername, "--Suppliers Names--", new { @id = "PolisherSupplierName", @name = "PolisherSupplierName", @class = "fntst" })
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <strong>Year Installed :</strong> @Html.DropDownListFor(model => model.PolisherYear, YearInstalled, "--Year Installed--", new { @id = "PolisherYear", @name = "PolisherYear", @style = "width:150px", @class = "fntst" })
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="pulseShow" style="text-align: left; vertical-align: middle;" id="sorter1">
+
+                                            @*@Html.CheckBoxFor(m => m.ColorSorter, new { id = "chkcolorsorter", @name = "chkcolorsorter" }) &nbsp;1.Color Sorter *@
+                                            @*@Html.TextBoxFor(m => m.ColorSorterMake, new { id = "txtcolorsortermake", @name = "txtcolorsortermake", @disabled = "disabled", @style = "width:60px" }) Make &nbsp;*@
+
+                                            @Html.TextBoxFor(m => m.ColorSorterChannels, new { id = "txtcolorsorterchannels", @name = "txtcolorsorterchannels", @style = "width:60px" }) Channels
+
+                                            @* &nbsp;@Html.TextBoxFor(m => m.ColorSorterPrimary, new { id = "txtcolorsorterprimary", @name = "txtcolorsorterprimary", @disabled = "disabled", @style = "width:60px" }) Primary&nbsp;@Html.TextBoxFor(m => m.ColorSorterSecondary, new { id = "txtcolorsortersecondary", @name = "txtcolorsortersecondary", @disabled = "disabled", @style = "width:60px" }) Secondary &nbsp;@Html.TextBoxFor(m => m.ColorSorterTertiary, new { id = "ColorSorterTertiary", @name = "ColorSorterTertiary", @style = "width:60px", @disabled = "disabled" }) Tertiary*@.
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                            <strong>Color Sorter 1 Supplier Name :</strong> &nbsp;&nbsp; @Html.DropDownListFor(model => model.ColorSorterSupplierName, Colorsortersuppliernamelist, "--Suppliers Names--", new { @id = "ColorSorterSupplierName", @name = "ColorSorterSupplierName", @class = "fntst" })
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <strong>Year Installed :</strong> @Html.DropDownListFor(model => model.ColorSorter1Year, YearInstalled, "--Year Installed--", new { @id = "ColorSorter1Year", @name = "ColorSorter1Year", @style = "width:150px", @class = "fntst" })
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="span3">
+                                        <div class="pulseShow" style="text-align: left; vertical-align: middle;" id="sorter2">
+
+                                            @*@Html.CheckBoxFor(m => m.ColorSorter1, new { id = "chkcolorsorter1", @name = "chkcolorsorter1" }) &nbsp;2.Color Sorter *@
+                                            @*@Html.TextBoxFor(m => m.ColorSorterMake1, new { id = "txtcolorsortermake1", @name = "txtcolorsortermake1", @disabled = "disabled", @style = "width:60px" }) Make &nbsp;*@
+
+                                            @Html.TextBoxFor(m => m.ColorSorterChannels1, new { id = "txtcolorsorterchannels1", @name = "txtcolorsorterchannels1", @style = "width:60px" }) Channels
+
+                                            @*&nbsp;@Html.TextBoxFor(m => m.ColorSorterPrimary1, new { id = "txtcolorsorterprimary1", @name = "txtcolorsorterprimary1", @disabled = "disabled", @style = "width:60px" }) Primary&nbsp;@Html.TextBoxFor(m => m.ColorSorterSecondary1, new { id = "txtcolorsortersecondary1", @name = "txtcolorsortersecondary1", @disabled = "disabled", @style = "width:60px" }) Secondary &nbsp;@Html.TextBoxFor(m => m.ColorSorterTertiary1, new { id = "ColorSorterTertiary1", @name = "ColorSorterTertiary1", @style = "width:60px" , @disabled = "disabled"}) Tertiary*@.
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                            <strong>Color Sorter 2 Supplier Name :</strong> &nbsp;&nbsp; @Html.DropDownListFor(model => model.ColorSorter1SupplierName, Colorsortersuppliernamelist, "--Suppliers Names--", new { @id = "ColorSorter1SupplierName", @name = "ColorSorter1SupplierName", @class = "fntst" })
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <strong>Year Installed :</strong> @Html.DropDownListFor(model => model.ColorSorter2Year, YearInstalled, "--Year Installed--", new { @id = "ColorSorter2Year", @name = "ColorSorter2Year", @style = "width:150px", @class = "fntst" })
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                @*<tr>
+                                        <td class="span3">
+                                            <div style="text-align: left; vertical-align: middle;">
+                                                @Html.CheckBoxFor(m => m.PackingMachine, new { id = "chkpackmachine", @name = "chkpackmachine" }) &nbsp;Packing Machine @Html.TextBoxFor(m => m.PackingMachineMake, new { id = "txtpackmachinemake", @name = "txtpackmachinemake",@disabled="disabled",@style="width:60px" }) Make &nbsp;@Html.TextBoxFor(m => m.PackingMachineNos, new { id = "txtpackmachinenos", @name = "txtpackmachinenos",@disabled="disabled",@style="width:60px" }) Nos, Pack Sizes &nbsp;@Html.TextBoxFor(m => m.PackingMachineKgs1, new { id = "txtpackmachinekg1", @name = "txtpackmachinekg1",@disabled="disabled",@style="width:60px" }) Kgs&nbsp;@Html.TextBoxFor(m => m.PackingMachineKgs2, new { id = "txtpackmachinekg2", @name = "txtpackmachinekg2",@disabled="disabled",@style="width:60px" }) Kgs. &nbsp; Brand Names @Html.TextBoxFor(m => m.PackingMachineBrandName, new { id = "txtpackmachinebrandname", @name = "txtpackmachinebrandname",@disabled="disabled",@style="width:60px" })
+                                            </div>
+                                        </td>
+                                    </tr>*@
+
+                                @*<tr>
+                                        <td class="span2">
+                                            <div style="text-align: left; vertical-align: middle;">
+                                                Plant Automation type @Html.CheckBoxFor(m => m.PlantAutomationTypeRelayOrPLCBased, new { id = "chkreplaybasedplc", @name = "chkreplaybasedplc" }) Relay based / PLC based control Panel  &nbsp;@Html.TextBoxFor(m => m.PlantAutomationTypeRelayOrPLCBasedMake, new { id = "txtreplaybasedplcmake", @name = "txtreplaybasedplcmake",@disabled="disabled",@style="width:60px" }) Make.
+                                            </div>
+                                        </td>
+                                    </tr>*@
+                            </table>
+                        </div>
+
+                    </div>
+                    @*<div style="display: none;" id="SectionsDiv3a">
+                            <table class="table" style="width: 1350px;">
+                                <tr>
+                                    <td>
+                                        <div style="text-align: left; vertical-align: middle;">
+                                           @Html.CheckBoxFor(m => m.Whitner, new { id = "chkwhitner", @name = "chkwhitner" }) &nbsp;<strong>Whitener </strong> @Html.TextBoxFor(m => m.WhitnerNos, new { id = "txtwhitnerno", @name = "txtwhitnerno", @disabled = "disabled", @style = "width:60px" })&nbsp; Nos, &nbsp; @Html.TextBoxFor(m => m.WhitnerKW, new { id = "txtwhitnerkw", @name = "txtwhitnerkw", @disabled = "disabled", @style = "width:60px" }) &nbsp; KW  &nbsp;
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            @Html.CheckBoxFor(m => m.Huller, new { id = "chkhusker", @name = "chkhusker" }) &nbsp;<strong>Huller</strong> &nbsp;@Html.TextBoxFor(m => m.HullerNos, new { id = "txthuskerno", @name = "txthuskerno", @disabled = "disabled", @style = "width:60px" }) &nbsp; Nos, &nbsp;@Html.TextBoxFor(m => m.HullerKW, new { id = "txthuskerkw", @name = "txthuskerkw", @disabled = "disabled", @style = "width:60px" }) &nbsp; KW  &nbsp;
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            @Html.CheckBoxFor(m => m.Polisher, new { id = "chkpolisher", @name = "chkpolisher" }) &nbsp;<strong>Polisher </strong> &nbsp;@Html.TextBoxFor(m => m.PolisherNos, new { id = "txtpolisherno", @name = "txtpolisherno", @disabled = "disabled", @style = "width:60px" }) &nbsp; Nos, &nbsp;@Html.TextBoxFor(m => m.PolisherKW, new { id = "txtpolisherkw", @name = "txtpolisherkw", @disabled = "disabled", @style = "width:60px" }) &nbsp; KW  &nbsp;
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>*@
+
+                    <hr style="border: solid; display: none;" id="line2" />
+
+                    <div style="padding-right:120px">
+                        @* customer requirement *@
+                        <div id="CustomerRequirementSection">
+                            <table class="table" style="width: 1500px;">
+                                <tr>
+                                    <td colspan="4">
+                                        <div style="text-align: left; vertical-align: middle;">
+                                            <label>
+                                                <strong>Customer Requirements Now </strong>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        @Html.DropDownListFor(m => m.CustReqYeorsNo, list2, "--Select--", new { @id = "yesorno", @name = "yesorno" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        @*capacity*@
+                        @*<div class="controls-row">
+                                <div class="table" style="width: 900px; margin: 0 auto; display: none" id="capacity">
+                                    <table>
+                                        <tr>
+                                            <td>Capacity:@Html.DropDownListFor(m => m.Capacity, list3, "--Select--", new { @id = "capcty", @name = "capcty" })
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>*@
+
+                        @*type of req*@
+                        <div class="controls-row">
+                            <div id="typeofrequirement" class="table" style="width: 900px; margin: 0 auto; display: none">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Type Of Requirement:@Html.DropDownListFor(m => m.TypeOfReq, list4, "--Select--", new { @id = "typeofreq", @name = "typeofreq" })
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        @*type of req only Sorter*@
+                        <div class="controls-row">
+                            <div id="typeofrequirement1" class="table" style="width: 900px; margin: 0 auto; display: none">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Type Of Requirement: &nbsp&nbsp
+                                            @Html.TextBoxFor(m => m.TypeOfReq, new { @id = "txttypeofreq", @name = "txttypeofreq", @Value = "Sorters", @readonly = "readonly" })
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        @*machines*@
+                        <div class="controls-row">
+                            <div id="machines" class="table" style="width: 900px; margin: 0 auto; display: none">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Machines:	@Html.CheckBoxFor(m => m.MachineClassifier, new { @id = "MachineClassifier", @name = "MachineClassifier" }) Classifier &nbsp; @Html.CheckBoxFor(m => m.MachineDestoner, new { @id = "MachineDestoner", @name = "MachineDestoner" }) Destoner &nbsp;@Html.CheckBoxFor(m => m.MachineHullerSeperator, new { @id = "MachineHullerSeperator", @name = "MachineHullerSeperator" }) Huller & Seperator &nbsp; @Html.CheckBoxFor(m => m.MachinePaddySeperator, new { @id = "MachinePaddySeperator", @name = "MachinePaddySeperator" }) Paddy Seperator
+                                            <br />
+                                            <br />
+                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                            @Html.CheckBoxFor(m => m.MachineThickThinGrader, new { @id = "MachineThickThinGrader", @name = "MachineThickThinGrader" }) Thick/Thin Grader &nbsp; @Html.CheckBoxFor(m => m.MachineWhitner, new { @id = "MachineWhitner", @name = "MachineWhitner" }) Whitner &nbsp;@Html.CheckBoxFor(m => m.MachinePolisher, new { @id = "MachinePolisher", @name = "MachinePolisher" }) Polisher &nbsp; @Html.CheckBoxFor(m => m.MachineSorter, new { @id = "MachineSorter", @name = "MachineSorter" }) Sorter
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="machines_gm" class="table" style="padding-left:60px;display:none">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Machines:	@Html.CheckBoxFor(m => m.MachineClassifierMTRA, new { @id = "MachineClassifierMTRA", @name = "MachineClassifierMTRA" }) Classifier(MTRA) &nbsp; @Html.CheckBoxFor(m => m.MachineDestonerMTSC, new { @id = "MachineDestonerMTSC", @name = "MachineDestonerMTSC" }) Destoner(MTSC) &nbsp;@Html.CheckBoxFor(m => m.MachineScourerMHXF, new { @id = "MachineScourerMHXF", @name = "MachineScourerMHXF" })Scourer(MHXF) &nbsp; @Html.CheckBoxFor(m => m.MachineAspirationChannelMVSE, new { @id = "MachineAspirationChannelMVSE", @name = "MachineAspirationChannelMVSE" }) Aspiration Channel(MVSE)
+                                            <br />
+                                            <br />
+                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                            @Html.CheckBoxFor(m => m.MachineDampenerMOZJ, new { @id = "MachineDampenerMOZJ", @name = "MachineDampenerMOZJ" }) Dampener(MOZJ) &nbsp; @Html.CheckBoxFor(m => m.MachineDampenerMOZL, new { @id = "MachineDampenerMOZL", @name = "MachineDampenerMOZL" }) Dampener(MOZL) &nbsp;@Html.CheckBoxFor(m => m.MachineAutomaticMoistureControlMYFE, new { @id = "MachineAutomaticMoistureControlMYFE", @name = "MachineAutomaticMoistureControlMYFE" }) Automatic Moisture Control(MYFE) &nbsp; @Html.CheckBoxFor(m => m.MachineRollerMillMDDK, new { @id = "MachineRollerMillMDDK", @name = "MachineRollerMillMDDK" }) RollerMill(MDDK) &nbsp; @Html.CheckBoxFor(m => m.MachinePurifierMQRF, new { @id = "MachinePurifierMQRF", @name = "MachinePurifierMQRF" }) Purifier(MQRF)
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div id="machines_gl" class="table" style="padding-left:60px;display:none">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Machines:	@Html.CheckBoxFor(m => m.PreCleanerClassifierTAS152, new { @id = "PreCleanerClassifierTAS152", @name = "PreCleanerClassifierTAS152" }) PreCleanerClassifier(TAS-152) &nbsp; @Html.CheckBoxFor(m => m.DrumSieveMKZM9510, new { @id = "DrumSieveMKZM9510", @name = "DrumSieveMKZM9510" }) DrumSieve(MKZM-9510) &nbsp;@Html.CheckBoxFor(m => m.PreCleanerClassifierLKGA20, new { @id = "PreCleanerClassifierLKGA20", @name = "PreCleanerClassifierLKGA20" })PreCleanerClassifier(LKGA-20) &nbsp;
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        @*time frame*@
+                        <div class="controls-row">
+                            <div id="timeframe" class="table" style="width: 900px; margin: 0 auto; display: none">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Follow Up:  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                            @Html.DropDownListFor(m => m.TimeFrame, list5, "--Select--", new { @id = "TimeFrame", @name = "TimeFrame" })
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="HandledByandComments" style="padding-left:60px">
+                        <div id="EnquiryHandledByc" style="vertical-align: middle;">
+                            <label>
+                                Enquiry Handled By : &nbsp&nbsp&nbsp&nbsp
+                                @*@Html.TextBoxFor(m => m.EnquiryHandledBy, new { id = "EnquiryHandledBy", @name = "EnquiryHandledBy", @style = "width:250px", Value = @ViewBag.CPName })*@
+                                @Html.DropDownListFor(m => m.EnquiryHandledBy, EnquiryHandledByList, "--Select--", new { id = "EnquiryHandledBy", @name = "EnquiryHandledBy", @style = "width:250px" })
+
+                            </label>
+                        </div>
+
+                        <div id="SorterModelc" style="vertical-align: middle;">
+                            <label>
+                                Sorter Models : &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                @Html.DropDownListFor(m => m.SorterModel, ModelSelectionList, "--Select--", new { id = "SorterModel", @name = "SorterModel", @style = "width:250px" })
+                            </label>
+                        </div>
+
+                        <div id="" style="vertical-align: middle;">
+                            <label>
+                                Visit Date : &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                @Html.TextBoxFor(model => model.VisitDate, new { @id = "VisitDate", @name = "VisitDate", @class = "fntst sss", @required = "required" })
+                            </label>
+                        </div>
+
+                        <div id="QuotesToBeSubmittedc" style="vertical-align: middle;">
+                            <label>
+                                Quote Submitted :
+                                @Html.DropDownListFor(m => m.QuotesToBeSubmitted, list2, "--Select--", new { @id = "QuotesToBeSubmitted", @name = "QuotesToBeSubmitted" })
+                            </label>
+                        </div>
+
+                        <div style="vertical-align: middle;">
+                            <label>
+                                Comments /Next Action Expected: @Html.TextBoxFor(m => m.CommentsActionExpected, new { id = "paddytorice", @name = "paddytorice", @style = "width:850px" })
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="span10 pad ">
+                        <div class="span3 cent">
+                            <input type="submit" id="btnapproval" name="btnapproval" value="Save" class="btn btn-large btn-success" />
+                        </div>
+                    </div>
+
+                    <!--End Of Buttons-->
+                </div>
+            </div>
+                                            }
+    </div>
+</div>
+
+
+@*to get district and pincode*@
+<script type="text/Javascript">
+    $(document).ready(function () {
+        $('#Stateid').change(function (e) {
+            e.preventDefault();
+            var url = '@Url.Action("GettingDistrict")';
+            var masprd = $('#Stateid option:selected').text();
+            $.post(url, { prdts: masprd }, function (data) {
+                var items = [];
+                items.push("<option>--Select District--</option>");
+                $.each(data, function () {
+                    items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
+                });
+                $("#citydrp").prop("required", true);
+                $("#citydrp").html(items.join(' '));
+            });
+        });
+    });
+</script>
+
+
+<script type="text/Javascript">
+    $(document).ready(function () {
+
+        var No = 'No';
+
+        $("#CustomerRequirementSection").attr("style", "display:block;padding-left:60px");
+        $('#yesorno option[value=' + No + ']').prop('selected', 'selected');
+        setTimeout(function () {
+            $('#yesorno').trigger("change");
+            //alert()
+        }, 500);
+        //alert(City)
+        //setTimeout(function () {
+
+        //    $('#citydrp option[value=' + City + ']').prop('selected', 'selected');
+        //    $('#citydrp').trigger("change");
+        //}, 500);
+
+        //setTimeout(function () {
+        //    $('#pindrp option[value=' + Pincode + ']').prop('selected', 'selected');
+        //}, 700);
+        //alert(2)
+    });
+</script>
+
+
+
+
+
+
+
+<script type="text/Javascript">
+    $(document).ready(function () {
+        $('#citydrp').change(function (e) {
+            e.preventDefault();
+            var url = '@Url.Action("GettingPINCode")';
+            var masprd = $('#citydrp option:selected').text();
+            $.post(url, { prdts: masprd }, function (data) {
+                var items = [];
+                items.push("<option>--Select PIN Code--</option>");
+                $.each(data, function () {
+                    items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
+                });
+                $("#pindrp").prop("required", true);
+                $("#pindrp").html(items.join(' '));
+
+            });
+        });
+    });
+</script>
+
+@*div hiding and displaying*@
+<script type="text/Javascript">
+    $(document).ready(function () {
+        $("#yesorno").change(function () {
+            //alert()
+            var counter = document.getElementById("yesorno").value;
+            var cmdtyp = $('#CommodityTypedrp option:selected').text();
+            if (counter == 'Yes') {
+                //$("#capacity").attr("style", "display:block;padding-left:60px");
+                $("#timeframe").attr("style", "display:block;padding-left:60px");
+                $("#typeofrequirement").attr("style", "display:block;padding-left:60px");
+                $("#QuotesToBeSubmittedc").attr("style", "display:block");
+                $("#EnquiryHandledByc").attr("style", "display:block");
+                $("#machines").attr("style", "padding-left:60px");
+
+                // $("#SorterModelc").attr("style", "display:block;");//code added by sneha 17th July 2017
+                //$("#machines").attr("style", "display:block");
+
+                //make these fields required
+                // $("#capcty").attr("required", "required");
+                $("#typeofreq").attr("required", "required");
+                $("#TimeFrame").attr("required", "required");
+                $("#EnquiryHandledBy").attr("required", "required");
+                //alert(cmdtyp);
+                if (cmdtyp == 'Pulses') {
+                    $("#machines").hide();
+                    $('#typeofreq').val('Sorters');
+                    $('#typeofreq').attr("disabled", true);
+                    $("#SorterModelc").attr("style", "display:block;");//code added by sneha 17th July 2017
+                    $("#machines_gl").hide();
+                    $("#machines_gm").hide();
+                }
+                else if (cmdtyp == 'Rice') {
+
+                    if ($('#newmill').attr('checked')) {
+                        $("#hideonnewmill").hide();
+                        $("#typeofreq").attr("required", "required");
+                        $("#typeofreq").attr("disabled", false);
+                        $("#machines").hide();
+                        $("#machines_gl").hide();
+                        $("#machines_gm").hide();
+                        $("#line2").hide();
+                    }
+                    else {
+                        $("#hideonnewmill").show();
+                        $("#typeofreq").attr("required", "required");
+                        $("#typeofreq").attr("disabled", false);
+                        $("#machines").hide();
+                        $("#machines_gl").hide();
+                        $("#machines_gm").hide();
+                    }
+
+                }
+                else if (cmdtyp == 'Grain Milling') {
+                    $("#typeofreq").removeAttr('required');
+                    $("#typeofrequirement").hide();
+                    $("#machines").hide();
+                    $("#machines_gm").show();
+                    $("#machines_gl").hide();
+                }
+                else if (cmdtyp == 'Grain Logistics') {
+                    $("#typeofreq").removeAttr('required');
+                    $("#typeofrequirement").hide();
+                    $("#machines").hide();
+                    $("#machines_gl").show();
+                    $("#machines_gm").hide();
+                }
+                else {
+                    $('#typeofreq').attr("disabled", false);
+                    $('#typeofreq').val('--Select--');
+                }
+            }
+            else {
+
+                $("#timeframe").attr("style", "display:none");
+                $("#typeofrequirement").attr("style", "display:none");
+                $("#QuotesToBeSubmittedc").attr("style", "display:none");
+                $("#EnquiryHandledByc").attr("style", "display:none");
+                $("#machines").attr("style", "display:none");
+                $("#machines_gl").hide();
+                $("#machines_gm").hide();
+                $("#SorterModelc").attr("style", "display:none;");
+                //make these fields required
+                //$("#capcty").removeAttr("required");
+                $("#typeofreq").removeAttr("required");
+                $("#TimeFrame").removeAttr("required");
+                $('#typeofreq').attr("disabled", false);
+                $('#typeofreq').val('--Select--');
+            }
+        });
+
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnapproval").click(function () {
+            var counter = document.getElementById("pindrp").value;
+            if (counter == '--Select PIN Code--') {
+                alert("Select Pin code");
+            }
+        })
+    });
+
+</script>
+
+<script type="text/Javascript">
+    $(document).ready(function () {
+        $("#typeofreq").change(function () {
+            var reqtyp = $('#typeofreq option:selected').text();
+            if (reqtyp == "Machines") {
+                $("#machines").attr("style", "padding-left:60px");
+                $("#machines").show();
+                $("#SorterModelc").hide();
+            } else if (reqtyp == "Projects") {
+                $("#machines").hide();
+                $("#SorterModelc").hide();
+            }
+            else if (reqtyp == "Sorters") {
+                $("#machines").hide();
+                $("#SorterModelc").show();
+            }
+            else {
+
+            }
+        }
+        );
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+        //$('#datePicker').datepicker({format: 'dd/mm/yyyy'}).val(today);
+        $('.dat').val(today);
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+        $('.sss').datepicker({
+            format: 'yyyy-mm-dd',
+            //onRender: function (date) {
+            //	return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            //}
+
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    });
+</script>
+
+@*Enabling textbox after checkbox checked*@
+<script>
+    $(document).ready(function () {
+        $("#chkparboiled").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txtparboiledmoisture").removeAttr('disabled');
+                $("#txtparboileddensity").removeAttr('disabled');
+            }
+            else {
+                $("#txtparboiledmoisture").attr('disabled', 'disabled');
+                $("#txtparboileddensity").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkmill").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txtmilltph").removeAttr('disabled');
+            }
+            else {
+                $("#txtmilltph").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkothers").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txtotherstph").removeAttr('disabled');
+            }
+            else {
+                $("#txtotherstph").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#Cleaner").change(function () {
+            if ($(this).is(':checked')) {
+                $("#CleanerNo").removeAttr('disabled');
+            }
+            else {
+                $("#CleanerNo").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#Magnet").change(function () {
+            if ($(this).is(':checked')) {
+                $("#MagnetNo").removeAttr('disabled');
+            }
+            else {
+                $("#MagnetNo").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#DeStoner").change(function () {
+            if ($(this).is(':checked')) {
+                $("#DeStonerNo").removeAttr('disabled');
+            }
+            else {
+                $("#DeStonerNo").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkhuller").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txthellernos").removeAttr('disabled');
+                $("#txthellerkw").removeAttr('disabled');
+            }
+            else {
+                $("#txthellernos").attr('disabled', 'disabled');
+                $("#txthellerkw").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkhullseperate").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txthullno").removeAttr('disabled');
+            }
+            else {
+                $("#txthullno").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkpaddytbl").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txtpaddytblnos").removeAttr('disabled');
+            }
+            else {
+                $("#txtpaddytblnos").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkthinthickgrade").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txtthinthickgradeno").removeAttr('disabled');
+                $("#txtthinthickgradedrums").removeAttr('disabled');
+            }
+            else {
+                $("#txtthinthickgradeno").attr('disabled', 'disabled');
+                $("#txtthinthickgradedrums").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkwhitner").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txtwhitnerno").removeAttr('disabled');
+                $("#txtwhitnerkw").removeAttr('disabled');
+                $("#txtwhitnerrpm").removeAttr('disabled');
+            }
+            else {
+                $("#txtwhitnerno").attr('disabled', 'disabled');
+                $("#txtwhitnerkw").attr('disabled', 'disabled');
+                $("#txtwhitnerrpm").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkhusker").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txthuskerno").removeAttr('disabled');
+                $("#txthuskerkw").removeAttr('disabled');
+            }
+            else {
+                $("#txthuskerno").attr('disabled', 'disabled');
+                $("#txthuskerkw").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkpolisher").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txtpolisherno").removeAttr('disabled');
+                $("#txtpolisherkw").removeAttr('disabled');
+                $("#txtpolisherrpm").removeAttr('disabled');
+            }
+            else {
+                $("#txtpolisherno").attr('disabled', 'disabled');
+                $("#txtpolisherkw").attr('disabled', 'disabled');
+                $("#txtpolisherrpm").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chklengthgrader").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txtlengthgraderno").removeAttr('disabled');
+                $("#txtgradesize1").removeAttr('disabled');
+                $("#txtgradesize2").removeAttr('disabled');
+                $("#txtgradesize3").removeAttr('disabled');
+                $("#txtgradesize4").removeAttr('disabled');
+            }
+            else {
+                $("#txtlengthgraderno").attr('disabled', 'disabled');
+                $("#txtgradesize1").attr('disabled', 'disabled');
+                $("#txtgradesize2").attr('disabled', 'disabled');
+                $("#txtgradesize3").attr('disabled', 'disabled');
+                $("#txtgradesize4").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+   @* $(document).ready(function () {
+        $("#chkcolorsorter").change(function () {
+            if ($(this).is(':checked')) {
+                //$("#txtcolorsortermake").removeAttr('disabled');
+                $("#txtcolorsorterchannels").removeAttr('disabled');
+                $("#txtcolorsorterprimary").removeAttr('disabled');
+                $("#txtcolorsortersecondary").removeAttr('disabled');
+                $("#ColorSorterTertiary").removeAttr('disabled');
+                $("#ColorSorterSupplierName").removeAttr('disabled');
+
+            }
+            else {
+                //$("#txtcolorsortermake").attr('disabled', 'disabled');
+                $("#txtcolorsorterchannels").attr('disabled', 'disabled');
+                $("#txtcolorsorterprimary").attr('disabled', 'disabled');
+                $("#txtcolorsortersecondary").attr('disabled', 'disabled');
+                $("#ColorSorterTertiary").attr('disabled', 'disabled');
+                $("#ColorSorterSupplierName").attr('disabled', 'disabled');
+
+            }
+        });
+    });
+
+
+
+    $(document).ready(function () {
+        $("#chkcolorsorter1").change(function () {
+            if ($(this).is(':checked')) {
+                //$("#txtcolorsortermake1").removeAttr('disabled');
+                $("#txtcolorsorterchannels1").removeAttr('disabled');
+                $("#txtcolorsorterprimary1").removeAttr('disabled');
+                $("#txtcolorsortersecondary1").removeAttr('disabled');
+                $("#ColorSorterTertiary1").removeAttr('disabled');
+
+                $("#ColorSorter1SupplierName").removeAttr('disabled');
+            }
+            else {
+                //$("#txtcolorsortermake1").attr('disabled', 'disabled');
+                $("#txtcolorsorterchannels1").attr('disabled', 'disabled');
+                $("#txtcolorsorterprimary1").attr('disabled', 'disabled');
+                $("#txtcolorsortersecondary1").attr('disabled', 'disabled');
+                $("#ColorSorterTertiary1").attr('disabled', 'disabled');
+
+                $("#ColorSorter1SupplierName").attr('disabled', 'disabled');
+
+            }
+        });
+    });*@
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkpackmachine").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txtpackmachinemake").removeAttr('disabled');
+                $("#txtpackmachinenos").removeAttr('disabled');
+                $("#txtpackmachinekg1").removeAttr('disabled');
+                $("#txtpackmachinekg2").removeAttr('disabled');
+                $("#txtpackmachinebrandname").removeAttr('disabled');
+            }
+            else {
+                $("#txtpackmachinemake").attr('disabled', 'disabled');
+                $("#txtpackmachinenos").attr('disabled', 'disabled');
+                $("#txtpackmachinekg1").attr('disabled', 'disabled');
+                $("#txtpackmachinekg2").attr('disabled', 'disabled');
+                $("#txtpackmachinebrandname").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#chkreplaybasedplc").change(function () {
+            if ($(this).is(':checked')) {
+                $("#txtreplaybasedplcmake").removeAttr('disabled');
+            }
+            else {
+                $("#txtreplaybasedplcmake").attr('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
+@*checking max length value*@
+<script>
+    //For restricting any field to its maxlength size
+    $(document).ready(function () {
+        $('input').keyup(function (e) {
+            if (this.value.length == $(this).attr("maxlength")) {
+                e.preventDefault();
+                $(event.target).next("span").html("You Cannot Enter More..").show().fadeOut(2000);
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
+
+@* Checking minimum length value *@
+<script>
+    //For restricting any field to its maxlength size
+    $(document).ready(function () {
+        $('inputmin').keyup(function (e) {
+            if (this.value.length == $(this).attr("minlength")) {
+                e.preventDefault();
+                $(event.target).next("span").html("Please Enter Minimum Length").show().fadeOut(2000);
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
+
+<script>
+    //phone number with 10digits
+    $('.keyup-limit-10').keyup(function () {
+        $('span.error-keyup-3').remove();
+        var inputVal = $(this).val();
+        var characterReg = /^([a-zA-Z0-9]{10,10})$/;
+        if (!characterReg.test(inputVal)) {
+            $(this).after('<span class="error error-keyup-3" style="color:red" >Minimum 10 digits.</span>');
+        }
+    });
+
+    //Pin code number with 6digits
+    $('.keyup-limit-6').keyup(function () {
+        $('span.error-keyup-3').remove();
+        var inputVal = $(this).val();
+        var characterReg = /^([a-zA-Z0-9]{6,6})$/;
+        if (!characterReg.test(inputVal)) {
+            $(this).after('<span class="error error-keyup-3" style="color:red" >Minimum 6 Digits.</span>');
+        }
+    });
+
+    //Mill Name No special char / numbers/ . , / are not allowed
+    $('.millname').keyup(function () {
+        $('span.error-millname-3').remove();
+        var inputVal = $(this).val();
+        var characterReg = /^([a-zA-Z0-9'' ''.'.])+$/;
+        //var characterReg = /^([a-zA-Z0-9]{6,6})$/;
+        if (!characterReg.test(inputVal)) {
+            $(this).after('<span class="error error-millname-3" style="color:red" >No Special and Numbers are not Allowed</span>');
+        }
+    });
+
+    //tel no
+    $('.keyup-limit-11').keyup(function () {
+        $('span.error-keyup-3').remove();
+        var inputVal = $(this).val();
+        var characterReg = /^([a-zA-Z0-9]{1,11})$/;
+        if (!characterReg.test(inputVal)) {
+            $(this).after('<span class="error error-keyup-3" style="color:red" >Only Numbers and Maximum 11 digits.</span>');
+        }
+    });
+
+    //income number with 7digits
+    $('.keyup-limit-7').keyup(function () {
+        $('span.error-keyup-3').remove();
+        var inputVal = $(this).val();
+        var characterReg = /^([a-zA-Z0-9]{1,7})$/;
+        if (!characterReg.test(inputVal)) {
+            $(this).after('<span class="error error-keyup-3" style="color:red" >Maximum 7 digits.</span>');
+        }
+    });
+
+    //email validation
+    $(".keyup-email").keyup(function () {
+        $('span.error-keyup-7').remove();
+        var inputVal = $(this).val();
+        var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+        if (!emailReg.test(inputVal)) {
+            $(this).after('<span class="error error-keyup-7">Invalid Email Format.</span>');
+        }
+    });
+
+    //For Sub category
+    $(".subcategory").keyup(function () {
+        $('span.error-keyup-7').remove();
+        var inputVal = $(this).val();
+        var characterReg = /([A-Z0-9A-Z])$/;
+        if (!characterReg.test(inputVal)) {
+            $(this).after('<span class="error error-keyup-7" style="color:red">Invalid Category</span>');
+        }
+    });
+</script>
+
+@*text and no validation*@
+<script type="text/javascript">
+    //allow to enter only numbers
+    $(document).ready(function () {
+        //called when key is pressed in textbox
+        $(".quantity").keypress(function (e) {
+            //if the letter is not digit then display error and don't type anything
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#errmsg1").html("Digits Only").show().fadeOut("slow");
+                $("#errmsg2").html("Digits Only").show().fadeOut("slow");
+                $("#errmsg3").html("Digits Only").show().fadeOut("slow");
+                $("#errmsg4").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+    //allow to enter only alphabets
+    $(document).ready(function () {
+        $(".text1").keypress(function (e) {
+            var code = e.keyCode || e.which;
+            if ((code < 65 || code > 90)
+                && (code < 97 || code > 122) && code != 32 && code != 46) {
+                $("#errmsg11").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg12").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg13").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg14").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg15").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg16").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg17").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg18").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg19").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg21").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg22").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg23").html("Only alphabets are allowed").show().fadeOut("slow");
+                $("#errmsg24").html("Only alphabets are allowed").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+</script>
+
+<script>
+    var downed = 0;
+    $('#telno11').keydown(function () {
+        downed++;
+        if (downed == 3) {
+            var reformat = this.value.replace(/(\d{4}\s*)/g, function (match) {
+                console.log("match before" + match);
+                if (match.match(/\s/)) { return match; }
+                return match + "-";
+            });
+            console.log(reformat);
+            this.value = reformat;
+            downed = 0;
+        }
+    });
+</script>
+
+@*hide error message after 10 seconds(10000 milliseconds)*@
+<script>
+    $(document).ready(function () {
+        $(".ErrorMsg").fadeOut(10000);
+    });
+</script>
+
+@* Commudity Type *@
+
+@*div hiding and displaying*@
+<script type="text/Javascript">
+    $(document).ready(function () {
+        $("#CommodityTypedrp").change(function () {
+            var counter = document.getElementById("CommodityTypedrp").value;
+            //alert(counter);
+            if (counter == 'Rice') {
+
+                $("#EnquiryTypeDiv1").attr("style", "display:block;padding-left:60px");
+                $("#line1").attr("style", "display:block;border: solid;");
+                $("#ExistingMillDetailsDiv2").attr("style", "display:block;padding-left:60px");
+                $("#SectionsDiv3").attr("style", "display:block;padding-left:60px");
+
+                $("#SectionsDiv3a").attr("style", "display:block;padding-left:50px");
+
+                $("#line2").attr("style", "display:block;border: solid;");
+                $("#CustomerRequirementSection").attr("style", "display:block;padding-left:60px");
+
+                $("#typeofrequirement1").attr("style", "display:none");
+
+                $("#MillDetailsSuppliersName").attr("required", "required");
+                $("#yesorno").attr("required", "required");
+                $("#YearInstalled").attr("required", "required");
+                //$("#EnquiryHandledBy").attr("required", "required");
+                //Capacity
+                $("#SorterModelc").attr("style", "display:none;");
+                $("#capacity").attr("style", "display:block;");
+                $("#capcty").attr("required", "required");
+
+                $('#ExistingMillDetailsDiv2  div:not(.pulseShow)').show();
+                $("#SectionsDiv3 tr div:not(.pulseShow)").show();
+
+                $("#buyldensity").attr("required");
+                $("#MillDetailsSuppliersName").attr("required");
+                $("#YearInstalled").attr("required");
+                $("#machines").attr("style", "display:block;padding-left:60px");
+                $("#machines_gl").hide();
+                $("#machines_gm").hide();
+
+                $("#yesorno").trigger("change");
+
+                $("#typeofreq").attr("disabled", false);
+                $("#compitator").hide();
+
+            }
+            else if (counter == "Pulses") {
+                $("#compitator").hide();
+                $("#hideonnewmill").show();
+                //hide parts
+                $("#machines").attr("style", "padding-left:60px");
+                $("#EnquiryTypeDiv1").attr("style", "display:none;padding-left:60px");
+                $("#line1").attr("style", "display:none;border: solid;");
+
+                $("#ExistingMillDetailsDiv2").attr("style", "display:block;padding-left:60px");
+                $("#SectionsDiv3").attr("style", "display:block;padding-left:60px");
+                $("#SectionsDiv3a").attr("style", "display:block;padding-left:50px");
+
+                $("#line2").attr("style", "display:block;border: solid;");
+                $("#CustomerRequirementSection").attr("style", "display:block;padding-left:60px");
+
+                $("#typeofrequirement1").attr("style", "display:none");
+
+                //$("#MillDetailsSuppliersName").attr("required", "required");
+                $("#MillDetailsSuppliersName").removeAttr("required");
+                $("#YearInstalled").removeAttr("required");
+                $("#yesorno").attr("required", "required");
+                //$("#YearInstalled").attr("required", "required");
+
+                //Capacity
+                $("#SorterModelc").attr("style", "display:none;");//code modified by sneha 17th july 2017
+                $("#capacity").attr("style", "display:block;");
+                $("#capcty").attr("required", "required");
+
+                $('#ExistingMillDetailsDiv2  div:not(.pulseShow)').show();
+                $("#SectionsDiv3 tr div:not(.pulseShow)").show();
+
+                //$("#buyldensity").removeAttr("required");
+                //$("#MillDetailsSuppliersName").removeAttr("required");
+                //$("#YearInstalled").removeAttr("required");
+
+                //show parts
+                $('#ExistingMillDetailsDiv2  div:not(.pulseShow)').hide();
+                $('#ExistingMillDetailsDiv2 .pulseShow').show();
+                $("#SectionsDiv3 tr div:not(.pulseShow)").hide();//attr("style", "display:none");
+                $("#SectionsDiv3 tr  div .pulseShow").show();//attr("style", "display:none");
+
+                $("#machines").hide();
+                $("#machines_gl").hide();
+                $("#machines_gm").hide();
+                $("#yesorno").trigger("change");
+                $("#sorter1").show();
+                $("#sorter2").show();
+            }
+            else if (counter == "Grain Milling") {
+
+                $("#machines").attr("style", "padding-left:60px");
+                $("#EnquiryTypeDiv1").attr("style", "display:none;padding-left:60px");
+                $("#hideonnewmill").attr("style", "display:none;padding-left:60px");
+                $("#line1").attr("style", "display:none;border: solid;");
+                $("#line2").hide();
+                $("#ExistingMillDetailsDiv2").attr("style", "display:block;padding-left:60px");
+                $("#SectionsDiv3").attr("style", "display:block;padding-left:60px");
+
+                $("#SectionsDiv3a").attr("style", "display:block;padding-left:50px");
+
+                // $("#line2").attr("style", "display:block;border: solid;");
+                $("#CustomerRequirementSection").attr("style", "display:block;padding-left:60px");
+
+                $("#typeofrequirement1").attr("style", "display:none");
+
+                $("#MillDetailsSuppliersName").removeAttr("required");
+                $("#yesorno").attr("required", "required");
+                $("#YearInstalled").removeAttr("required");
+                //$("#EnquiryHandledBy").attr("required", "required");
+                //Capacity
+                $("#SorterModelc").attr("style", "display:none;");
+                $("#capacity").attr("style", "display:block;");
+                $("#capcty").removeAttr("required");
+
+                $('#ExistingMillDetailsDiv2  div:not(.pulseShow)').show();
+                $("#SectionsDiv3 tr div:not(.pulseShow)").show();
+                $("#machines").hide();
+                $("#machines_gl").hide();
+                $("#machines_gm").show();
+                $("#buyldensity").attr("required");
+                // $("#MillDetailsSuppliersName").attr("required");
+                // $("#YearInstalled").attr("required");
+                $("#yesorno").trigger("change");
+
+                $("#hideonnewmill").show();
+                $("#compitator").show();
+                $("#div_GMCompitator").show();
+                $("#div_GLCompitator").hide();
+                $("#ExistingMillDetailsDiv2").hide();
+                $("#SectionsDiv3").hide();
+                $("#line2").show();
+
+            }
+            else if (counter == "Grain Logistics") {
+                $("#compitator").show();
+                $("#div_GMCompitator").hide();
+                $("#div_GLCompitator").show();
+
+                $("#MillDetailsSuppliersName").removeAttr("required");
+                $("#hideonnewmill").show();
+                $("#machines").attr("style", "padding-left:60px");
+                $("#EnquiryTypeDiv1").attr("style", "display:none;padding-left:60px");
+                $("#line1").attr("style", "display:none;border: solid;");
+
+                $("#ExistingMillDetailsDiv2").attr("style", "display:block;padding-left:60px");
+                $("#SectionsDiv3").attr("style", "display:block;padding-left:60px");
+                $("#SectionsDiv3a").attr("style", "display:block;padding-left:50px");
+
+                $("#line2").attr("style", "display:block;border: solid;");
+                $("#CustomerRequirementSection").attr("style", "display:block;padding-left:60px");
+
+                $("#typeofrequirement1").attr("style", "display:none");
+
+                //$("#MillDetailsSuppliersName").attr("required", "required");
+                $("#yesorno").attr("required", "required");
+                //$("#YearInstalled").attr("required", "required");
+
+                //Capacity
+                $("#SorterModelc").attr("style", "display:none;");//code modified by sneha 17th july 2017
+                $("#capacity").attr("style", "display:block;");
+                $("#capcty").removeAttr("required");
+
+                $('#ExistingMillDetailsDiv2  div:not(.pulseShow)').show();
+                $("#SectionsDiv3 tr div:not(.pulseShow)").show();
+
+                //$("#buyldensity").removeAttr("required");
+                //$("#MillDetailsSuppliersName").removeAttr("required");
+                $("#YearInstalled").removeAttr("required");
+
+                //show parts
+                $('#ExistingMillDetailsDiv2  div:not(.pulseShow)').hide();
+                $('#ExistingMillDetailsDiv2 .pulseShow').show();
+                $("#SectionsDiv3 tr div:not(.pulseShow)").hide();//attr("style", "display:none");
+                $("#SectionsDiv3 tr  div .pulseShow").show();//attr("style", "display:none");
+
+                $("#machines").hide();
+                $("#machines_gl").show();
+                $("#machines_gm").hide();
+                $("#yesorno").trigger("change");
+                $("#sorter1").hide();
+                $("#sorter2").hide();
+            }
+            else {
+                //alert("hi");
+                $("#EnquiryTypeDiv1").attr("style", "display:none");
+                $("#line1").attr("style", "display:none");
+
+                $('#ExistingMillDetailsDiv2  div:not(.pulseShow)').hide();
+                $("#ExistingMillDetailsDiv2").attr("style", "display:none");
+
+                $("#SectionsDiv3 tr div:not(.pulseShow)").hide();
+                $("#SectionsDiv3").attr("style", "display:none");
+
+                $("#SectionsDiv3a").attr("style", "display:none");
+
+                $("#line2").attr("style", "display:none");
+                $("#CustomerRequirementSection").attr("style", "display:block;padding-left:60px");
+
+                $("#typeofrequirement1").attr("style", "display:none;padding-left:60px"); //display only sorter
+
+                $("#capacity").attr("style", "display:none");
+                $("#typeofrequirement").attr("style", "display:none");
+
+                $("#timeframe").attr("style", "display:none");
+
+
+                $("#MillDetailsSuppliersName").removeAttr("required");
+                $("#yesorno").removeAttr("required");
+                $("#YearInstalled").removeAttr("required");
+
+                //Capacity
+
+                $("#capacity").attr("style", "display:none");
+                $("#capcty").removeAttr("required");
+                $("#yesorno").trigger("change");
+                $("#machines").attr("style", "display:none");
+                $("#machines_gl").attr("style", "display:none");
+                $("#machines_gm").attr("style", "display:none");
+            }
+        });
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#addcitypinchk").change(function () {
+            if ($(this).is(':checked')) {
+                $("#citytxt").attr("style", "display:block;");
+                $("#pincodetxt").attr("style", "display:block;");
+
+                $("#citydrp").attr("style", "display:none");
+                $("#pindrp").attr("style", "display:none");
+
+                //Making the fields required
+                $("#citytxt").attr("required", "required");
+                $("#pincodetxt").attr("required", "required");
+
+                $("#citydrp").removeAttr("required", "required");
+                $("#pindrp").removeAttr("required", "required");
+
+                //clearing the dropdown values when select the check box
+                $("#citydrp").val('');
+                $("#pindrp").val('');
+
+            }
+            else {
+
+                $("#citydrp").attr("style", "display:block;");
+                $("#pindrp").attr("style", "display:block;");
+
+                $("#citytxt").attr("style", "display:none");
+                $("#pincodetxt").attr("style", "display:none");
+
+                //Making the fields required
+
+                $("#citytxt").removeAttr("required", "required");
+                $("#pincodetxt").removeAttr("required", "required");
+
+                $("#citydrp").attr("required", "required");
+                $("#pindrp").attr("required", "required");
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    //Hide nd show div on click of the check New Mill
+    $(function () {
+        $("#newmill").click(function () {
+            if ($(this).is(":checked")) {
+                //alert(1)
+                $("#hideonnewmill").hide();
+                $("#MillDetailsSuppliersName").removeAttr("required");
+                $("#YearInstalled").removeAttr("required");
+                $("#capcty").removeAttr("required");
+                $("#line2").hide();
+
+            } else {
+                //alert(2)
+                $("#hideonnewmill").show();
+                $("#line2").show();
+            }
+        });
+    });
+</script>
+

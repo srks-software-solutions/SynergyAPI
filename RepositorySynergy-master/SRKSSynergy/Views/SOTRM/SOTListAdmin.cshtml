@@ -1,0 +1,127 @@
+﻿@model IList<SRKSSynergy.Models.SOTRM>
+@using SRKSSynergy.Helpers
+@{
+	
+	ViewBag.Title = "SOT Rice Report";
+	int slno = 1;
+	ViewBag.last = "is";
+}
+
+
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#cpnam").autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					url: "/SOT/Autocomplete",
+					type: "POST",
+					dataType: "json",
+					data: { term: request.term },
+					success: function (data) {
+						response($.map(data, function (item) {
+							return { label: item.CPName, value: item.CPName };
+						}))
+
+					}
+				})
+			},
+			messages: {
+				noResults: "", results: ""
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#printbutton").click(function () {
+			$("#printbutton").visible = false;
+			$("#savebutton").visible = false;
+			self.focus()
+			self.print()
+		});
+	});
+</script>
+
+<div class="bcgr" style="min-height: 580px;">
+	<div style="background: gray; padding-bottom: 15px">
+		<p class="txtft">Sales Opportunity Tracker</p>
+	</div>
+	<div class="row">
+		<div class=" row show-grid">
+			<div style="padding-top: 30px; padding-left: 65px">
+				<table class="table-hover" style="width:100%">
+					<thead>
+						<tr style="background: #BBBEBD">
+							<th style="width: 70px; text-align: center" class="fntst cal botbor">Serial No</th>
+							<th style="width: 200px; text-align: center" class="fntst cal botbor">Company Name</th>
+							<th style="width: 130px; text-align: center" class="fntst cal botbor">Sales Engg Name</th>
+							<th style="width: 130px; text-align: center" class="fntst cal botbor">Quotation No</th>
+							<th style="width: 80px; text-align: center" class="fntst cal botbor">Quote Date(dd/mm/yyy)</th>
+							<th style="width: 130px; text-align: center" class="fntst cal botbor">Section</th>
+                            <th style="width: 130px; text-align: center" class="fntst cal botbor">Machine</th>
+                            <th style="width: 130px; text-align: center" class="fntst cal botbor">Model</th>
+							<th style="width: 70px; text-align: center" class="fntst cal botbor">Quantity</th>
+							<th style="width: 170px; text-align: center" class="fntst cal botbor">Order Activeness</th>
+							<th style="width: 80px; text-align: center" class="fntst cal botbor">BYJT Chances(%)</th>
+							<th style="width: 130px; text-align: center" class="fntst cal botbor">Expected Order Month</th>
+							<th style="width: 230px; text-align: center" class="fntst cal botbor">Additional Comments</th>
+						</tr>
+					</thead>
+					@*@foreach (var item in Model)*@
+					@for (int i = 0; i < Model.Count; i++)
+					{
+						<tr>
+							<td style="text-align: center;">
+								@slno
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].QGEquipGeneralData.MDBGeneralData.OrganizationName)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].QGEquipGeneralData.SalesName)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].QGEquipGeneralData.QuotationNumber)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].QGEquipGeneralData.QuotationDate)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].MasterProducts.MasterProductName)</label>
+							</td>
+                            <td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].Products.ProductName)</label>
+							</td>
+                            <td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].Equipment)</label>
+							</td>
+							<td style="text-align: center;">
+								<label class="fntst">@Html.DisplayFor(m => m[i].Quantity)</label>
+							</td>
+							<td style="text-align: center;">
+								@Html.DisplayFor(m => m[i].Orderactive)
+							</td>
+							<td style="text-align: center;">
+								@Html.DisplayFor(m => m[i].BYJTChances)
+							</td>
+							<td style="text-align: center;">
+								@Html.DisplayFor(m => m[i].Expectedorder)
+							</td>
+							<td style="text-align: center; width: 100px">
+								@Html.DisplayFor(m => m[i].AdditionalComments, new { rows = 2, columns = 2, id = "addcomc" + slno, @class = "fntst", @placeholder = "Additional Comments" })
+							</td>
+						</tr>
+						slno = slno + 1;
+					}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

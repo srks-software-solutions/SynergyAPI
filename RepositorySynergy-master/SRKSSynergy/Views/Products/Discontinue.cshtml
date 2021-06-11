@@ -1,0 +1,68 @@
+﻿@model  SRKSSynergy.Models.Products
+
+@{
+	ViewBag.Title = "Deactivate Machine";
+}
+
+
+
+<div class="bcgr" id="mrefresh" style="min-height: 590px">
+	@using (Html.BeginForm())
+	{
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Deactivate Machine</p>
+		</div>
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(false)
+		@Html.HiddenFor(m => m.ProductID)
+		@Html.HiddenFor(m => m.ProductDescriptor)
+		@Html.HiddenFor(m => m.ProductName)
+		@Html.HiddenFor(m => m.MasterProductID)
+
+		@*<p class="txtft">Are you sure you want to Deactivate this?</p>*@
+		<div class="row">
+			<div class=" row show-grid">
+				<div class="span12 pad">
+					<p class="pad txtal" style="padding-bottom:30px">Are you sure you want to Discontinue this Product?</p>
+					<div class="span3" style="padding-left:40px">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Machine Name:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.ProductName)
+							</div>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Description:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.ProductDescriptor)
+							</div>
+						</div>
+					</div>
+					@*<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Email-ID:</label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.email)
+							</div>
+						</div>
+					</div>*@
+				</div>
+				@* Buttons *@
+				<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+					<div class=" row show-grid">
+						<div class="span10">
+							<div class="span3 cent1">
+								<input type="submit" name="Yes" value="Yes" class="btn btn-danger" />
+								<input type="submit" name="No" value="No" class="btn btn-success" />
+							</div>
+						</div>
+					</div>
+				</div>
+				@* End of Buttons *@
+			</div>
+		</div>
+	}
+</div>
+

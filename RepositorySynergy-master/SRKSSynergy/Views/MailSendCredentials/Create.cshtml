@@ -1,0 +1,71 @@
+﻿@model SRKSSynergy.Models.MailSendCredentials
+@{
+    ViewBag.Title = "Create";
+}
+
+@*Working*@
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+<style>
+    .validation-summary-valid {
+        display: none;
+    }
+</style>
+
+
+<div class="bcgr" style="min-height:650px">
+	<div style="background: gray;height:60px">
+        <p class="txtft">Mail Sender (From Mail)</p>
+    </div>
+	<div class="divider"></div>
+
+	<div class="container">
+
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(true)						
+			<div class="row">
+				<div class="col-xs-3">
+					<div class="form-group">
+							<label class="col-sm-12 control-label">From Email Address</label>
+							@Html.TextBoxFor(model => model.FromMail, new { @id = "emailadd",@style="height:30px", @placeholder = "Email Address", @class = "form-control", @required = "required" })							
+						</div>
+					</div>
+				   <div class="col-xs-3">
+					<div class="form-group">
+							<label class="col-sm-12 control-label">Password</label>
+							@Html.TextBoxFor(model => model.Password, new { @id = "password",@style="height:30px", @placeholder = "Password", @class = "form-control", @required = "required",@type="password" })
+						</div>
+					</div>
+			</div>			
+			<br />
+			<p>
+				<button type="submit" class="btn btn-primary " id="sit">Create</button>
+				@*<label class="control-label" style="color: red">@ViewBag.BrandIDEntered</label>*@
+			</p>
+		}
+		<form action="/MailSendCredentials/Index">
+			<button type="submit" class="btn btn-primary" id="sit1">Back To List</button>
+		</form>
+
+
+	</div>
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+

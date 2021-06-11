@@ -1,0 +1,340 @@
+﻿@*@model IEnumerable<SRKSSynergy.Models.MDBGeneralData>*@
+@model SRKSSynergy.Models.IndexViewModel
+
+@using SRKSSynergy.Helpers
+@{
+    ViewBag.Title = "Channel Partners MDB";
+    int slno = ViewBag.SlNo;
+}
+
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#custnm").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/MDB/AutocompleteCP",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CPName, value: item.CPName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#customername").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/MDB/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#printbutton").click(function () {
+            self.focus()
+            self.print()
+        });
+    });
+</script>
+
+<div class="bcgr" style="width:90%">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Channel Partners Master Data Base</p>
+    </div>
+    <form action="@Url.Action("CPMDB", "MDB")" method="post">
+        @* Create Equipment Link *@        
+        <div class="row noPrint" id="form2">
+            <div class=" row show-grid">
+                @* Text Box for search *@
+                <div class="span12 pad ">                                       
+                    <div class="span2" style="padding-right:20%">
+                        <div class="control-group ">
+                            <div class="controls" style="padding-top: 23px;">
+                                @Html.TextBox("custnm", null, new {@style="height:30px", @class = "printButtonClass noPrint ", @placeholder = "Search Channel Partner Name", @autocomplete = "off" })
+                                @*<span class="glyphicons glyphicons-database-search"></span>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:4% ; display:inline">&nbsp</div>
+                   
+
+                    @if (!User.IsInRole("ZonalManager"))
+                    {
+                    <div class="span2" style="padding-right:20%">
+                        <div class="control-group ">
+                            <div class="controls" style="padding-top: 23px">
+                                <select name="State" id="State">
+                                    <option value="#">----Search by State----</option>
+                                    <option value="Andhra Pradesh (AP)">Andhra Pradesh</option>
+                                    <option value="Arunachal Pradesh (AR)">Arunachal Pradesh</option>
+                                    <option value="Andaman and Nicobar Islands(AN)">Andaman and Nicobar Islands</option>
+                                    <option value="Assam (AS)">Assam</option>
+                                    <option value="Bihar (BR)">Bihar</option>
+                                    <option value="Chhattisgarh (CG)">Chhattisgarh</option>
+                                    <option value="Chandigarh (CH)">Chandigarh</option>
+                                    <option value="Delhi (DEL)">Delhi</option>
+                                    <option value="Dadra and Nagar Haveli (DN)">Dadra and Nagar Haveli</option>
+                                    <option value="Daman and Diu (DD)">Daman and Diu</option>
+                                    <option value="Goa (GA)">Goa</option>
+                                    <option value="Gujarat (GJ)">Gujarat</option>
+                                    <option value="Haryana (HR)">Haryana</option>
+                                    <option value="Himachal Pradesh (HP)">Himachal Pradesh</option>
+                                    <option value="Jammu and Kashmir (JK)">Jammu and Kashmir</option>
+                                    <option value="Jharkhand (JH)">Jharkhand</option>
+                                    <option value="Karnataka (KA)">Karnataka</option>
+                                    <option value="Kerala (KL)">Kerala</option>
+                                    <option value="Madhya Pradesh (MP)">Madhya Pradesh</option>
+                                    <option value="Maharashtra (MH)">Maharashtra</option>
+                                    <option value="Manipur (MN)">Manipur</option>
+                                    <option value="Meghalaya (ML)">Meghalaya</option>
+                                    <option value="Mizoram (MZ)">Mizoram</option>
+                                    <option value="Nagaland (NL)">Nagaland</option>
+                                    <option value="National Capital Territory of Delhi (DL)">National Capital Territory of Delhi</option>
+                                    <option value="Odisha(OR)">Odisha</option>
+                                    <option value="Punjab (PB)">Punjab</option>
+                                    <option value="Rajasthan (RJ)">Rajasthan</option>
+                                    <option value="Sikkim (SK)">Sikkim</option>
+                                    <option value="Tamil Nadu (TN)">Tamil Nadu</option>
+                                    <option value="Tripura (TR)">Tripura</option>
+                                    <option value="Uttar Pradesh (UP)">Uttar Pradesh</option>
+                                    <option value="Uttarakhand (UK)">Uttarakhand</option>
+                                    <option value="West Bengal (WB)">West Bengal</option>
+                                    <option value="Lakshadweep (LD)">Lakshadweep</option>
+                                    <option value="Pondicherry (PY)">Pondicherry</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    }
+
+                    
+                    @* to search customer name *@
+                   <div class="span2" >
+                        <div class="control-group ">
+                            <div class="controls" style="padding-top: 23px">
+                                @Html.TextBox("customername", null, new {@style="height:30px", @class = "printButtonClass", @placeholder = "Customer Name", @autocomplete = "off" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    @* Button for Search *@
+                    <div class="span12" style="margin-left:15%">
+                        <div class="span1" style="padding-top: 20px">
+                            <button class="btn btn-success glyphicon glyphicon-search  " value="Search" type="submit"> Search</button>
+                            @*<input type="submit" style="width: 70px; height: 35px" value="Search" class="btn btn-info existingcustomer printButtonClass glyphicon glyphicon-search" />*@
+                            @*@Html.ActionLink(" Enable", "EnableEnquiryRevised", "LeadEnquiry", new { @class = "btn btn-warning glyphicon glyphicon-ok", @Style = "text-decoration:none" })*@
+                        </div>
+                        @* End of buttons *@
+                        <div class="span1" style="padding-top: 20px">
+                            @*<input type="button" style="width: 70px; height: 35px" id="printbutton" value="Print" class="btn btn-info glyphicons glyphicon-ok" />*@
+                            <button class="btn btn-success glyphicon glyphicon-print " value="Print" type="Submit"> Print</button>
+                        </div>
+                       @* <div class="span1" style="padding-top: 20px">
+                            <button class="btn btn-success glyphicon glyphicon-download " value="Export" type="Submit"> Export</button>
+                        </div>*@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        @if (TempData["wrong"] != null)
+        {
+            <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["wrong"]</p>
+        }
+        @if (ViewBag.IsSearch == true)
+        {
+            <div class="row" style="padding-bottom: 20px;padding-top:5%;width:90%">
+                <div class=" row show-grid">
+                    <div style="text-align: right; height: 60px; padding-left: 50px">
+                        <table style="width:90%">
+                            <tr>Export
+
+                                <td style="text-align: left; padding-left: 70px">
+                                    <label class="fntst1">
+                                        M/s @ViewBag.OrganizationName
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; padding-left: 70px">
+                                    <label class="fntst1">
+                                        @ViewBag.AddressLine1 , @ViewBag.AddressLine2 , @ViewBag.AddressLine3
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left; padding-left: 70px">
+                                    <label class="fntst1">
+                                        @ViewBag.City - @ViewBag.Pincode , @ViewBag.State
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+@* Table for ChannelPartner *@
+        <table style="width:97%;margin-top:3%"> 
+            <thead style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <tr>
+                    <th style="text-align: center">
+                        <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No</span>
+                    </th>
+                    <th style="text-align: center">
+                        <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Unique ID</span>
+                    </th>
+                    <th style="text-align: center">
+                        <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Company Name</span>
+                    </th>
+                    <th style="text-align: center">
+                        <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Address</span>
+                    </th>
+                    <th style="text-align: center">
+                        <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">City</span>
+                    </th>
+                    <th style="text-align: center">
+                        <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">State</span>
+                    </th>
+                    <th style="text-align: center">
+                        <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Phone 1</span>
+                    </th>
+                    <th style="text-align: center">
+                        <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Email-ID</span>
+                    </th>
+                    <th style="text-align: center" class="noPrint"></th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var item in Model.CMDB)
+            {
+                <tr>
+                    <td style=" text-align: center; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td>
+                    <td style="text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.CompanyUniqueID)
+                    </td>
+                    <td style=" text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.OrganizationName)
+                    </td>
+                    <td style="text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td style="text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td style=" text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td style=" text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.LandLine1)
+                    </td>
+                    <td style=" text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.EmailID)
+                    </td>
+                    @if (!User.IsInRole("ZonalManager"))
+                    {                        
+                        <td>
+                            @Html.ActionLink(" View ", "ViewDetails", "MDB", new { id = item.MDBID }, new { @class = "btn btn-info glyphicon glyphicon-eye-open", @Style = "text-decoration:none" })
+                        </td>
+                        
+                        <td style="width:30px;">
+                            @Html.ActionLink(" Delete ", "Delete", "MDB", new { id = item.MDBID }, new { @class = "btn btn-danger glyphicon glyphicon-trash", @Style = "text-decoration:none" })
+                        </td>
+                    }
+                </tr>
+                    slno++;
+            }
+
+        </table>
+
+        <!-- pager -->
+				@if (Model.Pager.EndPage > 1)
+				{
+					<ul class="pagination">
+						@if (Model.Pager.CurrentPage > 1)
+						{
+							<li>
+								<a href="~/MDB/CPMDB">First</a>
+							</li>
+							<li>
+								<a href="~/MDB/CPMDB?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+							</li>
+						}
+
+						@for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+						{
+							<li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+								<a href="~/MDB/CPMDB?page=@page">@page</a>
+							</li>
+						}
+
+						@if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+						{
+							<li>
+								<a href="~/MDB/CPMDB?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+							</li>
+							<li>
+								<a href="~/MDB/CPMDB?page=@(Model.Pager.TotalPages)">Last</a>
+							</li>
+						}
+					</ul>
+				}	
+    </form>
+
+    @using (Html.BeginForm("ExportData", "MDB", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="text" name="custnm" class="input-xxsmall fntst" id="custnm" value="@ViewBag.OrganizationName" style="display:none" >
+        <input type="text" name="State" class="input-xxsmall fntst" id="State1" value=" @ViewBag.State" style="display:none">           
+        <div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+            <div class=" row show-grid">
+                <div class="span10">
+                    <div class="span3 cent">
+                        <input type="submit" style="width: 100px; height: 35px" value="Export" class="btn btn-info existingcustomer printButtonClass" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

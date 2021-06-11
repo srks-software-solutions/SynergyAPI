@@ -1,0 +1,72 @@
+﻿@model  SRKSSynergy.Models.AutoMailer
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="bcgr" id="mrefresh" style="min-height: 590px">
+	@using (Html.BeginForm())
+	{
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Delete AutoMailer</p>
+		</div>
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(false)
+		@Html.HiddenFor(m => m.AMID)		
+		@Html.HiddenFor(m => m.NullPeriod)		
+		@Html.HiddenFor(m => m.OTPeriod)
+		@Html.HiddenFor(m => m.Module)	       
+        @Html.HiddenFor(m => m.CreatedBy)
+		@Html.HiddenFor(m => m.CreatedOn)
+        @Html.HiddenFor(m => m.ModifiedBy)
+		@Html.HiddenFor(m => m.ModifiedOn)  
+        @Html.HiddenFor(m => m.IsDeleted)	  
+        @Html.HiddenFor(m => m.IsStatus)
+      
+		@*<p class="txtft">Are you sure you want to Deactivate this?</p>*@
+		<div class="row">
+			<div class=" row show-grid">
+				<div class="span12 pad">
+					<p class="pad txtal" style="padding-bottom:30px">Are you sure you want to Delete?</p>
+					<div class="span3" style="padding-left:40px">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Auto Mailer ID:</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.AMID)                                
+							</div>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Module </strong></label>
+                            <div class="controls">
+                               @Html.DisplayFor(model => model.Module)                                
+                            </div>
+						</div>
+					</div>
+                    <div class="span3" style="padding-left:40px">
+						<div class="control-group">
+							<label class="control-label fntst"><strong>Period (In Days):</strong></label>
+							<div class="controls">
+								@Html.DisplayFor(model => model.OTPeriod)                                
+							</div>
+						</div>
+					</div>
+					</div>
+				@* Buttons *@
+				<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+					<div class=" row show-grid">
+						<div class="span10">
+							<div class="span3 cent1">
+								<input type="submit" name="Yes" value="Yes" class="btn btn-success" />
+								<input type="submit" name="No" value="No" class="btn btn-success" />
+							</div>
+						</div>
+					</div>
+				</div>
+				@* End of Buttons *@
+			</div>
+		</div>
+	}
+</div>
+

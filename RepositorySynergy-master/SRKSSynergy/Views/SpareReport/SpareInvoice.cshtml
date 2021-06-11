@@ -1,0 +1,313 @@
+﻿@model IList<SRKSSynergy.Models.OutwardSpare>
+@using SRKSSynergy.Helpers
+@{
+    
+    ViewBag.Title = "Spare Status Invoice Claim Report";
+    int slno = 1;
+    ViewBag.last = "is";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<script>
+    $(document).ready(function () {
+        $('.sss').monthpicker();
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cpnam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/SpareReport/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CPName, value: item.CPName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $("#cusnam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/SpareReport/Autocompletecus",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName};
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#printbutton").click(function () {
+            $("#printbutton").visible = false;
+            $("#savebutton").visible = false;
+            self.focus()
+            self.print()
+        });
+    });
+</script>
+
+<div class="bcgr" style="min-height: 580px;">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Spare Status Invoice Report</p>
+    </div>
+    <div class="noPrint">
+        <form action="@Url.Action("SpareInvoice", "SpareReport")" method="get">
+        <div style="background: #e5e5e5; min-height: 30px; min-width: 690px">
+            <div class="row" style="padding-top: 10px">
+                <div class=" row show-grid">
+                    @* Text Box for search *@
+                    <div class="span12 pad">
+                        <div class="span3 ">
+                            <div class="control-group ">
+                                <label class="control-label fntst ">Channel Partner Name</label>
+                                <div class="controls">
+                                    @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="cpnam" name="cpnam" placeholder="Channel Partner Name">*@
+                                    @Html.TextBox("cpnam", null, new {@style="height:30px", @class = "printButtonClass noPrint", @placeholder = " Search Channel Partner Name",@autocomplete="off" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span1"></div>
+                        <div class="span3 ">
+                            <div class="control-group ">
+                                <label class="control-label fntst ">Customer Name</label>
+                                <div class="controls">
+                                    @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="cpnam" name="cpnam" placeholder="Channel Partner Name">*@
+                                    @Html.TextBox("cusnam", null, new {@style="height:30px", @class = "printButtonClass noPrint", @placeholder = " Search Customer Name",@autocomplete="off" })
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                     <div class="span12 pad">
+                         <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label fntst">Item Name</label>
+                                <div class="controls">
+                                    @Html.DropDownList("ProductModelSparesID", null, "--Select--", new {@style="width:75%", @class="printButtonClass noPrint fntst" })
+                                </div>
+                            </div>
+                        </div>
+                         <div class="span1"></div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label fntst">Dispatch Status</label>
+                                <div class="controls">
+                                    <select style="width:75%", id="dispst" name="dispst" class="printButtonClass noPrint fntst">
+                                        <option value="">Select Option</option>
+                                        <option value="0">Open</option>
+                                        <option value="1">Close</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12 pad">
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label fntst">From Month</label>
+                                <div class="controls">
+                                    <input style="height:30px", type ="text" class="printButtonClass noPrint fntst sss" id="fm" name="fm" placeholder="Select Month" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span1"></div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label fntst">To Month</label>
+                                <div class="controls">
+                                    <input style="height:30px", type ="text" class="printButtonClass noPrint fntst sss" id="tm" name="tm" placeholder="Select Month" />
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="span12 pad">
+                        <div class="span1"></div>
+                        @* Button for Search *@
+                        <div class="span3" style="padding-top: 20px">
+                            @*<input type="submit" style="width: 100px; height: 35px" value="Get Details" class="btn btn-info existingcustomer printButtonClass" />*@
+                            <button type="submit" id="gd" class="btn btn-info existingcustomer glyphicon glyphicon-paste"  > Get_Details</button>
+                        </div>
+                        @* End of buttons *@
+
+                        <div class="span3" style="padding-top: 20px">
+                            <button class="btn btn-info printButtonClass glyphicon glyphicon-print" id="printbutton" style="width:100px;height:35px" type="button"> Print</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+@* Wrong Channel Partner *@
+    @if (TempData["wrongcp"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["wrongcp"]</p>
+    }
+
+
+    <div class="row">
+        <div class=" row show-grid">
+            <div style="padding-top: 30px; padding-left: 65px">
+                <table class="table-hover" style="width:95%;margin-left:1%">
+                    <thead>
+                        <tr style="background: #BBBEBD">
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Serial No</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Customer Name</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Channel Partner</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Order No</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Invoice No</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Item</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Quantity</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Month</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Invoice Date</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Dispatch Date</th>
+                            <th></th>
+                            <th style="width: auto; text-align: center" class="fntst cal botbor">Status</th>
+                        </tr>
+                    </thead>
+
+                   @* @for (int i = 0; i < Model.Count; i++)*@
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align: center;">
+                                @slno
+                            </td>
+                            <td> </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.CustomerName</label>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.ChannelPartners.CPName</label>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.OrderNo</label>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.InvoiceNo</label>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.ProductModelSpare.ProductModelSparesDesc</label>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.QuantityOrdered</label>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td style="text-align: center;">
+                                @item.OutwardMonth
+                            </td>
+                            <td>
+
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.InvoiceDate.ToString("dd-MM-yyyy")</label>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.DispatchDate.ToString("dd-MM-yyyy")</label>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td style="text-align: center;">
+                                @if (item.IsDispatch == 0)
+                                { 
+                                    <label class="fntst">Open</label>
+                                }
+                                @if (item.IsDispatch == 1)
+                                { 
+                                    <label class="fntst">Close</label>
+                                }
+                            </td>
+                        </tr>
+                        slno = slno + 1;
+                    }
+                </table>
+            </div>
+             @using (Html.BeginForm("ExportDataInv", "SpareReport", FormMethod.Post, new { enctype = "multipart/form-data" }))
+             {
+            <input type="text" name="cpnam" class="input-xxsmall fntst" id="cpnam" value="@ViewBag.cpnam" style="display:none" >
+            <input type="text" name="cusnam" class="input-xxsmall fntst" id="cusnam" value="@ViewBag.cusnam" style="display:none">
+            <input type="text" name="ProductModelSparesID" class="input-xxsmall fntst" id="ProductModelSparesID" value="@ViewBag.prdid" style="display:none" >
+            <input type="text" class="input-xxsmall fntst" id="dispst" name="dispst" value="@ViewBag.dispt" style="display:none" >
+            <input type="text" class="input-xxsmall fntst" id="fm" name="fm" value="@ViewBag.fm" style="display:none" >
+            <input type="text" class="input-xxsmall fntst" id="tm" name="tm" value="@ViewBag.tm" style="display:none" >
+            <div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+                <div class=" row show-grid">
+                    <div class="span10">
+                        <div class="span3">
+                            @*<input type="submit" style="width: 100px; height: 35px" value="ExportData" class="btn btn-info existingcustomer printButtonClass" />*@
+                            <button class="btn btn-success glyphicon glyphicon-copy" value="post" type="Submit"> Export_Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             }
+        </div>
+    </div>
+</div>
+

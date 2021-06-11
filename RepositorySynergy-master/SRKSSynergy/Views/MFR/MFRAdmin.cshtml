@@ -1,0 +1,949 @@
+﻿@model SRKSSynergy.Models.MFRALL
+@{
+	ViewBag.Title = "Machine Fault Report";
+}
+@*<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />*@
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+@*<script src="~/Content/bootstrap/js/bootstrap.js"></script>*@
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#oanum").autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					url: "/MFR/Autocompletemfr",
+					type: "POST",
+					dataType: "json",
+					data: { term: request.term },
+					success: function (data) {
+						response($.map(data, function (item) {
+							return { label: item.OANumber, value: item.OANumber };
+						}))
+					}
+				})
+			},
+			messages: {
+				noResults: "", results: ""
+			}
+		});
+	});
+</script>
+@{
+	List<SelectListItem> listItems1 = new List<SelectListItem>();
+	List<SelectListItem> listItems2 = new List<SelectListItem>();
+	List<SelectListItem> listItems3 = new List<SelectListItem>();
+    List<SelectListItem> listItems4 = new List<SelectListItem>();
+    List<SelectListItem> listItems5 = new List<SelectListItem>();
+	listItems1.Add(new SelectListItem
+		 {
+			 Text = "1",
+			 Value = "1"
+		 });
+	listItems1.Add(new SelectListItem
+		 {
+			 Text = "2",
+			 Value = "2",
+		 });
+	listItems1.Add(new SelectListItem
+		 {
+			 Text = "3",
+			 Value = "3"
+		 });
+	listItems1.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems2
+	listItems2.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems3
+	listItems3.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+
+    listItems4.Add(new SelectListItem
+    {
+        Text = "1",
+        Value = "1"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "2",
+        Value = "2",
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "3",
+        Value = "3"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "6",
+        Value = "6"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "7",
+        Value = "7"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "8",
+        Value = "8"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "9",
+        Value = "9"
+    });
+    listItems4.Add(new SelectListItem
+    {
+        Text = "10",
+        Value = "10"
+    });
+    //ListItems2
+    listItems5.Add(new SelectListItem
+    {
+        Text = "1",
+        Value = "1"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "2",
+        Value = "2",
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "3",
+        Value = "3"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "6",
+        Value = "6"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "7",
+        Value = "7"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "8",
+        Value = "8"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "9",
+        Value = "9"
+    });
+    listItems5.Add(new SelectListItem
+    {
+        Text = "10",
+        Value = "10"
+    });
+
+	}
+<div style="background: gray; padding-bottom: 15px">
+	<p class="txtft">Machine Fault Report</p>
+</div>
+<div class="container" style="width: 1050px; padding-top: 3px">
+	<div style="background: #e5e5e5">
+		@using (Html.BeginForm("MFRAdmin", "MFR", FormMethod.Post))
+		{
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(true)
+			<div class="row" style="padding-top: 10px">
+				@Html.HiddenFor(m => m.MFR.OrderNum)
+				@Html.HiddenFor(m => m.MFR.MFRNumber)
+				@Html.HiddenFor(m => m.MFR.MFRID)
+				@Html.HiddenFor(m=>m.MFR.IsMFR)
+				@Html.HiddenFor(m=>m.MFR.MfrEnteredBy)
+				@Html.HiddenFor(m => m.MFR.MDBID, new { Value=ViewBag.mdbid})
+				@Html.HiddenFor(m => m.MFR.CPID, new { Value=ViewBag.cpid})
+				@Html.HiddenFor(m => m.MFRParts1.MFRPID)
+				@Html.HiddenFor(m => m.MFRParts1.MFRID)
+				@Html.HiddenFor(m => m.MFRParts2.MFRID)
+				@Html.HiddenFor(m => m.MFRParts3.MFRID)
+				@Html.HiddenFor(m => m.MFRParts2.MFRPID)
+				@Html.HiddenFor(m => m.MFRParts3.MFRPID)
+				@Html.HiddenFor(m => m.MFRBBAN.MFRBBID)
+				@Html.HiddenFor(m => m.MFRBBAN.MfrAdminDat, new {id = "Mfrdat", @class = "fntst dat" })
+
+
+                @if (TempData["date"] != null)
+                {
+	                <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["date"]</p>
+                }
+				<div>
+					<!-- Row2 -->
+					<div style="padding-left: 40px">
+						<table class="table " style="width: 1030px; padding-left: 30px;">
+							<div class="controls-row">
+								<tr>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>HOD Number :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											<input type="text" class="fntst" id="hodNumber" placeholder="HOD Number" readonly="readonly" value="@ViewBag.HODNumber">
+										</div>
+									</td>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>MFR Number:</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											@*<input type="text" class="fntst" id="to" placeholder="To">*@
+											<input type="text" class="fntst" id="mfrnumber" placeholder="HOD Number" readonly="readonly" value="@ViewBag.Mfrnum">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>MFR Entered By :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											<input type="text" class="fntst" id="mfr_by" placeholder="MFR Enetered by" readonly="readonly" value="@ViewBag.LoginName">
+										</div>
+									</td>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>To :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											@*<input type="text" class="fntst" id="to" placeholder="To">*@
+											@Html.TextBoxFor(model => model.MFR.MfrTo, new { id = "mfrto", @class = "fntst", @placeholder = "MFR To" ,@readonly="readonly"})
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Channel Partner :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											<input type="text" class="fntst" id="chanpart" readonly="readonly" value="@ViewBag.CPName" placeholder="Channel Partner" readonly="readonly">
+										</div>
+									</td>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Date :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											@Html.TextBoxFor(model => model.MFR.MfrDate, new { id = "Mfrdat", @class = "fntst",@readonly = "readonly" })
+											@*<input type="text" class="fntst" id="dat" value="@ViewBag.ShowQuoteDate" readonly="readonly">*@
+										</div>
+									</td>
+								</tr>
+							</div>
+						</table>
+					</div>
+					<!-- Row31 -->
+					<div style="padding-left: 40px">
+						<table class="table " style="width: 1030px; padding-left: 30px;">
+							<div class="controls-row">
+								<tr>
+									<td class="span2" colspan="4">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Customer Data : </strong>(Please enter the Customer details in the space below)</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Company :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											<input type="text" class="fntst" id="cmpynm" placeholder="Company Name" readonly="readonly" value="@ViewBag.Company" readonly="readonly">
+										</div>
+									</td>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>City :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											<input type="text" class="fntst" id="city" placeholder="City" readonly="readonly" value="@ViewBag.City" readonly="readonly">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Contact :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											<input type="text" class="fntst" id="cont" placeholder="Contact Person Name" readonly="readonly" value="@ViewBag.Contact" readonly="readonly">
+										</div>
+									</td>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Mobile/Tel No :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											<input type="text" class="fntst" id="mob/tel" placeholder="Mobile/Tel No" readonly="readonly" value="@ViewBag.Phone" readonly="readonly">
+										</div>
+									</td>
+								</tr>
+							</div>
+						</table>
+					</div>
+					<!-- Row3 -->
+					<div style="padding-left: 40px">
+						<table class="table " style="width: 1030px; padding-left: 30px;">
+							<div class="controls-row">
+								<tr>
+									<td class="span2" colspan="4">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Machine Data : </strong>(Please enter the machine details in the space below)</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Model :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											@Html.TextBoxFor(model => model.MFR.MfrModelNo, new { id = "modelno", @class = "fntst", @placeholder = "Model No",@readonly="readonly" })
+										</div>
+									</td>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>M/c's Sl no :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											@*<input type="text" class="fntst" id="mac_slno" placeholder="Enter the M/c's Sl no">*@
+											@Html.TextBoxFor(model => model.MFR.MacSlNo, new { id = "mcslno", @class = "fntst", @placeholder = "Machine Serial No",@readonly="readonly" })
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Commissioned by :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											@*<input type="text" class="fntst" id="comm_by" placeholder="Commissioned by">*@
+											@Html.TextBoxFor(model => model.MFR.CommissionedBy, new { id = "commby", @class = "fntst", @placeholder = "Commissioned By",@readonly="readonly" })
+										</div>
+									</td>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Commissioning date :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											@Html.TextBoxFor(model => model.MFR.CommissionedDate, new { id = "commdat", @class = "fntst", @placeholder = "Select Date", Value= @ViewBag.CommissionDate, @readonly = "readonly" })
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span2">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Present M/c status :</strong></label>
+										</div>
+									</td>
+									<td class="span3">
+										<div>
+											<label class="checkbox">
+												@*<input type="checkbox" value="">*@
+												@Html.CheckBoxFor(m => m.MFR.MacBreakDown, new { id = "breakdown", @name = "breakdown", @class = "inline", @type = "checkbox",@readonly="readonly" })
+												M/c break-down
+											</label>
+										</div>
+									</td>
+									<td class="span2" colspan="2">
+										<div>
+											<label class="checkbox">
+												@*<input type="checkbox" value="">*@
+												@Html.CheckBoxFor(m => m.MFR.MacOperatTemp, new { id = "opertempo", @name = "opertempo", @class = "inline", @type = "checkbox",@readonly="readonly" })
+												M/c operating temporarily
+											</label>
+										</div>
+									</td>
+								</tr>
+							</div>
+						</table>
+					</div>
+					<!-- Row4 -->
+					<div style="padding-left: 40px">
+						<table class="table " style="width: 1030px; padding-left: 30px;">
+							<div class="controls-row">
+								<tr>
+									<td class="span10">
+										<div style="text-align: left; vertical-align: middle;">
+											<label>
+												<strong>Fault 1 : </strong>
+												Precise nature of the fault : (In the box below, please mention briefly eg : Bearing failure)
+											</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span10">
+									@*<textarea rows="1" class="span10" type="text" id="fault1"></textarea></td>*@
+									@Html.TextAreaFor(m => m.MFR.Fault, new { @id = "fault", @name = "fault", rows = 1, columns = 20, @style = "width:900px", @placeholder = "Nature of Fault in Brief",@readonly="readonly" })
+								</tr>
+								<tr>
+									<td class="span10">
+										<div style="text-align: left; vertical-align: middle;">
+											<label>
+												<strong>Analysis of the possible cause of fault / failure :</strong>
+												(In the box below, please provide us with your observations, and analysis in as much details as possible using 5 why analysis)
+											</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span10">
+										<div style="text-align: left; vertical-align: middle;">
+											<label>
+												<strong>5 - Why Analysis : </strong>
+												Ask the concerned person 5 times why on the given situation and record the answer obtained in the same sequence.
+											</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span10">
+										<div style="text-align: left; vertical-align: middle;">
+											<label><strong>Why did this happen? </strong></label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span10">
+										@*<textarea rows="1" class="span10" type="text" id="fault1"></textarea></td>*@
+										@Html.TextAreaFor(m => m.MFR.Ask1, new { @id = "ask1", @name = "ask1", rows = 1, columns = 20, @style = "width:900px", @placeholder = "Reason",@readonly="readonly" })
+								</tr>
+
+								<tr>
+									<td class="span10">
+										<div style="text-align: left; vertical-align: middle;">
+											<label>
+												<strong>Remedial Action already taken :</strong>
+												(In the box below, please tell us what is the present state of the machine and what is the nature of the remnedial action taken by you based on the above 5 why analysis)
+											</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="span10">
+										@*<textarea rows="1" class="span10" type="text" id="fault1"></textarea></td>*@
+										@Html.TextAreaFor(m => m.MFR.Remedial, new { @id = "remedial", @name = "remedial", rows = 1, columns = 20, @style = "width:900px", @placeholder = "Remedial Action Taken", @readonly="readonly" })
+								</tr>
+							</div>
+						</table>
+					</div>
+					<!-- Row5 -->
+					<div style="padding-left: 40px">
+						<table class="table" style="width: 1030px; padding-left: 30px;">
+							<div class="controls-row">
+								<tr>
+									<td colspan="4">
+										<div style="text-align: left; vertical-align: middle;">
+											<label>
+												<strong>Parts that needs to be replaced : </strong>
+											</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 50px; text-align: center;">No</td>
+									<td style="width: 50px; text-align: center;">Qty</td>
+									<td style="width: 200px; text-align: center;">Part Number</td>
+									<td style="text-align: center;">Description</td>
+								</tr>
+								<tr>
+									@Html.HiddenFor(m => m.MFRParts1.ProductModelSparesID)
+									@Html.HiddenFor(m => m.MFRParts1.Quantity)
+                                    @Html.HiddenFor(m => m.MFRParts1.ProductModelSpare.BuhlerPresentStock)
+                                    @Html.HiddenFor(m=>m.MFRParts1.ProductModelSpare.IsDeleted)
+									<td style="width: 50px; text-align: center;">1</td>
+									<td style="width: 50px; text-align: center;">
+									@*@Html.DropDownListFor(model => model.MFRParts1.Quantity, listItems1, "-- Select Quantity --", new { @id = "qty1",@style="width:100px", @name = "qty1", @required = "required" ,@Disabled="disabled"})*@
+									@Html.TextBoxFor(model => model.MFRParts1.Quantity, new { id = "qty1", @class = "input-medium fntst", @readonly = "readonly",@style="width:100px", @placeholder = "Quantity" })
+									</td>
+									<td style="width: 300px; text-align: center;">
+										@Html.DropDownListFor(m => m.MFRParts1.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID1"], "--Select Model--", new { id = "ProductModelSparesID1", @required = "required",@Disabled="disabled" })
+                                        @Html.HiddenFor(m => m.MFRParts1.ProductModelSparesID)
+									</td>
+									<td style="text-align: center;">
+										@Html.TextBoxFor(model => model.MFRParts1.ModelDesc, new { id = "moddes1", @type = "text", @class = "fntst", @style="width:430px", @readonly = "readonly" })
+									</td>
+								</tr>
+								<tr>
+									@Html.HiddenFor(m => m.MFRParts2.ProductModelSparesID)
+									@Html.HiddenFor(m => m.MFRParts2.Quantity)
+                                    @Html.HiddenFor(m => m.MFRParts2.ProductModelSpare.BuhlerPresentStock)
+                                     @Html.HiddenFor(m=>m.MFRParts2.ProductModelSpare.IsDeleted)
+									<td style="width: 50px; text-align: center;">2</td>
+									<td style="width: 50px; text-align: center;">
+								@*	@Html.DropDownListFor(model => model.MFRParts2.Quantity, listItems2, "-- Select Quantity --", new { @id = "qty2",@style="width:100px", @name = "qty2", @required = "required",@Disabled="disabled" })*@
+									@Html.TextBoxFor(model => model.MFRParts2.Quantity, new { id = "qty2", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity",@style="width:100px" })
+									</td>
+									<td style="width: 300px; text-align: center;">
+										@Html.DropDownListFor(m => m.MFRParts2.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID2"], "--Select Model--", new { id = "ProductModelSparesID2", @required = "required",@Disabled="disabled" })
+									</td>
+									<td style="text-align: center;">
+										@Html.TextBoxFor(model => model.MFRParts2.ModelDesc, new { id = "moddes2", @type = "text",@style="width:430px", @class = "fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+								<tr>
+									@Html.HiddenFor(m => m.MFRParts3.ProductModelSparesID)
+									@Html.HiddenFor(m => m.MFRParts3.Quantity)
+                                    @Html.HiddenFor(m => m.MFRParts3.ProductModelSpare.BuhlerPresentStock)
+                                     @Html.HiddenFor(m=>m.MFRParts3.ProductModelSpare.IsDeleted)
+									<td style="width: 50px; text-align: center;">3</td>
+									<td style="width: 50px; text-align: center;">
+									@*@Html.DropDownListFor(model => model.MFRParts3.Quantity, listItems3, "-- Select Quantity --", new { @id = "qty3",@style="width:100px", @name = "qty3", @required = "required",@Disabled="disabled" })*@
+									@Html.TextBoxFor(model => model.MFRParts3.Quantity, new { id = "qty3", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity",@style="width:100px"})
+									<td style="width: 300px; text-align: center;">
+										@Html.DropDownListFor(m => m.MFRParts3.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID3"], "--Select Model--", new { id = "ProductModelSparesID3", @required = "required",@Disabled="disabled"})
+									</td>
+									<td style="text-align: center;">
+										@Html.TextBoxFor(model => model.MFRParts3.ModelDesc, new { id = "moddes3", @type = "text",@style="width:430px", @class = "fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+                                <tr>
+									@Html.HiddenFor(m => m.MFRParts4.ProductModelSparesID)
+									@Html.HiddenFor(m => m.MFRParts4.Quantity)
+                                    @Html.HiddenFor(m => m.MFRParts4.ProductModelSpare.BuhlerPresentStock)
+                                     @Html.HiddenFor(m=>m.MFRParts4.ProductModelSpare.IsDeleted)
+									<td style="width: 50px; text-align: center;">4</td>
+									<td style="width: 50px; text-align: center;">
+									@*@Html.DropDownListFor(model => model.MFRParts4.Quantity, listItems4, "-- Select Quantity --", new { @id = "qty4",@style="width:100px", @name = "qty4", @required = "required" ,@Disabled="disabled"})*@
+									@Html.TextBoxFor(model => model.MFRParts4.Quantity, new { id = "qty4", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity",@style="width:100px" })
+									</td>
+									<td style="width: 300px; text-align: center;">
+										@Html.DropDownListFor(m => m.MFRParts4.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID4"], "--Select Model--", new { id = "ProductModelSparesID4", @required = "required",@Disabled="disabled" })
+                                        @Html.HiddenFor(m => m.MFRParts4.ProductModelSparesID)
+									</td>
+									<td style="text-align: center;">
+										@Html.TextBoxFor(model => model.MFRParts4.ModelDesc, new { id = "moddes4", @type = "text", @class = "fntst", @style="width:430px", @readonly = "readonly" })
+									</td>
+								</tr>
+                                <tr>
+									@Html.HiddenFor(m => m.MFRParts5.ProductModelSparesID)
+									@Html.HiddenFor(m => m.MFRParts5.Quantity)
+                                    @Html.HiddenFor(m => m.MFRParts5.ProductModelSpare.BuhlerPresentStock)
+                                     @Html.HiddenFor(m=>m.MFRParts5.ProductModelSpare.IsDeleted)
+									<td style="width: 50px; text-align: center;">5</td>
+									<td style="width: 50px; text-align: center;">
+									@*@Html.DropDownListFor(model => model.MFRParts5.Quantity, listItems5, "-- Select Quantity --", new { @id = "qty1",@style="width:100px", @name = "qty1", @required = "required" ,@Disabled="disabled"})*@
+									@Html.TextBoxFor(model => model.MFRParts5.Quantity, new { id = "qty5", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style="width:100px"})
+									</td>
+									<td style="width: 300px; text-align: center;">
+										@Html.DropDownListFor(m => m.MFRParts5.ProductModelSparesID, (SelectList)ViewData["ProductModelSparesID5"], "--Select Model--", new { id = "ProductModelSparesID5", @required = "required",@Disabled="disabled" })
+                                        @Html.HiddenFor(m => m.MFRParts5.ProductModelSparesID)
+									</td>
+									<td style="text-align: center;">
+										@Html.TextBoxFor(model => model.MFRParts5.ModelDesc, new { id = "moddes5", @type = "text", @class = "fntst", @style="width:430px", @readonly = "readonly" })
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<div style="text-align: left; vertical-align: middle;">
+											<label>
+												Signature of the sender :
+											</label>
+										</div>
+									</td>
+									<td>
+										<label></label>
+									</td>
+								</tr>
+							</div>
+						</table>
+					</div>
+					<!-- Row6 -->
+					<div style="padding-left: 40px">
+						<table class="table" style="width: 1030px; padding-left: 30px;">
+							<div class="controls-row">
+								<tr>
+									<td colspan="4">
+										<div style="text-align: left; vertical-align: middle;">
+											<label>
+												For BBAN use only (Do not write anything below this line)
+											</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 80px; text-align: center;">Recd on</td>
+									<td style="width: 200px; text-align: center;">
+										@Html.TextBoxFor(model => model.MFRBBAN.RecdOn, new { id = "recdon", @class = "fntst", @placeholder = "Recorded On",@required="required"})
+										@Html.ValidationMessageFor(model => model.MFRBBAN.RecdOn)
+									</td>
+									<td style="width: 150px; text-align: center;">MFR processed by :</td>
+									<td style="width: 200px; text-align: left;" colspan="3">&nbsp;
+										@Html.TextBoxFor(model => model.MFRBBAN.MFRProcessedBy, new { id = "mfrproc", @class = "fntst",@required="required", @placeholder = "MFR Processed By", Value=@ViewBag.LoginName1})
+										@Html.ValidationMessageFor(model => model.MFRBBAN.MFRProcessedBy)
+									</td>
+								</tr>
+								@*<tr>
+									<td style="width: 80px; text-align: center;">MFR No / yr</td>
+									<td style="width: 200px; text-align: center;">
+										@Html.TextBoxFor(model => model.MFRBBAN.MFRNoYear, new { id = "mfryear", @class = "fntst", @placeholder = "MFR No/Year ",@required="required" })
+										@Html.ValidationMessageFor(model => model.MFRBBAN.MFRNoYear)
+									</td>
+                                </tr>*@
+								<tr>
+									@*<td style="width: 80px; text-align: center;">AOD date :</td>
+									<td style="width: 200px; text-align: center;">
+										@Html.TextBoxFor(model => model.MFRBBAN.AODDat, new { id = "aod", @class = "input-medium fntst", @placeholder = "Select Date", @readonly = "readonly" , @required="required"})
+									</td>*@
+									<td style="width: 150px; text-align: center;"> Date :</td>
+									<td style="width: 200px; text-align: left;" colspan="3">&nbsp;
+										@Html.TextBoxFor(model => model.MFRBBAN.DispatchDat, new { id = "dis", @class = "input-medium fntst dat",@readonly = "readonly", @required="required" })
+									</td>
+								</tr>
+							</div>
+						</table>
+					</div>
+					<div class="span10 pad ">
+						<div class="span3 cent">
+							@*<button class="btn btn-large btn-success" type="button">Generate</button>*@
+							@*<input type="submit" value="Submit" class="btn btn-large btn-success"/>*@
+							<input type="submit" id="sbmt_Approve" name="btnapproval" value="Approve" class="btn btn-large btn-success" onclick ="return inStock();javascript: return validateform();" />
+
+							<input type="submit" id="sbmt_Reject" name="btnrejected" value="Reject" class="btn btn-large btn-success" onclick ="javascript: return validateform();" />
+						<script type="text/javascript">
+                            function inStock() {
+                                var qty1 = $("#MFRParts1_Quantity").val();
+                                var qty2 = $("#MFRParts2_Quantity").val();
+                                var qty3 = $("#MFRParts3_Quantity").val();
+                                var qty4 = $("#MFRParts4_Quantity").val();
+                                var qty5 = $("#MFRParts5_Quantity").val();
+                                var pname1 = $("#ProductModelSparesID1 option:selected").text();
+                                var pname2 = $("#ProductModelSparesID2 option:selected").text();
+                                var pname3 = $("#ProductModelSparesID3 option:selected").text();
+                                var pname4 = $("#ProductModelSparesID4 option:selected").text();
+                                var pname5 = $("#ProductModelSparesID5 option:selected").text();
+                                var MFR1 = $("#MFRParts1_ProductModelSpare_BuhlerPresentStock").val();
+                                var MFR2 = $("#MFRParts2_ProductModelSpare_BuhlerPresentStock").val();
+                                var MFR3 = $("#MFRParts3_ProductModelSpare_BuhlerPresentStock").val();
+                                var MFR4 = $("#MFRParts4_ProductModelSpare_BuhlerPresentStock").val();
+                                var MFR5 = $("#MFRParts5_ProductModelSpare_BuhlerPresentStock").val();
+                                var isdel1 = $("#MFRParts1_ProductModelSpare_IsDeleted").val();
+                                var isdel2 = $("#MFRParts2_ProductModelSpare_IsDeleted").val();
+                                var isdel3 = $("#MFRParts3_ProductModelSpare_IsDeleted").val();
+                                var isdel4 = $("#MFRParts4_ProductModelSpare_IsDeleted").val();
+                                var isdel5 = $("#MFRParts5_ProductModelSpare_IsDeleted").val();
+                              //  alert(isdel1)
+                                if (parseInt(isdel1) == 1)
+                                    // alert(1)
+                                {
+                                    //alert(0)
+                                    alert(pname1 + " is already deleted")
+                                    $("#sbmt_Approve").prop('disabled', true);
+                                    $("#sbmt_Approve").prop('readonly', 'readonly');
+                                }
+                                else {
+
+                                    if (parseInt(qty1) > parseInt(MFR1)) {
+                                        // alert(1)
+                                        alert(pname1 + " is not in stock, present  availability in stock is " + MFR1 + " only.");
+                                        $("#sbmt_Approve").prop('disabled', true);
+                                        $("#sbmt_Approve").prop('readonly', 'readonly');
+                                        //}
+
+                                        // alert(1.1)
+                                    }
+                                }
+                                // alert(2.0)
+                                if (parseInt(isdel2) == 1)
+                                    // alert(1)
+                                {
+                                    //alert(0)
+                                    alert(pname2 + " is already deleted")
+                                    $("#sbmt_Approve").prop('disabled', true);
+                                    $("#sbmt_Approve").prop('readonly', 'readonly');
+                                }
+                                else {
+                                    if (parseInt(qty2) > parseInt(MFR2)) {
+                                        //   alert(2)
+                                        alert(pname2 + " is not in stock, present availability in stock is " + MFR2 + " only.");
+                                        $("#sbmt_Approve").prop('disabled', true);
+                                    }
+                                }
+                                if (parseInt(isdel3) == 1)
+                                    // alert(1)
+                                {
+                                    //alert(0)
+                                    alert(pname3 + " is already deleted")
+                                    $("#sbmt_Approve").prop('disabled', true);
+                                    $("#sbmt_Approve").prop('readonly', 'readonly');
+                                }
+                                else {
+                                    if (parseInt(qty3) > parseInt(MFR3)) {
+                                        // alert(3)
+                                        alert(pname3 + " is not in stock, present  availability in stock is " + MFR3 + " only.");
+                                        $("#sbmt_Approve").prop('disabled', true);
+                                        // return false;
+                                    }
+                                }
+                                if (parseInt(isdel4) == 1)
+                                    // alert(1)
+                                {
+                                    //alert(0)
+                                    alert(pname4 + " is already deleted")
+                                    $("#sbmt_Approve").prop('disabled', true);
+                                    $("#sbmt_Approve").prop('readonly', 'readonly');
+                                }
+                                else {
+                                    if (parseInt(qty4) > parseInt(MFR4)) {
+                                        //  alert(4)
+                                        alert(pname4 + " is not in stock, present  availability in stock is " + MFR4 + " only.");
+                                        $("#sbmt_Approve").prop('disabled', true);
+                                        //  return false;
+                                    }
+                                }
+                                if (parseInt(isdel5) == 1)
+                                    // alert(1)
+                                {
+                                    //alert(0)
+                                    alert(pname5 + " is already deleted")
+                                    $("#sbmt_Approve").prop('disabled', true);
+                                    $("#sbmt_Approve").prop('readonly', 'readonly');
+                                }
+                                else {
+                                    if (parseInt(qty5) > parseInt(MFR5)) {
+                                        // alert(5)
+                                        alert(pname5 + " is not in stock, present  availability in stock is " + MFR5 + " only.");
+                                        $("#sbmt_Approve").prop('disabled', true);
+                                        //return false;
+                                    }
+                                }
+                                //return false;
+                            }
+                        </script>
+                        </div>
+					</div>
+					<!--End Of Buttons-->
+				</div>
+			</div>
+		}
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var now = new Date();
+		var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+		//$('#datePicker').datepicker({format: 'dd/mm/yyyy'}).val(today);
+		$('.dat').val(today);
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var now = new Date();
+		var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+		$('.sss').datepicker({
+			format: 'dd/mm/yyyy',
+			onRender: function (date) {
+				return date.valueOf() > now.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			$(this).datepicker('hide');
+		});
+	});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();
+        $('.ssss').datepicker({
+            dateFormat: 'dd-mm-yyyy',
+            //onRender: function (date) {
+            //	return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            //}
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    });
+</script>

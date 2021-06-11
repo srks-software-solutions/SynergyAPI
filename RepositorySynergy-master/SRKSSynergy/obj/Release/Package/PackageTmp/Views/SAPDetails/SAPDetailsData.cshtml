@@ -1,0 +1,160 @@
+﻿@model SRKSSynergy.Models.OAEquipGeneralData
+@{
+    ViewBag.Title = "SAPDetailsData";
+}
+
+
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<div style="background: gray; padding-bottom: 15px">
+    <p class="txtft">Enter SAP Details</p>
+</div>
+
+<div class="bcgr" style="min-height: 700px">
+	@using (Html.BeginForm("SAPDetailsData", "SAPDetails", FormMethod.Post))
+ {
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+
+       @Html.HiddenFor(m => m.OAID)
+       @Html.HiddenFor(m => m.CompanyUniqueID)
+       @Html.HiddenFor(m => m.OADate)
+       @Html.HiddenFor(m => m.CPID)
+       @Html.HiddenFor(m => m.QGID)               
+
+		
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+								
+				<div class="span12 pad">
+					<p class="pad txtal">Contact Details</p>
+					<!--<div class="span3">-->
+					<div class="accordion" id="accordion2">
+						<!--Contact address Person 1-->
+						<div class="accordion-group">							
+							<div class="accordion-body">
+								<div class="accordion-inner">									
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Company Id</label>
+												<div class="controls">
+													@Html.DisplayFor(m => m.CompanyUniqueID)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Channel Partner</label>
+												<div class="controls">
+													@Html.DisplayFor(m => m.ChannelPartners.CPName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">OA Approval Date</label>
+												<div class="controls">
+														@Html.DisplayFor(m => m.OADate)
+												</div>
+											</div>
+										</div>
+									</div>
+									
+                                    <div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Enter SAP Number</label>
+												<div class="controls">
+												<input style="height:30px"  type="text" class="fntst" id="sapno" name="sapno" placeholder="Enter SAP Number" required="required">
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Enter SAP Date</label>
+												<div class="controls">
+											<input style="height:30px"  type="text" class="fntst sss" id="sapdate" name="sapdate"  placeholder="Select SAP Date" required="required">
+												</div>
+											</div>
+										</div>
+										@*<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Last Name</label>
+												<div class="controls">
+													
+												</div>
+											</div>
+										</div>*@
+									</div>
+
+								</div>
+							</div>
+						</div>						
+					</div>
+				</div>
+				<!--Row6-->
+			</div>
+		</div>
+     
+		
+		<div class="span10 pad ">
+            <div class="span3 cent" style="padding-left: 2%">
+			    <button class="btn btn-success btn-large glyphicon glyphicon-arrow-left" style="display: inline;">@Html.ActionLink(" Back_to_List", "SAPOA","SAPDetails", new { @Style="color:white;text-decoration:none"})</button>
+            </div>
+            <div class="span3 cent" style="padding-left: 10%">
+				<button class="btn btn-success glyphicon glyphicon-cloud-upload" value="post" type="Submit"> Save</button>
+            </div>
+		</div>
+ }
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+        //$('#datePicker').datepicker({format: 'dd/mm/yyyy'}).val(today);
+        $('.dat').val(today);
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+        $('.sss').datepicker({
+            format: 'yyyy-mm-dd',
+            //onRender: function (date) {
+            //	return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            //}
+
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    });
+</script>
+
+@*hide error message after 10 seconds(10000 milliseconds)*@
+<script>
+    $(document).ready(function () {
+        $(".ErrorMsg").fadeOut(10000);
+    });
+</script>
+
+
+

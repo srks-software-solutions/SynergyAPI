@@ -1,0 +1,141 @@
+﻿
+@model IList<SRKSSynergy.Models.OAEquipGeneralData>
+@{
+    ViewBag.Title = "SAPRiceOA";    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("OAApprovalPrint", "OA", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a> 
+    if (id == ViewBag.sortBy)
+    {
+    <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}
+@* End Of Paging & Sorting Code *@
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+@Scripts.Render("~/bundles/modernizr")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cunam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/OA/Autocompleteappprint",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<input type="text" id="success" value="false" style="display: none;" />
+<form action="@Url.Action("OAApprovalPrint", "OA")" method="get">
+    <div style="background: #e5e5e5;">
+        <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">Order Booked SAP</p>
+        </div>
+        <div class="row" style="padding-top: 10px">
+            <div class=" row show-grid">
+                <div class="span12 pad ">
+                    <div class="span2">
+                        <div class="control-group ">
+                            <label class="control-label fntst ">Customer Name</label>
+                            <div class="controls ">
+                                <input style="height:30px" type="text" class="fntst excus" value="@ViewBag.Search" id="cunam" name="cunam" placeholder="Customer Name">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="span2">
+                        <div class="cent3"  style="margin-bottom:0px">
+                            @*<input type="submit" value="Get Details" class="btn btn-info existingcustomer" onclick="javascript: return updateparent();" />*@
+                            @*<input type="submit" value="Get Details" id="gd" class="btn btn-info existingcustomer"  style="margin-bottom:0px;padding-top:6%"/>*@
+                            <button type="submit" id="gd" class="btn btn-info existingcustomer glyphicon glyphicon-paste"  > Get_Details</button>
+                            @*onclick="javascript: return updateparent();"*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (ViewBag.IsSearch == true)
+{
+    <div id="getquotations">
+        <table class="table table-striped" style="width: 100%">
+            @* header *@
+            <tr align="center">
+                <th align="center" style="width: 50px; text-align: center">@sortLink("SL.No", 1)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Order Acknowledgement No", 2)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Customer Name", 3)</th>                
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Channel Partner Quotation No", 5)</th>
+                <th align="center" style="width: 60px; text-align: center">@sortLink("OA Approval Date", 6)</th>
+                <th align="center" style="width: 120px; text-align: center">SAP Details</th>
+            </tr>
+            @{
+                SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+                int i = 1;
+                int slno = 1;
+             }
+            @foreach (var p in Model)
+            {    
+                <tr class="@(i++ % 2 == 0 ? "highlighted" : "")">
+                    <td align="center" style="width: 50px; text-align: center">@slno</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.OANumber</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.MDBGeneralData.OrganizationName</td>                    
+                    <td align="center" style="width: 100px; text-align: center">@p.CPQuotationNumber</td>
+                    <td align="center" style="width: 60px; text-align: center">@Html.DisplayFor(modelitem => p.Approvaldate)</td>
+                    <td align="center" style="width: 120px; text-align: center">
+                        
+                        @if (p.ApprovalStatus == 1)
+                        { 
+                            int oaid=db.OASAPDetails.Where(m=>m.OrderID==p.OAID).Where(m=>m.IsRice==0).Count();
+                            if(oaid==0)
+                            {
+                            @Html.ActionLink(" Add", "SAPDetailsData", new { oaid = p.OAID }, new { @align = "center", @style = "text-align:center", @class = "btn btn-info existingcustomer glyphicon glyphicon-plus" })
+                            }
+                            else
+                            {
+                               @Html.ActionLink(" Edit", "SAPDetailsDataEdit", new { oaid = p.OAID }, new { @align = "center", @style = "text-align:center", @class = "btn btn-info existingcustomer glyphicon glyphicon-pencil" }) 
+                            }
+                        }
+                    </td>
+                </tr>
+                        slno++;
+            }
+
+        </table>
+
+        @*<div class="pagination" style="font-size: 18px; font-family: Calibri; float: right; padding-right: 70px">
+            Page: 
+            @pageLinks()
+        </div>*@
+    </div>
+}
+

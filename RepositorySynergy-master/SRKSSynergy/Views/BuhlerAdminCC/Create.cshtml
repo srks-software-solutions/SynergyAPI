@@ -1,0 +1,119 @@
+﻿@model SRKSSynergy.Models.BuhlerAdminCC
+@{
+    ViewBag.Title = "Create";
+}
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+<style>
+    .validation-summary-valid {
+        display: none;
+    }
+</style>
+<div class="bcgr" style="min-height: 650px">
+    <div style="background: gray; height: 60px">
+        <p class="txtft">Create Buhler Mail ID (CC Mail)</p>
+    </div>
+    <div class="divider"></div>
+
+    <div class="container">
+        <div id="UploadErrors">
+            @if (Session["tick"] != null)
+            {
+                <pre>
+<span style="font-family:Calibri;font-size:13px">@Session["tick"]</span>
+                    </pre>
+                Session["tick"] = null;
+            }
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)	
+      
+            					
+            <div class="row" style="padding-top:5%">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label">Name</label>
+                        @Html.TextBoxFor(model => model.Name, new { @id = "name", @placeholder = "Enter Name", @class = "form-control",@style="height:30px", @required = "required" })
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label">Email ID</label>
+                        @Html.TextBoxFor(model => model.EmailId, new { @id = "emails", @placeholder = "Enter Email", @class = "form-control", @required = "required",@style="height:30px" })
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label">Designation</label>
+                        @Html.TextBoxFor(model => model.Designation, new { @id = "designation", @placeholder = "Designation", @class = "form-control", @required = "required" ,@style="height:30px"})
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label">Mail Type</label>
+                        @*@Html.TextBoxFor(model => model.CCType, new { @id = "cctype", @placeholder = "Mail Type", @class = "form-control", @required = "required" })*@
+                        <select id="cctype" name="cctype" class="fntst" required="required" style="height:30px">
+                            <option value="Admin">Admin</option>
+                            <option value="Zone">Zone</option>
+                            <option value="Spares">SparesAdmin</option>
+                        </select>
+                    </div>
+
+                    <div id="zones" class="form-group" hidden="hidden">
+                        <label class="col-sm-12 control-label">Zone's</label>
+                        @Html.DropDownList("ZoneID", null, "--Select--", new { @id = "zoneid", @name = "zoneid", @class = "fntst" })
+                    </div>
+                </div>
+            </div>			
+            <br />
+            <div class="span10 pad ">
+            <div class="span3 cent" style="padding-left: 2%">
+			    <button class="btn btn-success btn-large glyphicon glyphicon-arrow-left" style="display: inline;">@Html.ActionLink(" Back_to_List", "Index","BuhlerAdminCC", new { @Style="color:white;text-decoration:none"})</button>
+            </div>
+            <div class="span3 cent" style="padding-left: 10%">
+				<button class="btn btn-success glyphicon glyphicon-cloud-upload" value="post" type="Submit"> Save</button>
+            </div>
+		</div>
+        }
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#cctype").change(function () {
+        var val = $("#cctype").val();
+
+        if (val == "Zone") {
+            $("#zones").show();
+        }
+        else {
+            $("#zones").hide();
+        }
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    setTimeout(function () {
+        $('#UploadErrors').fadeOut('slow');
+    }, 10000); // <-- time in milliseconds
+</script>
+
+

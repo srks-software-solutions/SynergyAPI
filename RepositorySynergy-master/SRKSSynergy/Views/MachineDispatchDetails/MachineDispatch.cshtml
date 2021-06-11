@@ -1,0 +1,186 @@
+﻿
+@model SRKSSynergy.Models.MachineDispatch
+
+@{
+	ViewBag.Title = "Machine Dispatch Inventory";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+<style>
+	.validation-summary-valid {
+		display: none;
+	}
+</style>
+<div class="bcgr" style="min-height: 590px">
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Machine Dispatch Details</p>
+		</div>
+@* No Success *@
+		if (TempData["Oadate"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["Oadate"]</p>
+		}
+@* Customer Added *@
+		if (TempData["customer"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["customer"]</p>
+		}      
+@*<div class="bcgr">*@ 
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Machine Serial Number</label>
+							<div class="controls">
+								<input type="text" class="fntst" id="macslno" placeholder="Machine Serial No" readonly="readonly" Value = "@ViewBag.MacSlNo" >								
+								@Html.HiddenFor(m => m.MachineInventoryID, new { Value = ViewBag.Macid})
+                                @Html.HiddenFor(m => m.ProductModelID, new {Value=ViewBag.ProductModelID})
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Customer Name</label>
+							<div class="controls">
+								<input type="text" class="fntst" id="custname" placeholder="Customer Name" readonly="readonly" Value = "@ViewBag.CustNM" >
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Order Acknowledgement Number</label>
+							<div class="controls">
+								@*@Html.DropDownListFor(m => m.OANumber, (IEnumerable<SelectListItem>)ViewBag.OANumber, "--Select--", new { @id = "OANumber", @required = "required" })*@
+								@Html.DropDownListFor(m => m.OANumber, (SelectList)ViewData["OANumber"], "--Select--", new { id = "OANumber", @required = "required" })
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">OA Date</label>
+							<div class="controls">
+									@Html.TextBoxFor(model => model.OADate, new {id = "dte", @class = "fntst", @placeholder = "OA Date", @required = "required",@readonly="readonly"})                           	
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Invoice Number</label>
+							<div class="controls">
+								@Html.TextBoxFor(model => model.InvoiceNumber, new { id = "invno", @class = "fntst", @placeholder = "Invoicce Number", @required = "required" })
+								@Html.ValidationMessageFor(model => model.InvoiceNumber)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Invoice Date</label>
+							<div class="controls">
+								@Html.TextBoxFor(model => model.InvoiceDate, new { @id = "invdate", @class = "fntst sss", @placeholder = "Invoice Date", @readonly="readonly" , @required = "required"})
+								@Html.ValidationMessageFor(model => model.InvoiceDate)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">LR Number</label>
+							<div class="controls">
+								@Html.TextBoxFor(model => model.LRNumber, new { id = "lrno", @class = "fntst", @placeholder = "LR Number", @required = "required" })
+								@Html.ValidationMessageFor(model => model.LRNumber)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Dispatch Date</label>
+							<div class="controls">
+								@Html.TextBoxFor(model => model.DispatchDate, new { @id = "dispdate", @class = "fntst sss", @placeholder = "Dispatch Date" , @readonly="readonly", @required = "required"})
+								@Html.ValidationMessageFor(model => model.DispatchDate)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Transporter</label>
+							<div class="controls">
+								@Html.TextBoxFor(model => model.Transporter, new { id = "transp", @class = "fntst", @placeholder = "Transporter", @required = "required" })
+								@Html.ValidationMessageFor(model => model.Transporter)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad ">
+					<div class="span3 cent" style="padding-left: 300px">
+						<input type="submit" name="btnsave" value="Save" class="btn btn-large btn-success" />
+						@*<input type="submit" name="btndispatch" value="Dispatch" class="btn btn-large btn-success" />*@
+					</div>
+					<p style="color: red; font-family: Calibri; font-size: 18px; font-weight: 900">
+						@Html.Label("", Convert.ToString((string)ViewBag.Duplicate))
+					</p>
+				</div>
+
+			</div>
+		</div>
+	
+	}
+
+	<div>
+		@Html.ActionLink("Back to List", "Index")
+	</div>
+</div>
+@section Scripts {
+		@Scripts.Render("~/bundles/jqueryval")
+	}
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("select#OANumber").change(function (evt) {
+			{
+				var selectedID = $("#OANumber option:selected").val();
+				$.getJSON("/MachineDispatchDetails/GetOAdate", { ID: selectedID}, function (data) {
+					//Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+				    var d = $('#dte').val(data.OADate);				  
+				});
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var now = new Date();
+		var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+		$('.sss').datepicker({
+			format: 'yyyy-mm-dd',
+			//onRender: function (date) {
+			//	return date.valueOf() < now.valueOf() ? 'disabled' : '';
+			//}
+
+		}).on('changeDate', function (ev) {
+			$(this).datepicker('hide');
+		});
+	});
+</script>

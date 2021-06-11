@@ -1,0 +1,270 @@
+﻿@model IEnumerable<SRKSSynergy.Models.InwardSpare>
+
+@{
+    ViewBag.Title = "Inward Spare";
+    int slno = 1;
+}
+
+@* Paging & Sorting Code  *@
+
+@helper buildLinks(int start, int end, string innerContent)
+{
+    for (int i = start; i <= end; i++)
+    {
+    <a class="@(i == ViewBag.CurrentPage ? "current" : "")"  href="@Url.Action("Index", "Inward", new { page = i, sortBy = ViewBag.sortBy, isAsc = ViewBag.isAsc.ToString().ToLower(), search = ViewBag.Search })">@(innerContent ?? i.ToString())</a>      
+    }
+    
+}
+
+
+@*@helper pageLinks()
+{
+    const int maxPages = 11;
+
+    if (ViewBag.TotalPages <= maxPages)
+    {
+    @buildLinks(1, (int)ViewBag.TotalPages, null)
+        return;
+    }
+
+    int pagesAfter = ViewBag.TotalPages - ViewBag.CurrentPage; // Number of pages after current
+    int pagesBefore = ViewBag.CurrentPage - 1; // Number of pages before current
+
+    if (pagesAfter <= 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st page
+
+        int pageSubset = ViewBag.TotalPages - maxPages - 1 > 1 ? ViewBag.TotalPages - maxPages - 1 : 2;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages - maxPages + 3, ViewBag.TotalPages, null) // Show last pages
+
+        return; // Exit
+    }
+
+    if (pagesBefore <= 4)
+    {
+    @buildLinks(1, maxPages - 2, null) // Show 1st pages
+
+
+        int pageSubset = maxPages + 2 < ViewBag.TotalPages ? maxPages + 2 : ViewBag.TotalPages - 1;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }
+
+    if (pagesAfter > 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st pages
+
+        int pageSubset1 = ViewBag.CurrentPage - 7 > 1 ? ViewBag.CurrentPage - 7 : 2;
+        int pageSubset2 = ViewBag.CurrentPage + 7 < ViewBag.TotalPages ? ViewBag.CurrentPage + 7 : ViewBag.TotalPages - 1;
+
+    @buildLinks(pageSubset1, pageSubset1, pageSubset1 == ViewBag.CurrentPage - 4 ? null : "...") // Show 1st page subset (...)
+
+    @buildLinks(ViewBag.CurrentPage - 3, ViewBag.CurrentPage + 3, null) // Show middle pages
+
+        // Show 2nd page subset (...)
+        // only show ... if page is contigous to the previous one.
+    @buildLinks(pageSubset2, pageSubset2, pageSubset2 == ViewBag.CurrentPage + 4 ? null : "...")
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }    
+}*@
+
+@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("Index", "Inward", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a> 
+    if (id == ViewBag.sortBy)
+    {
+    <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}
+
+@* End Of Paging & Sorting Code *@
+
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#equipname").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Inward/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.ProductModelSparesDesc, value: item.ProductModelSparesDesc };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+<div class="bcgr" style="min-height:590px;min-width:1410px">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Inward Spare</p>
+    </div>
+    <form action="@Url.Action("Index", "Inward")" method="post">
+        @* Create Equipment Link *@
+        <div style="padding-left: 20px;padding-top:10px">
+            @Html.ActionLink("Create New Inward", "AddInward", "Inward", new { @class = "btn btn-success", @Style = "text-decoration:none" })
+        </div>
+
+        @* Searching for a particular Model view *@
+        <div class="row">
+            <div class=" row show-grid">
+                @* Text Box for search *@
+                <div class="span12 pad ">
+                    <div class="span3 ">
+                        <div class="control-group ">                        
+                            <div class="controls" style="padding-left: 70px; padding-top: 23px">                          
+                               @Html.TextBox("equipname", null, new { @placeholder="Search for Inward item"})
+                            </div>
+                        </div>
+                    </div>           
+                    @* Button for Search *@
+                    <div class="span3" style="padding-top:20px">                           
+                           <input type="submit" style="width: 70px; height: 35px" value="Search" class="btn btn-info" />
+                    </div>
+                    @* End of buttons *@
+                    <span id="rData"></span>
+                </div>
+            </div>
+        </div>
+
+        @* Table for Equipment *@
+        <table class="table table-hover" style="width: 1410px;">
+            <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No.</span>
+                </th>
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Month</span>
+                </th>
+                <th style="width: 130px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px"> 
+                         @Html.DisplayNameFor(model => model.InwardType)</span>
+                </th>
+                <th style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    @Html.DisplayNameFor(model => model.PONumber)
+                </th>
+                                <th style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    Item Code
+                </th>
+
+                <th style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    @Html.DisplayNameFor(model => model.ProductModelSpare.ProductModelSparesDesc)
+                </th>
+                <th style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    @Html.DisplayNameFor(model => model.QuantityOrdered)
+               @* </th>
+                                <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">QuantityRemaining</span>
+                </th>*@
+                <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">AgentPrice</span>
+                </th>
+                                <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">TotalValue</span>
+                </th>
+                           <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Edit</span>
+                </th>
+                      @*     <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Discontinue</span>
+                </th>*@
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                                    @Html.DisplayFor(modelItem => item.InwardMonth)
+                    </td>
+                                        <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                                    @Html.DisplayFor(modelItem => item.InwardType)
+                    </td>
+                    <td style="width: 130px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.PONumber)
+                    </td>
+                    <td style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.ProductModelSpare.ProductModelSparesName)
+                    </td>
+                    <td style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.ProductModelSpare.ProductModelSparesDesc)
+                    </td>
+                    <td style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.QuantityOrdered)
+                    </td>
+                    @*<td style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.QuantityRemaining)
+                    </td>*@
+                    <td style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.ProductModelSpare.AgentPrice)
+                    </td>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.TotalValue)
+                    </td>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+
+                        @Html.ActionLink("Edit", "ModifyInward", "Inward", new { id = item.InwardID }, new { @class = "btn btn-success", @Style = "text-decoration:none" }) 
+                    </td>
+
+@*                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.ActionLink("Discontinue", "Discontinue","Inward", new { id=item.InwardID }, new { @class = "btn btn-success", @Style = "text-decoration:none" })
+                    </td>*@
+                </tr>
+                slno++;
+            }
+
+        </table>
+       @* <div class="pagination" style="font-size: 18px; font-family: Calibri;float:right;padding-right:70px">
+            Page: 
+            @pageLinks()
+        </div>*@
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datepicker').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'MM yy',
+            onClose: function (dateText, inst) {
+                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).datepicker('setDate', new Date(year, month, 1));
+            },
+            beforeShow: function (input, inst) {
+                if ((datestr = $(this).val()).length > 0) {
+                    year = datestr.substring(datestr.length - 4, datestr.length);
+                    month = jQuery.inArray(datestr.substring(0, datestr.length - 5), $(this).datepicker('option', 'monthNames'));
+                    $(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
+                    $(this).datepicker('setDate', new Date(year, month, 1));
+                }
+            }
+        });
+    });
+</script>

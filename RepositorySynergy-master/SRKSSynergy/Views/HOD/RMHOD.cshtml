@@ -1,0 +1,325 @@
+﻿
+@model IList<SRKSSynergy.Models.RiceOAEquipGeneralData>
+@{
+    ViewBag.Title = "RMHOD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* Paging & Sorting Code  *@
+
+@helper buildLinks(int start, int end, string innerContent)
+{
+    for (int i = start; i <= end; i++)
+    {
+    <a class="@(i == ViewBag.CurrentPage ? "current" : "")"  href="@Url.Action("RMHOD", "HOD", new { page = i, sortBy = ViewBag.sortBy, isAsc = ViewBag.isAsc.ToString().ToLower(), search = ViewBag.Search, cunam = ViewBag.CUNAM })">@(innerContent ?? i.ToString())</a>
+    }
+
+}
+
+
+@helper pageLinks()
+{
+    const int maxPages = 25;
+
+    if (ViewBag.TotalPages <= maxPages)
+    {
+    @buildLinks(1, (int)ViewBag.TotalPages, null)
+        return;
+    }
+
+    int pagesAfter = ViewBag.TotalPages - ViewBag.CurrentPage; // Number of pages after current
+    int pagesBefore = ViewBag.CurrentPage - 1; // Number of pages before current
+
+    if (pagesAfter <= 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st page
+
+        int pageSubset = ViewBag.TotalPages - maxPages - 1 > 1 ? ViewBag.TotalPages - maxPages - 1 : 2;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages - maxPages + 3, ViewBag.TotalPages, null) // Show last pages
+
+        return; // Exit
+    }
+
+    if (pagesBefore <= 4)
+    {
+    @buildLinks(1, maxPages - 2, null) // Show 1st pages
+
+
+        int pageSubset = maxPages + 2 < ViewBag.TotalPages ? maxPages + 2 : ViewBag.TotalPages - 1;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }
+
+    if (pagesAfter > 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st pages
+
+        int pageSubset1 = ViewBag.CurrentPage - 7 > 1 ? ViewBag.CurrentPage - 7 : 2;
+        int pageSubset2 = ViewBag.CurrentPage + 7 < ViewBag.TotalPages ? ViewBag.CurrentPage + 7 : ViewBag.TotalPages - 1;
+
+    @buildLinks(pageSubset1, pageSubset1, pageSubset1 == ViewBag.CurrentPage - 4 ? null : "...") // Show 1st page subset (...)
+
+    @buildLinks(ViewBag.CurrentPage - 3, ViewBag.CurrentPage + 3, null) // Show middle pages
+
+        // Show 2nd page subset (...)
+        // only show ... if page is contigous to the previous one.
+    @buildLinks(pageSubset2, pageSubset2, pageSubset2 == ViewBag.CurrentPage + 4 ? null : "...")
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }
+}
+
+@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("RMHOD", "HOD", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a>
+    if (id == ViewBag.sortBy)
+    {
+    <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+@* End Of Paging & Sorting Code *@
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+@Scripts.Render("~/bundles/modernizr")
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+        $('#frommonth').datepicker({
+            format: 'yyyy-mm-dd',
+            //onRender: function (date) {
+            //	return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            //}
+
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cunam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/RiceOA/Autocompleteappprint",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+<style>
+    .dispnone {
+    display:none
+    }
+    .dropdown-menu {
+        z-index: 1050;
+    }
+</style>
+<input type="text" id="success" value="false" style="display: none;" />
+<form action="@Url.Action("RMHOD", "HOD")" method="get">
+    <div style="background: #e5e5e5; ">
+        <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">Order Acknowledgement Print</p>
+        </div>
+        <div class="row" style="padding-top: 10px">
+            <div class=" row show-grid">
+                <div class="span12 pad ">
+                    <div class="span2">
+                        <div class="control-group ">
+                            <label class="control-label fntst ">Customer Name</label>
+                            <div class="controls ">
+                                <input style="height:30px" type="text" class="fntst excus" value="@ViewBag.Search" id="cunam" name="cunam" placeholder="Customer Name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="span2">
+                        <div class="cent3">
+                            @*<input type="submit" value="Get Details" class="btn btn-info existingcustomer" onclick="javascript: return updateparent();" />*@
+                            @*<input type="submit" value="Get Details" id="gd" class="btn btn-info existingcustomer" style="margin-bottom:0px;padding-top:6%" />*@
+                            <button type="submit" id="gd" class="btn btn-info existingcustomer glyphicon glyphicon-paste"  > Get_Details</button>
+                            @*onclick="javascript: return updateparent();"*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (ViewBag.IsSearch == true)
+{
+    <input id="hdn_uid" type="hidden" value="@ViewBag.UserId"/>
+    <div id="getquotations">
+        <table class="table table-striped" style="width: 100%">
+            @* header *@
+            <tr align="center">
+                <th align="center" style="width: 50px; text-align: center">@sortLink("SL.No", 1)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Order Acknowledgement No", 2)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Customer Name", 3)</th>
+                <th align="center" style="width: 150px; text-align: center">@sortLink("Subject", 4)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Channel Partner Quotation No", 5)</th>
+                <th align="center" style="width: 60px; text-align: center">@sortLink("Date", 6)</th>
+                <th align="center" style="width: 120px; text-align: center">Generate HOD</th>
+            </tr>
+            @{int i = 1;
+              int slno = 1;}
+            @foreach (var p in Model)
+            {
+                <tr class="@(i++ % 2 == 0 ? "highlighted" : "")">
+                    <td align="center" style="width: 50px; text-align: center">@slno</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.OANumber</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.MDBGeneralData.OrganizationName</td>
+                    <td align="center" style="width: 150px; text-align: center">@p.Subjectinfo</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.CPQuotationNumber</td>
+                    <td align="center" style="width: 60px; text-align: center">@Html.DisplayFor(modelitem => p.OADate)</td>
+
+                    <td  align="center" style="width: 60px; text-align: center">
+                         @if (p.IsDispatch == 1)
+                            {//item confirmation yes or no for updation of isdispatch == 2
+
+                                <button type="button" id="RiceOA_@p.ROAID" class="btn btn-danger btn-md" data-toggle="modal" data-target="#myModal" onclick="updateid(this);"><i class="glyphicon glyphicon-repeat" ></i>  <span style="padding:3px"> Generate</span></button>
+                                <h4 id="RiceOADispatched_@p.ROAID" class="dispnone"><i class="glyphicon glyphicon-check" style="color:green;"></i> <span class="label label-primary"> HOD Generated</span></h4>
+                            }
+                         else if (p.IsDispatch == 2)
+                            {//item received label
+                                <h4> <i class="glyphicon glyphicon-check" style="color:green;"></i> <span class="label label-primary"> HOD Generated</span></h4>
+                            }
+                    </td>
+                </tr>
+                        slno++;
+            }
+
+        </table>
+                <div class="modal fade op" id="myModal" role="dialog" style="border-radius: 04px;">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#245580;color:white">
+                        <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
+                        <h4 class="modal-title ">Machine Dispatch</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="hdn_id" />
+                        <div class="row" style="padding-left:25px">
+                           <div class="control-group">
+                            <label class="control-label fntst"> Date</label>
+                            <div class="controls">
+                                <input style="height:30px"  type="text" class="sss" id="frommonth" name="frommonth" required="required">
+                            </div>
+                        </div>
+                        </div>
+                        <div  class="row" style="padding-left:25px">
+                             <div class="control-group">
+                                 <textarea rows="5" id="maildetails" cols="70" style="margin-left: 0px; margin-right: 0px; width: 494px;max-width:534px;height:219px;max-height:246px" required="required"></textarea>
+                             </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-success" id="sendmail"  onclick="return updatestatus();">Generate</button>
+                            </div>
+
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function updateid(val) {
+                var id = $(val).attr('id');
+                id = id.split('_');
+                id = id[1];
+                $("#hdn_id").val(id);
+            }
+        </script>
+        <script type="text/javascript">
+            function updatestatus() {
+                var MFRid = $("#hdn_id").val();
+                var datem = $("#frommonth").val();
+                var details = $("#maildetails").val();
+                var uid = $("#hdn_uid").val();
+                if (datem == "" && details == "" || details == "" || datem == "") {
+                    alert('Please fill all the feilds');
+                    return false;
+                }
+                else {
+                    $("#sendmail").attr("data-dismiss", "modal");
+                    var data = {};
+                    data.id = MFRid;
+                    data.maildetails = details;
+                    data.date = datem;
+                    data.UID = uid;
+                    $.ajax({
+                        url: '/HOD/updateRiceOAstatus',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        // dataType: 'json',
+                        success: function (data) {
+                            //On ajax success do this
+                            $("#RiceOADispatched_" + MFRid).removeClass("dispnone");
+                            $("#RiceOA_" + MFRid).addClass("dispnone");
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            //On error do this
+                            if (xhr.status == 200) {
+
+                                alert(ajaxOptions);
+                            }
+                            else {
+                                alert(xhr.status);
+                                alert(thrownError);
+                            }
+                        }
+                    });
+                    return true;
+                }
+            }
+        </script>
+
+    </div>
+}
+

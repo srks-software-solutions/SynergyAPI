@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "RevisedLeadGenerationReport";
+}
+
+
+<div class="bcgr" style="min-height: 580px">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Revised Lead Generation Report</p>
+		</div>
+		
+     
+     
+		 @* Wrong Channel Partner *@
+		if (TempData["NoVal"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["NoVal"]</p>
+		}
+		<div class="span10 pad ">
+			<div class="span3 cent" style="padding-left: 70px">
+				<button class="btn btn-success" value="Create" type="Submit">Generate Report</button>
+			</div>
+		</div>
+	}
+</div>
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

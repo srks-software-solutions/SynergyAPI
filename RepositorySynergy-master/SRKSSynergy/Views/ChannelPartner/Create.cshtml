@@ -1,0 +1,1331 @@
+﻿@model SRKSSynergy.Models.MainChannelPartner
+
+@{
+	ViewBag.Title = "Channel Partner";
+}
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+@*<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-multiselect.css" rel="stylesheet" />*@
+@*<script src="~/Content/bootstrap/js/jquery-2.0.3.min.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-3.0.0.min.js"></script>*@
+@*<script src="~/Content/bootstrap/js/bootstrap-multiselect.js"></script>*@
+@*<script src="~/Content/bootstrap/js/bootstrap.js"></script>*@
+
+<script type="text/javascript">
+	function checkvalue(value) {
+		if (value === "others")
+			document.getElementById('ctype').style.display = 'block';
+		else {
+			document.getElementById('ctype').style.display = 'none';
+			$('#orype').val = value;
+		}
+	}
+</script>
+<script type="text/javascript">
+	function checkvaluet1(value) {
+		if (value === "otherst1")
+			document.getElementById('title').style.display = 'block';
+		else
+			document.getElementById('title').style.display = 'none';
+	}
+</script>
+<script type="text/javascript">
+	function checkvaluet2(value) {
+		if (value === "otherst2")
+			document.getElementById('title1').style.display = 'block';
+		else
+			document.getElementById('title1').style.display = 'none';
+	}
+</script>
+<script type="text/javascript">
+	function checkvalue1(value) {
+		if (value === "others1")
+			document.getElementById('orype').style.display = 'block';
+		else {
+			document.getElementById('orype').style.display = 'none';
+			$('#orype').val = value;
+		}
+	}
+	$(document).ready(function () {
+		$('#cptit1').change(function () {
+			var passval1 = $(':selected', this).val();
+			$('#title').val(passval1);
+		});
+	});
+	////Dropdown value to textbox 2
+	//$(document).ready(function () {
+	//    $('#cptit1').change(function () {
+	//        var passval1 = $(':selected', this).val();
+	//        $('#title').val(passval1);
+	//    });
+	//});
+	////Dropdown value to textbox 3
+	//$(document).ready(function () {
+	//    $('#cptit2').change(function () {
+	//        var passval2 = $(':selected', this).val();
+	//        $('#title1').val(passval2);
+	//    });
+	//});
+	//Dropdown value to textbox 3
+	$(document).ready(function () {
+	  $('#test-build-select-all-select').change(function () {
+		var passvalmul = $('select#test-build-select-all-select').val();
+			$('#post').val(passvalmul);
+		});
+	});
+</script>
+@*<h2>Create</h2>*@
+<style>
+.validation-summary-valid
+{
+	display: none;
+}
+</style>
+<div class="bcgr">
+@using (Html.BeginForm("Create", "ChannelPartner", FormMethod.Post,
+							new { enctype = "multipart/form-data" }))
+{
+	<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Create-Channel Partner Registration</p>
+		</div>
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true)
+
+		
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<!--Row1-->
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Channel Partner Unique ID</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="cnuid" placeholder="Channel Partner Unique ID" readonly="readonly">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.CPUniqueID, new { id = "cnuid", Value =ViewBag.Chanpart , @class = "fntst", @placeholder = "Channel Partner Unique ID", @readonly = "readonly"})
+								@Html.ValidationMessageFor(model => model.ChannelPartners.CPUniqueID)
+							</div>
+						</div>
+					</div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+							<label class="control-label fntst">Zone Name</label>
+							<div class="controls">
+                                @Html.DropDownListFor(m => m.ChannelPartners.ZoneID, (SelectList)ViewData["ZoneName"], "--Select Zone--", new { id = "ZoneName", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				<!--General Data-->
+				<div class="span10 pad">
+					<p class="pad txtal">General Data</p>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Organization Name</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="orme" placeholder="Organization Name">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.CPName, new { id = "orme", @type = "text", @class = "fntst", @placeholder = "Organization Name" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.CPName)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Organization Type</label>
+							<div class="controls">
+								@{
+	List<SelectListItem> listItems1 = new List<SelectListItem>();
+	listItems1.Add(new SelectListItem
+		 {
+			 Text = "Private Limited",
+			 Value = "Private Limited",
+		 });
+	//listItems1.Add(new SelectListItem
+	//     {
+	//         Text = "Government",
+	//         Value = "Government",
+	//     });
+	listItems1.Add(new SelectListItem
+		 {
+			 Text = "Public Listed",
+			 Value = "Public Listed",
+		 });
+	listItems1.Add(new SelectListItem
+	{
+		Text = "Sole Proprietorship",
+		Value = "Sole Proprietorship",
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "Others",
+		Value = "others1",
+	}); 
+								}
+							</div>
+							<div class="controls">
+								@Html.DropDownListFor(model => model.ChannelPartners.CPOrgType, listItems1, "-- Select Type --", new {@id = "orid", @Value="" ,@class = "fntst",onchange="checkvalue1(this.value)",@required = "required"})
+								@*<input name="orype" class="fntst dis" value="" style="/*display: none*/" id="orype" placeholder="Other Type">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.CPOrgTypeothers, new { id = "orype", @type = "text", @style = "display: none", @class = "fntst", @placeholder = "Other Type" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.CPOrgType)
+								@Html.ValidationMessageFor(model => model.ChannelPartners.CPOrgTypeothers)
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Contact Address-->
+				<div class="span10 pad">
+					<p class="pad txtal">Contact Address</p>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Address (Line1)</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="addr1" placeholder="Address (Line1)">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.AddressLine1, new { id = "addr1", @type = "text", @class = "fntst", @placeholder = "Address (Line1)" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.AddressLine1)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Address (Line2)</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="addr2" placeholder="Address (Line2)">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.AddressLine2, new { id = "addr2", @type = "text", @class = "fntst", @placeholder = "Address (Line2)" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.AddressLine2)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Address (Line3)</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="addr3" placeholder="Address (Line3)">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.AddressLine3, new { id = "addr3", @type = "text", @class = "fntst", @placeholder = "Address (Line3" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.AddressLine3)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">City/Town/District</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="ctd" placeholder="City/Town/District">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.City, new { id = "ctd", @type = "text", @class = "fntst", @placeholder = "City/Town/District" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.City)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Pincode</label>
+							<div class="controls">
+								@*<input type="number" min="0" class="fntst" id="pincd" placeholder="Pincode">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.PinCode, new { id = "pincd", @type = "text", @class = "fntst", @placeholder = "Pincode" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.PinCode)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">State</label>
+							<div class="controls">
+								@{
+	List<SelectListItem> listItemsst = new List<SelectListItem>();
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Andhra Pradesh (AP)",
+		Value = "Andhra Pradesh (AP)"
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Arunachal Pradesh (AR)",
+		Value = "Arunachal Pradesh (AR)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Andaman and Nicobar Islands(AN)",
+		Value = "Andaman and Nicobar Islands(AN)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Assam (AS)",
+		Value = "Assam (AS)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Bihar (BR)",
+		Value = "Bihar (BR)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Chhattisgarh (CG)",
+		Value = "Chhattisgarh (CG)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Chandigarh (CH)",
+		Value = "Chandigarh (CH)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Dadra and Nagar Haveli (DN)",
+		Value = "Dadra and Nagar Haveli (DN)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Daman and Diu (DD)",
+		Value = "Daman and Diu (DD)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Goa (GA)",
+		Value = "Goa (GA)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Gujarat (GJ)",
+		Value = "Gujarat (GJ)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Haryana (HR)",
+		Value = "Haryana (HR)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Himachal Pradesh (HP)",
+		Value = "Himachal Pradesh (HP)"
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Jammu and Kashmir (JK)",
+		Value = "Jammu and Kashmir (JK)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Jharkhand (JH)",
+		Value = "Jharkhand (JH)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Karnataka (KA)",
+		Value = "Karnataka (KA)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Kerala (KL)",
+		Value = "Kerala (KL)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Madhya Pradesh (MP)",
+		Value = "Madhya Pradesh (MP)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Maharashtra (MH)",
+		Value = "Maharashtra (MH)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Manipur (MN)",
+		Value = "Manipur (MN)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Meghalaya (ML)",
+		Value = "Meghalaya (ML)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Mizoram (MZ)",
+		Value = "Mizoram (MZ)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Nagaland (NL)",
+		Value = "Nagaland (NL)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "National Capital Territory of Delhi (DL)",
+		Value = "National Capital Territory of Delhi (DL)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Odisha(OR)",
+		Value = "Odisha(OR)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Punjab (PB)",
+		Value = "Punjab (PB)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Rajasthan (RJ)",
+		Value = "Rajasthan (RJ)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Sikkim (SK)",
+		Value = "Sikkim (SK)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Tamil Nadu (TN)",
+		Value = "Tamil Nadu (TN)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Tripura (TR)",
+		Value = "Tripura (TR)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Uttar Pradesh (UP)",
+		Value = "Uttar Pradesh (UP)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Uttarakhand (UK)",
+		Value = "Uttarakhand (UK)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "West Bengal (WB)",
+		Value = "West Bengal (WB)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Lakshadweep (LD)",
+		Value = "Lakshadweep (LD)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Pondicherry (PY)",
+		Value = "Pondicherry (PY)",
+	});
+								}
+								@Html.DropDownListFor(model => model.ChannelPartners.State, listItemsst, "-- Select Type --", new { @id = "state", @name = "orype", @class = "fntst",@required = "required" })
+								@*<input type="text" class="fntst" id="state" placeholder="State">*@
+								@*@Html.TextBoxFor(model => model.ChannelPartners.State, new { id = "state", @type = "text", @class = "fntst", @placeholder = "State" })*@
+								@Html.ValidationMessageFor(model => model.ChannelPartners.State)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Country</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="cntry" placeholder="Country">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.Country, new { id = "cntry", @type = "text",Value = "India", @class = "fntst", @placeholder = "Country" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.Country)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span14 pad">
+					<div class="span4">
+						@*<div class="control-group">*@
+							<label class="fntst">Phone1</label>
+								<span>
+									@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+									+@Html.TextBoxFor(model => model.ChannelPartners.Isd1, new { id = "isd1",@Value="91", @type = "number",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD",@required = "required" })
+									@Html.ValidationMessageFor(model => model.ChannelPartners.Isd1)
+								</span>
+							<span>
+								@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.Std1, new { id = "std1", @type = "number",@min="0", @class = "input-mini3 fntst", @placeholder = "STD" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.Std1)
+							</span>
+							<span>
+								@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.ContactNumLL1, new { id = "cnuid", @type = "text",@min="0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.ContactNumLL1)
+							</span>
+						@*</div>*@
+					</div>
+
+					<div class="span4">
+						@*<div class="control-group">*@
+							<label class="fntst" style="width: 70px">Phone2</label>
+								<span>
+									@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+									+@Html.TextBoxFor(model => model.ChannelPartners.Isd2, new { id = "isd2",@Value="91", @type = "number",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+									@Html.ValidationMessageFor(model => model.ChannelPartners.Isd2)
+								</span>
+							<span>
+								@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.Std2, new { id = "std2", @type = "number",@min="0", @class = "input-mini3 fntst", @placeholder = "STD" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.Std2)
+							</span>
+							<span>
+								@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.ContactNumLL2, new { id = "cnuid", @type = "number",@min="0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.ContactNumLL2)
+							</span>
+						@*</div>*@
+					</div>
+				</div>
+				<div class="span1"></div>
+				<div class="span10 pad">
+					<div class="span4">
+						@*<div class="control-group">*@
+							<label class="fntst" style="width: 70px">FAX</label>
+								<span>
+									@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+									+@Html.TextBoxFor(model => model.ChannelPartners.Isdf, new { id = "isdf",@Value="91", @type = "number",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+									@Html.ValidationMessageFor(model => model.ChannelPartners.Isdf)
+								</span>
+							<span>
+								@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.Stdf, new { id = "stdf", @type = "number",@min="0", @class = "input-mini3 fntst", @placeholder = "STD" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.Stdf)
+							</span>
+							<span>
+								@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.FAX, new { id = "fax", @type = "number",@min="0", @class = "input-medium1 fntst", @placeholder = "Fax" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.FAX)
+							</span>
+						@*</div>*@
+					</div>
+					@*<div class="span1"></div>*@
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Website</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="webst" placeholder="Website">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.Website, new { id = "webst",@type="text", @class = "fntst", @placeholder = "Website" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.Website)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">E-mail 1</label>
+							<div class="controls">
+								@*<input type="email" class="fntst" id="email" placeholder="E-mail">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.Email, new { id = "email", @class = "fntst", @placeholder = "E-mail ID" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.Email)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">E-mail 2</label>
+							<div class="controls">
+								@*<input type="email" class="fntst" id="email" placeholder="E-mail">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.Email2, new { id = "email2", @class = "fntst", @placeholder = "E-mail ID 2" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.Email2)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span12 pad">
+					<div class="span12">
+						<div class="control-group">
+							<label class="control-label fntst" style="font-family: Calibri">Postal / Courier (Press CTRL to Select Multiple)</label>
+							<div class="controls">
+								<table class="table">
+									<tbody>
+										<tr id="test-build-select-all-tr">
+											<td>
+												<select id="test-build-select-all-select" multiple="multiple">
+													<option value="DHL">DHL</option>
+													<option value="DTDC">DTDC</option>
+													<option value="Professional">Professional</option>
+													<option value="TNT">TNT</option>
+													<option value="Blue Dart">Blue Dart</option>
+												</select> 
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<label style="font-size:14px;font-family:Calibri">Please Enter courier name after comma "TNT,others"</label>
+								@Html.TextBoxFor(model => model.ChannelPartners.postcour, new { id = "post",@value="", @class = "input-xxlarge fntst", @placeholder = "Selected Value"})
+								@Html.ValidationMessageFor(model => model.ChannelPartners.postcour)
+							</div>
+						</div>
+					</div>
+					@*@Html.Partial("_Multipleselectbox")*@
+				</div>
+				<!--Contact Details-->
+				<div class="span12 pad">
+					<p class="pad txtal">Contact Details</p>
+					<!--<div class="span3">-->
+					<div class="accordion" id="accordion2">
+						<!--Contact address Person 1-->
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Contact Person 1 Address 
+								</a>
+							</div>
+							<div id="collapseOne" class="accordion-body collapse in">
+								<div class="accordion-inner">
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Title</label>
+												<div class="controls">
+													@{
+	List<SelectListItem> listItems4 = new List<SelectListItem>();
+	listItems4.Add(new SelectListItem
+		 {
+			 Text = "Mr",
+			 Value = "Mr"
+		 });
+	listItems4.Add(new SelectListItem
+		 {
+			 Text = "Miss",
+			 Value = "Miss",
+		 });
+	listItems4.Add(new SelectListItem
+		 {
+			 Text = "Mrs",
+			 Value = "Mrs"
+		 });
+	listItems4.Add(new SelectListItem
+	{
+		Text = "Dr",
+		Value = "Dr"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "Prof.",
+		Value = "Prof."
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "Others",
+		Value = "otherst1"
+	});
+													}
+												</div>
+												<div class="controls">
+													@Html.DropDownListFor(model => model.CPContactPersonData1.Title, listItems4, "-- Select Type --", new {id="cptit1", @name = "orype", @class = "fntst", @onchange = "checkvaluet1(this.value)",@required = "required" })
+													@*<input name="reltype" value="" class="fntst dis" style="display: none" id="title" placeholder="Other Type">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.Titleothers, new { @id = "title", @name = "reltype", @class = "fntst dis", @style = "display: none", @placeholder = "Other Type" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.Titleothers)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">First Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="fstnm" placeholder="First Name">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.FirstName, new { id = "fstnm", @class = "fntst", @placeholder = "First Name",@required = "required" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.FirstName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Middle Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="mdlnm" placeholder="Middle Name">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.MiddleName, new { id = "mdlnm",@type="text", @class = "fntst", @placeholder = "Middle Name" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.MiddleName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Last Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="lstnm" placeholder="Last Name">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.LastName, new { id = "lstnm",@type="text", @class = "fntst", @placeholder = "Last Name"  })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.LastName)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Designation</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Desg" placeholder="Designation">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.Designation, new { id = "Desg", @class = "fntst", @placeholder = "Designation" ,@required = "required" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.Designation)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Department</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Dept" placeholder="Department">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.Department, new { id = "Dept", @class = "fntst", @placeholder = "Department" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.Department)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span13">
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst">Phone Board1</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.CPContactPersonData1.Isd1, new { id = "isd3",@Value="91",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD" ,@required = "required" })
+														@Html.ValidationMessageFor(model => model.CPContactPersonData1.Isd1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.Std1, new { id = "std3", @type = "text",@min="0", @class = "input-mini3 fntst", @placeholder = "STD"  ,@required = "required"})
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.Std1)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.PhoneLL1, new { id = "direct3", @type = "text",@min="0", @class = "input-medium1 fntst", @placeholder = "Direct" ,@required = "required"})
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.PhoneLL1)
+												</span>
+											@*</div>*@
+										</div>
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst" style="width: 112px">Phone Board2</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.CPContactPersonData1.Isd2, new { id = "isd4",@Value="91",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@*@Html.ValidationMessageFor(model => model.CPContactPersonData1.Isd2)*@
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.Std2, new { id = "std4", @class = "input-mini3 fntst",@min="0", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.Std2)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.PhoneLL2, new { id = "direct4", @type = "text",@min="0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.PhoneLL2)
+												</span>
+											@*</div>*@
+										</div>
+										<div class="span"></div>
+									</div>
+									<div class="span12">
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst">Mobile 1</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.CPContactPersonData1.Isdm1, new { id = "isdm1",@Value="91",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD",@required = "required" })
+														@Html.ValidationMessageFor(model => model.CPContactPersonData1.Isdm1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.Mobile1, new { id = "directm1", @class = "input-medium1 fntst",@min="0", @placeholder = "Direct",@required = "required" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.Mobile1)
+												</span>
+											@*</div>*@
+										</div>
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst" style="width: 76px">Mobile 2</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.CPContactPersonData1.Isdm2, new { id = "isdm2",@Value="91",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.CPContactPersonData1.Isdm2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.Mobile2, new { id = "directm2",@min="0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.Mobile2)
+												</span>
+											@*</div>*@
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">E-mail</label>
+												<div class="controls">
+													@*<input type="email" class="fntst" id="eml" placeholder="E-mail">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.EmailID, new { id = "emlc1", @class = "fntst", @placeholder = "E-mail",@required = "required" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.EmailID)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Key Activity</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="keyactc1" placeholder="Key Activity">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData1.KeyActivity, new { id = "keyactc1", @class = "fntst", @placeholder = "Key Activity"})
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.KeyActivity)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Comments</label>
+												<div class="controls">
+													@Html.TextAreaFor(model => model.CPContactPersonData1.Comments, new { rows=2, columns=2, id = "addcomc1", @class = "fntst", @placeholder = "Additional Comments"  })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData1.Comments)
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="accordion" id="accordion3">
+						<!--Contact address Person 2-->
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseTwo">Contact Person 2 Address 
+								</a>
+							</div>
+							<div id="collapseTwo" class="accordion-body collapse">
+								<div class="accordion-inner">
+									
+									<div class="span10">
+									   @* <p class="pad txtal">Contact Person 1 Details</p>*@
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Title</label>
+												<div class="controls">
+													@*<select id="cptit2" name="orype" class="fntst" onchange='checkvaluet2(this.value)'>
+															<option value="Mr">Mr</option>
+															<option value="Miss">Miss</option>
+															<option value="Mrs">Mrs</option>
+															<option value="Dr">Dr</option>
+															<option value="Prof">Prof.</option>
+															<option value="otherst2">Others</option>
+														</select>*@
+													@{
+	List<SelectListItem> listItems5 = new List<SelectListItem>();
+	listItems5.Add(new SelectListItem
+	{
+		Text = "Mr",
+		Value = "Mr"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "Miss",
+		Value = "Miss",
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "Mrs",
+		Value = "Mrs"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "Dr",
+		Value = "Dr"
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "Prof.",
+		Value = "Prof."
+	});
+	listItems5.Add(new SelectListItem
+	{
+		Text = "Others",
+		Value = "otherst2"
+	});
+													}
+												</div>
+												<div class="controls">
+													@Html.DropDownListFor(model => model.CPContactPersonData2.Title, listItems5, "-- Select Type --", new {id="cptit2", @name = "orype", @class = "fntst", @onchange = "checkvaluet2(this.value)" })
+													@*<input name="reltype" value="" class="fntst dis" style="display: none" id="title1" placeholder="Other Type">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.Titleothers, new { @id = "title1", @name = "reltype", @class = "fntst dis", @style = "display: none", @placeholder = "Other Type" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.Titleothers)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">First Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="fstnm" placeholder="First Name">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.FirstName, new { id = "fstnmc2", @class = "fntst", @placeholder = "First Name" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.FirstName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Middle Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="mdlnm" placeholder="Middle Name">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.MiddleName, new { id = "mdlnmc2", @class = "fntst", @placeholder = "Middle Name" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.MiddleName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Last Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="lstnm" placeholder="Last Name">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.LastName, new { id = "lstnmc2", @class = "fntst", @placeholder = "Last Name" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.LastName)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Designation</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Desg" placeholder="Designation">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.Designation, new { id = "Desgc2", @class = "fntst", @placeholder = "Designation" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.Designation)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Department</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Dept" placeholder="Department">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.Department, new { id = "Deptc2", @class = "fntst", @placeholder = "Department" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.Department)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span13">
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst">Phone Board1</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.CPContactPersonData2.Isd1, new { id = "isdc2",@Value = "91",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@*@Html.ValidationMessageFor(model => model.CPContactPersonData2.Isd1)*@
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.Std1, new { id = "stdc2",@min="0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.Std1)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.PhoneLL1, new { id = "directc2",@min="0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.PhoneLL1)
+												</span>
+											@*</div>*@
+										</div>
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst" style="width: 112px">Phone Board2</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.CPContactPersonData2.Isd2, new { id = "isdc2",@Value = "91",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@*@Html.ValidationMessageFor(model => model.CPContactPersonData2.Isd2)*@
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.Std2, new { id = "stdc2",@min="0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.Std2)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.PhoneLL2, new { id = "directc2",@min="0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.PhoneLL2)
+												</span>
+											@*</div>*@
+										</div>
+										<div class="span"></div>
+									</div>
+									<div class="span12">
+										<div class="span4">
+											<div class="control-group">
+												<label class="control-label fntst">Mobile 1</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.CPContactPersonData2.Isdm1, new { id = "isdmc2",@Value = "91",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@*@Html.ValidationMessageFor(model => model.CPContactPersonData2.Isdm1)*@
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.Mobile1, new { id = "directmc2",@min="0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.Mobile1)
+												</span>
+											</div>
+										</div>
+										<div class="span4">
+											<div class="control-group">
+												<label class="control-label fntst" style="width: 76px">Mobile 2</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.CPContactPersonData2.Isdm2, new { id = "isdm2c2",@Value = "91",@min="0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@*@Html.ValidationMessageFor(model => model.CPContactPersonData2.Isdm2)*@
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.Mobile2, new { id = "directm2c2",@min="0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.Mobile2)
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">E-mail</label>
+												<div class="controls">
+													@*<input type="email" class="fntst" id="eml" placeholder="E-mail">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.EmailID, new { id = "emlc2", @class = "fntst", @placeholder = "E-mail" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.EmailID)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Key Activity</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="keyact" placeholder="Key Activity">*@
+													@Html.TextBoxFor(model => model.CPContactPersonData2.KeyActivity, new { id = "keyactc2", @class = "fntst", @placeholder = "Key Activity" })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.KeyActivity)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Comments</label>
+												<div class="controls">
+													@Html.TextAreaFor(model => model.CPContactPersonData2.Comments, new {@id = "addcomc2", rows=2, columns=2,@type="text",@class = "fntst", @placeholder = "Additional Comments"  })
+													@Html.ValidationMessageFor(model => model.CPContactPersonData2.Comments)
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Row6-->
+			</div>
+		</div>
+		<div class="row">
+			<div class=" row show-grid">
+				<div class="span12 pad">
+					<p class="pad txtal">Statutory Registration Numbers</p>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Company PAN*</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="cpan" placeholder="Company PAN">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.CompanyPAN, new { id = "cpan", @class = "fntst", @placeholder = "Company PAN",@required = "required" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.CompanyPAN)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">TIN Number*</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="TaxDAN" placeholder="TIN Number" required>*@
+								@Html.TextBoxFor(model => model.ChannelPartners.TIN, new { id = "TaxDAN", @class = "fntst", @placeholder = "TIN Number",@required = "required" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.TIN)
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Row2-->
+				<div class="span12 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">CST Number</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="cst" placeholder="Central Sales Tax Number(CST)">*@
+								@Html.TextBoxFor(model => model.ChannelPartners.CSTNumber, new { id = "cst", @class = "fntst", @placeholder = "Central Sales Tax Number(CST)" })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.CSTNumber)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Others</label>
+							<div class="controls">
+								<!--<input type="text" class="fntst" id="oth" placeholder="Others please Specify">-->
+								@*<textarea rows="2" class="fntst" placeholder="Others Please Specify"></textarea>*@
+								@*@Html.TextBoxFor(model => model.ChannelPartners.Others, new { id = "keyact", @class = "fntst", @placeholder = "Others Please Specify" })*@
+								@Html.TextAreaFor(model => model.ChannelPartners.Others, new {@id = "otherssat",@type="text", rows=2, columns=2,@class = "fntst", @placeholder = "Additional Comments"  })
+								@Html.ValidationMessageFor(model => model.ChannelPartners.Others)
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Row4-->
+				<div class="span12 pad">
+					<p class="pad txtal">Bank Details</p>
+					<div class="accordion" id="accordion4">
+						<!--Bank 1 Details-->
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#collapsebk1">Click here to enter Bank 1 Details 
+								</a>
+							</div>
+							<div id="collapsebk1" class="accordion-body collapse in">
+								<div class="accordion-inner">
+									<div class="span10 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Bank Name*</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+													@Html.TextBoxFor(model => model.CPBankDetails1.BankName, new { id = "banm1", @class = "fntst", @placeholder = "Bank Name",@required = "required" })
+													@Html.ValidationMessageFor(model => model.CPBankDetails1.BankName)
+												</div>
+											</div>
+										</div>
+										<div class="span1"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Branch Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+													@Html.TextBoxFor(model => model.CPBankDetails1.BranchName, new { id = "brnm", @class = "fntst", @placeholder = "Branch Name",@required = "required" })
+													@Html.ValidationMessageFor(model => model.CPBankDetails1.BranchName)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Row5-->
+									<div class="span10 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Account Type*</label>
+												<div class="controls">
+													@*<select name="orype" class="fntst">
+															<option>Savings Bank Account</option>
+															<option>Current Account</option>
+														</select>*@
+													@{
+	List<SelectListItem> listItems9 = new List<SelectListItem>();
+	listItems9.Add(new SelectListItem
+	{
+		Text = "Savings Bank Account",
+		Value = "Savings Bank Account"
+	});
+	listItems9.Add(new SelectListItem
+	{
+		Text = "Current Account",
+		Value = "Current Account",
+	});
+													}
+													@Html.DropDownListFor(model => model.CPBankDetails1.Accounttype, listItems9, "-- Select Type --", new { @id = "bk1ty", @name = "orype", @class = "fntst",@required = "required" })
+													@*@Html.TextBoxFor(model => model.CPBankDetails.Accounttype,new {id = "keyact" ,@type = "text", @class = "fntst", @placeholder="Key Activity"})*@
+													@*@Html.ValidationMessageFor(model => model.CPBankDetails1.Accounttype)*@
+												</div>
+											</div>
+										</div>
+										<div class="span1"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Account Number*</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Acnum" placeholder="Account Number">*@
+													@Html.TextBoxFor(model => model.CPBankDetails1.AccountNumber, new { id = "Acnum1", @class = "fntst", @placeholder = "Account Number",@required = "required" })
+													@Html.ValidationMessageFor(model => model.CPBankDetails1.AccountNumber)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Row6-->
+									<div class="span10 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">RTGS/NEFT IFSC Code* (Example:ICIC0000002)</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="rtnecd" placeholder="RTGS/NEFT IFSC Code">*@
+													@Html.TextBoxFor(model => model.CPBankDetails1.IFSCCode, new { id = "rtnecd1", @class = "fntst", @placeholder = "RTGS/NEFT IFSC Code",@required = "required" })
+													@Html.ValidationMessageFor(model => model.CPBankDetails1.IFSCCode)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Row12-->
+									<div class="span12 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Cheque In favour of</label>
+												<div class="controls">
+													@*<input type="text" class=" input-xlarge city" id="chequeinfav" placeholder="In favour of">*@
+													@Html.TextBoxFor(model => model.CPBankDetails1.BankChequeinfavor, new { id = "chequeinfav1", @class = "input-xlarge city", @placeholder = "In favour of" })
+													@Html.ValidationMessageFor(model => model.CPBankDetails1.BankChequeinfavor)
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="accordion" id="accordion5">
+					<!--Bank 2 Details-->
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion5" href="#collapsebk2">Click here to enter Bank 2 Details 
+							</a>
+						</div>
+						<div id="collapsebk2" class="accordion-body collapse">
+							<div class="accordion-inner">
+								<div class="span12 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Bank Name*</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+												@Html.TextBoxFor(model => model.CPBankDetails2.BankName, new { id = "banm2", @class = "fntst", @placeholder = "Bank Name" })
+												@Html.ValidationMessageFor(model => model.CPBankDetails2.BankName)
+											</div>
+										</div>
+									</div>
+									<div class="span1"></div>
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Branch Name</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+												@Html.TextBoxFor(model => model.CPBankDetails2.BranchName, new { id = "brnm2", @class = "fntst", @placeholder = "Branch Name" })
+												@Html.ValidationMessageFor(model => model.CPBankDetails2.BranchName)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row5-->
+								<div class="span10 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Account Type*</label>
+											<div class="controls">
+												@*<select name="orype" class="fntst">
+														<option>Savings Bank Account</option>
+														<option>Current Account</option>
+													</select>*@
+												@{
+	List<SelectListItem> listItems10 = new List<SelectListItem>();
+	listItems10.Add(new SelectListItem
+	{
+		Text = "Savings Bank Account",
+		Value = "Savings Bank Account"
+	});
+	listItems10.Add(new SelectListItem
+	{
+		Text = "Current Account",
+		Value = "Current Account",
+	});
+												}
+												@Html.DropDownListFor(model => model.CPBankDetails2.Accounttype, listItems10, "-- Select Type --", new { @id = "bk2ty", @name = "orype", @class = "fntst" })
+												@*@Html.TextBoxFor(model => model.CPBankDetails.Accounttype,new {id = "keyact" ,@type = "text", @class = "fntst", @placeholder="Key Activity"})*@
+												@*@Html.ValidationMessageFor(model => model.CPBankDetails2.Accounttype)*@
+											</div>
+										</div>
+									</div>
+									<div class="span1"></div>
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Account Number*</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="Acnum" placeholder="Account Number">*@
+												@Html.TextBoxFor(model => model.CPBankDetails2.AccountNumber, new { id = "Acnum", @class = "fntst", @placeholder = "Account Number" })
+												@Html.ValidationMessageFor(model => model.CPBankDetails2.AccountNumber)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row6-->
+								<div class="span10 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">RTGS/NEFT IFSC Code* (Example:ICIC0000002)</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="rtnecd" placeholder="RTGS/NEFT IFSC Code">*@
+												@Html.TextBoxFor(model => model.CPBankDetails2.IFSCCode, new { id = "rtnecd2", @class = "fntst", @placeholder = "RTGS/NEFT IFSC Code" })
+												@Html.ValidationMessageFor(model => model.CPBankDetails2.IFSCCode)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row12-->
+								<div class="span12 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Cheque In favour of</label>
+											<div class="controls">
+												@*<input type="text" class=" input-xlarge city" id="website" placeholder="In favour of">*@
+												@Html.TextBoxFor(model => model.CPBankDetails2.BankChequeinfavor, new { id = "chequeinfav2", @class = "input-xlarge fntst", @placeholder = "In favour of" })
+												@Html.ValidationMessageFor(model => model.CPBankDetails2.BankChequeinfavor)
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+			<!--End Of Rows-->
+			@* Upload Image *@
+			<div style="padding-left:200px">
+				<p style="font-family:Calibri;font-size:18px"><strong>Upload Your Logo</strong></p>
+			<label for="file" class="fntst">Upload Image:</label> 
+			<input type="file" accept="image/*" name="file" id="file" style="width: 100%;" required="required" />
+				</div>
+			@* End of Upload image  *@
+			<!--Buttons-->
+			<div class="span10 pad ">
+				<div class="span3 cent">
+					@*<button class="btn btn-large btn-success" type="submit">Submit</button>*@
+					<input type="submit" value="Submit" id="open" class="btn btn-large btn-success" />
+				</div>
+			</div>
+			<!--End Of Buttons-->
+		</div>
+}
+<div>
+	@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-success", @style = "text-decoration:none" })
+</div>
+
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

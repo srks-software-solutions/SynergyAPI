@@ -1,0 +1,391 @@
+﻿@model IEnumerable<SRKSSynergy.Models.OCMCTCoilNew>
+@{
+    ViewBag.Title = "OCMCTCoil";
+}
+
+
+<!-- glyphicons help -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+<style>
+        #snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+    .form-control.multiselect-search {
+    height:35px;
+    }
+
+    </style>
+<script>
+    function myFunction() {
+        var x = document.getElementById("snackbar")
+        x.className = "show";
+        setTimeout(function () {
+            x.className = x.className.replace("show", "");
+
+        }, 3000);
+        setTimeout(function () {
+            location.reload();
+        }, 2000);
+    }
+</script>
+<div class="bcgr" style="min-height:590px;min-width:1410px">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">OCM - CT Coil</p>
+    </div>
+
+<div id="snackbar">Item inserted sucessfully</div>
+
+
+    <form action="@Url.Action("OCMBrakechamfer", "OCMMaster")" method="post">
+        <div style="padding-left: 20px;padding-top:10px">
+            <button class="btn btn-primary glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal" id="addbtn" onclick="addclick()"> Add </button>
+        </div>
+     <div style="padding-bottom:1%"></div>
+
+        <div class="modal fade op" id="myModal" role="dialog" style="margin-left:420px; box-shadow:none;border: transparent;">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#245580;color:white">
+                        <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
+                        <h4 class="modal-title "> OCM CT Coil </h4>
+                    </div>
+                    <div class="modal-body" style="height:250px;">
+                        <input type="hidden" id="hdn_id" />
+                        <div class="row" style="padding-left:25px">
+                           <div class="control-group">
+                               <div class="col-md-4">
+                            <label class="control-label fntst"> CT Coil Name :</label>
+                                   </div>
+                               <div class="col-md-3">
+                                <input style="height:30px;"  type="text"  id="gname"  required="required">
+                                    </div>
+                        </div>
+                        </div>
+                        <div class="row" style="padding-left:25px;display:none">
+                           <div class="col-md-4">
+                            <label class="control-label fntst"> CT Coil Short Name :</label>
+                           </div>
+                           <div class="col-md-3">
+                            <input style="height:30px;"  type="text"  id="gsname"  required="required">
+                        </div>
+                        </div>
+                         <div class="row" style="padding-left:25px">
+                           <div class="control-group">
+                               <div class="col-md-4">
+                            <label class="control-label fntst"> Pass Full Name :</label>
+                                   </div>
+                               <div class="col-md-3">
+                                <select id="psid" style="height:30px"> @*multiple="multiple"*@
+                                    <option value="0">--Select--</option>
+                                    <option value="cheese">Cheese</option>
+                                    <option value="tomatoes">Tomatoes</option>
+                                    <option value="mozarella">Mozzarella</option>
+                                    <option value="mushrooms">Mushrooms</option>
+                                    <option value="pepperoni">Pepperoni</option>
+                                    <option value="onions">Onions</option>
+                                </select>
+                                    </div>
+                        </div>
+                        </div>
+                        <div class="row" style="padding-top: 20px;">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3" >
+                                <button type="button" class="btn btn-success" id="add"  onclick="return addgtyp();">Add</button>
+                                <button type="button" class="btn btn-success" id="update" style="display:none" onclick="return updategtyp();">Update</button>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-danger" id="close" data-dismiss="modal">Cancel</button>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-hover" style="width: 1410px;">
+            <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No.</span>
+                </th>
+                <th style="width: 200px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">CT Coil Name</span>
+                </th>
+                 <th style="width: 200px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Pass Full Path</span>
+                </th>
+                 <th style="width: 200px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px"></span>
+                </th>
+                <th></th>
+            </tr>
+            @if (Model ==null){
+                 <tr>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     </tr>
+            }
+            else{
+                int slno = 1;
+            foreach (var item in Model)
+            {
+
+                <tr>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td>
+                    <td style="width: 200px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.OCMCTCoilName)
+                    </td>
+                     <td style="width: 200px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.PathName)
+                    </td>
+                    <td>
+                        <button class="btn btn-primary glyphicon glyphicon-pencil" id="@item.OCMCTCoilId edit" onclick="editgtyp(this);"> Edit </button>
+                        <button class="btn btn-danger glyphicon glyphicon-trash"  id="@item.OCMCTCoilId del" onclick="delgtyp(this);"> Delete </button>
+                       </td>
+                </tr>
+                slno++;
+            }
+            }
+
+        </table>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#psid").html('');
+                var opdsgn = '<option value="0">--select--</option>';
+                var addopdsgn = '';
+                $.ajax({
+                    url: "/OCMMaster/AutocompleteOCMPassFullPath",
+                    type: "POST",
+                    dataType: "json",
+                    data: {},
+                    success: function (data) {
+
+                        $.each(data, function (i, v) {
+                            addopdsgn = addopdsgn + '<option value="' + v.PassId + '"> ' + v.PathName + ' </option>';
+                        });
+                        $("#psid").html(opdsgn + addopdsgn)
+                    }
+                })
+            });
+            setTimeout(function(){
+            $(document).ready(function () {
+                $('#ppsid').multiselect({
+                    enableFiltering: true,
+                    includeSelectAllOption: true,
+                    maxHeight: 150,
+                    buttonWidth: 210
+                });
+
+            });
+            }, 1000);
+
+        </script>
+
+        <script >
+            function addclick() {
+                $("#add").show();
+                $("#update").hide();
+                $("#gname").val('');
+                $("#gsname").val('');
+            }
+            function addgtyp() {
+                $("#add").show();
+                var psid = $('#psid').val();
+                $("#update").hide();
+                var gname = $("#gname").val();
+                var gsname = $("#psid").val();
+
+                if (gname == "" && gsname == "0" || gsname == "0" || gname == "")
+                {
+                    $("#snackbar").html('Please fill all the feilds');
+                    alert('Please fill all the feilds');
+                }
+                else {
+                    $("#close").click();
+                    var data = {};
+                    data.gname = gname;
+                    data.psid = psid;
+                    $.ajax({
+                        url: '/OCMMaster/OCMCTCoilAdd',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        // dataType: 'json',
+                        success: function (data) {
+                            //On ajax success do this
+                            $("#snackbar").html('Sucessfully added');
+                            myFunction();
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            //On error do this
+                            if (xhr.status == 200) {
+
+                                alert(ajaxOptions);
+                            }
+                            else {
+                                alert(xhr.status);
+                                alert(thrownError);
+                            }
+                        }
+                    });
+
+                    return true;
+                }
+
+            }
+            function editgtyp(val) {
+                var id = $(val).attr('id');
+                id = id.split(' ');
+                var gid = id[0];
+                $("#hdn_id").val(gid);
+                $("#add").hide();
+                $("#update").show();
+                $('#myModal').modal('show');
+
+                var data = {};
+                data.gid = gid;
+                $.ajax({
+                    url: '/OCMMaster/OCMCTCoilShow',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    // dataType: 'json',
+                    success: function (data) {
+                        var res = data.split("%");
+
+                        $("#gname").val(res[0]);
+                        $("#psid").val(res[1]);
+
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //On error do this
+                        if (xhr.status == 200) {
+
+                            alert(ajaxOptions);
+                        }
+                        else {
+                            alert(xhr.status);
+                            alert(thrownError);
+                        }
+                    }
+                });
+            }
+            function updategtyp() {
+                $("#add").show();
+                $("#update").hide();
+                var gid = $("#hdn_id").val();
+                var gname = $("#gname").val();
+                var gsname = $("#psid").val();
+                var pid = $("#psid").val();
+                if (gname == "" && gsname == "0" || gsname == "0" || gname == "") {
+                    $("#snackbar").html('Please fill all the feilds');
+                    //myFunction();
+                    //return false;
+                    alert('Please fill all the feilds');
+                }
+                else {
+                    $("#close").click();
+                    var data = {};
+                    data.gid = gid;
+                    data.gname = gname;
+                    data.pid = pid;
+                    $.ajax({
+                        url: '/OCMMaster/OCMCTCoilUpdate',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        // dataType: 'json',
+                        success: function (data) {
+                            //On ajax success do this
+                            $("#snackbar").html('Sucessfully Updated');
+                            myFunction();
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            //On error do this
+                            if (xhr.status == 200) {
+
+                                alert(ajaxOptions);
+                            }
+                            else {
+                                alert(xhr.status);
+                                alert(thrownError);
+                            }
+                        }
+                    });
+
+                    return true;
+                }
+            }
+            function delgtyp(val) {
+                var id = $(val).attr('id');
+                id = id.split(' ');
+                var gid = id[0];
+                $("#hdn_id").val(gid);
+                $("#add").hide();
+                $("#update").show();
+
+
+                var data = {};
+                data.gid = gid;
+                $.ajax({
+                    url: '/OCMMaster/OCMCTCoilDelete',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    // dataType: 'json',
+                    success: function (data) {
+                        var res = data.split("%");
+
+                        $("#snackbar").html('Sucessfully Deleted');
+                        myFunction();
+
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //On error do this
+                        if (xhr.status == 200) {
+
+                            alert(ajaxOptions);
+                        }
+                        else {
+                            alert(xhr.status);
+                            alert(thrownError);
+                        }
+                    }
+                });
+            }
+    </script>
+    </form>
+
+</div>
+
+

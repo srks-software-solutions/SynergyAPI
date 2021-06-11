@@ -1,0 +1,429 @@
+﻿@model SRKSSynergy.Models.ReportModelMFR
+@{
+	ViewBag.Title = "MFR";
+	Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title - Synergy Application</title>
+	<meta name="viewport" content="width=device-width" />
+	<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+	<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+	<script src="~/Content/bootstrap/js/jquery-1.9.1.min.js"></script>
+	<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+	@Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+	<div class="container" id="content" style="width: 1000px">
+		<div style="height: 100px">
+			<div style="width: 700px; float: left; height: 100px"></div>
+			<div style="width: 300px; height: 100px; float: right">
+			</div>
+		</div>
+
+		@* MFR Entered By *@
+		<div style="padding-left: 40px;padding-bottom:30px;padding-top:60px">
+			<table class="table " style="width: 800px; padding-left: 30px;">
+				<div class="controls-row">
+					<tr>
+						<td >
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>HOD Number :</strong></label>
+							</div>
+						</td>
+						<td >
+							<div style="text-align: left; vertical-align: middle;">
+								<label class="fntstrep">@Model.HODNumber</label>
+							</div>
+						</td>
+						<td >
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>MFR Number :</strong></label>
+							</div>
+						</td>
+						<td >
+							<div style="text-align: left; vertical-align: middle;">
+								<label class="fntstrep">@Model.MFRNumber</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td >
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>MFR Entered By :</strong></label>
+							</div>
+						</td>
+						<td >
+							<div style="text-align: left; vertical-align: middle;">
+								<label class="fntstrep">@Model.MFREnteredBy</label>
+							</div>
+						</td>
+						<td >
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>To :</strong></label>
+							</div>
+						</td>
+						<td >
+							<div style="text-align: left; vertical-align: middle;">
+								<label class="fntstrep">@Model.MFRTo</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td >
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>Channel Partner :</strong></label>
+							</div>
+						</td>
+						<td >
+							<div>
+								<label class="fntstrep">@Model.ChannelPartner</label>
+							</div>
+						</td>
+						<td >
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>Date :</strong></label>
+							</div>
+						</td>
+						<td>
+							<div>
+								<label class="fntstrep">@Model.MfrDate</label>
+							</div>
+						</td>
+					</tr>
+				</div>
+			</table>
+		</div>
+		@* Customer Data *@
+		<div style="padding-left: 40px;padding-bottom:30px;">
+			<table class="table " style="width: 1075px; padding-left: 30px;">
+				<div class="controls-row">
+					<tr>
+						<td class="span2" colspan="4">
+							<div style="text-align: left; vertical-align: middle;padding-bottom:7px">
+								<label><strong>Customer Data : </strong></label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span2">
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>Company :</strong></label>
+							</div>
+						</td>
+						<td class="span3">
+							<div>
+								@*<input type="text" class="fntst" id="cmpynm" placeholder="Company Name" readonly="readonly" value="@ViewBag.Company">*@
+								<label class="fntstrep">@Model.OrganizationName</label>
+							</div>
+						</td>
+						<td class="span2">
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>City :</strong></label>
+							</div>
+						</td>
+						<td class="span3">
+							<div>
+								@*<input type="text" class="fntst" id="city" placeholder="City" readonly="readonly" value="@ViewBag.City">*@
+								<label class="fntstrep">@Model.City</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span2">
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>Contact :</strong></label>
+							</div>
+						</td>
+						<td class="span3">
+							<div>
+								@*<input type="text" class="fntst" id="cont" placeholder="Contact Person Name" readonly="readonly" value="@ViewBag.Contact">*@
+								<label class="fntstrep">@Model.ContactPersonName</label>
+							</div>
+						</td>
+						<td class="span2">
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>Mobile/Tel No :</strong></label>
+							</div>
+						</td>
+						<td class="span3">
+							<div>
+								@*<input type="text" class="fntst" id="mob/tel" placeholder="Mobile/Tel No" readonly="readonly" value="@ViewBag.Phone">*@
+								<label class="fntstrep">@Model.Mobile</label>
+							</div>
+						</td>
+					</tr>
+				</div>
+			</table>
+		</div>
+		@* Machine Data *@
+		<div style="padding-left: 40px;padding-bottom:30px;">
+			<table class="table " style="width: 800px; padding-left: 30px;">
+				<div class="controls-row">
+					<tr>
+						<td class="span2" colspan="4">
+							<div style="text-align: left; vertical-align: middle;padding-bottom:7px">
+								<label><strong>Machine Data : </strong></label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span2">
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>Model :</strong></label>
+							</div>
+						</td>
+						<td class="span3">
+							<div>
+								@*@Html.DropDownListFor(m => m.MFR.MfrModelNo,(IEnumerable<SelectListItem>)ViewBag.Product, "--Select--", new {@id="ProductModelID1",@required ="required" })*@
+								<label class="fntstrep">@Model.Modelno</label>
+								@*<input type="text" class="fntst" id="model" placeholder="Model" readonly="readonly" value="@ViewBag.EModel">*@
+							</div>
+						</td>
+						<td class="span2">
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>M/c's Sl no :</strong></label>
+							</div>
+						</td>
+						<td class="span3">
+							<div>
+								@*<input type="text" class="fntst" id="mac_slno" placeholder="Enter the M/c's Sl no">*@
+								@*@Html.TextBoxFor(model => model.MFR.MacSlNo, new { id = "mcslno", @class = "fntst", @placeholder = "Machine Serial No", Value=@ViewBag.MacSrlNo })*@
+								@*@Html.DropDownListFor(m => m.MFR.MacSlNo,(IEnumerable<SelectListItem>)ViewBag.Serial, "--Select--", new {@id="SerialNo",@required ="required" })*@
+								<label class="fntstrep">@Model.MacSlNo</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span2">
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>Commissioned by :</strong></label>
+							</div>
+						</td>
+						<td class="span3">
+							<div>
+								@*<input type="text" class="fntst" id="comm_by" placeholder="Commissioned by">*@
+								@*@Html.TextBoxFor(model => model.MFR.CommissionedBy, new { id = "commby", @class = "fntst", @placeholder = "Commissioned By",@required="required" })
+											@Html.ValidationMessageFor(model => model.MFR.CommissionedBy)*@
+								<label class="fntstrep">@Model.CommissionedBy</label>
+							</div>
+						</td>
+						<td class="span2">
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>Commissioning date :</strong></label>
+							</div>
+						</td>
+						<td class="span3">
+							<div>
+								@*@Html.TextBoxFor(model => model.MFR.CommissionedDate, new { id = "commdat", @class = "fntst", @placeholder = "Select Date", Value= @ViewBag.CommissionDate, @readonly = "readonly" })*@
+								<label class="fntstrep">@Model.CommDate</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span2">
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>Present M/c status :</strong></label>
+							</div>
+						</td>
+						<td class="span3">
+							<div>
+								<label class="checkbox">
+									@*<input type="checkbox" value="">*@
+									@Html.CheckBoxFor(m => m.McBrkDwn, new { id = "breakdown", @name = "breakdown", @class = "inline", @type = "checkbox" })
+									M/c break-down
+								</label>
+							</div>
+						</td>
+						<td class="span2" colspan="2">
+							<div>
+								<label class="checkbox">
+									@*<input type="checkbox" value="">*@
+									@Html.CheckBoxFor(m => m.McOpTem, new { id = "opertempo", @name = "opertempo", @class = "inline", @type = "checkbox" })
+									M/c operating temporarily
+								</label>
+							</div>
+						</td>
+					</tr>
+				</div>
+			</table>
+		</div>
+		@* Fault 1 *@
+		<div style="padding-left: 40px;padding-bottom:40px;">
+			<table class="table " style="width: 1030px; padding-left: 30px;">
+				<div class="controls-row">
+					<tr style="padding-bottom:10px">
+						<td class="span10">
+							<div style="text-align: left; vertical-align: middle;">
+								<label>
+									<strong>Fault 1 : </strong>
+								</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span10">
+							<label class="fntstrep" style="padding-bottom:15px">@Model.Fault1</label>
+						</td>
+					</tr>
+					<tr>
+						<td class="span10">
+							<div style="text-align: left; vertical-align: middle;padding-bottom:10px;padding-top:20px">
+								<label>
+									<strong>Analysis of the possible cause of fault / failure :</strong>
+									(In the box below, please provide us with your observations, and analysis in as much details as possible using 5 why analysis) 
+								</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span10">
+							<div style="text-align: left; vertical-align: middle;padding-bottom:10px">
+								<label>
+									<strong>5 - Why Analysis : </strong>
+									Ask the concerned person why on the given situation and record the answer obtained in the same sequence.
+								</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span10">
+							<div style="text-align: left; vertical-align: middle;">
+								<label><strong>Why did this happen? </strong></label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span10">
+							<label class="fntstrep">@Model.Ask1</label>
+							</td>
+					</tr>
+					@*<tr>
+						<td class="span10">
+							<div style="text-align: left; vertical-align: middle;padding-top:25px">
+								<label><strong>Why did this happen? </strong></label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span10">
+							<label class="fntstrep">@Model.Ask2</label>
+					</tr>
+					<tr>
+						<td class="span10">
+							<div style="text-align: left; vertical-align: middle;padding-top:25px">
+								<label><strong>Why did this happen? </strong></label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span10">
+							<label class="fntstrep">@Model.Ask3</label>
+					</tr>
+					<tr>
+						<td class="span10">
+							<div style="text-align: left; vertical-align: middle;padding-top:25px">
+								<label><strong>Why did this happen? </strong></label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span10">
+							<label class="fntstrep">@Model.Ask4</label>
+					</tr>
+					<tr>
+						<td class="span10">
+							<div style="text-align: left; vertical-align: middle;padding-top:25px">
+								<label><strong>Why did this happen? </strong></label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span10">
+							<label class="fntstrep">@Model.Ask5</label>
+					</tr>*@
+					<tr>
+						<td class="span10">
+							<div style="text-align: left; vertical-align: middle;padding-top:30px">
+								<label>
+									<strong>Remedial Action already taken :</strong>
+									(In the box below, please tell us what is the present state of the machine and what is the nature of the remnedial action taken by you based on the above 5 why analysis) 
+								</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="span10">
+							@*<textarea rows="1" class="span10" type="text" id="fault1"></textarea></td>*@
+							@*@Html.TextAreaFor(m => m.MFR.Remedial, new { @id = "remedial", @name = "remedial", rows = 1, columns = 20, @style = "width:900px",@required="required", @placeholder = "Remedial Action Taken" })
+										@Html.ValidationMessageFor(m => m.MFR.Remedial)*@
+							<label class="fntstrep">@Model.Remedial</label>
+					</tr>
+				</div>
+			</table>
+		</div>
+		@* Parts Needs to be replaced *@
+		<div style="padding-left: 40px;padding-bottom:30px;">
+			<table class="table" style="width: 800px; padding-left: 30px;padding-top:40px">
+				<div class="controls-row">
+					<tr>
+						<td colspan="4">
+							<div style="text-align: left; vertical-align: middle;padding-bottom:10px">
+								<label>
+									<strong>Parts that needs to be replaced : </strong>
+								</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="width: 50px;  text-align: center;"><label style="text-align:center">SL No</label></td>
+						<td style="width: 50px;  text-align: center;"><label style="text-align:center">Qty</label></td>
+						<td style="width: 130px; text-align: center;"><label style="text-align:center">Part Number</label></td>
+						<td style="width: 250px; text-align: center;"><label style="text-align:center">Description</label></td>
+					</tr>
+				</div>
+			</table>
+			<table class="table" style="width: 800px;">
+				<div class="controls-row">
+					@{int slno = 0;}
+					@foreach (var item in Model.MFRParts)
+					{
+						slno++;
+						<table style="width: 800px;padding-left: 30px; ">
+							<tr>
+								<td style="width: 50px;text-align:center" class="fntstrep">
+									<strong>@slno</strong>
+								</td>
+								<td style="width: 50px">
+									<label class="fntstrep" style="text-align:center;padding-left:30px"><strong>@item.Quantity</strong></label>
+								</td>
+								<td style="width: 130px;">
+									<label class="fntstrep" style="text-align:center;padding-left:40px"><strong>@item.ProductModelSpare.ProductModelSparesName</strong></label>
+								</td>
+								<td style="width: 250px;text-align:center">
+									<label class="fntstrep" style="text-align:center"><strong>@item.ModelDesc</strong></label>
+								</td>
+							</tr>
+						</table>
+					}
+					<tr>
+						<td colspan="3">
+							<div style="text-align: left; vertical-align: middle;padding-left: 30px;padding-top:200px">
+								<label>
+									Signature of the sender : 
+								</label>
+							</div>
+						</td>
+						<td>
+							<label></label>
+						</td>
+					</tr>
+				</div>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

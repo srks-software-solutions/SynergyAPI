@@ -1,0 +1,218 @@
+﻿@model SRKSSynergy.Models.TargetSettingsLead
+@{
+    ViewBag.Title = "Create";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+@*target type*@
+@{
+    List<SelectListItem> list2 = new List<SelectListItem>();
+    list2.Add(new SelectListItem
+         {
+             Text = "Lead",
+             Value = "Lead"
+         });
+    list2.Add(new SelectListItem
+         {
+             Text = "Quotation Submitted",
+             Value = "Quotation Submitted",
+         });
+    list2.Add(new SelectListItem
+    {
+        Text = "Order Booked",
+        Value = "Order Booked",
+    });                              
+}
+
+@*lead / machine  type*@
+@{
+    List<SelectListItem> list3 = new List<SelectListItem>();
+    list3.Add(new SelectListItem
+         {
+             Text = "SmartLine Lead",
+             Value = "SmartLine Lead"
+         });
+    list3.Add(new SelectListItem
+         {
+             Text = "BSOH Lead",
+             Value = "BSOH Lead",
+         });                             
+}
+
+<style>
+    .ui-datepicker-calendar {
+    display: none;
+}
+</style>
+
+<script>
+    //$(document).ready(function () {
+    //    $('#tmonth').monthpicker();
+    //});
+   
+
+    $(function() {
+        $('.date-picker-year').datepicker({
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'yy',
+            onClose: function(dateText, inst) { 
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).datepicker('setDate', new Date(year, 1));
+            }
+        });
+        $(".date-picker-year").focus(function () {
+            $(".ui-datepicker-month").hide();
+        });
+    });
+    
+    $(function() {
+        $('.date-picker-month').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'MM',
+            onClose: function(dateText, inst) { 
+                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).datepicker('setDate', new Date(year, month, 1));
+            }
+        });
+        $(".date-picker-month").focus(function () {
+            $(".ui-datepicker-year").hide();
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CPName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/TargetSettingsLead/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CPName, value: item.CPName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<div class="bcgr" style="min-height: 590px">
+	@using (Html.BeginForm("Create", "TargetSettingsLead", FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Create Target Settings Lead</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">                
+                <div class="span18 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Select Lead Type</label>
+							<div class="controls">
+								@Html.DropDownListFor(model => model.MachineType, list3, "-- Select Lead Type --", new { @id = "leadtype", @name = "leadtype", @class = "fntst", @required = "required" })
+							</div>
+						</div>
+					</div>
+				
+
+               <div class="span1 pad"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Select Target Type</label>
+							<div class="controls">
+								@Html.DropDownListFor(model => model.TargetType, list2, "-- Select Target Type --", new { @id = "targettype", @name = "targettype", @class = "fntst", @required = "required" })
+							</div>
+						</div>
+					</div>
+				               
+
+				<div class="span1 pad"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Channel Partner</label>
+							<div class="controls">
+								<input type="text" class="fntst excus" value="" id="CPName" name="CPName" placeholder="Channel Partner Name" style="height:30px" >
+                                @*@Html.DropDownListFor(m => m.ChannelPartners.ZoneID, (SelectList)ViewData["ZoneName"], "--Select Zone--", new { id = "ZoneName", @required = "required" })*@
+							</div>
+						</div>
+					</div>
+				</div>
+
+                <div class="span18 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Select Year</label>
+							<div class="controls">								
+                                @Html.TextBoxFor(model => model.Year, new { @id = "tyear",@name="tyear", @class = "input fntst date-picker-year" , @style="height:30px" })
+                                @*<input class="input fntst date-picker-year" id="tyear" name="tyear" placeholder="Select Year" />*@								
+							</div>
+						</div>
+					</div>
+				
+                    <div class="span1 pad"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Select Month</label>
+							<div class="controls">
+                                @Html.TextBoxFor(model => model.Month, new { @id = "tmonth",@name="tmonth", @class = "input fntst date-picker-month", @style="height:30px"  })																
+                                @*<input class="input fntst date-picker-month" id="tmonth" name="tmonth" placeholder="Select Month" />*@								
+							</div>
+						</div>
+					</div>
+				
+                    <div class="span1 pad"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Targets</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.Targets, new { @id = "desc", @class = "input fntst", @placeholder = "Enter Targets", @style="height:30px"  })								
+							</div>
+						</div>
+					</div>
+				</div>
+								
+                <div class="span10 pad ">
+                    <div class="span3 cent" style="padding-left: 2%">
+                        <button class="btn btn-success btn-large glyphicon glyphicon-arrow-left" style="display: inline;">@Html.ActionLink(" Back_to_List", "Index","TargetSettingsLead", new { @Style="color:white;text-decoration:none"})</button>
+					</div>
+					<div class="span3 cent" style="padding-left: 20%">
+						@*<input type="submit" name="btnsave" value="Save" class="btn btn-large btn-success" />*@
+                        <button class="btn btn-success glyphicon glyphicon-cloud-upload" value="post" type="Submit"> Save</button>
+					</div>                   					
+				</div>
+                				
+			</div>
+		</div>
+	}	
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

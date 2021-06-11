@@ -1,0 +1,637 @@
+﻿@model IEnumerable<SRKSSynergy.Models.OutwardMFR>
+
+@{
+    ViewBag.Title = "Outward MFR";
+    int slno = 1;
+}
+
+@* Paging & Sorting Code  *@
+
+@*@helper buildLinks(int start, int end, string innerContent)
+    {
+        for (int i = start; i <= end; i++)
+        {
+        <a class="@(i == ViewBag.CurrentPage ? "current" : "")"  href="@Url.Action("Index", "OutwardMFR", new { page = i, sortBy = ViewBag.sortBy, isAsc = ViewBag.isAsc.ToString().ToLower(), search = ViewBag.Search })">@(innerContent ?? i.ToString())</a>
+        }
+
+    }
+
+
+    @helper pageLinks()
+    {
+        const int maxPages = 11;
+
+        if (ViewBag.TotalPages <= maxPages)
+        {
+        @buildLinks(1, (int)ViewBag.TotalPages, null)
+            return;
+        }
+
+        int pagesAfter = ViewBag.TotalPages - ViewBag.CurrentPage; // Number of pages after current
+        int pagesBefore = ViewBag.CurrentPage - 1; // Number of pages before current
+
+        if (pagesAfter <= 4)
+        {
+        @buildLinks(1, 1, null) // Show 1st page
+
+            int pageSubset = ViewBag.TotalPages - maxPages - 1 > 1 ? ViewBag.TotalPages - maxPages - 1 : 2;
+        @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+        @buildLinks(ViewBag.TotalPages - maxPages + 3, ViewBag.TotalPages, null) // Show last pages
+
+            return; // Exit
+        }
+
+        if (pagesBefore <= 4)
+        {
+        @buildLinks(1, maxPages - 2, null) // Show 1st pages
+
+
+            int pageSubset = maxPages + 2 < ViewBag.TotalPages ? maxPages + 2 : ViewBag.TotalPages - 1;
+        @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+        @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+            return; // Exit
+
+        }
+
+        if (pagesAfter > 4)
+        {
+        @buildLinks(1, 1, null) // Show 1st pages
+
+            int pageSubset1 = ViewBag.CurrentPage - 7 > 1 ? ViewBag.CurrentPage - 7 : 2;
+            int pageSubset2 = ViewBag.CurrentPage + 7 < ViewBag.TotalPages ? ViewBag.CurrentPage + 7 : ViewBag.TotalPages - 1;
+
+        @buildLinks(pageSubset1, pageSubset1, pageSubset1 == ViewBag.CurrentPage - 4 ? null : "...") // Show 1st page subset (...)
+
+        @buildLinks(ViewBag.CurrentPage - 3, ViewBag.CurrentPage + 3, null) // Show middle pages
+
+            // Show 2nd page subset (...)
+            // only show ... if page is contigous to the previous one.
+        @buildLinks(pageSubset2, pageSubset2, pageSubset2 == ViewBag.CurrentPage + 4 ? null : "...")
+        @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+            return; // Exit
+
+        }
+    }*@
+
+@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("Index", "OutwardMFR", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a>
+    if (id == ViewBag.sortBy)
+    {
+        <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}
+
+@* End Of Paging & Sorting Code *@
+
+@*<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+    <script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+    <script src="~/Content/bootstrap/js/jquery.js"></script>
+    <script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+    <script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>*@
+
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-2.1.4.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#equipname").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/RiceOA/Autocompletemach",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+<style>
+    .dispnone {
+        display: none
+    }
+</style>
+
+<div class="bcgr" style="min-height: 590px; width:100%">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Outward MFR List</p>
+    </div>
+    <form action="@Url.Action("Index", "OutwardMFR")" method="post">
+        @* Create Equipment Link *@
+        @*        <div style="padding-left: 20px;padding-top:10px">
+                @Html.ActionLink("Create New Outward", "AddMFR", "OutwardMFR", new { @class = "btn btn-success", @Style = "text-decoration:none" })
+            </div>*@
+
+        @* Searching for a particular Model view *@
+        <div class="row">
+            <div class=" row show-grid">
+                @* Text Box for search *@
+                <div class="span12 pad ">
+                    <div class="span3 ">
+                        <div class="control-group ">
+                            @*<label class="control-label fntst ">Customer Name</label>*@
+                            <div class="controls" style="padding-left: 70px; padding-top: 23px">
+                                @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="equipname" name="equipname" placeholder="Equipment Name">*@
+
+                                @Html.TextBox("equipname", null, new { @style = "height:30px", @placeholder = "Search for Customer Name", @id = "equipname" })
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        List<SelectListItem> listItems1 = new List<SelectListItem>();
+                        listItems1.Add(new SelectListItem
+                        {
+                            Text = "Yet to dispatch",
+                            Value = "0"
+                        });
+                        listItems1.Add(new SelectListItem
+                        {
+                            Text = "Yet to recieve spare",
+                            Value = "1",
+                        });
+                        listItems1.Add(new SelectListItem
+                        {
+                            Text = "Process completed",
+                            Value = "2"
+                        });
+
+                    }
+                    <div class="span3 ">
+                        <div class="control-group ">
+                            @*<label class="control-label fntst ">Customer Name</label>*@
+                            <div class="controls" style="padding-left: 70px; padding-top: 23px">
+                                @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="equipname" name="equipname" placeholder="Equipment Name">*@
+
+                                @Html.DropDownList("Isdisp", listItems1, "-- Select Type --", new { @id = "Isdisp", @name = "Isdisp", @class = "fntst" })
+ </div>
+                        </div>
+                    </div>
+                    @*<div class="span"></div>*@
+                    @* Button for Search *@
+                    <div class="span3" style="padding-top: 20px">
+                        @*<input type="submit" style="width: 70px; height: 35px" value="Search" class="btn btn-info" />*@
+                        <button class="btn btn-success glyphicon glyphicon-search " value="post" type="submit"> Search</button>
+                    </div>
+                    @* End of buttons *@
+                    @*<span id="rData"></span>*@
+                </div>
+            </div>
+        </div>
+
+        @* Table for Equipment *@
+        <table class="table table-hover" style="width:97%;margin-left:1%">
+            <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No.</span>
+                </th>
+                <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Month</span>
+                </th>
+                <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Customer</span>
+                </th>
+                <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">MFR No</span>
+                </th>
+                <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">MFR Date</span>
+                </th>
+                <th style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">ItemCode</span>
+                </th>
+
+                <th style="width: 200px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    @Html.DisplayNameFor(model => model.ProductModelSpare.ProductModelSparesDesc)
+                </th>
+                <th style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                @* <th style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                        <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">AgentPrice</span>
+                    </th>
+                    <th style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                        <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Total Value</span>
+                    </th>*@
+                <th style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Status</span>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.OutwardMonth)
+                    </td>
+                    @* <td style="width: 140px; text-align: center; font-family: Calibri; font-size: 16px">
+                            @Html.DisplayFor(modelItem => item.DispatchDate)
+                        </td>*@
+                    <td style="width: 130px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.CustomerName)
+                    </td>
+                    <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.MFRNo)
+                    </td>
+                    <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @{
+                string sdt = "";
+
+                if (item.MFRNo != null)
+                {
+                    SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+                    var dte = db.MFR.Where(m => m.MFRNumber == item.MFRNo).Select(m => m.MfrDate).FirstOrDefault();
+
+
+
+                                @*DateTime dt =Convert.ToDateTime(dte);*@
+
+                                @*sdt = dt.ToString("dd-MM-yyyy");*@
+                    sdt = dte;
+                }
+                        }
+                        @Html.Label(@sdt)
+
+                    </td>
+                    <td style="width:100px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.ProductModelSpare.ProductModelSparesName)
+                    </td>
+                    <td style="width: 200px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.ProductModelSpare.ProductModelSparesDesc)
+                    </td>
+                    <td style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.QuantityOrdered)
+                    </td>
+                    @*<td style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px">
+                            @Html.DisplayFor(modelItem => item.ProductModelSpare.AgentPrice)
+                        </td>
+                        <td style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px">
+                            @Html.DisplayFor(modelItem => item.TotalValue, new { @id = "TotVal" })
+                        </td>*@
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            if (item.IsDispatch == 0)
+                            {
+                                @Html.ActionLink(" Dispatch", "ModifyMFR", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send", @Style = "text-decoration:none" })
+
+                            }
+                            else if (item.IsDispatch == 1)
+                            {//item confirmation yes or no for updation of isdispatch == 2
+                                <img src="~/Images/info-icon--6.png" style="height:30px;width:30px" title="Fault Spare Description:@item.FaultSpareDescription" data-toggle="tooltip" />
+                                <button type="button" id="Sparereturned_@item.MFRId" class="btn btn-danger btn-md" data-toggle="modal" data-target="#myModal" onclick="updateid(this);"><i class="glyphicon glyphicon-repeat" ></i>  <span style="padding:3px"> Spares returned</span></button>
+                                <h4 id="Sparereturnedlbl_@item.MFRId" class="dispnone"><i class="glyphicon glyphicon-check" style="color:green;"></i> <span class="label label-primary"> Spares received</span></h4>
+                            }
+                            else if (item.IsDispatch == 2)
+                            {//item received label
+                                <h4> <i class="glyphicon glyphicon-check" style="color:green;"></i> <span class="label label-primary"> Spares received</span></h4>
+                            }
+                        }
+                        else if (User.IsInRole("ChannelPartnerAdmin"))
+                        {
+                            <table>
+                                <tbody>
+                                    <tr>
+
+                                         @if (item.IsDispatch == 0)
+                                         {
+                                             <td>Not Dispatched</td>
+                                             <td></td>
+                                             <td></td>
+                                             <td></td>
+                                         }
+                                         else if (item.IsDispatch == 1)
+                                         {
+                                          <td> Dispatched </td>
+                                          <td style="display: block;width: 50px;"><img src="~/Images/info-icon--6.png" style="height:30px;width:30px" title="Remarks: @item.Remarks" data-toggle="tooltip" /></td>
+                                          @*<td><input type="image" style="text-decoration:none" class="btn btn-success glyphicon glyphicon-info-sign" data-toggle="tooltip" title="@item.Remarks" id="remarkid_@item.MFRId"  onclick=" return false;" /></td>*@
+                                          @*<td><button style="text-decoration:none" class="btn btn-success glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Hooray!" id="remarkid_@item.MFRId"  onclick=" getremark(this);" data-toggle="modal" data-target="#myModal1" ></button></td>*@
+                                             if (item.SparesRecievedDate == null)
+                                             {
+                                          <td>@Html.ActionLink(" Spares Recieved", "SparesRecieved", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send ", @Style = "text-decoration:none" })</td>
+                                             }
+                                             else
+                                             {
+
+                                          <td>@Html.ActionLink(" Spares Recieved", "SparesRecieved", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send ", @Style = "text-decoration:none" })</td> //disabled
+                                             }
+                                             if (item.MachineIssueDate == null)
+                                             {
+                                          <td>@Html.ActionLink(" Machine Issue", "MachineIssue", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send", @Style = "text-decoration:none" })</td>
+                                             }
+                                             else
+                                             {
+                                          <td>@Html.ActionLink(" Machine Issue", "MachineIssue", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send ", @Style = "text-decoration:none" })</td> //disabled
+                                             }
+                                             if (item.FaultSpareDate == null)
+                                             {
+                                          <td>@Html.ActionLink(" Fault Spare Dispatch", "FaultSpareDispatch", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send", @Style = "text-decoration:none" })</td>
+                                             }
+                                             else
+                                             {
+                                           <td>@Html.ActionLink(" Fault Spare Dispatch", "FaultSpareDispatch", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send ", @Style = "text-decoration:none" })</td>//disabled
+                                             }
+                                         }
+                                         else if (item.IsDispatch == 2)
+                                         {
+                                             <td>MFR Closed</td>
+                                             <td style="display: block;width: 50px;"><img src="~/Images/info-icon--6.png" style="height:30px;width:30px" title="Remarks: @item.Remarks" data-toggle="tooltip" /></td>
+                                          @*<td><input type="image" style="text-decoration:none" class="btn btn-success glyphicon glyphicon-info-sign" data-toggle="tooltip" title="@item.Remarks" id="remarkid_@item.MFRId"  onclick=" return false;" /></td>*@
+                                          @*<td><button style="text-decoration:none" class="btn btn-success glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Hooray!" id="remarkid_@item.MFRId"  onclick=" getremark(this);" data-toggle="modal" data-target="#myModal1" ></button></td>*@
+                                             if (item.SparesRecievedDate == null)
+                                             {
+                                          <td>@Html.ActionLink(" Spares Recieved", "SparesRecieved", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send ", @Style = "text-decoration:none" })</td>
+                                             }
+                                             else
+                                             {
+
+                                          <td>@Html.ActionLink(" Spares Recieved", "SparesRecieved", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send ", @Style = "text-decoration:none" })</td> //disabled
+                                             }
+                                             if (item.MachineIssueDate == null)
+                                             {
+                                          <td>@Html.ActionLink(" Machine Issue", "MachineIssue", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send", @Style = "text-decoration:none" })</td>
+                                             }
+                                             else
+                                             {
+                                          <td>@Html.ActionLink(" Machine Issue", "MachineIssue", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send ", @Style = "text-decoration:none" })</td> //disabled
+                                             }
+                                             if (item.FaultSpareDate == null)
+                                             {
+                                          <td>@Html.ActionLink(" Fault Spare Dispatch", "FaultSpareDispatch", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send", @Style = "text-decoration:none" })</td>
+                                             }
+                                             else
+                                             {
+                                           <td>@Html.ActionLink(" Fault Spare Dispatch", "FaultSpareDispatch", "OutwardMFR", new { id = item.MFRId }, new { @class = "btn btn-success glyphicon glyphicon-send ", @Style = "text-decoration:none" })</td>//disabled
+                                             }
+                                         }
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                        <script type="text/javascript">
+                            function updateid(val) {
+                                var id = $(val).attr('id');
+                                id = id.split('_');
+                                id = id[1];
+                                $("#hdn_id").val(id);
+                            }
+                        </script>
+                    </td>
+                </tr>
+                        slno++;
+            }
+        </table>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog" style="margin-left:450px;border-radius: 04px;">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#245580;color:white">
+                        <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
+                        <h4 class="modal-title ">Is spares returned ?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="hdn_id" />
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="updatestatus();">Yes</button>
+                            </div>
+
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal1" role="dialog" style="margin-left:450px;border-radius: 04px;">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#245580;color:white">
+                        <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
+                        <h4 class="modal-title ">Remarks</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <span id="remark"></span>
+                            </div>
+
+                            <div class="col-md-3"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function updatestatus() {
+                var MFRid = $("#hdn_id").val();
+                var data = {};
+                data.id = MFRid;
+                $.ajax({
+                    url: '/OutwardMFR/updateMFRstatus',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                   // dataType: 'json',
+                    success: function (data) {
+                        //On ajax success do this
+                        $("#Sparereturnedlbl_" + MFRid).removeClass("dispnone");
+                        $("#Sparereturned_" + MFRid).addClass("dispnone");
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //On error do this
+                        if (xhr.status == 200) {
+
+                            alert(ajaxOptions);
+                        }
+                        else {
+                            alert(xhr.status);
+                            alert(thrownError);
+                        }
+                    }
+                });
+            }
+            </script>
+        <script>
+
+            function getremark() {
+                var MFRid = 1;
+                var data = {};
+                data.id = MFRid;
+                $.ajax({
+                    url: '/OutwardMFR/updateMFRstatus',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    // dataType: 'json',
+                    success: function (data) {
+                        alert('s');
+                        //On ajax success do this
+                        //$("#Sparereturnedlbl_" + MFRid).removeClass("dispnone");
+                        //$("#Sparereturned_" + MFRid).addClass("dispnone");
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //On error do this
+                        if (xhr.status == 200) {
+
+                            alert(ajaxOptions);
+                        }
+                        else {
+                            alert(xhr.status);
+                            alert(thrownError);
+                        }
+                    }
+                });
+            }
+
+
+            //function getremark(val) {
+
+            //    var ids = $(val).attr("id");
+            //    ids = ids.split('_');
+            //    var ide = ids[1];
+            //    alert(ide);
+            //    $.ajax({
+            //        url: '/OutwardMFR/updateremark',
+            //        type: 'POST',
+            //        contentType: 'application/json',
+            //        //dataType: 'json',s
+            //        data: { mfrid: ide },
+            //        success: function (data) {
+            //            alert(data)
+
+            //        },
+            //        error: function (xhr, ajaxOptions, thrownError) {
+            //            //On error do this
+            //            if (xhr.status == 200) {
+
+            //                alert(ajaxOptions);
+            //            }
+            //            else {
+            //                alert(xhr.status);
+            //                alert(thrownError);
+            //            }
+            //        }
+            //    });
+
+
+
+
+
+               //$.ajax({
+               //     url: '/OutwardMFR/updateremark',
+               //     type: 'POST',
+               //     contentType: 'application/json',
+               //     data: JSON.stringify(data),
+               //     // dataType: 'json',
+               //     success: function (data) {
+               //         //On ajax success do this
+               //         $("#Sparereturnedlbl_" + MFRid).removeClass("dispnone");
+               //         $("#Sparereturned_" + MFRid).addClass("dispnone");
+               //     },
+               //     error: function (xhr, ajaxOptions, thrownError) {
+               //         //On error do this
+               //         if (xhr.status == 200) {
+
+               //             alert(ajaxOptions);
+               //         }
+               //         else {
+               //             alert(xhr.status);
+               //             alert(thrownError);
+               //         }
+               //     }
+               // });
+            //}
+        </script>
+     @*   <script type="text/javascript">
+            function getremark(val) {
+                // var ids = $(val).attr("id");
+                var ids = "a_1";
+                ids = ids.split('_');
+                var ide = ids[1];
+                alert(ide);
+
+                jQuery.ajax({
+                    url: '@Url.Action("updateremark", "OutwardMFR")',
+                    method: "POST",
+                    cache: false,
+                    contentType: 'application/json',
+
+                    data: { id: ide }
+                }).done(function (result) {
+                    $('#remark').val(result);
+                });
+
+            }
+            </script>*@
+@*<div class="pagination" style="font-size: 18px; font-family: Calibri;float:right;padding-right:70px">
+        Page:
+        @pageLinks()
+    </div>*@
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datepicker').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'MM yy',
+            onClose: function (dateText, inst) {
+                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).datepicker('setDate', new Date(year, month, 1));
+            },
+            beforeShow: function (input, inst) {
+                if ((datestr = $(this).val()).length > 0) {
+                    year = datestr.substring(datestr.length - 4, datestr.length);
+                    month = jQuery.inArray(datestr.substring(0, datestr.length - 5), $(this).datepicker('option', 'monthNames'));
+                    $(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
+                    $(this).datepicker('setDate', new Date(year, month, 1));
+                }
+            }
+        });
+    });
+</script>
+@*<script>
+        $(document).ready(function () {
+            $('#TotVal').val(accounting.formatMoney(totalprice));
+
+        });
+
+    </script>*@

@@ -1,0 +1,3137 @@
+﻿@model SRKSSynergy.Models.MainDataBase
+
+@{
+	ViewBag.Title = "Main MDB";
+}
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script type="text/javascript">
+	function checkvalue(value) {
+		if (value === "others")
+			document.getElementById('ctype').style.display = 'block';
+		else
+			document.getElementById('ctype').style.display = 'none';
+	}
+</script>
+<script type="text/javascript">
+	function checkvaluec1(value) {
+		if (value === "othersc1")
+			document.getElementById('c1').style.display = 'block';
+		else
+			document.getElementById('c1').style.display = 'none';
+	}
+</script>
+<script type="text/javascript">
+	function checkvaluec2(value) {
+		if (value === "othersc2")
+			document.getElementById('c2').style.display = 'block';
+		else
+			document.getElementById('c2').style.display = 'none';
+	}
+</script>
+<script type="text/javascript">
+	function checkvaluec3(value) {
+		if (value === "othersc3")
+			document.getElementById('c3').style.display = 'block';
+		else
+			document.getElementById('c3').style.display = 'none';
+	}
+</script>
+<script type="text/javascript">
+	function checkvaluec4(value) {
+		if (value === "othersc4")
+			document.getElementById('c4').style.display = 'block';
+		else
+			document.getElementById('c4').style.display = 'none';
+	}
+</script>
+<script type="text/javascript">
+	function checkvaluec5(value) {
+		if (value === "othersc5")
+			document.getElementById('c5').style.display = 'block';
+		else
+			document.getElementById('c5').style.display = 'none';
+	}
+</script>
+<script type="text/javascript">
+	function checkvaluec6(value) {
+		if (value === "othersc6")
+			document.getElementById('c6').style.display = 'block';
+		else
+			document.getElementById('c6').style.display = 'none';
+	}
+</script>
+<script type="text/javascript">
+	function checkvaluety(value) {
+		if (value === "others1")
+			document.getElementById('orype').style.display = 'block';
+		else
+			document.getElementById('orype').style.display = 'none';
+	}
+	//Dropdown value to textbox 3
+	$(document).ready(function () {
+		$('#test-build-select-all-select').change(function () {
+			var passvalmul = $('select#test-build-select-all-select').val();
+			$('#post').val(passvalmul);
+		});
+	});
+</script>
+<style>
+	.validation-summary-valid {
+		display: none;
+	}
+</style>
+@if (Model.MDBGeneralData.OrganizationType == "others1")
+{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#orype').attr("style", "display:block");
+		});
+	</script>
+}
+@*@if (Model.MDBContactPersonData1.Title != null || Model.MDBContactPersonData1.Title!="")
+{
+    if(Model.MDBContactPersonData1.Title=="othersc1")
+    {
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#c1').attr("style", "display:block");
+		});
+	</script>
+}
+}*@
+@if (Model.MDBContactPersonData2 != null)
+{
+if (Model.MDBContactPersonData2.Title == "othersc2")
+{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#c2').attr("style", "display:block");
+		});
+	</script>
+}
+}
+@if (Model.MDBContactPersonData3 != null)
+{
+if (Model.MDBContactPersonData3.Title == "othersc3")
+{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#c3').attr("style", "display:block");
+		});
+	</script>
+}
+}
+@if (Model.MDBContactPersonData4 != null)
+{
+if (Model.MDBContactPersonData4.Title == "othersc4")
+{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#c4').attr("style", "display:block");
+		});
+	</script>
+}
+}
+@if (Model.MDBContactPersonData5 != null)
+{
+if (Model.MDBContactPersonData5.Title == "othersc5")
+{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#c5').attr("style", "display:block");
+		});
+	</script>
+}
+}
+@if (Model.MDBContactPersonData6 != null)
+{
+if (Model.MDBContactPersonData6.Title == "othersc6")
+{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#c6').attr("style", "display:block");
+		});
+	</script>
+}
+}
+@*@if (Model.MDBGeneralData.RelationshipType == "others")
+{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#ctype').attr("style", "display:block");
+		});
+	</script>
+}*@
+<div class="bcgr">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+
+		<div style="background: gray; padding-bottom: 7px">
+			<p class="txtft">Edit-Master Data Base</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<!--Row1-->
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Company Unique ID</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="cnuid" placeholder="Company Unique ID" readonly="readonly">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.CompanyUniqueID, new { @id = "Cusunid", @class = "fntst", @readonly = "readonly" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.CompanyUniqueID)
+						    	@Html.HiddenFor(model => model.MDBGeneralData.MDBID)
+								@Html.HiddenFor(model => model.MDBContactPersonData1.MDBCPDID)
+							    @Html.HiddenFor(model => model.MDBContactPersonData1.MDBID)
+								@if (Model.MDBContactPersonData2 != null)
+								{
+								@Html.HiddenFor(model => model.MDBContactPersonData2.MDBCPDID)
+								@Html.HiddenFor(model => model.MDBContactPersonData2.MDBID)
+								}
+								 @if (Model.MDBContactPersonData3 != null)
+								{
+								@Html.HiddenFor(model => model.MDBContactPersonData3.MDBCPDID)
+								@Html.HiddenFor(model => model.MDBContactPersonData3.MDBID)
+								 }
+								@if (Model.MDBContactPersonData4 != null)
+								{
+								@Html.HiddenFor(model => model.MDBContactPersonData4.MDBCPDID)
+								@Html.HiddenFor(model => model.MDBContactPersonData4.MDBID)
+								}
+								@if (Model.MDBContactPersonData5 != null)
+								{
+								@Html.HiddenFor(model => model.MDBContactPersonData5.MDBCPDID)
+								@Html.HiddenFor(model => model.MDBContactPersonData5.MDBID)
+								}
+								@if (Model.MDBContactPersonData6 != null)
+								{
+								@Html.HiddenFor(model => model.MDBContactPersonData6.MDBCPDID)
+								@Html.HiddenFor(model => model.MDBContactPersonData6.MDBID)
+								}
+								@Html.HiddenFor(model => model.MDBBankDetail1.MDBBDID)
+								@Html.HiddenFor(model => model.MDBBankDetail1.MDBID)
+								@if (Model.MDBBankDetail2 != null)
+								{
+								@Html.HiddenFor(model => model.MDBBankDetail2.MDBBDID)
+								@Html.HiddenFor(model => model.MDBBankDetail2.MDBID)
+								}
+								@Html.HiddenFor(model => model.MDBStatutoryNumber.MDBSNID)
+								@Html.HiddenFor(model => model.MDBStatutoryNumber.MDBID)
+							</div>
+						</div>
+					</div>
+				</div>
+				<p style="color: red;font-family:Calibri;font-size:16px">
+						@Html.Label("", Convert.ToString((string)ViewBag.Duplicate))
+					</p>
+				@Html.HiddenFor(model => model.MDBGeneralData.CPID, new { id = "natureOfVisitField" })
+				
+				<!--Row3-->
+				<div class="span10 pad">
+					<p class="pad txtal">General Data</p>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Organization Name</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="orme" placeholder="Organization Name">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.OrganizationName, new { @id = "ornme", @class = "fntst", @placeholder = "Organization Name", @required = "required" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.OrganizationName)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Organization Type</label>
+							<div class="controls">
+								@{
+		List<SelectListItem> listItems1 = new List<SelectListItem>();
+		listItems1.Add(new SelectListItem
+			 {
+				 Text = "Private Limited",
+				 Value = "Private Limited"
+			 });
+		listItems1.Add(new SelectListItem
+			 {
+				 Text = "Government",
+				 Value = "Government",
+			 });
+		listItems1.Add(new SelectListItem
+			 {
+				 Text = "Public Listed",
+				 Value = "Public Listed"
+			 });
+		listItems1.Add(new SelectListItem
+		{
+			Text = "Sole Proprietorship",
+			Value = "Sole Proprietorship"
+		});
+		listItems1.Add(new SelectListItem
+		{
+			Text = "Others",
+			Value = "others1"
+		}); 
+								}
+							</div>
+							<div class="controls">
+								@Html.DropDownListFor(model => model.MDBGeneralData.OrganizationType, listItems1, "-- Select Type --", new { @id = "orgty", @name = "orype", @class = "fntst", @onchange = "checkvaluety(this.value)", @required = "required" })
+								@*<input name="orype" class="fntst dis" style="display: none" id="orype" placeholder="Other Type">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.OrganizationTypeothers, new { @id = "orype", @class = "fntst dis", @style = "display: none", @placeholder = "Other Type" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.OrganizationType)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Search Term</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="srtm" placeholder="Short Name">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.SearchTerm, new { @id = "srttrm", @class = "fntst", @placeholder = "Short Name" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.SearchTerm)
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Row4-->
+				<div class="span10 pad">
+					<p class="pad txtal">Contact Address</p>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Address (Line1)</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="addr1" placeholder="Address (Line1)">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.AddressLine1, new { @id = "addr1", @class = "fntst", @placeholder = "Address (Line1)", @required = "required" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.AddressLine1)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Address (Line2)</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="addr2" placeholder="Address (Line2)">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.AddressLine2, new { @id = "addr2", @class = "fntst", @placeholder = "Address (Line2)", @required = "required" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.AddressLine2)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Address (Line3)</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="addr3" placeholder="Address (Line3)">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.AddressLine3, new { @id = "addr3", @class = "fntst", @placeholder = "Address (Line3)" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.AddressLine3)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Address (Line4)</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="addr4" placeholder="Address (Line4)">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.AddressLine4, new { @id = "addr4", @class = "fntst", @placeholder = "Address (Line4)" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.AddressLine4)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">City/Town/District</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="ctd" placeholder="City/Town/District">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.City, new { @id = "cty", @class = "fntst", @placeholder = "City/Town/District", @required = "required" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.City)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Pincode</label>
+							<div class="controls">
+								@*<input type="number" min="0" class="fntst" id="pincd" placeholder="Pincode">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.Pincode, new { @id = "pincd", @class = "fntst", @placeholder = "Pincode", @required = "required" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.Pincode)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">State</label>
+							<div class="controls">
+								@{
+	List<SelectListItem> listItemsst = new List<SelectListItem>();
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Andhra Pradesh (AP)",
+		Value = "Andhra Pradesh (AP)"
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Arunachal Pradesh (AR)",
+		Value = "Arunachal Pradesh (AR)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Andaman and Nicobar Islands(AN)",
+		Value = "Andaman and Nicobar Islands(AN)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Assam (AS)",
+		Value = "Assam (AS)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Bihar (BR)",
+		Value = "Bihar (BR)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Chhattisgarh (CG)",
+		Value = "Chhattisgarh (CG)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Chandigarh (CH)",
+		Value = "Chandigarh (CH)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Delhi (DEL)",
+		Value = "Delhi (DEL)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Dadra and Nagar Haveli (DN)",
+		Value = "Dadra and Nagar Haveli (DN)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Daman and Diu (DD)",
+		Value = "Daman and Diu (DD)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Goa (GA)",
+		Value = "Goa (GA)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Gujarat (GJ)",
+		Value = "Gujarat (GJ)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Haryana (HR)",
+		Value = "Haryana (HR)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Himachal Pradesh (HP)",
+		Value = "Himachal Pradesh (HP)"
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Jammu and Kashmir (JK)",
+		Value = "Jammu and Kashmir (JK)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Jharkhand (JH)",
+		Value = "Jharkhand (JH)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Karnataka (KA)",
+		Value = "Karnataka (KA)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Kerala (KL)",
+		Value = "Kerala (KL)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Madhya Pradesh (MP)",
+		Value = "Madhya Pradesh (MP)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Maharashtra (MH)",
+		Value = "Maharashtra (MH)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Manipur (MN)",
+		Value = "Manipur (MN)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Meghalaya (ML)",
+		Value = "Meghalaya (ML)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Mizoram (MZ)",
+		Value = "Mizoram (MZ)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Nagaland (NL)",
+		Value = "Nagaland (NL)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "National Capital Territory of Delhi (DL)",
+		Value = "National Capital Territory of Delhi (DL)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Odisha(OR)",
+		Value = "Odisha(OR)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Punjab (PB)",
+		Value = "Punjab (PB)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Rajasthan (RJ)",
+		Value = "Rajasthan (RJ)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Sikkim (SK)",
+		Value = "Sikkim (SK)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Tamil Nadu (TN)",
+		Value = "Tamil Nadu (TN)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Tripura (TR)",
+		Value = "Tripura (TR)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Uttar Pradesh (UP)",
+		Value = "Uttar Pradesh (UP)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Uttarakhand (UK)",
+		Value = "Uttarakhand (UK)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "West Bengal (WB)",
+		Value = "West Bengal (WB)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Lakshadweep (LD)",
+		Value = "Lakshadweep (LD)",
+	});
+	listItemsst.Add(new SelectListItem
+	{
+		Text = "Pondicherry (PY)",
+		Value = "Pondicherry (PY)",
+	});
+								}
+								@Html.DropDownListFor(model => model.MDBGeneralData.State, listItemsst, "-- Select Type --", new { @id = "stat", @name = "orype", @class = "fntst",@required = "required" })
+								@*<input type="text" class="fntst" id="state" placeholder="State">*@
+								@*@Html.TextBoxFor(model => model.MDBGeneralData.State, new { @id = "stat", @class = "fntst", @placeholder = "State", @required = "required" })*@
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.State)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Country</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="cntry" placeholder="Country">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.Country, new { @id = "ctry", @Value = "INDIA", @class = "fntst", @placeholder = "Country", @required = "required" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.Country)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span14 pad">
+					<div class="span4">
+						@*<div class="control-group">*@
+							<label class="fntst">Phone1 (Ex:+91 80 12345678)</label>
+								<span>
+									@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+									+@Html.TextBoxFor(model => model.MDBGeneralData.Isd1, new { @id = "isdge",@min="0",@Value = 91, @type = "number", @class = "input-mini3 fntst", @placeholder = "ISD",required="required" })
+									@Html.ValidationMessageFor(model => model.MDBGeneralData.Isd1)
+								</span>
+							<span>
+								@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.Std1, new { @id = "stdge", @min="0",@type = "number", @class = "input-mini3 fntst", @placeholder = "STD",required="required" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.Std1)
+							</span>
+							<span>
+								@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.PhoneLL1, new { @id = "llge",@min="0", @type = "number", @class = "input-medium1 fntst", @placeholder = "Directs",required="required" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.PhoneLL1)
+							</span>
+						@*</div>*@
+					</div>
+
+					<div class="span4">
+						@*<div class="control-group">*@
+							<label class="fntst">Phone2 (Ex:+91 80 12345678)</label>
+								<span>
+									@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+									+@Html.TextBoxFor(model => model.MDBGeneralData.Isd2, new { @id = "isdge1",@min="0",@Value = 91, @type = "number", @class = "input-mini3 fntst", @placeholder = "ISD" })
+									@Html.ValidationMessageFor(model => model.MDBGeneralData.Isd2)
+								</span>
+							<span>
+								@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.Std2, new { @id = "stdge1",@min="0", @type = "number", @class = "input-mini3 fntst", @placeholder = "STD" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.Std2)
+							</span>
+							<span>
+								@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.ContactNumLL2, new { @id = "llge1",@min="0", @type = "number", @class = "input-medium1 fntst", @placeholder = "Direct" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.ContactNumLL2)
+							</span>
+						@*</div>*@
+					</div>
+				</div>
+				<div class="span1"></div>
+				<div class="span10 pad">
+					<div class="span4">
+						@*<div class="control-group">*@
+							<label class="fntst">FAX (Ex:+91 80 12345678)</label>
+								<span>
+									@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+									+@Html.TextBoxFor(model => model.MDBGeneralData.Isdf, new { @id = "isdgef",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+									@Html.ValidationMessageFor(model => model.MDBGeneralData.Isdf)
+								</span>
+							<span>
+								@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.Stdf, new { @id = "stdgef", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.Stdf)
+							</span>
+							<span>
+								@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.FAX, new { @id = "llgef", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.FAX)
+							</span>
+						@*</div>*@
+					</div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Website</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="webst" placeholder="Website">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.Website, new { id = "webst", @type = "text", @class = "fntst", @placeholder = "Website" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.Website)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">E-mail 1</label>
+							<div class="controls">
+								@*<input type="email" class="fntst" id="email" placeholder="E-mail">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.EmailID, new { id = "email", @type = "email", @class = "fntst", @placeholder = "E-mail" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.EmailID)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">E-mail 2</label>
+							<div class="controls">
+								@*<input type="email" class="fntst" id="email" placeholder="E-mail">*@
+								@Html.TextBoxFor(model => model.MDBGeneralData.EmailID2, new { id = "email", @type = "email", @class = "fntst", @placeholder = "E-mail" })
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.EmailID2)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span12 pad">
+					<div class="span12">
+						<div class="control-group">
+							<label class="control-label fntst" style="font-family: Calibri">Postal / Courier (Press CTRL to Select Multiple)</label>
+							<div class="controls">
+								<table class="table">
+									<tbody>
+										<tr id="test-build-select-all-tr">
+											<td>
+												<select id="test-build-select-all-select" multiple="multiple",required="required">
+													<option value="DHL">DHL</option>
+													<option value="DTDC">DTDC</option>
+													<option value="Professional">Professional</option>
+													<option value="TNT">TNT</option>
+													<option value="Blue Dart">Blue Dart</option>
+												</select>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<label style="font-size:14px;font-family:Calibri">Please Enter courier name after comma "TNT,others"</label>
+								@Html.TextBoxFor(model => model.MDBGeneralData.PostalCourier, new { id = "post",@value="", @class = "input-xxlarge fntst", @placeholder = "Selected Value"})
+								@Html.ValidationMessageFor(model => model.MDBGeneralData.PostalCourier)
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Row5-->
+				<div class="span12 pad">
+					<p class="pad txtal">Contact Details</p>
+					<!--<div class="span3">-->
+					<div class="accordion" id="accordion2">
+						<!--Contact address Person 1-->
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Contact Person 1 Address 
+								</a>
+							</div>
+							<div id="collapseOne" class="accordion-body collapse in">
+								<div class="accordion-inner">
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Title</label>
+												<div class="controls">
+													@*<select id="cp1ty" class="fntst" onchange='checkvaluec1(this.value)'>
+														<option value="Mr">Mr</option>
+														<option value="Miss">Miss</option>
+														<option value="Mrs">Mrs</option>
+														<option value="Dr">Dr</option>
+														<option value="Prof.">Prof.</option>
+														<option value="othersc1">Others</option>
+													</select>*@
+													@{
+		List<SelectListItem> listItems2 = new List<SelectListItem>();
+		listItems2.Add(new SelectListItem
+				 {
+					 Text = "Mr",
+					 Value = "Mr"
+				 });
+		listItems2.Add(new SelectListItem
+			 {
+				 Text = "Miss",
+				 Value = "Miss",
+			 });
+		listItems2.Add(new SelectListItem
+			 {
+				 Text = "Mrs",
+				 Value = "Mrs"
+			 });
+		listItems2.Add(new SelectListItem
+		{
+			Text = "Dr",
+			Value = "Dr"
+		});
+		listItems2.Add(new SelectListItem
+		{
+			Text = "Prof.",
+			Value = "Prof."
+		});
+		listItems2.Add(new SelectListItem
+		{
+			Text = "Others",
+			Value = "othersc1"
+		});
+													}
+												</div>
+												<div class="controls">
+													@Html.DropDownListFor(model => model.MDBContactPersonData1.Title, listItems2, "-- Select Type --", new { @id = "cp1ty", @name = "orype", @class = "fntst", @onchange = "checkvaluec1(this.value)", @required = "required" })
+													@*<input name="reltype" value="" class="fntst dis" style="display: none" id="c1" placeholder="Other Type">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.Titleothers, new { @class = "fntst dis", @style = "display: none", @id = "c1", @placeholder = "Other Type" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Title)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">First Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="fstnm" placeholder="First Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.FirstName, new { id = "fstnm", @type = "text", @class = "fntst", @placeholder = "First Name", @required = "required" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.FirstName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Middle Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="mdlnm" placeholder="Middle Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.MiddleName, new { id = "mdlnm", @type = "text", @class = "fntst", @placeholder = "Middle Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.MiddleName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Last Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="lstnm" placeholder="Last Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.LastName, new { id = "lstnm", @type = "text", @class = "fntst", @placeholder = "Last Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.LastName)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Designation</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Desg" placeholder="Designation">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.Designation, new { id = "Desg", @type = "text", @class = "fntst", @placeholder = "Designation", @required = "required" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Designation)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Department</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Dept" placeholder="Department">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.Department, new { id = "Dept", @type = "text", @class = "fntst", @placeholder = "Department" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Department)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span13">
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst">Phone Board1 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData1.Isd1, new { id = "isd1",@min="0",@Value = 91, @type = "number", @class = "input-mini3 fntst", @placeholder = "ISD",@required = "required" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Isd1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.Std1, new { id = "std1", @min="0",@type = "number", @class = "input-mini3 fntst", @placeholder = "STD",@required = "required" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Std1)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.PhoneLL1, new { id = "cnuid",@min="0", @type = "number", @class = "input-medium1 fntst", @placeholder = "Direct",@required = "required" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.PhoneLL1)
+												</span>
+											@*</div>*@
+										</div>
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst" >Phone Board2 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData1.Isd2, new { id = "isd2",@min="0",@Value = 91, @type = "number", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Isd2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.Std2, new { id = "std2", @min="0",@type = "number", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Std2)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.PhoneLL2, new { id = "cnuid1", @min="0",@type = "number", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.PhoneLL2)
+												</span>
+											@*</div>*@
+										</div>
+
+									</div>
+									<div class="span12">
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst">Mobile 1 (Ex:+91 9999999999)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData1.Isdm1, new { id = "isdm1",@Value = 91, @min="0",@type = "number", @class = "input-mini3 fntst", @placeholder = "ISD",@required = "required" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Isdm1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.Mobile1, new { id = "mbl1", @type = "number",  @min="0",@class = "input-medium1 fntst", @placeholder = "Direct" ,@required = "required"})
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Mobile1)
+												</span>
+											@*</div>*@
+										</div>
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst" >Mobile 2 (Ex:+91 9999999999)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData1.Isdm2, new { id = "isd2",@Value = 91, @min="0", @type = "number", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Isdm2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.Mobile2, new { id = "mbl2", @type = "number", @min="0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Mobile2)
+												</span>
+											@*</div>*@
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">E-mail</label>
+												<div class="controls">
+													@*<input type="email" class="fntst" id="eml" placeholder="E-mail">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.EmailID, new { id = "eml", @type = "email", @class = "fntst", @placeholder = "E-mail" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.EmailID)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Key Activity</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="keyact" placeholder="Key Activity">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData1.KeyActivity, new { id = "keyact", @type = "text", @class = "fntst", @placeholder = "Key Activity"})
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.KeyActivity)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Comments</label>
+												<div class="controls">
+													<!--<input type="text" class="fntst" id="web" placeholder="Comments">-->
+													@*<textarea rows="2" class="fntst" placeholder="Additional Comments"></textarea>*@
+													@*@Html.TextBoxFor(model => model.MDBContactPersonData1.Comments, new { id = "txtar", @type = "text", @class = "fntst", @placeholder = "Additional Comments" })*@
+													@Html.TextAreaFor(model => model.MDBContactPersonData1.Comments, new { id = "txtar", rows = 2, columns = 2, @class = "fntst", @placeholder = "Additional Comments" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData1.Comments)
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--Contact address Person 2-->
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Contact Person 2 Address 
+								</a>
+							</div>
+							<div id="collapseTwo" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Title</label>
+												<div class="controls">
+													@*<select id="cp2ty" class="fntst" onchange='checkvaluec2(this.value)'>
+														<option value="Mr">Mr</option>
+														<option value="Miss">Miss</option>
+														<option value="Mrs">Mrs</option>
+														<option value="Dr">Dr</option>
+														<option value="Prof.">Prof.</option>
+														<option value="othersc2">Others</option>
+													</select>*@
+													@{ 
+		List<SelectListItem> listItems3 = new List<SelectListItem>();
+		listItems3.Add(new SelectListItem
+				 {
+					 Text = "Mr",
+					 Value = "Mr"
+				 });
+		listItems3.Add(new SelectListItem
+			 {
+				 Text = "Miss",
+				 Value = "Miss",
+			 });
+		listItems3.Add(new SelectListItem
+			 {
+				 Text = "Mrs",
+				 Value = "Mrs"
+			 });
+		listItems3.Add(new SelectListItem
+		{
+			Text = "Dr",
+			Value = "Dr"
+		});
+		listItems3.Add(new SelectListItem
+		{
+			Text = "Prof.",
+			Value = "Prof."
+		});
+		listItems3.Add(new SelectListItem
+		{
+			Text = "Others",
+			Value = "othersc2"
+		});
+													}
+												</div>
+												<div class="controls">
+													@Html.DropDownListFor(model => model.MDBContactPersonData2.Title, listItems3, "-- Select Type --", new { @id = "cp2ty", @name = "orype", @class = "fntst", @onchange = "checkvaluec2(this.value)" })
+													@*<input name="reltype" value="" class="fntst dis" style="display: none" id="c2" placeholder="Other Type">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.Titleothers, new { @class = "fntst dis", @style = "display: none", @id = "c2", @placeholder = "Other Type" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Title)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">First Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="fstnm" placeholder="First Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.FirstName, new { id = "fstnm2", @type = "text", @class = "fntst", @placeholder = "First Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.FirstName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Middle Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="mdlnm" placeholder="Middle Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.MiddleName, new { id = "mdlnm2", @type = "text", @class = "fntst", @placeholder = "Middle Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.MiddleName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Last Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="lstnm" placeholder="Last Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.LastName, new { id = "lstnm2", @type = "text", @class = "fntst", @placeholder = "Last Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.LastName)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Designation</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Desg" placeholder="Designation">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.Designation, new { id = "Desg2", @type = "text", @class = "fntst", @placeholder = "Designation" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Designation)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Department</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Dept" placeholder="Department">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.Department, new { id = "Dept2", @type = "text", @class = "fntst", @placeholder = "Department" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Department)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span13">
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst">Phone Board1 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData2.Isd1, new { id = "isd12",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Isd1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.Std1, new { id = "std12", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Std1)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.PhoneLL1, new { id = "cnuid12", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.PhoneLL1)
+												</span>
+											@*</div>*@
+										</div>
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst" >Phone Board2 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData2.Isd2, new { id = "isd22",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Isd2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.Std2, new { id = "std22", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Std2)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.PhoneLL2, new { id = "cnuid22", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.PhoneLL2)
+												</span>
+											@*</div>*@
+										</div>
+
+									</div>
+									<div class="span12">
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst">Mobile 1 (Ex:+91 8888888888)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData2.Isdm1, new { id = "isd12",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Isdm1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.Mobile1, new { id = "mbl12", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Mobile1)
+												</span>
+											@*</div>*@
+										</div>
+										<div class="span4">
+											@*<div class="control-group">*@
+												<label class="fntst" >Mobile 2 (Ex:+91 8888888888)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData2.Isdm2, new { id = "isd22",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Isdm2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.Mobile2, new { id = "mbl22", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Mobile2)
+												</span>
+											@*</div>*@
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">E-mail</label>
+												<div class="controls">
+													@*<input type="email" class="fntst" id="eml" placeholder="E-mail">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.EmailID, new { id = "eml2", @type = "email", @class = "fntst", @placeholder = "E-mail" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.EmailID)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Key Activity</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="keyact" placeholder="Key Activity">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData2.KeyActivity, new { id = "keyact2", @type = "text", @class = "fntst", @placeholder = "Key Activity" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.KeyActivity)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Comments</label>
+												<div class="controls">
+													<!--<input type="text" class="fntst" id="web" placeholder="Comments">-->
+													@*<textarea rows="2" class="fntst" placeholder="Additional Comments"></textarea>*@
+													@*@Html.TextBoxFor(model => model.MDBContactPersonData2.Comments, new { id = "txtar2", @type = "text", @class = "fntst", @placeholder = "First Name" })*@
+													@Html.TextAreaFor(model => model.MDBContactPersonData2.Comments, new { id = "txtar2", rows = 2, columns = 2, @class = "fntst", @placeholder = "Additional Comments" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData2.Comments)
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--Contact address Person 3-->
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse3">Contact Person 3 Address 
+								</a>
+							</div>
+							<div id="collapse3" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Title</label>
+												<div class="controls">
+													@*<select id="cp3ty" class="fntst" onchange='checkvaluec3(this.value)'>
+														<option value="Mr">Mr</option>
+														<option value="Miss">Miss</option>
+														<option value="Mrs">Mrs</option>
+														<option value="Dr">Dr</option>
+														<option value="Prof.">Prof.</option>
+														<option value="othersc3">Others</option>
+													</select>*@
+													@{
+		List<SelectListItem> listItems4 = new List<SelectListItem>();
+		listItems4.Add(new SelectListItem
+				 {
+					 Text = "Mr",
+					 Value = "Mr"
+				 });
+		listItems4.Add(new SelectListItem
+			 {
+				 Text = "Miss",
+				 Value = "Miss",
+			 });
+		listItems4.Add(new SelectListItem
+			 {
+				 Text = "Mrs",
+				 Value = "Mrs"
+			 });
+		listItems4.Add(new SelectListItem
+		{
+			Text = "Dr",
+			Value = "Dr"
+		});
+		listItems4.Add(new SelectListItem
+		{
+			Text = "Prof.",
+			Value = "Prof."
+		});
+		listItems4.Add(new SelectListItem
+		{
+			Text = "Others",
+			Value = "othersc3"
+		});
+													}
+												</div>
+												<div class="controls">
+													@Html.DropDownListFor(model => model.MDBContactPersonData3.Title, listItems4, "-- Select Type --", new { @id = "cp3ty", @name = "orype", @class = "fntst", @onchange = "checkvaluec3(this.value)" })
+													@*<input name="reltype" value="" class="fntst dis" style="/*display: none*/" id="c3" placeholder="Other Type">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.Titleothers, new { @class = "fntst dis", @style = "display: none", @id = "c3", @placeholder = "Other Type" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Title)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">First Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="fstnm" placeholder="First Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.FirstName, new { id = "fstnm3", @type = "text", @class = "fntst", @placeholder = "First Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.FirstName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Middle Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="mdlnm" placeholder="Middle Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.MiddleName, new { id = "mdlnm3", @type = "text", @class = "fntst", @placeholder = "Middle Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.MiddleName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Last Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="lstnm" placeholder="Last Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.LastName, new { id = "lstnm3", @type = "text", @class = "fntst", @placeholder = "Last Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.LastName)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Designation</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Desg" placeholder="Designation">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.Designation, new { id = "Desg3", @type = "text", @class = "fntst", @placeholder = "Designation" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Designation)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Department</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Dept" placeholder="Department">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.Department, new { id = "Dept3", @type = "text", @class = "fntst", @placeholder = "Department" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Department)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span13">
+										<div class="span4">
+												<label class="fntst">Phone Board1 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData3.Isd1, new { id = "isd13",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Isd1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.Std1, new { id = "std13", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Std1)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.PhoneLL1, new { id = "cnuid13", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.PhoneLL1)
+												</span>
+										</div>
+										<div class="span4">
+												<label class="fntst">Phone Board2 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData3.Isd2, new { id = "isd23",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Isd2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.Std2, new { id = "std23", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Std2)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.PhoneLL2, new { id = "cnuid23", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.PhoneLL2)
+												</span>
+											</div>
+										
+
+									</div>
+									<div class="span12">
+										<div class="span4">
+												<label class="fntst">Mobile 1 (Ex:+91 8888888888)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData3.Isdm1, new { id = "isd13",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Isdm1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.Mobile1, new { id = "mbl13", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Mobile1)
+												</span>
+										</div>
+										<div class="span4">
+												<label class="fntst">Mobile 2 (Ex:+91 8888888888)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData3.Isdm2, new { id = "isd23",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Isdm2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.Mobile2, new { id = "mbl23", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Mobile2)
+												</span>
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">E-mail</label>
+												<div class="controls">
+													@*<input type="email" class="fntst" id="eml" placeholder="E-mail">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.EmailID, new { id = "eml3", @type = "email", @class = "fntst", @placeholder = "E-mail" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.EmailID)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Key Activity</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="keyact" placeholder="Key Activity">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData3.KeyActivity, new { id = "keyact3", @type = "text", @class = "fntst", @placeholder = "Key Activity" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.KeyActivity)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Comments</label>
+												<div class="controls">
+													<!--<input type="text" class="fntst" id="web" placeholder="Comments">-->
+													@*<textarea rows="2" class="fntst" placeholder="Additional Comments"></textarea>*@
+													@*@Html.TextBoxFor(model => model.MDBContactPersonData3.Comments, new { id = "txtar3", @type = "text", @class = "fntst", @placeholder = "First Name" })*@
+													@Html.TextAreaFor(model => model.MDBContactPersonData3.Comments, new { id = "txtar3", rows = 2, columns = 2, @class = "fntst", @placeholder = "Additional Comments" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData3.Comments)
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--Contact address Person 4-->
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">Contact Person 4 Address 
+								</a>
+							</div>
+							<div id="collapse4" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Title</label>
+												<div class="controls">
+													@*<select id="cp4ty" class="fntst" onchange='checkvaluec4(this.value)'>
+														<option value="Mr">Mr</option>
+														<option value="Miss">Miss</option>
+														<option value="Mrs">Mrs</option>
+														<option value="Dr">Dr</option>
+														<option value="Prof.">Prof.</option>
+														<option value="othersc4">Others</option>
+													</select>*@
+													@{
+		List<SelectListItem> listItems5 = new List<SelectListItem>();
+		listItems5.Add(new SelectListItem
+				 {
+					 Text = "Mr",
+					 Value = "Mr"
+				 });
+		listItems5.Add(new SelectListItem
+			 {
+				 Text = "Miss",
+				 Value = "Miss",
+			 });
+		listItems5.Add(new SelectListItem
+			 {
+				 Text = "Mrs",
+				 Value = "Mrs"
+			 });
+		listItems5.Add(new SelectListItem
+		{
+			Text = "Dr",
+			Value = "Dr"
+		});
+		listItems5.Add(new SelectListItem
+		{
+			Text = "Prof.",
+			Value = "Prof."
+		});
+		listItems5.Add(new SelectListItem
+		{
+			Text = "Others",
+			Value = "othersc4"
+		});
+													}
+												</div>
+												<div class="controls">
+													@Html.DropDownListFor(model => model.MDBContactPersonData4.Title, listItems5, "-- Select Type --", new { @id = "cp4ty", @name = "orype", @class = "fntst", @onchange = "checkvaluec4(this.value)" })
+													@*<input name="reltype" value="" class="fntst dis" style="display: none" id="c4" placeholder="Other Type">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.Titleothers, new { @class = "fntst dis", @style = "display: none", @id = "c4", @placeholder = "Other Type" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Title)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">First Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="fstnm" placeholder="First Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.FirstName, new { id = "fstnm4", @type = "text", @class = "fntst", @placeholder = "First Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.FirstName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Middle Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="mdlnm" placeholder="Middle Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.MiddleName, new { id = "mdlnm4", @type = "text", @class = "fntst", @placeholder = "Middle Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.MiddleName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Last Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="lstnm" placeholder="Last Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.LastName, new { id = "lstnm4", @type = "text", @class = "fntst", @placeholder = "Last Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.LastName)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Designation</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Desg" placeholder="Designation">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.Designation, new { id = "Desg4", @type = "text", @class = "fntst", @placeholder = "Designation" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Designation)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Department</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Dept" placeholder="Department">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.Department, new { id = "Dept4", @type = "text", @class = "fntst", @placeholder = "Department" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Department)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span13">
+										<div class="span4">
+												<label class="fntst">Phone Board1 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData4.Isd1, new { id = "isd14",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Isd1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.Std1, new { id = "std14", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Std1)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.PhoneLL1, new { id = "cnuid14", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.PhoneLL1)
+												</span>
+										</div>
+										<div class="span4">
+												<label class="fntst">Phone Board2 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData4.Isd2, new { id = "isd24",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Isd2)
+													</span>
+												<span>
+													@*<input type="number min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.Std2, new { id = "std24", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Std2)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.PhoneLL2, new { id = "cnuid24", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.PhoneLL2)
+												</span>
+										</div>
+
+									</div>
+									<div class="span12">
+										<div class="span4">
+												<label class="fntst">Mobile 1 (Ex:+91 8888888888)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData4.Isdm1, new { id = "isd14",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Isdm1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.Mobile1, new { id = "mbl14", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Mobile1)
+												</span>
+										</div>
+										<div class="span4">
+												<label class="fntst">Mobile 2 (Ex:+91 8888888888)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData4.Isdm2, new { id = "isd24",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Isdm2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.Mobile2, new { id = "mbl24", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Mobile2)
+												</span>
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">E-mail</label>
+												<div class="controls">
+													@*<input type="email" class="fntst" id="eml" placeholder="E-mail">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.EmailID, new { id = "eml4", @type = "email", @class = "fntst", @placeholder = "E-mail" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.EmailID)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Key Activity</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="keyact" placeholder="Key Activity">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData4.KeyActivity, new { id = "keyact4", @type = "text", @class = "fntst", @placeholder = "Key Activity" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.KeyActivity)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Comments</label>
+												<div class="controls">
+													<!--<input type="text" class="fntst" id="web" placeholder="Comments">-->
+													@*<textarea rows="2" class="fntst" placeholder="Additional Comments"></textarea>*@
+													@*@Html.TextBoxFor(model => model.MDBContactPersonData4.Comments, new { id = "txtar4", @type = "text", @class = "fntst", @placeholder = "First Name" })*@
+													@Html.TextAreaFor(model => model.MDBContactPersonData4.Comments, new { id = "txtar4", rows = 2, columns = 2, @class = "fntst", @placeholder = "Additional Comments" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData4.Comments)
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--Contact address Person 5-->
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse5">Contact Person 5 Address 
+								</a>
+							</div>
+							<div id="collapse5" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Title</label>
+												<div class="controls">
+													@*<select id="cp5ty" class="fntst" onchange='checkvaluec5(this.value)'>
+														<option value="Mr">Mr</option>
+														<option value="Miss">Miss</option>
+														<option value="Mrs">Mrs</option>
+														<option value="Dr">Dr</option>
+														<option value="Prof.">Prof.</option>
+														<option value="othersc5">Others</option>
+													</select>*@
+													@{
+		List<SelectListItem> listItems6 = new List<SelectListItem>();
+		listItems6.Add(new SelectListItem
+				 {
+					 Text = "Mr",
+					 Value = "Mr"
+				 });
+		listItems6.Add(new SelectListItem
+			 {
+				 Text = "Miss",
+				 Value = "Miss",
+			 });
+		listItems6.Add(new SelectListItem
+			 {
+				 Text = "Mrs",
+				 Value = "Mrs"
+			 });
+		listItems6.Add(new SelectListItem
+		{
+			Text = "Dr",
+			Value = "Dr"
+		});
+		listItems6.Add(new SelectListItem
+		{
+			Text = "Prof.",
+			Value = "Prof."
+		});
+		listItems6.Add(new SelectListItem
+		{
+			Text = "Others",
+			Value = "othersc5"
+		});
+													}
+												</div>
+												<div class="controls">
+													@Html.DropDownListFor(model => model.MDBContactPersonData5.Title, listItems6, "-- Select Type --", new { @id = "cp5ty", @name = "orype", @class = "fntst", @onchange = "checkvaluec5(this.value)" })
+													@*<input name="reltype" value="" class="fntst dis" style="display: none" id="c5" placeholder="Other Type">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.Titleothers, new { @class = "fntst dis", @style = "display: none", @id = "c5", @placeholder = "Other Type" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Title)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">First Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="fstnm" placeholder="First Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.FirstName, new { id = "fstnm5", @type = "text", @class = "fntst", @placeholder = "First Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.FirstName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Middle Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="mdlnm" placeholder="Middle Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.MiddleName, new { id = "mdlnm5", @type = "text", @class = "fntst", @placeholder = "Middle Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.MiddleName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Last Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="lstnm" placeholder="Last Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.LastName, new { id = "lstnm5", @type = "text", @class = "fntst", @placeholder = "Last Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.LastName)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Designation</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Desg" placeholder="Designation">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.Designation, new { id = "Desg5", @type = "text", @class = "fntst", @placeholder = "Designation" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Designation)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Department</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Dept" placeholder="Department">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.Department, new { id = "Dept5", @type = "text", @class = "fntst", @placeholder = "Department" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Department)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span13">
+										<div class="span4">
+												<label class="fntst">Phone Board1 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData5.Isd1, new { id = "isd15",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Isd1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.Std1, new { id = "std15", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Std1)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.PhoneLL1, new { id = "cnuid15", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.PhoneLL1)
+												</span>
+										</div>
+										<div class="span4">
+												<label class="fntst" >Phone Board2 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData5.Isd2, new { id = "isd25",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Isd2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.Std2, new { id = "std25", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Std2)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.PhoneLL2, new { id = "cnuid25", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.PhoneLL2)
+												</span>
+										</div>
+
+									</div>
+									<div class="span12">
+										<div class="span4">
+												<label class="fntst">Mobile 1 (Ex:+91 8888888888)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData5.Isdm1, new { id = "isd15",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Isdm1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.Mobile1, new { id = "mbl15", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Mobile1)
+												</span>
+										</div>
+										<div class="span4">
+												<label class="fntst" >Mobile 2 (Ex:+91 8888888888)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+													   +@Html.TextBoxFor(model => model.MDBContactPersonData5.Isdm2, new { id = "isd25",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Isdm2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.Mobile2, new { id = "mbl25", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Mobile2)
+												</span>
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">E-mail</label>
+												<div class="controls">
+													@*<input type="email" class="fntst" id="eml" placeholder="E-mail">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.EmailID, new { id = "eml5", @type = "email", @class = "fntst", @placeholder = "E-mail" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.EmailID)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Key Activity</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="keyact" placeholder="Key Activity">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData5.KeyActivity, new { id = "keyact5", @type = "text", @class = "fntst", @placeholder = "Key Activity" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.KeyActivity)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Comments</label>
+												<div class="controls">
+													<!--<input type="text" class="fntst" id="web" placeholder="Comments">-->
+													@*<textarea rows="2" class="fntst" placeholder="Additional Comments"></textarea>*@
+													@*@Html.TextBoxFor(model => model.MDBContactPersonData5.Comments, new { id = "txtar5", @type = "text", @class = "fntst", @placeholder = "First Name" })*@
+													@Html.TextAreaFor(model => model.MDBContactPersonData5.Comments, new { id = "txtar5", rows = 2, columns = 2, @class = "fntst", @placeholder = "Additional Comments" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData5.Comments)
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--Contact address Person 6-->
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse6">Contact Person 6 Address 
+								</a>
+							</div>
+							<div id="collapse6" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Title</label>
+												<div class="controls">
+													@*<select id="cp6ty"class="fntst" onchange='checkvaluec6(this.value)'>
+														<option value="Mr">Mr</option>
+														<option value="Miss">Miss</option>
+														<option value="Mrs">Mrs</option>
+														<option value="Dr">Dr</option>
+														<option value="Prof.">Prof.</option>
+														<option value="othersc6">Others</option>
+													</select>*@
+													@{
+		List<SelectListItem> listItems7 = new List<SelectListItem>();
+		listItems7.Add(new SelectListItem
+				 {
+					 Text = "Mr",
+					 Value = "Mr"
+				 });
+		listItems7.Add(new SelectListItem
+			 {
+				 Text = "Miss",
+				 Value = "Miss",
+			 });
+		listItems7.Add(new SelectListItem
+			 {
+				 Text = "Mrs",
+				 Value = "Mrs"
+			 });
+		listItems7.Add(new SelectListItem
+		{
+			Text = "Dr",
+			Value = "Dr"
+		});
+		listItems7.Add(new SelectListItem
+		{
+			Text = "Prof.",
+			Value = "Prof."
+		});
+		listItems7.Add(new SelectListItem
+		{
+			Text = "Others",
+			Value = "othersc6"
+		});
+													}
+												</div>
+												<div class="controls">
+													@Html.DropDownListFor(model => model.MDBContactPersonData6.Title, listItems7, "-- Select Type --", new { @id = "cp6ty", @name = "orype", @class = "fntst", @onchange = "checkvaluec6(this.value)" })
+													@*<input name="reltype" value="" class="fntst dis" style="display: none" id="c6" placeholder="Other Type">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.Titleothers, new { @class = "fntst dis", @style = "display: none", @id = "c6", @placeholder = "Other Type" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Title)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">First Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="fstnm" placeholder="First Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.FirstName, new { id = "fstnm6", @type = "text", @class = "fntst", @placeholder = "First Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.FirstName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Middle Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="mdlnm" placeholder="Middle Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.MiddleName, new { id = "mdlnm6", @type = "text", @class = "fntst", @placeholder = "Middle Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.MiddleName)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Last Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="lstnm" placeholder="Last Name">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.LastName, new { id = "lstnm6", @type = "text", @class = "fntst", @placeholder = "Last Name" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.LastName)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Designation</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Desg" placeholder="Designation">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.Designation, new { id = "Desg6", @type = "text", @class = "fntst", @placeholder = "Designation" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Designation)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Department</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Dept" placeholder="Department">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.Department, new { id = "Dept6", @type = "text", @class = "fntst", @placeholder = "Department" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Department)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span13">
+										<div class="span4">
+												<label class="fntst">Phone Board1 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData6.Isd1, new { id = "isd16",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Isd1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.Std1, new { id = "std16", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Std1)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.PhoneLL1, new { id = "cnuid16", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.PhoneLL1)
+												</span>
+										</div>
+										<div class="span4">
+												<label class="fntst" >Phone Board2 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData6.Isd2, new { id = "isd26",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Isd2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.Std2, new { id = "std26", @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Std2)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.PhoneLL2, new { id = "cnuid26", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.PhoneLL2)
+												</span>
+										</div>
+
+									</div>
+									<div class="span12">
+										<div class="span4">
+												<label class="fntst">Mobile 1 (Ex:+91 8888888888)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData6.Isdm1, new { id = "isd16",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Isdm1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.Mobile1, new { id = "mbl16", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Mobile1)
+												</span>
+										</div>
+										<div class="span4">
+												<label class="fntst" >Mobile 2 (Ex:+91 8888888888)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBContactPersonData6.Isdm2, new { id = "isd26",@Value = 91, @type = "number", @min = "0", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Isdm2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.Mobile2, new { id = "mbl26", @type = "number", @min = "0", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Mobile2)
+												</span>
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">E-mail</label>
+												<div class="controls">
+													@*<input type="email" class="fntst" id="eml" placeholder="E-mail">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.EmailID, new { id = "eml6", @type = "email", @class = "fntst", @placeholder = "E-mail" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.EmailID)
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="span10">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Key Activity</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="keyact" placeholder="Key Activity">*@
+													@Html.TextBoxFor(model => model.MDBContactPersonData6.KeyActivity, new { id = "keyact6", @type = "text", @class = "fntst", @placeholder = "Key Activity" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.KeyActivity)
+												</div>
+											</div>
+										</div>
+										<div class="span"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Comments</label>
+												<div class="controls">
+													<!--<input type="text" class="fntst" id="web" placeholder="Comments">-->
+													@*<textarea rows="2" class="fntst" placeholder="Additional Comments"></textarea>*@
+													@*@Html.TextBoxFor(model => model.MDBContactPersonData6.Comments, new { id = "txtar6", @type = "text", @class = "fntst", @placeholder = "First Name" })*@
+													@Html.TextAreaFor(model => model.MDBContactPersonData6.Comments, new { id = "txtar6", rows = 2, columns = 2, @class = "fntst", @placeholder = "Additional Comments" })
+													@Html.ValidationMessageFor(model => model.MDBContactPersonData6.Comments)
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Row6-->
+			</div>
+		</div>
+		<div class="row">
+			<div class=" row show-grid">
+				<div class="span12 pad">
+					<p class="pad txtal">Statutory Registration Numbers</p>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Company PAN*</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="cpan" placeholder="Company PAN">*@
+								@Html.TextBoxFor(model => model.MDBStatutoryNumber.CompanyPAN, new { id = "cpan", @type = "text", @class = "fntst", @placeholder = "Company PAN", @required = "required" })
+								@Html.ValidationMessageFor(model => model.MDBStatutoryNumber.CompanyPAN)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">TIN Number*</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="TaxDAN" placeholder="TIN Number" required>*@
+								@Html.TextBoxFor(model => model.MDBStatutoryNumber.TIN, new { id = "tinnum", @type = "text", @class = "fntst", @placeholder = "TIN Number", @required = "required" })
+								@Html.ValidationMessageFor(model => model.MDBStatutoryNumber.TIN)
+							</div>
+						</div>
+					</div>
+					@*<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">PAN</label>
+							<div class="controls">*@
+					@*<input type="text" class="fntst" id="inpan" placeholder="Individual PAN (Sole Proprietorship)">*@
+					@*@Html.TextBoxFor(model => model.MDBStatutoryNumber.p, new { id = "inpan", @type = "text", @class = "fntst", @placeholder = "Individual PAN" })
+								@Html.ValidationMessageFor(model => model.MDBStatutoryNumber.TIN)
+							</div>
+						</div>
+					</div>*@
+				</div>
+				<!--Row1-->
+				<div class="span12 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Registration Number</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="CRN" placeholder="Company Registration Number">*@
+								@Html.TextBoxFor(model => model.MDBStatutoryNumber.RegistrationNumber, new { id = "cmpregnum", @type = "text", @class = "fntst", @placeholder = "Company Registration Number" })
+								@Html.ValidationMessageFor(model => model.MDBStatutoryNumber.RegistrationNumber)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Service Tax Number</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="STN" placeholder="Service Tax Registration Number">*@
+								@Html.TextBoxFor(model => model.MDBStatutoryNumber.ServiceTaxNumber, new { id = "stnum", @type = "text", @class = "fntst", @placeholder = "Service Tax Registration Number" })
+								@Html.ValidationMessageFor(model => model.MDBStatutoryNumber.ServiceTaxNumber)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Importer-Exporter Code</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="IEC" placeholder="Importer-Exporter Code">*@
+								@Html.TextBoxFor(model => model.MDBStatutoryNumber.ImporterExporterCode, new { id = "iecde", @type = "text", @class = "fntst", @placeholder = "Importer-Exporter Code" })
+								@Html.ValidationMessageFor(model => model.MDBStatutoryNumber.ImporterExporterCode)
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Row2-->
+				<div class="span12 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">CST Number</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="cst" placeholder="Central Sales Tax Number(CST)">*@
+								@Html.TextBoxFor(model => model.MDBStatutoryNumber.CSTNumber, new { id = "cstnum", @type = "text", @class = "fntst", @placeholder = "Central Sales Tax Number(CST)" })
+								@Html.ValidationMessageFor(model => model.MDBStatutoryNumber.CSTNumber)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Tax Deduction Account Number</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="TaxDAN" placeholder="Tax Deduction Account Number">*@
+								@Html.TextBoxFor(model => model.MDBStatutoryNumber.TaxDeductionAccountNumber, new { id = "txddnum", @type = "text", @class = "fntst", @placeholder = "Tax Deduction Account Number" })
+								@Html.ValidationMessageFor(model => model.MDBStatutoryNumber.TaxDeductionAccountNumber)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Others</label>
+							<div class="controls">
+								<!--<input type="text" class="fntst" id="oth" placeholder="Others please Specify">-->
+								@*<textarea rows="4" class="fntst" placeholder="Others Please Specify"></textarea>*@
+								@*@Html.TextBoxFor(model => model.MDBStatutoryNumber.Others, new { id = "othar1", @type = "text", @class = "fntst", @placeholder = "Others Please Specify" })*@
+								@Html.TextAreaFor(model => model.MDBStatutoryNumber.Others, new { id = "othar1", rows = 2, columns = 2, @class = "fntst", @placeholder = "Others Please Specify" })
+								@Html.ValidationMessageFor(model => model.MDBStatutoryNumber.Others)
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Row4-->
+				<div class="span12 pad">
+					<p class="pad txtal">Bank Details</p>
+					<div class="accordion" id="accordion3">
+						<!--Bank 1 Details-->
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<button  class="btn btn-info"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsebk1" style="color:white">Bank 1 Details 
+								</a> </button>
+							</div>
+							<div id="collapsebk1" class="accordion-body collapse in">
+								<div class="accordion-inner">
+									<div class="span10 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Bank Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.BankName, new { id = "bnk1", @type = "text", @class = "fntst", @placeholder = "Bank Name" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.BankName)
+												</div>
+											</div>
+										</div>
+										<div class="span1"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Branch Name</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.BranchName, new { id = "brch1", @type = "text", @class = "fntst", @placeholder = "Branch Name" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.BranchName)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Row5-->
+									<div class="span10 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Account Type</label>
+												<div class="controls">
+													@*<select name="orype" class="fntst">
+														<option>Savings Bank Account</option>
+														<option>Current Account</option>
+													</select>*@
+													@{
+		List<SelectListItem> listItems8 = new List<SelectListItem>();
+		listItems8.Add(new SelectListItem
+				 {
+					 Text = "Savings Bank Account",
+					 Value = "Savings Bank Account"
+				 });
+		listItems8.Add(new SelectListItem
+			 {
+				 Text = "Current Account",
+				 Value = "Current Account",
+			 });
+													}
+													@Html.DropDownListFor(model => model.MDBBankDetail1.Accounttype, listItems8, "-- Select Type --", new { @name = "orype", @class = "fntst" })
+													@*@Html.TextBoxFor(model => model.MDBBankDetail.Accounttype)*@
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.Accounttype)
+												</div>
+											</div>
+										</div>
+										<div class="span1"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Account Number</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="Acnum" placeholder="Account Number">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.AccountNumber, new { id = "accnum1", @type = "text", @class = "fntst", @placeholder = "Account Number"})
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.AccountNumber)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Row6-->
+									<div class="span10 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">RTGS/NEFT IFSC Code (Example:ICIC0000002)</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="rtnecd" placeholder="RTGS/NEFT IFSC Code">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.IFSCCode, new { id = "ifsccd", @type = "text", @class = "fntst", @placeholder = "IFSC Code" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.IFSCCode)
+												</div>
+											</div>
+										</div>
+										<div class="span1"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Bank Address Line 1</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="ba1" placeholder="Bank Address Line 1">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.AddressLine1, new { id = "bnadd11", @type = "text", @class = "fntst", @placeholder = "Bank Address Line 1" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.AddressLine1)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Row7-->
+									<div class="span10 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Bank Address Line 2</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="ba2" placeholder="Bank Address Line 2">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.AddressLine2, new { id = "bnadd21", @type = "text", @class = "fntst", @placeholder = "Bank Address Line 2" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.AddressLine2)
+												</div>
+											</div>
+										</div>
+										<div class="span1"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Bank Address Line 3</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="ba3" placeholder="Bank Address Line 3">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.AddressLine3, new { id = "bnadd31", @type = "text", @class = "fntst", @placeholder = "Bank Address Line 3" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.AddressLine3)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Row8-->
+									<div class="span10 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">City</label>
+												<div class="controls">
+													@*<input type="text" class="city" id="CRN" placeholder="City">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.City, new { id = "cty1", @type = "text", @class = "fntst", @placeholder = "City" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.City)
+												</div>
+											</div>
+										</div>
+										<div class="span1"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Pin Code</label>
+												<div class="controls">
+													@*<input type="number" min="0" class="fntst" id="pincd" placeholder="Pin Code">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.PinCode, new { id = "pincd1", @type = "text", @class = "fntst", @placeholder = "Pincode" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.PinCode)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Row9-->
+									<div class="span10 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">State</label>
+												<div class="controls">
+													@{
+	List<SelectListItem> listItemsst1 = new List<SelectListItem>();
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Andhra Pradesh (AP)",
+		Value = "Andhra Pradesh (AP)"
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Arunachal Pradesh (AR)",
+		Value = "Arunachal Pradesh (AR)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Andaman and Nicobar Islands(AN)",
+		Value = "Andaman and Nicobar Islands(AN)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Assam (AS)",
+		Value = "Assam (AS)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Bihar (BR)",
+		Value = "Bihar (BR)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Chhattisgarh (CG)",
+		Value = "Chhattisgarh (CG)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Chandigarh (CH)",
+		Value = "Chandigarh (CH)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Delhi (DEL)",
+		Value = "Delhi (DEL)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Dadra and Nagar Haveli (DN)",
+		Value = "Dadra and Nagar Haveli (DN)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Daman and Diu (DD)",
+		Value = "Daman and Diu (DD)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Goa (GA)",
+		Value = "Goa (GA)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Gujarat (GJ)",
+		Value = "Gujarat (GJ)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Haryana (HR)",
+		Value = "Haryana (HR)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Himachal Pradesh (HP)",
+		Value = "Himachal Pradesh (HP)"
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Jammu and Kashmir (JK)",
+		Value = "Jammu and Kashmir (JK)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Jharkhand (JH)",
+		Value = "Jharkhand (JH)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Karnataka (KA)",
+		Value = "Karnataka (KA)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Kerala (KL)",
+		Value = "Kerala (KL)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Madhya Pradesh (MP)",
+		Value = "Madhya Pradesh (MP)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Maharashtra (MH)",
+		Value = "Maharashtra (MH)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Manipur (MN)",
+		Value = "Manipur (MN)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Meghalaya (ML)",
+		Value = "Meghalaya (ML)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Mizoram (MZ)",
+		Value = "Mizoram (MZ)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Nagaland (NL)",
+		Value = "Nagaland (NL)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "National Capital Territory of Delhi (DL)",
+		Value = "National Capital Territory of Delhi (DL)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Odisha(OR)",
+		Value = "Odisha(OR)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Punjab (PB)",
+		Value = "Punjab (PB)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Rajasthan (RJ)",
+		Value = "Rajasthan (RJ)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Sikkim (SK)",
+		Value = "Sikkim (SK)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Tamil Nadu (TN)",
+		Value = "Tamil Nadu (TN)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Tripura (TR)",
+		Value = "Tripura (TR)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Uttar Pradesh (UP)",
+		Value = "Uttar Pradesh (UP)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Uttarakhand (UK)",
+		Value = "Uttarakhand (UK)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "West Bengal (WB)",
+		Value = "West Bengal (WB)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Lakshadweep (LD)",
+		Value = "Lakshadweep (LD)",
+	});
+	listItemsst1.Add(new SelectListItem
+	{
+		Text = "Pondicherry (PY)",
+		Value = "Pondicherry (PY)",
+	});
+								}
+								@Html.DropDownListFor(model => model.MDBBankDetail1.State, listItemsst1, "-- Select Type --", new { @id = "stt1", @name = "orype", @class = "fntst" })
+													@*<input type="text" class="city" id="stt" placeholder="State">*@
+													@*@Html.TextBoxFor(model => model.MDBBankDetail1.State, new { id = "stt1", @type = "text", @class = "fntst", @placeholder = "State" })*@
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.State)
+												</div>
+											</div>
+										</div>
+										<div class="span1"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Country</label>
+												<div class="controls">
+													@*<input type="text" class="fntst" id="cnty" placeholder="Country">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.Country, new { id = "cnty1", @Value = "INDIA", @type = "text", @class = "fntst", @placeholder = "Country" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.Country)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Row10-->
+									<div class="span13 pad">
+										<div class="span4">
+												<label class="fntst">Phone1 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBBankDetail1.Isd1, new { id = "isdb1",@Value = 91, @type = "text", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBBankDetail1.Isd1)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.Std1, new { id = "stdb1", @type = "text", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.Std1)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.PhoneLL1, new { id = "llb1", @type = "text", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.PhoneLL1)
+												</span>
+										</div>
+
+										<div class="span4">
+												<label class="fntst" >Phone2 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBBankDetail1.Isd2, new { id = "isdb2",@Value = 91, @type = "text", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBBankDetail1.Isd2)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.Std2, new { id = "std2", @type = "text", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.Std2)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.PhoneLL2, new { id = "llb2", @type = "text", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.PhoneLL2)
+												</span>
+										</div>
+									</div>
+									<!--Row11-->
+									<div class="span10 pad">
+										<div class="span4">
+												<label class="fntst">FAX (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBBankDetail1.Isdf, new { id = "isdbf",@Value = 91, @type = "text", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBBankDetail1.Isdf)
+													</span>
+												<span>
+													@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.Stdf, new { id = "stdf", @type = "text", @class = "input-mini3 fntst", @placeholder = "STD" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.Stdf)
+												</span>
+												<span>
+													@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.FAX, new { id = "llbf", @type = "text", @class = "input-medium1 fntst", @placeholder = "Direct" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.FAX)
+												</span>
+										</div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">E-mail</label>
+												<div class="controls">
+													@*<input type="email" class="fntst" id="email" placeholder="E-mail">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.Email, new { id = "eml", @type = "text", @class = "fntst", @placeholder = "E-mail" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.Email)
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--Row12-->
+									<div class="span12 pad">
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Website</label>
+												<div class="controls">
+													@*<input type="text" class="city" id="website" placeholder="Website">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.Website, new { id = "website1", @type = "text", @class = "fntst", @placeholder = "Website" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.Website)
+												</div>
+											</div>
+										</div>
+										<div class="span1"></div>
+										<div class="span3">
+											<div class="control-group">
+												<label class="control-label fntst">Cheque In favour of</label>
+												<div class="controls">
+													@*<input type="text" class=" input-xlarge city" id="website" placeholder="In favour of">*@
+													@Html.TextBoxFor(model => model.MDBBankDetail1.BankChequeinfavor, new { id = "chinfa", @type = "text", @class = "input-xlarge fntst", @placeholder = "Cheque In favour of" })
+													@Html.ValidationMessageFor(model => model.MDBBankDetail1.BankChequeinfavor)
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--Bank 2 Details-->
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<button  class="btn btn-info"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsebk2">Bank 2 Details 
+							</a> </button>
+						</div>
+						<div id="collapsebk2" class="accordion-body collapse">
+							<div class="accordion-inner">
+								<div class="span10 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Bank Name</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.BankName, new { id = "bnk2", @type = "text", @class = "fntst", @placeholder = "Bank Name" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.BankName)
+											</div>
+										</div>
+									</div>
+									<div class="span1"></div>
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Branch Name</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.BranchName, new { id = "brch2", @type = "text", @class = "fntst", @placeholder = "Branch Name" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.BranchName)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row5-->
+								<div class="span10 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Account Type</label>
+											<div class="controls">
+												@*<select name="orype" class="fntst">
+													<option>Savings Bank Account</option>
+													<option>Current Account</option>
+												</select>*@
+												@{
+		List<SelectListItem> listItems9 = new List<SelectListItem>();
+		listItems9.Add(new SelectListItem
+				 {
+					 Text = "Savings Bank Account",
+					 Value = "Savings Bank Account"
+				 });
+		listItems9.Add(new SelectListItem
+			 {
+				 Text = "Current Account",
+				 Value = "Current Account",
+			 });
+												}
+												@Html.DropDownListFor(model => model.MDBBankDetail2.Accounttype, listItems9, "-- Select Type --", new { @name = "orype", @class = "fntst" })
+												@*@Html.TextBoxFor(model => model.MDBBankDetail.Accounttype)*@
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.Accounttype)
+											</div>
+										</div>
+									</div>
+									<div class="span1"></div>
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Account Number</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="Acnum" placeholder="Account Number">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.AccountNumber, new { id = "accnum2", @type = "text", @class = "fntst", @placeholder = "Account Number" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.AccountNumber)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row6-->
+								<div class="span10 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">RTGS/NEFT IFSC Code (Example:ICIC0000002)</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="rtnecd" placeholder="RTGS/NEFT IFSC Code">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.IFSCCode, new { id = "ifsccd2", @type = "text", @class = "fntst", @placeholder = "IFSC Code" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.IFSCCode)
+											</div>
+										</div>
+									</div>
+									<div class="span1"></div>
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Bank Address Line 1</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="ba1" placeholder="Bank Address Line 1">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.AddressLine1, new { id = "bnadd12", @type = "text", @class = "fntst", @placeholder = "Bank Address Line 1" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.AddressLine1)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row7-->
+								<div class="span10 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Bank Address Line 2</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="ba2" placeholder="Bank Address Line 2">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.AddressLine2, new { id = "bnadd22", @type = "text", @class = "fntst", @placeholder = "Bank Address Line 2" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.AddressLine2)
+											</div>
+										</div>
+									</div>
+									<div class="span1"></div>
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Bank Address Line 3</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="ba3" placeholder="Bank Address Line 3">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.AddressLine3, new { id = "bnadd32", @type = "text", @class = "fntst", @placeholder = "Bank Address Line 3" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.AddressLine3)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row8-->
+								<div class="span10 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">City</label>
+											<div class="controls">
+												@*<input type="text" class="city" id="CRN" placeholder="City">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.City, new { id = "cty2", @type = "text", @class = "fntst", @placeholder = "City" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.City)
+											</div>
+										</div>
+									</div>
+									<div class="span1"></div>
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Pin Code</label>
+											<div class="controls">
+												@*<input type="number" min="0" class="fntst" id="pincd" placeholder="Pin Code">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.PinCode, new { id = "pincd2", @type = "text", @class = "fntst", @placeholder = "Pincode" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.PinCode)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row9-->
+								<div class="span10 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">State</label>
+											<div class="controls">
+												@{
+		List<SelectListItem> listItemsst2 = new List<SelectListItem>();
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Andhra Pradesh (AP)",
+		Value = "Andhra Pradesh (AP)"
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Arunachal Pradesh (AR)",
+		Value = "Arunachal Pradesh (AR)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Andaman and Nicobar Islands(AN)",
+		Value = "Andaman and Nicobar Islands(AN)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Assam (AS)",
+		Value = "Assam (AS)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Bihar (BR)",
+		Value = "Bihar (BR)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Chhattisgarh (CG)",
+		Value = "Chhattisgarh (CG)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Chandigarh (CH)",
+		Value = "Chandigarh (CH)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Delhi (DEL)",
+		Value = "Delhi (DEL)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Dadra and Nagar Haveli (DN)",
+		Value = "Dadra and Nagar Haveli (DN)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Daman and Diu (DD)",
+		Value = "Daman and Diu (DD)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Goa (GA)",
+		Value = "Goa (GA)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Gujarat (GJ)",
+		Value = "Gujarat (GJ)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Haryana (HR)",
+		Value = "Haryana (HR)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Himachal Pradesh (HP)",
+		Value = "Himachal Pradesh (HP)"
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Jammu and Kashmir (JK)",
+		Value = "Jammu and Kashmir (JK)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Jharkhand (JH)",
+		Value = "Jharkhand (JH)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Karnataka (KA)",
+		Value = "Karnataka (KA)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Kerala (KL)",
+		Value = "Kerala (KL)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Madhya Pradesh (MP)",
+		Value = "Madhya Pradesh (MP)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Maharashtra (MH)",
+		Value = "Maharashtra (MH)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Manipur (MN)",
+		Value = "Manipur (MN)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Meghalaya (ML)",
+		Value = "Meghalaya (ML)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Mizoram (MZ)",
+		Value = "Mizoram (MZ)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Nagaland (NL)",
+		Value = "Nagaland (NL)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "National Capital Territory of Delhi (DL)",
+		Value = "National Capital Territory of Delhi (DL)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Odisha(OR)",
+		Value = "Odisha(OR)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Punjab (PB)",
+		Value = "Punjab (PB)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Rajasthan (RJ)",
+		Value = "Rajasthan (RJ)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Sikkim (SK)",
+		Value = "Sikkim (SK)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Tamil Nadu (TN)",
+		Value = "Tamil Nadu (TN)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Tripura (TR)",
+		Value = "Tripura (TR)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Uttar Pradesh (UP)",
+		Value = "Uttar Pradesh (UP)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Uttarakhand (UK)",
+		Value = "Uttarakhand (UK)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "West Bengal (WB)",
+		Value = "West Bengal (WB)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Lakshadweep (LD)",
+		Value = "Lakshadweep (LD)",
+	});
+	listItemsst2.Add(new SelectListItem
+	{
+		Text = "Pondicherry (PY)",
+		Value = "Pondicherry (PY)",
+	});
+								}
+								@Html.DropDownListFor(model => model.MDBBankDetail2.State, listItemsst2, "-- Select Type --", new { @id = "stt2", @class = "fntst" })
+												@*<input type="text" class="city" id="stt" placeholder="State">*@
+												@*@Html.TextBoxFor(model => model.MDBBankDetail2.State, new { id = "stt2", @type = "text", @class = "fntst", @placeholder = "State" })*@
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.State)
+											</div>
+										</div>
+									</div>
+									<div class="span1"></div>
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Country</label>
+											<div class="controls">
+												@*<input type="text" class="fntst" id="cnty" placeholder="Country">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.Country, new { id = "cnty2", @Value = "INDIA", @type = "text", @class = "fntst", @placeholder = "Country" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.Country)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row10-->
+								<div class="span13 pad">
+									<div class="span4">
+											<label class="fntst">Phone1 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBBankDetail2.Isd1, new { id = "isdb2",@Value = 91, @type = "text", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBBankDetail2.Isd1)
+													</span>
+											<span>
+												@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.Std1, new { id = "stdb2", @type = "text", @class = "input-mini3 fntst", @placeholder = "STD" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.Std1)
+											</span>
+											<span>
+												@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.PhoneLL1, new { id = "llb2", @type = "text", @class = "input-medium1 fntst", @placeholder = "Direct" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.PhoneLL1)
+											</span>
+									</div>
+
+									<div class="span4">
+											<label class="fntst">Phone2 (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBBankDetail2.Isd2, new { id = "isdb22",@Value = 91, @type = "text", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBBankDetail2.Isd2)
+													</span>
+											<span>
+												@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.Std2, new { id = "std22", @type = "text", @class = "input-mini3 fntst", @placeholder = "STD" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.Std2)
+											</span>
+											<span>
+												@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.PhoneLL2, new { id = "llb22", @type = "text", @class = "input-medium1 fntst", @placeholder = "Direct" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.PhoneLL2)
+											</span>
+									</div>
+								</div>
+								<!--Row11-->
+								<div class="span10 pad">
+									<div class="span4">
+											<label class="fntst" >FAX (Ex:+91 80 12345678)</label>
+													<span>
+														@*<input type="number" min="0" class="input-mini3 fntst" placeholder="ISD">*@
+														+@Html.TextBoxFor(model => model.MDBBankDetail2.Isdf, new { id = "isdb2f",@Value = 91, @type = "text", @class = "input-mini3 fntst", @placeholder = "ISD" })
+														@Html.ValidationMessageFor(model => model.MDBBankDetail2.Isdf)
+													</span>
+											<span>
+												@*<input type="number" min="0" class="input-mini3 fntst" placeholder="STD">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.Stdf, new { id = "std2f", @type = "text", @class = "input-mini3 fntst", @placeholder = "STD" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.Stdf)
+											</span>
+											<span>
+												@*<input type="number" min="0" class="input-medium1 fntst" id="cnuid" placeholder="Direct">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.FAX, new { id = "llb2f", @type = "text", @class = "input-medium1 fntst", @placeholder = "Direct" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.FAX)
+											</span>
+									</div>
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">E-mail</label>
+											<div class="controls">
+												@*<input type="email" class="fntst" id="email" placeholder="E-mail">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.Email, new { id = "eml2", @type = "text", @class = "fntst", @placeholder = "E-mail" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.Email)
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--Row12-->
+								<div class="span12 pad">
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Website</label>
+											<div class="controls">
+												@*<input type="text" class="city" id="website" placeholder="Website">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.Website, new { id = "website2", @type = "text", @class = "fntst", @placeholder = "Website" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.Website)
+											</div>
+										</div>
+									</div>
+									<div class="span1"></div>
+									<div class="span3">
+										<div class="control-group">
+											<label class="control-label fntst">Cheque In favour of</label>
+											<div class="controls">
+												@*<input type="text" class=" input-xlarge city" id="website" placeholder="In favour of">*@
+												@Html.TextBoxFor(model => model.MDBBankDetail2.BankChequeinfavor, new { id = "chinfa2", @type = "text", @class = "input-xlarge fntst", @placeholder = "Cheque In favour of" })
+												@Html.ValidationMessageFor(model => model.MDBBankDetail2.BankChequeinfavor)
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				@*Buttons*@
+				<div class="span10 pad ">
+					<div class="span3 cent">
+                        <button class="btn btn-info btn-large">@Html.ActionLink("Back to List", "Index", "MDB", new { @style = "color:white" }) </button>
+						<input type="submit" value="Update" class="btn btn-large btn-success" style="margin-left:5%" />
+					</div>
+				</div>
+				@*End Of Buttons*@
+			</div>
+
+		</div>
+@*End Of Rows*@
+
+	
+	}
+
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

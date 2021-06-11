@@ -1,0 +1,767 @@
+﻿@{
+    ViewBag.Title = "LiveDashBoard";
+    Layout = null;
+}
+
+@* Loads Google Chart *@
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+   // google.load("visualization", "1.1", { packages: ['annotationchart'] });       
+</script>
+
+@* Total Leads Generated Individually(LOADS Default) *@
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '@Url.Action("Piechart2")',
+            data: '{}',
+            success: function (chartsdata1) {
+                // Callback that creates and populates a data table,  
+                // instantiates the pie chart, passes in the data and  
+                // draws it.  
+                //alert(chartsdata1);
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'CPName');
+                data.addColumn('number', 'TotalCount');
+                for (var i = 0; i < chartsdata1.length; i++) {
+                    data.addRow([chartsdata1[i].CPName, chartsdata1[i].TotalCount]);
+                }
+                // Instantiate and draw our chart, passing in some options  
+                var chart = new google.visualization.BarChart(document.getElementById('Chart_div'));
+                chart.draw(data,
+                  {
+                      //colors:['#FF0000'],
+                      title:'Total Leads Chart',
+                      pieSliceText: ['none'],
+                      position: "top",
+                      fontsize: "14px",
+                      chartArea: { width: '63%' },
+                      hAxis: {
+                          fontsize: "14px",
+                          title: 'Leads Generated',
+                      },
+                      vAxis: {
+                          fontsize: "14px",
+                          title: 'Channel Partners',
+                      },
+                      isStacked: true,
+                      annotations: {
+                          alwaysOutside: true,
+                          boxStyle: {
+                              stroke: '#ccc',
+                              strokeWidth: 1,
+                          }
+                      },
+                  });
+            },
+            error: function () {               
+                alert:("Error loading data! Please try again.");
+            }
+        });
+    })
+</script>
+
+@* perform on click on Lead Generation START -1*@
+<script type="text/Javascript">
+	@* Adding and Deleting the Products in the Quotation *@
+    $(document).ready(function () {
+        var counter;        
+        //Add function for row 3
+        //Starts here
+        $("#lg").click(function () {
+            var lg = 1;
+            var oclg = 0;
+            var qg = 0;
+            var og = 0;	        
+            if (lg == 1) {
+               
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '@Url.Action("Piechart2")',
+            data: '{}',
+            success: function (chartsdata1) {
+                // Callback that creates and populates a data table,  
+                // instantiates the pie chart, passes in the data and  
+                // draws it.  
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'CPName');
+                data.addColumn('number', 'TotalCount');
+                for (var i = 0; i < chartsdata1.length; i++) {
+                    data.addRow([chartsdata1[i].CPName, chartsdata1[i].TotalCount]);
+                }
+                // Instantiate and draw our chart, passing in some options  
+                var chart = new google.visualization.BarChart(document.getElementById('Chart_div'));
+                chart.draw(data,
+                  {
+                      //colors:['#FF0000'],
+                      title:'Total Leads Chart',
+                      pieSliceText: ['none'],
+                      position: "top",
+                      fontsize: "14px",
+                      chartArea: { width: '63%' },
+                      hAxis: {
+                          fontsize: "14px",
+                          title: 'Leads Generated',
+                      },
+                      vAxis: {
+                          fontsize: "14px",
+                          title: 'Channel Partners',
+                      },
+                      isStacked: true,
+                      annotations: {
+                          alwaysOutside: true,
+                          boxStyle: {
+                              stroke: '#ccc',
+                              strokeWidth: 1,
+                          }
+                      },
+                  });
+            },
+            error: function () {               
+                alert:("Error loading data! Please try again.");
+            }
+        });
+    })                
+            }           
+        })
+        });     	
+ </script>
+@* END *@
+
+@* perform on click on Open/CLose Lead Generation START -2*@
+<script type="text/Javascript">
+	@* Adding and Deleting the Products in the Quotation *@
+    $(document).ready(function () {
+        var counter;
+        //Add function for row 3
+        //Starts here
+        $("#oclg").click(function () {
+            var lg = 0;
+            var oclg = 1;
+            var qg = 0;
+            var og = 0;
+            if (oclg == 1)
+            {                
+     $(function () {
+         $.ajax({
+             type: 'POST',
+             dataType: 'json',
+             contentType: 'application/json',
+             url: '@Url.Action("Piechart4")',
+            data: '{}',
+            success: function (chartsdata3) {
+                // Callback that creates and populates a data table,  
+                // instantiates the pie chart, passes in the data and  
+                // draws it.  
+              
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Name');
+                data.addColumn('number', 'LeadsGenerated');
+                data.addColumn('number', 'OpenLeads');
+                data.addColumn('number', 'ClosedLeads (Moved to MDB)');
+                data.addColumn('number', 'DroppedLeads');
+                data.addColumn('number', 'QuotationGenerated');
+
+                for (var i = 0; i < chartsdata3.length; i++)
+                {                  
+                    data.addRow([chartsdata3[i].Name, chartsdata3[i].LeadsGenerated, chartsdata3[i].OpenLeads, chartsdata3[i].ClosedLeads, chartsdata3[i].DroppedLeads, chartsdata3[i].QuotationGenerated]);
+                }
+
+                //alert(getSum(data, i));
+                //function getSum(data, j) {
+                //    var total = 0;
+                //    for (i = 0; i < data.getNumberOfRows() ; i++)
+                //        total = total + data.getValue(i, j);
+                //    return total;
+                //}                
+                //           
+                //end
+
+                // Instantiate and draw our chart, passing in some options  
+                var chart = new google.visualization.BarChart(document.getElementById('Chart_div'));
+                chart.draw(data,
+                  {
+                      title: 'Open / Closed / Dropped Leads Chart',
+                      annotations: {
+                          alwaysOutside: true,
+                          textStyle: {
+                              fontSize: 12,
+                              auraColor: 'none',
+                              color: '#555'
+                          },
+                      },
+                      colors: ['#337AB7', '#FFD700', '#3B3', '#F7332D', '#FF8F00'],
+                      pieSliceText: ['none'],
+                      position: "top",
+                      fontsize: "14px",
+                      chartArea: { width: '63%' },
+                      hAxis: {
+                          fontsize: "14px",
+                          title: 'Leads Generated',
+                          fontstyle: 'calibri',
+
+                      },
+                      vAxis: {
+                          fontsize: "14px",
+                          title: 'Channel Partners',
+                      },
+                      isStacked: true,
+                      displayAnnotations:true,                      
+                  });
+            },
+            error: function () {
+                alert: ("Error loading data! Please try again.");
+            }
+        });
+    })
+            }
+        })
+    });
+ </script>
+@* END *@
+
+@* perform on click on Quotation Generation START -3*@
+<script type="text/Javascript">
+	@* Adding and Deleting the Products in the Quotation *@
+    $(document).ready(function () {
+        var counter;
+        //Add function for row 3
+        //Starts here
+        $("#qg").click(function () {
+            var lg = 0;
+            var oclg = 0;
+            var qg = 1;
+            var og = 0;
+            if (qg == 1)
+            {                
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '@Url.Action("Piechart3")',
+            data: '{}',
+            success: function (chartsdata2) {
+                // Callback that creates and populates a data table,  
+                // instantiates the pie chart, passes in the data and  
+                // draws it.  
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'CPName');
+                data.addColumn('number', 'TotalCount');
+                for (var i = 0; i < chartsdata2.length; i++) {
+                    data.addRow([chartsdata2[i].CPName, chartsdata2[i].TotalCount]);
+                }
+                // Instantiate and draw our chart, passing in some options  
+                var chart = new google.visualization.BarChart(document.getElementById('Chart_div'));
+                chart.draw(data,
+                  {
+                      title:'Total Quotation Chart',
+                      colors: ['#FF8F00'],
+                      pieSliceText: ['none'],
+                      position: "top",
+                      fontsize: "14px",
+                      chartArea: { width: '63%' },
+                      hAxis: {
+                          fontsize: "14px",
+                          title: 'Quotation Generated',
+                      },
+                      vAxis: {
+                          fontsize: "14px",
+                          title: 'Channel Partners',
+                      },
+                      isStacked: true,
+                      annotations: {
+                          alwaysOutside: true,
+                          boxStyle: {
+                              stroke: '#ccc',
+                              strokeWidth: 1,
+                          }
+                      },
+                  });
+            },
+            error: function () {
+                alert: ("Error loading data! Please try again.");
+            }
+        });
+    })
+                
+ }
+        })
+    });
+ </script>
+@* END *@
+
+@* perform on click on generated orders START-4 *@
+<script type="text/Javascript">
+	@* Adding and Deleting the Products in the Quotation *@
+    $(document).ready(function () {
+        var counter;
+        //Add function for row 3
+        //Starts here
+        $("#ogg").click(function () {
+            var lg = 0;
+            var oclg = 0;
+            var qg = 0;
+            var og = 1;
+            if (og == 1) {
+                $(function () {
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        url: '@Url.Action("Piechart5")',
+            data: '{}',
+            success: function (chartsdata4) {
+                // Callback that creates and populates a data table,  
+                // instantiates the pie chart, passes in the data and  
+                // draws it.  
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'CPName');                
+                data.addColumn('number', 'TotalApproveCount');
+                data.addColumn('number', 'TotalRejectCount');
+                for (var i = 0; i < chartsdata4.length; i++) {
+                    data.addRow([chartsdata4[i].CPName, chartsdata4[i].TotalApproveCount, chartsdata4[i].TotalRejectCount]);
+                }
+                // Instantiate and draw our chart, passing in some options  
+                var chart = new google.visualization.BarChart(document.getElementById('Chart_div'));
+                chart.draw(data,
+                  {
+                      title: 'Total Orders Generated',
+                      colors: ['#FF8F00'],
+                      pieSliceText: ['none'],
+                      position: "top",
+                      fontsize: "14px",
+                      chartArea: { width: '63%' },
+                      hAxis: {
+                          fontsize: "14px",
+                          title: 'Generated Orders',
+                      },
+                      vAxis: {
+                          fontsize: "14px",
+                          title: 'Channel Partners',
+                      },
+                      isStacked: true,
+                      annotations: {
+                          alwaysOutside: true,
+                          boxStyle: {
+                              stroke: '#ccc',
+                              strokeWidth: 1,
+                          }
+                      },
+                  });
+            },
+            error: function () {
+                alert: ("Error loading data! Please try again.");
+            }
+        });
+    })
+
+}
+        })
+    });
+ </script>
+@* END *@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Live-DashBoard</title>
+       
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/js/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<style type="text/css">
+	.auto-style1 {
+		font-size: xx-large;
+		font-family: "Times New Roman", Times, serif;
+	}
+	.auto-style2 {
+		float: left;
+		height: 30px;
+		padding: 15px 15px;
+		font-size: xx-large;
+		line-height: 20px;
+	}
+	    .tp
+	    {
+            background:#FAFAFA;
+	    }
+	</style>       
+</head>
+
+@*This code will use for Automatic Page refresh*@
+<script type="text/javascript">
+        function timedRefresh(timeoutPeriod) {
+            setTimeout(function () {
+                location.reload(true);
+            }, timeoutPeriod);
+        }
+</script>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            var tabs = $('.tabsm > li');
+            tabs.on("click", function () {
+                tabs.removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+</script>
+     <body onload="JavaScript:timedRefresh(100000000);" style="background:#009B91">     
+       <div id="wrapper">                                                                                      
+            <nav class="navbar tp navbar-fixed-top" role="navigation" style="margin-bottom:0;">
+             <div class="navbar-header">
+                @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>*@
+                 <div class="navbar navbar-fixed-top" style="margin: -1px -1px 0;">
+                       <ul >
+                            <li style="padding-top: 1px;font:20px;color:white;">
+                              <a href="#" class="btn" style="width:150px;height:50px;background:#FAFAFA;font-size:30px;color:#009B91"><strong>Synergy</strong></a></li>
+                       </ul>                   
+                </div>
+                
+                <div class="navbar navbar-fixed-top" style="margin: -1px -1px 0;">
+                       <ul class="nav pull-right" style="padding-right: 50px">
+                            <li style="padding-top: 10px;font:20px;color:white;">
+                              <a href="/Account/Login" class="btn" style="width:90px;height:35px;background:#009B91;text-decoration:none;font-size:14px;color:white;"><strong>Logout</strong></a>
+                            </li>
+                           
+                       </ul>  
+                    <ul class="nav pull-right" style="padding-right: 50px">
+                    <li style="padding-top: 10px;font:20px;color:white;">
+                              <a href="/MainDashboard/MainDashboard" class="btn" style="width:150px;height:35px;background:#009B91;text-decoration:none;font-size:14px;color:white;"><strong>Go To Dashboard</strong></a>
+                            </li>
+                    </ul>                 
+                </div>
+             </div>
+            <!-- /.navbar-header -->
+
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+               <div class="navbar-header">
+                
+                &nbsp;<!-- /.row -->
+                 <div class="row" style="padding-top:4%">
+					<div class="auto-style1">
+					</div>
+                     @* Total Lead Generated Block *@
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-primary">
+                         @* Blue box *@                     
+                       <div id="lg" class="panel-heading" style="background:#337AB7">                              
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-sitemap" style="font-size:70px"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">
+											@ViewBag.totalleads</div>
+										<div style="font-family:Calibri;font-size:20px">Leads Generated</div>
+									</div>
+								</div>
+							</div>  
+                            @if (ViewBag.totalleads > 0)
+                            {                   
+							<a href="/LeadEnquiry/TotalLeads">                                                         
+							<div class="panel-footer">
+								<span class="pull-left">View Details</span>
+								<span class="pull-right">
+								<i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix">
+								</div>
+							</div>
+							</a>
+                            }
+                            else
+                            {
+                                <a href="#">                                                         
+							<div class="panel-footer">
+								<span class="pull-left">View Details</span>
+								<span class="pull-right">
+								<i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix">
+								</div>
+							</div>
+							</a>
+                            }
+
+						</div>
+					</div>
+                     @* Open/CLose/Drop Leads Block *@
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-red">							
+                                <div id="oclg" class="panel-heading" style="background:#F33A3A">
+								<div class="row" style="height: 82px">
+									<div class="col-xs-3">
+                                        <i class="fa fa-folder-open" style="font-size:40px"></i>
+										<i class="fa fa-folder" style="font-size:40px"></i>                                        
+									</div>
+									<div class="col-xs-9 text-right" >
+										<div class="huge">
+											@ViewBag.totalleads
+										</div>
+										<div style="font-family:Calibri;font-size:20px">
+											Leads Vs Status 
+										</div>										
+									</div>
+								</div>
+							</div>
+                            @if (ViewBag.totalleads>0)
+                            {
+							<a href="/LeadEnquiry/OpenCloseLeads">
+							<div class="panel-footer">
+								<span class="pull-left">View Details</span>
+								<span class="pull-right">
+								<i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix">
+								</div>
+							</div>
+							</a>
+                            }
+                            else
+                            {
+                              <a href="#">
+							<div class="panel-footer">
+								<span class="pull-left">View Details</span>
+								<span class="pull-right">
+								<i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix">
+								</div>
+							</div>
+							</a>  
+                            }
+						</div>
+					</div>
+                     @* Quotation Generated  *@
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-yellow">						
+                             <div id="qg" class="panel-heading" style="background:#FF8F00;">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-print" style="font-size:70px">
+										</i></div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">
+											@ViewBag.exp</div>
+										<div style="font-family:Calibri;font-size:20px">
+											Quotation Generated</div>
+									</div>
+								</div>
+							</div>
+                            @if (ViewBag.exp > 0)
+                            {
+							<a href="/LeadEnquiry/QuotationGenerated">
+							<div class="panel-footer">
+								<span class="pull-left">View Details</span>
+								<span class="pull-right">
+								<i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix">
+								</div>
+							</div>
+							</a>
+                            }
+                            else
+                            {
+                             <a href="#">
+							<div class="panel-footer">
+								<span class="pull-left">View Details</span>
+								<span class="pull-right">
+								<i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix">
+								</div>
+							</div>
+							</a>   
+                            }
+						</div>
+					</div>
+                     @* Orders drop Block *@
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-green">
+							<div id="og" class="panel-heading" style="background:#3B3">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-shopping-cart fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">@ViewBag.odergen</div>
+										<div style="font-family:Calibri;font-size:20px">Generated Orders</div>
+									</div>
+								</div>
+							</div>
+                            @if (ViewBag.odergen > 0)
+                            {
+							<a href="/LeadEnquiry/GeneratedOrdersView">
+							<div class="panel-footer">
+								<span class="pull-left">View Details</span>
+								<span class="pull-right">
+								<i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix">
+								</div>
+							</div>
+							</a>
+                            }
+                            else
+                            {
+                             <a href="#">
+							<div class="panel-footer">
+								<span class="pull-left">View Details</span>
+								<span class="pull-right">
+								<i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix">
+								</div>
+							</div>
+							</a>   
+                            }
+							</div>
+					</div>
+				</div>
+                 <!-- /.row -->
+            	<div class="row">					
+                    <div class="col-lg-9">
+					  <div class="panel panel-default">
+							<div class="panel-heading">
+                                <i class="fa fa-bar-chart-o fa-fw">&nbsp; </i>Pictorial Presentation
+								</div>
+                           <!-- /.panel-Start -->                            
+                           <div class="panel-body" id="Chart_div" style="width: 950px; height: 900px;">						                            
+                           </div>                         
+                           @*<div class="panel-body" id="opencloselead" style="width: 950px; height: 600px;">						                            
+                           </div>
+						   <div class="panel-body" id="Quotation" style="width: 750px; height: 600px;">			                            
+                           </div>*@                        
+				       </div>                    
+                    </div>
+                    <!-- /.panel End -->                     
+
+                    @*extra for notification*@
+                    <div class="col-lg-3">
+                    <div class="panel panel-default">
+                         <!-- /.panel-heading -->
+							<div class="panel-heading">
+								<i class="fa fa-bell fa-fw">&nbsp; </i>Notifications Panel
+							</div>
+                       <!-- /.panel-Body -->
+                        	<div class="panel-body">
+								<div class="list-group">
+                                    <a href="/LeadEnquiry/LeadGeneratedNotify" class="list-group-item">
+									<i class="fa fa-sitemap"></i>  New Leads (<span style="color:red">@ViewBag.newleadcount</span>)
+									<span class="pull-right text-muted small">
+									<em>@ViewBag.newlead</em> </span></a>
+
+                                    <a href="/LeadEnquiry/NewQuotationNotify" class="list-group-item">
+									<i class="fa fa-print"></i>  New Quotation (<span style="color:red">@ViewBag.newquotationcount</span>)
+									<span class="pull-right text-muted small">
+									<em>@ViewBag.newquotation</em> </span></a>
+
+                                    <a href="/LeadEnquiry/DropLeadsNotify" class="list-group-item">
+									<i class="fa fa-tasks fa-fw"></i>  Dropped Leads (<span style="color:red">@ViewBag.dropleadscount</span>)
+									<span class="pull-right text-muted small">
+									<em>@ViewBag.dropleads</em> </span></a>
+
+									@*<a href="#" class="list-group-item">
+									<i class="fa fa-comment fa-fw"></i>  New Approvals (<span style="color:red">@ViewBag.newapprovalscount</span>)
+									<span class="pull-right text-muted small">
+									<em>@ViewBag.newapprovals</em> </span></a>                                 									
+									*@
+                                    <a href="/LeadEnquiry/OrdersGenerated" class="list-group-item">
+									<i class="fa fa-shopping-cart fa-fw"></i>  Orders (<span style="color:red">@ViewBag.ordergeneratedcount</span>)
+									<span class="pull-right text-muted small">
+									<em>@ViewBag.odergenerated</em> </span></a>
+        							</div>
+                               </div>
+                        <!-- /.panel-Body Ends-->                           
+                            	@*<a href="#" class="btn btn-default btn-block">View All Alerts</a>*@
+							</div>                          
+                      	</div>
+                    @*end*@
+              </div>
+                  
+                 
+                  
+                   <footer>
+            <div class="chat-panel panel panel-default">
+                        <!-- /.panel-heading -->
+                        <!-- /.panel-body -->
+                        	<div class="panel-footer" >
+								<div class="input-group">
+                                    <label  class="form-control input-sm">Developed and Maintained by SRKS Software Solutions Pvt Ltd @System.DateTime.Now.Year</label>
+									
+									<span class="input-group-btn">
+                                        <label class="form-control input-sm"></label>
+									</span>
+								</div>
+							</div>
+                        <!-- /.panel-footer -->
+                    	</div>
+        </footer>
+                
+                    <!-- /.panel .chat-panel -->
+       </div>
+            
+        </div>
+        
+        <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/js/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+   
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    </body>
+</html>
+
+
+

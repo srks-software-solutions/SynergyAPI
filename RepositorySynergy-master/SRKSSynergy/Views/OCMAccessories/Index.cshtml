@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SRKSSynergy.Models.OCMAccessories>
+
+@{
+    ViewBag.Title = "Index";
+    int slno = 1;
+}
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<div class="bcgr" style="min-height:590px;min-width:1410px">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">OCM - Accessories List</p>
+    </div>
+    <form action="@Url.Action("Index", "OCMAccessories")" method="post">
+        @* Create Equipment Link *@
+        <div style="padding-left: 20px;padding-top:10px">
+            @Html.ActionLink("Add ", "Create", "OCMAccessories", new { @class = "btn btn-primary glyphicon glyphicon-plus", @Style = "text-decoration:none" })
+        </div>
+            <div style="padding-bottom:1%"></div>
+
+        <table class="table table-hover" style="width: 1410px;">
+            <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No.</span>
+                </th>
+                <th style="width: 200px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Product Type</span>
+                </th>
+                <th style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px; padding-bottom: 5px; padding-top: 5px">
+                    Description 
+                </th>
+                <th style="width: 200px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Part Number</span>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td>
+                    <td style="width: 200px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.MasterProducts.MasterProductName)
+                    </td>
+                    <td style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.AccessoriesDescription)
+                    </td>
+                    <td style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.PartNumber)
+                    </td>
+                    <td>                        
+                        @Html.ActionLink("Edit", "Edit", "OCMAccessories", new { id = item.AccessoriesID }, new { @class = "btn btn-primary glyphicon glyphicon-pencil", @Style = "text-decoration:none" }) 
+                        
+                        @Html.ActionLink("Delete", "Delete","OCMAccessories", new { id=item.AccessoriesID }, new { @class = "btn btn-danger glyphicon glyphicon-trash", @Style = "text-decoration:none" })
+                    </td>
+                </tr>
+                slno++;
+            }
+
+        </table>
+    </form>
+</div>

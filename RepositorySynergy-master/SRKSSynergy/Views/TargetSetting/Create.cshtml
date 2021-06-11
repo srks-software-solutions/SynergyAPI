@@ -1,0 +1,107 @@
+﻿@model SRKSSynergy.Models.TargetSettings
+@{
+    ViewBag.Title = "Create";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tmonth').monthpicker();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CPName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/TargetSetting/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CPName, value: item.CPName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<div class="bcgr" style="min-height: 590px">
+	@using (Html.BeginForm("Create", "TargetSetting", FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Create Target Settings</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Channel Partner</label>
+							<div class="controls">
+								<input type="text" class="fntst excus" value="" id="CPName" name="CPName" placeholder="Channel Partner Name">
+                                @*@Html.DropDownListFor(m => m.ChannelPartners.ZoneID, (SelectList)ViewData["ZoneName"], "--Select Zone--", new { id = "ZoneName", @required = "required" })*@
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Select Month</label>
+							<div class="controls">								
+                                <input class="input fntst" id="tmonth" name="tmonth" placeholder="Select Month" />								
+							</div>
+						</div>
+					</div>
+				</div>
+
+                <div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Targets</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.Targets, new { @id = "desc", @class = "input fntst", @placeholder = "Enter Targets" })								
+							</div>
+						</div>
+					</div>
+				</div>
+
+				
+				<div class="span10 pad ">
+					<div class="span3 cent" style="padding-left: 300px">
+						<button class="btn btn-success" value="create" type="submit">Create</button>
+					</div>									
+				</div>
+				
+			</div>
+		</div>
+	}
+
+	<div>
+		@Html.ActionLink("Back to List", "Index")
+	</div>
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

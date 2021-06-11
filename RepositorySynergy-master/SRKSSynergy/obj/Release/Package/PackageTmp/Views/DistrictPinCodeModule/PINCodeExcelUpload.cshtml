@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "PINCodeExcelUpload";
+}
+
+    <script src="~/Content/assets/js/browser.js"></script>
+<head>
+    <script>
+     
+        function doSomething() {
+            //do some stuff here. eg:               
+            var selectedID = TimeMe.getTimeOnCurrentPageInSeconds();
+            var controllerName = '@ViewContext.RouteData.Values["Controller"].ToString()';
+            var actionName = '@ViewContext.RouteData.Values["action"].ToString()';
+            $.getJSON("/ViewLog/ViewLogTime", { ID: selectedID, controlername: controllerName, actiname: actionName, browser: browserVersion }, function (data) {
+
+            });
+
+        }
+            </script> 
+</head>
+     <div class="time-message" style="display:none">
+             <label id="timeInSeconds"/>		
+		</div>
+@using (Html.BeginForm("PINCodeExcelUpload", "DistrictPinCodeModule", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)                     
+    <h3 class="heading_b uk-margin-bottom uk-text-primary">Upload PIN Code Details</h3>
+    <div class="md-card">
+        <div class="md-card-content md-card md-card-primary">
+            <div class="uk-grid" data-uk-grid-margin="">
+                
+                <div class="uk-width-medium-2-2">                         
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <h3 class="heading_a uk-margin-small-bottom">Select a file
+                            </h3>                          
+                             <input id="file" name="file" type="file" accept="xlsx/*" class="dropify" data-show-upload="false" data-show-remove="false" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <span class="uk-input-group-addon">
+            </span>
+            <span class="uk-input-group-addon">
+                <button class="md-btn  md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" type="submit">Upload</button>
+            </span>
+        </div>
+    </div>
+}
+@*show error for file name*@
+<div class="uk-width-medium-1-4">
+    <span id="clickme" data-message='@Session["Error"]'></span>
+</div>
+
+<!-- page specific plugins -->
+<!--  dropify -->
+<script src="~/Content/assets/js/custom/dropify/dist/js/dropify.min.js"></script>
+
+<!--  form file input functions -->
+<script src="~/Content/assets/js/pages/forms_file_input.min.js"></script>
+
+<!--  notifications functions -->
+<script src="~/Content/assets/js/pages/components_notifications.min.js"></script>
+
+<script>
+    $(function (e) {
+        var ErrMsg = ('@Session["Error"]');
+        if (ErrMsg) {
+            $("#clickme").click();
+        }
+    });
+</script>
+
+@{
+    Session["Error"] = null;
+    }

@@ -1,0 +1,78 @@
+﻿@model SRKSSynergy.Models.OCMReducerRing
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<div class="bcgr" style="height:700px">
+@using (Html.BeginForm())
+{
+	<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Edit OCM-Reducer Ring</p>
+		</div>
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true)
+
+        @Html.HiddenFor(m => m.ReduceRingID)				
+        @Html.HiddenFor(m => m.CreatedBy)
+		@Html.HiddenFor(m => m.CreatedOn)        
+        @Html.HiddenFor(m => m.IsDeleted)	  
+        
+
+    <div class="row">
+        <div class=" row show-grid">
+
+            <div class="span12 pad">
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Product Type</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(m => m.MasterProductID, null, "--Select Product Type--", new { id = "MasterProductID" , @Value = ViewData["MasterProductID"]})
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span12 pad">
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Reduce Ring Description</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.ReduceRingDescription, new { @id = "ReduceRingDescription", @class = "fntst", @placeholder = "Reduce Ring Description", @required = "required" ,@style="height:30px" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span10 pad">
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label fntst">Part Number</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.PartNumber, new { @id = "PartNumber", @class = "fntst", @placeholder = "Part Number", @required = "required",@style="height:30px" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*Buttons*@
+             <div class="span10 pad ">
+            <div class="span3 cent" style="padding-left: 2%">
+			    <button class="btn btn-success btn-large glyphicon glyphicon-arrow-left" style="display: inline;">@Html.ActionLink(" Back_to_List", "Index","OCMReducerRing", new { @Style="color:white;text-decoration:none"})</button>
+            </div>
+            <div class="span3 cent" style="padding-left: 10%">
+				<button class="btn btn-success glyphicon glyphicon-cloud-upload" value="post" type="Submit"> Save</button>
+            </div>
+		</div>
+            @*End Of Buttons*@
+        </div>
+    </div>
+   
+}
+ </div>   
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+ 

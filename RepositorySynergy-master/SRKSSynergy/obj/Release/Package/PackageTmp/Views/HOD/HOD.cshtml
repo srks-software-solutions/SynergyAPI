@@ -1,0 +1,477 @@
+﻿@model SRKSSynergy.Models.Handover
+@{
+	ViewBag.Title = "HOD";
+}
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+@*<script src="~/Content/bootstrap/js/accounting.js"></script>*@
+
+
+@*Auto Suggest Jquery*@
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#oanum").autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					url: "/HOD/Autocompletehod",
+					type: "POST",
+					dataType: "json",
+					data: { term: request.term },
+					success: function (data) {
+						response($.map(data, function (item) {
+							return { label: item.OANumber, value: item.OANumber };
+						}))
+					}
+				})
+			},
+			messages: {
+				noResults: "", results: ""
+			}
+		});
+	});
+</script>
+
+
+<div style="background: gray; padding-bottom: 15px">
+	<p class="txtft">Hand Over Document</p>
+</div>
+<div class="container" style="width: 1000px; padding-top: 3px">
+	<div style="background: #e5e5e5">
+		@*Form for getting Order acknowledgement Number auto suggesting*@
+		@*@using (Html.BeginForm("HOD", "HOD", FormMethod.Get))
+		{
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(true)
+			@*<div class="row" style="padding-top: 10px">
+				<div class=" row show-grid">
+					<div class="span12 pad">
+						<div class="span3 ">
+							<div class="control-group ">
+								<label class="control-label fntst ">Order Acknowledgement Number</label>
+								<div class="controls">
+									@Html.TextBox("oanum", null, new {@required = "required", @placeholder = " Search Order Number" })
+								</div>
+							</div>
+						</div>*@
+						@* Button for Search *@
+						@*<div class="span3" style="padding-top: 20px">
+							<input type="submit" style="width: 100px; height: 35px" name="wrngoanum" value="Get Details" class="btn btn-info existingcustomer printButtonClass" />
+						</div>*@
+						@* End of buttons *@
+					@*</div>
+				</div>
+			</div>
+		}*@
+		@* MFR Generated Message *@
+		@if (TempData["OANum"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["OANum"]</p>
+		}
+		@* MFR Generated Message *@
+		@if (TempData["Machineslno"] != null)
+  {
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["Machineslno"]</p>
+  }
+		@* Null Order Number *@
+		@if (TempData["OANumber"] != null)
+  {
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["OANumber"]</p>
+  }
+		<!--Form Starts-->
+		@using (Html.BeginForm("HOD", "HOD", Model, FormMethod.Post))
+  {
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(true)
+			@Html.HiddenFor(m => m.OAnum, new { id = "oanum" })
+			@Html.HiddenFor(m => m.MDBID, new { Value = ViewBag.mdbid })
+			<div class="row" style="padding-top: 10px">
+				<div class=" row show-grid">
+					<!--Row1-->
+					<div class="span10 pad">
+						<label class="checkbox inline"><strong>Protocol of</strong></label>
+						<label class="checkbox inline">
+							@Html.CheckBoxFor(m => m.Handing, new { id = "handing", @name = "handing", @class = "inline", @type = "checkbox" })
+							@*<input name="Checkbox1" type="checkbox" class="inline">*@<strong>Handing over</strong>
+						</label>
+						<label class="checkbox inline">
+							@Html.CheckBoxFor(m => m.Commis, new { id = "commis", @name = "commis", @class = "inline", @type = "checkbox" })
+							@*<input name="Checkbox2" type="checkbox" class="inline">*@<strong>Commissioning</strong>
+						</label>
+						<label class="checkbox inline">
+							@Html.CheckBoxFor(m => m.Termi, new { id = "termi", @name = "termi", @class = "inline", @type = "checkbox" })
+							@*<input name="Checkbox3" type="checkbox" class="inline">*@<strong>Termination of Erection</strong>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="padding-top: 10px">
+				<div class=" row show-grid">
+					<div class="span10 pad">
+						<div class="span5">
+							<table class="table table-bordered" style="min-width: 800px">
+								<tbody>
+									<tr style="border-bottom: 1px solid black">
+										<td>
+											<label class="control-label "><strong>HOD Number</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@Html.TextBoxFor(model => model.HODNumber, new { @id = "hodnumber", Value = @ViewBag.HodNumber, @class = "fntst", @placeholder = "HOD Number", @readonly = "readonly" })
+											@*<input type="text" class="fntst" id="hodnumber" placeholder="Customer Name" readonly="readonly" Value = "" >*@
+										</td>
+									</tr>
+									<tr style="border-bottom: 1px solid black">
+										<td>
+											<label class="control-label "><strong>Customer Name</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@*@Html.TextBoxFor(model => model.OAEquipGeneralData.MDBGeneralData.OrganizationName, new { @id = "custnm", Value = @ViewBag.cust, @class = "fntst", @placeholder = "Customer Name" })*@
+											<input type="text" class="fntst" id="custname" placeholder="Customer Name" readonly="readonly" Value = "@ViewBag.cust" >
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="control-label "><strong>Place / Country</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@*@Html.TextBoxFor(model => model.OAEquipGeneralData.MDBGeneralData.City, new { @id = "place", Value = @ViewBag.city, @class = "fntst", @placeholder = "Place / Country" })*@
+											<input type="text" class="fntst" id="city" readonly="readonly" placeholder="Place / Country" Value = "@ViewBag.city" >
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="control-label "><strong>Customer Purchase Order No.</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@Html.TextBoxFor(model => model.Custpurorderno, new { @id = "purodno", @class = "fntst", @required = "required", @placeholder = " Customer Purchase Order No." })
+											@Html.ValidationMessageFor(model => model.Custpurorderno)
+											@*<input type="text" class="fntst" id="orme" placeholder="Customer Purchase Order No">*@
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="control-label "><strong>Buhler Customer No. / Order No.</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@Html.TextBoxFor(model => model.Buhlercustorderno, new { @id = "buhcustno", @class = "fntst", @required = "required", @placeholder = " Buhler Customer No. / Order No." })
+											@Html.ValidationMessageFor(model => model.Buhlercustorderno)
+											@*<input type="text" class="fntst" id="orme" placeholder="Buhler Customer No. / Order No.">*@
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="control-label "><strong>Project</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@Html.TextBoxFor(model => model.Project, new { @id = "project", @class = "fntst", @required = "required", @placeholder = " Project" })
+											@Html.ValidationMessageFor(model => model.Project)
+											@*<input type="text" class="fntst" id="orme" placeholder="Project">*@
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="control-label "><strong>Buhler Representative</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@Html.TextBoxFor(model => model.Buhlerrep, new { @id = "buhrep", @class = "fntst", @required = "required", @placeholder = "Buhler Representative" })
+											 @Html.ValidationMessageFor(model => model.Buhlerrep)
+											@*<input type="text" class="fntst" id="orme" placeholder="Buhler Representative">*@
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="control-label "><strong>Customer Representative</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@Html.TextBoxFor(model => model.Custrep, new { @id = "custrep", @class = "fntst", @required = "required", @placeholder = " Customer Representative" })
+											@Html.ValidationMessageFor(model => model.Custrep)
+											@*<input type="text" class="fntst" id="orme" placeholder="Buhler Representative">*@
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="control-label "><strong>Model No</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@Html.DropDownListFor(m => m.modelno, (IEnumerable<SelectListItem>)ViewBag.Product, "--Select--", new { @id = "ProductModelID1", @required = "required" })
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="control-label "><strong>Quantity</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@Html.TextBoxFor(model => model.Quantity, new { @id = "qty", @class = "fntst", @readonly = "readonly", @placeholder = "Quantity" })
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="control-label "><strong>Machine Serial No.</strong></label></td>
+										<td><strong>:</strong></td>
+										<td>
+											@Html.TextBoxFor(model => model.MacSlNo, new { @id = "macslno", @class = "fntst", Value=ViewBag.Macslno, @required = "required", @placeholder = "Machine Serial No",@readonly="readonly" })
+											@*<input type="text" class="fntst" id="orme" placeholder="Buhler Representative">*@
+
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Row3-->
+			<div class="row" style="padding-top: 10px">
+				<div class=" row show-grid">
+					<div class="span10 pad">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Erection, new { id = "erection", @name = "erection", @class = "inline", @type = "checkbox" })
+								@*<input type="checkbox" value="">*@
+								@*<span class="span"></span>*@
+								<label class="checkbox inline">The erection / delivery was (were) duly executed<br /></label>
+								@*<span class="span"></span>*@
+								<label class="checkbox inline">The machine(s) / plant is (are) ready for operation</label>
+							</label>
+						</div>
+					</div>
+					<!--Row4-->
+					<div class="span10 pad">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Trail, new { id = "trail", @name = "trail", @class = "inline", @type = "checkbox" })
+								@*<input type="checkbox" value="">*@
+								@*<span class="span"></span>*@
+								<label class="checkbox inline">A trial run</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Wimaterial, new { id = "wimat", @name = "wimat", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox1" type="checkbox" class="inline">*@with material
+								</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Womaterial, new { id = "womat", @name = "womat", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox2" type="checkbox" class="inline">*@without material
+								</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Wcarr, new { id = "wcarr", @name = "wcarr", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox3" type="checkbox" class="inline">*@was carried out
+								</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Wnotcarr, new { id = "wnocarr", @name = "wnocarr", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox3" type="checkbox" class="inline">*@was not carried out
+								</label>
+							</label>
+						</div>
+					</div>
+					<!--Row5-->
+					<div class="span12 pad">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Completionerection, new { id = "cmplerec", @name = "cmplerec", @class = "inline", @type = "checkbox" })
+								@*<span class="span"></span>*@
+								<label class="checkbox inline">After completion of erection work a trial run / commissioning could not take place for reasons beyond the responsibility of Buhler</label>
+							</label>
+						</div>
+					</div>
+					<!--Row6-->
+					<div class="span10 pad">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Capacity, new { id = "cap", @name = "cap", @class = "inline", @type = "checkbox" })
+								@*<input type="checkbox" value="">*@
+								<label class="checkbox inline">The capacity agreed upon was</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Reached, new { id = "reached", @name = "reached", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox1" type="checkbox" class="inline">*@reached
+								</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Notreached, new { id = "ntreac", @name = "ntreac", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox2" type="checkbox" class="inline">*@not reached
+								</label>
+							</label>
+						</div>
+					</div>
+					<!--Row7-->
+					<div class="span12 pad">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Machinehanded, new { id = "mchan", @name = "mchan", @class = "inline", @type = "checkbox" })
+								<label class="checkbox inline">The machine(s) / plant were handed over by Buhler (India) limited to the customer on: Date
+								@Html.TextBoxFor(model => model.Handeddate, new { id = "datePicker2", @class = "input-medium fntst sss", @placeholder = "Select Date", @readonly = "readonly", @required = "required" })
+								@*@Html.TextBoxFor(model => model.Handeddate, new { id = "datePicker2", @class = "input-medium fntst",Value = @System.DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss tt"), @placeholder = "Select Date", @readonly = "readonly",@style = "display:none;"  })*@
+								@*@ViewBag.ShowQuoteDate*@
+								</label>
+								@*<input type="date" class="fntst" id="orme" placeholder="select the date">*@
+							</label>
+						</div>
+					</div>
+					<!--Row8-->
+					<div class="span10 pad">
+						<div class="span">
+							<label class="checkbox">
+								@*<input type="checkbox" value="">*@
+								@Html.CheckBoxFor(m => m.Buyer, new { id = "buy", @name = "buy", @class = "inline", @type = "checkbox" })
+								@*<span class="span"></span>*@
+								<label class="checkbox inline">The buyer takes full responsibility of the operation and maintenance of the plant.</label>
+							</label>
+						</div>
+					</div>
+					<!--Row9-->
+					<div class="span10 pad">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Followcomm, new { id = "follow", @name = "follow", @class = "inline", @type = "checkbox" })
+								@*<input type="checkbox" value="">*@
+								<label class="checkbox inline">The following comments (if any) were established : </label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Seperate, new { id = "sep", @name = "sep", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox1" type="checkbox" class="inline">*@See separate list
+								</label>
+							</label>
+						</div>
+					</div>
+					<!--Row10-->
+					<div class="span10" style="padding-left: 60px">
+						<p></p>
+						<label>
+							<strong>Comments :</strong>
+						</label>
+						<div class="span">
+							@Html.TextAreaFor(m => m.Comments, new { @id = "oarej", @name = "oarej", rows = 4, columns = 20, @style = "width:900px", @placeholder = "Additional Comments" })
+							@Html.ValidationMessageFor(model => model.Comments)
+							@*<textarea class="span7" rows="3"></textarea>*@
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="padding-top: 10px">
+				<div class=" row show-grid">
+					<!-- Row 11 -->
+					<div class="span10" style="padding-left: 60px">
+						<table>
+							<tr>
+								<td>
+									<label class="control-label "><strong>Signatures:</strong></label></td>
+								<td style="padding-left: 200px"></td>
+								<td>
+									<label class="control-label "><strong>Customer:</strong></label></td>
+								<td style="padding-left: 200px"></td>
+								<td>
+									<label class="control-label "><strong>Authorized Channel Partner For Buhler (India) Pvt. Ltd.</strong></label></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="padding-top: 10px">
+				<div class=" row show-grid">
+					<!--Row 12-->
+					<div class="span10" style="padding-left: 60px">
+						<label><strong>Place :</strong></label>
+					</div>
+					<!--Row 13-->
+					<div class="span10" style="padding-left: 60px">
+						<label><strong>Date :</strong></label>
+					</div>
+					<!-- Row 14 -->
+					<div class=" span10" style="padding-left: 60px">
+						<table>
+							<tr>
+								<td>
+									<label class="control-label "><strong>Copies For :</strong></label></td>
+								<td style="width: 300px;"></td>
+								<td>
+									<label class="checkbox inline">Enclosure</label>
+									<label class="checkbox inline">
+										@Html.CheckBoxFor(m => m.Yes, new { id = "yes", @name = "yes", @class = "inline", @type = "checkbox" })
+										@*<input name="Checkbox1" type="checkbox" class="inline">*@Yes
+									</label>
+									<label class="checkbox inline">
+										@Html.CheckBoxFor(m => m.No, new { id = "no", @name = "no", @class = "inline", @type = "checkbox" })
+										@*<input name="Checkbox2" type="checkbox" class="inline">*@No
+									</label>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!--Row 15 -->
+					<div class="span10" style="padding-left: 60px">
+						@*<div class="span"></div>*@
+						<label><strong>Please tick the applicable boxes</strong></label>
+					</div>
+					<!--Buttons-->
+					<div class="span10 pad ">
+						<div class="span3 cent">
+							<input type="submit" value="Submit" class="btn btn-large btn-success" onclick="javascript: return updateparent();" />
+						</div>
+					</div>
+					<!--End Of Buttons-->
+				</div>
+				<!--End Of Rows-->
+			</div>
+
+  }
+	</div>
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+<script>
+    function updateparent()
+    {
+        var date1 = $("#datePicker2").val();
+        if (date1.length == 0 ) {
+            alert('Please fill out the handed over date');
+            return false;
+        }
+        else {
+            return true;
+        }
+
+
+    }
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("select#ProductModelID1").change(function (evt) {
+			{
+				var selectedID = $("#ProductModelID1 option:selected").val();
+				var ONum = $("#oanum").val();
+				$.getJSON("/HOD/GetProductModelDetails", { ID: selectedID, oanum: ONum }, function (data) {
+					//Assiginig Values of Unit Price Description & Exclusion After Selecting Model
+					$("#qty").val(data.Quantity);
+				});
+			}
+		});
+	});
+	@* Update Quotation Number from DB for every 100 milli seconds *@
+	$(document).ready(function () {
+		//setInterval(updatequotnumber, 100);
+		function updatequotnumber() {
+			var ordernum = '@ViewBag.Order';
+			if (ordernum != "" && ordernum != null) {
+				$.getJSON("/HOD/Gethodnumber", { ID: mdbid }, function (data) {
+					if (data.quotnumb != "") {
+						$("#hodnumber").val(data.quotnumb);
+					}
+				});
+			}
+		}
+	});
+	$(document).ready(function () {
+		var now = new Date();
+		var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+		$('.sss').datepicker({
+			format: 'yyyy-mm-dd',
+			//onRender: function (date) {
+			//	return date.valueOf() < now.valueOf() ? 'disabled' : '';
+			//}
+
+		}).on('changeDate', function (ev) {
+			$(this).datepicker('hide');
+		});
+	});
+</script>

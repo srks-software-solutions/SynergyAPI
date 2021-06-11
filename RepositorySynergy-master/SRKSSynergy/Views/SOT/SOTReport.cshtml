@@ -1,0 +1,377 @@
+﻿@model IList<SRKSSynergy.Models.SOT>
+@using SRKSSynergy.Helpers
+@{
+    
+    ViewBag.Title = "SOT Report";
+    int slno = 1;
+    ViewBag.last = "is";
+}
+
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<script>
+    $(document).ready(function () {
+        $('#frommonth').monthpicker();
+
+    });
+    $(document).ready(function () {
+        $('#tomonth').monthpicker();
+
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cpnam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/SOT/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CPName, value: item.CPName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#printbutton").click(function () {
+            $("#printbutton").visible = false;
+            $("#savebutton").visible = false;
+            self.focus()
+            self.print()
+        });
+    });
+</script>
+
+<div class="bcgr" style="min-height: 580px;">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Sales Opportunity Tracker</p>
+    </div>
+    <div class="noPrint">
+        <form action="@Url.Action("SOTReport", "SOT")" method="get">
+            <div style="background: #e5e5e5; min-height: 30px; min-width: 690px">
+                <div class="row" style="padding-top: 10px">
+                    <div class=" row show-grid">
+                        @* Text Box for search *@
+                        <div class="span12 pad">
+                            <div class="span3 ">
+                                <div class="control-group ">
+                                    <label class="control-label fntst ">Channel Partner Name</label>
+                                    <div class="controls">
+                                        @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="cpnam" name="cpnam" placeholder="Channel Partner Name">*@
+                                        @Html.TextBox("cpnam", null, new { @style = "height:30px", @class = "printButtonClass noPrint", @placeholder = " Search Channel Partner Name", @autocomplete = "off" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span1"></div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <label class="control-label fntst">Equipment Name</label>
+                                    <div class="controls">
+                                        @*<select id="Equipname" name="Equipname" class="input-medium fntst">
+                                        <option value="">Select Option</option>
+                                        <option value="CCD 240">CCD 240</option>
+                                        <option value="CCD 320">CCD 320</option>
+                                        <option value="CMOS 160">CMOS 160</option>
+                                        <option value="CMOS 240">CMOS 240</option>
+                                        <option value="CMOS 320">CMOS 320</option>
+                                    </select>*@
+                                        @Html.DropDownList("ProductModelID", null, "--Select--", new { @class = "fntst" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span12 pad">
+                            <div class="span3">
+                                <div class="control-group">
+                                    <label class="control-label fntst">From Month</label>
+                                    <div class="controls">
+                                        @*<input class="input-medium fntst" id="frommonth" name="frommonth" placeholder="   Select Month " style="border-radius:4px;width:100%" />*@
+                                        <input style="height: 30px" type="text" class="printButtonClass noPrint fntst sss" id="frommonth" name="frommonth" placeholder="Select Month" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span1"></div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <label class="control-label fntst">To Month</label>
+                                    <div class="controls">
+                                        @*<select id="tomonth" name="tomonth" class="input-medium fntst">
+                                        <option value="">Select Option</option>
+                                        <option value="Jan,2014">Jan,2014</option>
+                                        <option value="Feb,2014">Feb,2014</option>
+                                        <option value="Mar,2014">Mar,2014</option>
+                                        <option value="Apr,2014">Apr,2014</option>
+                                        <option value="May,2014">May,2014</option>
+                                        <option value="Jun,2014">Jun,2014</option>
+                                        <option value="Jul,2014">Jul,2014</option>
+                                        <option value="Aug,2014">Aug,2014</option>
+                                        <option value="Sep,2014">Sep,2014</option>
+                                        <option value="Oct,2014">Oct,2014</option>
+                                        <option value="Nov,2014">Nov,2014</option>
+                                        <option value="Dec,2014">Dec,2014</option>
+                                        <option value="Jan,2015">Jan,2015</option>
+                                        <option value="Feb,2015">Feb,2015</option>
+                                        <option value="Mar,2015">Mar,2015</option>
+                                        <option value="Apr,2015">Apr,2015</option>
+                                        <option value="May,2015">May,2015</option>
+                                        <option value="Jun,2015">Jun,2015</option>
+                                        <option value="Jul,2015">Jul,2015</option>
+                                        <option value="Aug,2015">Aug,2015</option>
+                                        <option value="Sep,2015">Sep,2015</option>
+                                        <option value="Oct,2015">Oct,2015</option>
+                                        <option value="Nov,2015">Nov,2015</option>
+                                        <option value="Dec,2015">Dec,2015</option>
+                                    </select>*@
+                                        @*<input class="input-medium fntst" id="tomonth" name="tomonth" placeholder="    Select Month "  style="border-radius:4px;width:100%;"/>*@
+                                        <input style="height: 30px" type="text" class="printButtonClass noPrint fntst sss" id="tomonth" name="tomonth" placeholder="Select Month" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span1"></div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <label class="control-label fntst">BYJT Chances(%)</label>
+                                    <div class="controls">
+                                        <select  style="height: 30px;width:90%" id="byjt" name="byjt" class="input-medium fntst">
+                                            <option value="">Select Option</option>
+                                            <option value="0">0%</option>
+                                            <option value="20">20%</option>
+                                            <option value="40">40%</option>
+                                            <option value="60">60%</option>
+                                            <option value="80">80%</option>
+                                            <option value="100">100%</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span1"></div>
+                            @* Button for Search *@
+
+                            <div class="span10 pad ">
+                                <div class="span3 cent">
+                                    <button type="submit" id="gd" class="btn btn-large btn-info existingcustomer glyphicon glyphicon-paste"> Get_Details</button>
+                                </div>
+                                <div class="span3 cent" style="padding-left: 10%">
+                                    <button class="btn btn-info btn-large printButtonClass glyphicon glyphicon-print " id="printbutton" style="height: 35px" type="button"> Print</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    @* Wrong Channel Partner *@
+    @if (TempData["wrong"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["wrong"]</p>
+    }
+@* Equipment Success *@
+    @if (TempData["euipment"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["euipment"] @ViewBag.equip @ViewBag.last </p>
+    }
+@* No Equipment *@
+    @if (TempData["noeuipment"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["noeuipment"]</p>
+    }
+@* Expected Month *@
+    @if (TempData["expmonth"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["expmonth"] @ViewBag.expmon @ViewBag.last </p>
+    }
+@* No Expected Month *@
+    @if (TempData["noexpmonth"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["noexpmonth"]</p>
+    }
+@* Byjt Chances *@
+    @if (TempData["byjt"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["byjt"] @ViewBag.byjt% @ViewBag.last </p>
+    }
+@* No Byjt Chances *@
+    @if (TempData["nobyjt"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["nobyjt"]</p>
+    }
+    @if (ViewBag.IsSearch == true)
+    {
+        <div class="row">
+            <div class=" row show-grid">
+                <div style="text-align: right; height: 60px; padding-left: 50px">
+                    <table>
+                        <tr>
+                            <td style="text-align: left; padding-left: 70px">
+                                <label class="fntst1">
+                                    M/s @ViewBag.OrganizationName
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding-left: 70px">
+                                <label class="fntst1">
+                                    @ViewBag.AddressLine1 , @ViewBag.AddressLine2 , @ViewBag.AddressLine3
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding-left: 70px">
+                                <label class="fntst1">
+                                    @ViewBag.City - @ViewBag.Pincode , @ViewBag.State
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class=" row show-grid">
+            <div style="padding-top: 30px; padding-left: 3%">
+                <table class="table-hover" style="width: 95%">
+                    <thead>
+                        <tr style="background: #BBBEBD">
+                            <th style="width: 70px; text-align: center" class="fntst cal botbor">Serial No</th>
+                            <th style="width: 200px; text-align: center" class="fntst cal botbor">Company Name</th>
+                            <th style="width: 130px; text-align: center" class="fntst cal botbor">Sales Engg Name</th>
+                            <th style="width: 130px; text-align: center" class="fntst cal botbor">Quotation No</th>
+                            <th style="width: 80px; text-align: center" class="fntst cal botbor">Quote Date(dd/mm/yyy)</th>
+                            <th style="width: 130px; text-align: center" class="fntst cal botbor">Model</th>
+                            <th style="width: 70px; text-align: center" class="fntst cal botbor">Quantity</th>
+                            <th style="width: 170px; text-align: center" class="fntst cal botbor">Order Activeness</th>
+                            <th style="width: 80px; text-align: center" class="fntst cal botbor">BYJT Chances(%)</th>
+                            <th style="width: 130px; text-align: center" class="fntst cal botbor">Expected Order Month</th>
+                            <th style="width: 230px; text-align: center" class="fntst cal botbor">Additional Comments</th>
+                        </tr>
+                    </thead>
+                    @*@foreach (var item in Model)*@
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td style="text-align: center;">
+                                @slno
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@Html.DisplayFor(m => m[i].QGEquipGeneralData.MDBGeneralData.OrganizationName)</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@Html.DisplayFor(m => m[i].QGEquipGeneralData.SalesName)</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@Html.DisplayFor(m => m[i].QGEquipGeneralData.QuotationNumber)</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@Html.DisplayFor(m => m[i].QGEquipGeneralData.QuotationDate)</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@Html.DisplayFor(m => m[i].Equipment)</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@Html.DisplayFor(m => m[i].Quantity)</label>
+                            </td>
+                            <td style="text-align: center;">
+                                @Html.DisplayFor(m => m[i].Orderactive)
+                            </td>
+                            <td style="text-align: center;">
+                                @Html.DisplayFor(m => m[i].BYJTChances)
+                            </td>
+                            <td style="text-align: center;">
+                                @Html.DisplayFor(m => m[i].Expectedorder)
+                            </td>
+                            <td style="text-align: center; width: 100px">
+                                @Html.DisplayFor(m => m[i].AdditionalComments, new { rows = 2, columns = 2, id = "addcomc" + slno, @class = "fntst", @placeholder = "Additional Comments" })
+                            </td>
+                        </tr>
+                        slno = slno + 1;
+                    }
+                </table>
+            </div>
+            @*<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+                <div class=" row show-grid">
+                    <div class="span10">
+                        <div class="span3 cent">
+                            <button class="btn btn-large btn-success printButtonClass" id="printbutton" type="button">Print</button>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            @{
+                if (User.IsInRole("ZonalManager"))
+                {
+                    using (Html.BeginForm("ExportDatazonal", "SOT", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                <input type="text" name="cpnam" class="input-xxsmall fntst" id="cpnam" value="@ViewBag.CPname" style="display:none" >
+                <input type="text" name="byjt" class="input-xxsmall fntst" id="byjt1" value="@ViewBag.BYJT" style="display:none">
+                <input type="text" name="Equipname" class="input-xxsmall fntst" id="Equipname1" value="@ViewBag.Equipment" style="display:none" >
+@*<input type="text" name="expmonth" class="input-xxsmall fntst" id="expmonth1" value="@ViewBag.ExpectedMonth" style="display:none" >*@
+                <input type="text" class="input-xxsmall fntst" id="frm" name="frm" value="@ViewBag.fromExpectedMonth" style="display:none" >
+                <input type="text" class="input-xxsmall fntst" id="tom" name="tom" value="@ViewBag.toExpectedMonth" style="display:none" >
+                <div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+                    <div class=" row show-grid">
+                        <div class="span10">
+                            <div class="span3 cent">
+                                <button class="btn btn-info printButtonClass" id="printbutton" style="width: 100px; height: 35px" type="button">Print</button>
+                                <input type="submit" style="width: 100px; height: 35px" value="Export" class="btn btn-info existingcustomer printButtonClass" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("ExportData", "SOT", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                <input type="text" name="cpnam" class="input-xxsmall fntst" id="cpnam" value="@ViewBag.CPname" style="display:none" >
+                <input type="text" name="byjt" class="input-xxsmall fntst" id="byjt1" value="@ViewBag.BYJT" style="display:none">
+                <input type="text" name="Equipname" class="input-xxsmall fntst" id="Equipname1" value="@ViewBag.Equipment" style="display:none" >
+@*<input type="text" name="expmonth" class="input-xxsmall fntst" id="expmonth1" value="@ViewBag.ExpectedMonth" style="display:none" >*@
+                <input type="text" class="input-xxsmall fntst" id="frm" name="frm" value="@ViewBag.fromExpectedMonth" style="display:none" >
+                <input type="text" class="input-xxsmall fntst" id="tom" name="tom" value="@ViewBag.toExpectedMonth" style="display:none" >
+                <div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+                    <div class=" row show-grid">
+                        <div class="span10">
+                            <div class="span3 cent">
+                                <button class="btn btn-info printButtonClass" id="printbutton" style="width: 100px; height: 35px" type="button">Print</button>
+                                <input type="submit" style="width: 100px; height: 35px" value="Export" class="btn btn-info existingcustomer printButtonClass" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>

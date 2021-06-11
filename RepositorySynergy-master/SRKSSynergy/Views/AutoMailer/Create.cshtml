@@ -1,0 +1,123 @@
+﻿@model SRKSSynergy.Models.AutoMailer
+@{
+    ViewBag.Title = "Create";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tmonth').monthpicker();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CPName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/TargetSetting/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CPName, value: item.CPName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<div class="bcgr" style="min-height: 700px">
+	@using (Html.BeginForm("Create", "AutoMailer", FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Create AutoMailer</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+                            <label class="control-label fntst">Select Module</label>
+							<div class="controls">								
+								<select id="module" name="module" class="fntst" required="required">
+								  <option value="Leads">Leads</option>
+								  <option value="SOT">SOT</option>                                 							 
+								</select>
+							</div>							
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Period (In Days)</label>
+							<div class="controls">
+								   @Html.TextBoxFor(model => model.OTPeriod, new { @id = "desc",@maxlength=2, @class = "input fntst", @placeholder = "Enter Days" })								
+                                @Html.ValidationMessageFor(model => model.OTPeriod)
+							</div>
+						</div>
+					</div>
+				</div>
+
+               @* <div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Null Period</label>
+							<div class="controls">								
+								@Html.TextBoxFor(model => model.NullPeriod, new { @id = "desc", @class = "input fntst", @placeholder = "Enter Null Period" })								
+							</div>
+						</div>
+					</div>
+				</div>*@
+
+				
+				<div class="span10 pad ">
+					<div class="span3 cent" style="padding-left: 300px">
+						<button class="btn btn-success" value="create" type="submit">Create</button>
+					</div>									
+				</div>
+				
+			</div>
+		</div>
+	}
+
+	<div>
+		@Html.ActionLink("Back to List", "Index")
+	</div>
+</div>
+<script>
+    //For restricting any field to its maxlength size
+    $(document).ready(function () {
+        $('input').keyup(function (e) {
+            if (this.value.length == $(this).attr("maxlength")) {
+                e.preventDefault();
+                $(event.target).next("span").html("Only 2 Digits Allowed").show().fadeOut(2000);
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,535 @@
+﻿@model  SRKSSynergy.Models.MDBGeneralData
+@{
+    ViewBag.Title = "ViewDetails";
+}
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<div class="bcgr">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">View Customer Details</p>
+        </div>
+        <div class="row" style="padding-top: 10px">
+            <div class=" row show-grid">
+                <!--Row1-->
+                <div class="span12 pad">
+                    <p class="pad txtal">General Data</p>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Organization Name :</label>
+                            <div class="controls">
+                                 @Html.DisplayFor(model => model.OrganizationName)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                           <label class="control-label fntst">Organization Type</label>
+                            <div class="controls">
+                                 @Html.DisplayFor(model => model.OrganizationType)
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+               
+                <!--Row4-->
+                <div class="span12 pad">
+                    <p class="pad txtal">Contact Address</p>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Full Address</label>
+                            <div class="controls">
+                                @Html.DisplayFor(model => model.AddressLine1), @Html.DisplayFor(model => model.AddressLine2), @Html.DisplayFor(model => model.AddressLine3), @Html.DisplayFor(model => model.AddressLine4)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                     <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">City/Town/District</label>
+                            <div class="controls">
+                                @Html.DisplayFor(model => model.City)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Pincode</label>
+                            <div class="controls">
+                                @Html.DisplayFor(model => model.Pincode)
+                            </div>
+                        </div>
+                    </div>                    
+                     <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">State</label>
+                            <div class="controls">
+                                @Html.DisplayFor(model => model.State)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Country</label>
+                            <div class="controls">
+                                @Html.DisplayFor(model => model.Country)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  
+                 <!--Row5-->            
+                <div class="span12 pad">
+                    <div class="span3">
+                        <label class="fntst">Phone-1</label>
+                        <div class="controls">
+                            +@Html.DisplayFor(model => model.Isd1)-@Html.DisplayFor(model => model.Std1)-@Html.DisplayFor(model => model.PhoneLL1)
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <label class="fntst">Phone-2</label>
+                        <div class="controls">
+                            +@Html.DisplayFor(model => model.Isd2)-@Html.DisplayFor(model => model.Std2)-@Html.DisplayFor(model => model.ContactNumLL2)
+                        </div>
+                    </div>
+                </div>
+
+                <!--Row6-->
+                <div class="span12 pad">                    
+                    <div class="span3">
+                        <label class="control-label fntst">FAX </label>
+                        <div class="controls">
+                            +@Html.DisplayFor(model => model.Isdf)-@Html.DisplayFor(model => model.Stdf)-@Html.DisplayFor(model => model.FAX)
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Website</label>
+                            <div class="controls">
+                                @Html.DisplayFor(model => model.Website)
+                            </div>
+                        </div>
+                    </div>
+                     <div class="span1"></div>         
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">E-mail-1</label>
+                            <div class="controls">
+                                @Html.DisplayFor(model => model.EmailID)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    @*<div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">E-mail-2</label>
+                            <div class="controls">
+                                @Html.DisplayFor(model => model.EmailID2)
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+                   
+                 <!--Row7-->
+                <div class="span10 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst" style="font-family: Calibri">Postal / Courier (Press CTRL to Select Multiple)</label>
+                            <div class="controls">
+                                @Html.DisplayFor(model => model.PostalCourier)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Rownew-->
+                <div class="span12 pad">
+                    <p class="pad txtal">Contact Details</p>                    
+                        <!--Contact address Person 1-->                      
+                                    <div class="span10">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Contact Person Name</label>
+                                                <div class="controls">
+                                                   @ViewBag.cdname
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span10">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Designation</label>
+                                                <div class="controls">
+                                                    @ViewBag.cddesignation
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span1"></div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Department</label>
+                                                <div class="controls">
+                                                    @ViewBag.cddept
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span13">
+                                        <div class="span4">
+                                            <label class="fntst">Phone Board-1</label>
+                                            <div class="controls">
+                                                    @ViewBag.cdphone1
+                                                </div>
+                                        </div>
+                                        <div class="span4">
+                                            <label class="fntst">Phone Board-2</label>
+                                           <div class="controls">
+                                                    @ViewBag.cdphne2
+                                                </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="span12">
+                                        <div class="span4">
+                                            <label class="fntst">Mobile-1</label>
+                                           <div class="controls">
+                                                    @ViewBag.cdmob1
+                                                </div>
+                                        </div>
+                                        <div class="span4">
+                                            <label class="fntst">Mobile-2</label>
+                                           <div class="controls">
+                                                    @ViewBag.cdmob2
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="span12">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">E-mail</label>
+                                                <div class="controls">
+                                                    @ViewBag.cdemail
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span10">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Key Activity</label>
+                                                <div class="controls">
+                                                    @ViewBag.cdkeyact
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span1"></div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Comments</label>
+                                                <div class="controls">
+                                                    @ViewBag.cdcomment
+                                                </div>
+                                            </div>
+                                    </div>                              
+                            </div>
+                        </div>
+                       
+                 <!--Contact address Person 2-->                           
+               
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class=" row show-grid">
+                <div class="span12 pad">
+                    <p class="pad txtal">Statutory Registration Numbers</p>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Company PAN*</label>
+                            <div class="controls">
+                                @ViewBag.srncpan
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">TIN Number*</label>
+                            <div class="controls">
+                                @ViewBag.srntin
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--Row1-->
+                <div class="span12 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Registration Number</label>
+                            <div class="controls">
+                                @ViewBag.srnregno
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Service Tax Number</label>
+                            <div class="controls">
+                                @ViewBag.srnservicetax
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Importer-Exporter Code</label>
+                            <div class="controls">
+                                @ViewBag.srnimport
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Row2-->
+                <div class="span12 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">CST Number</label>
+                            <div class="controls">
+                                @ViewBag.srncstno
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Tax Deduction Account Number</label>
+                            <div class="controls">
+                                @ViewBag.srntaxdedu
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">Others</label>
+                            <div class="controls">
+                                @ViewBag.srnothers
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Row4-->
+                <div class="span12 pad">
+                    <p class="pad txtal">Bank Details</p>
+                    <div class="accordion" id="accordion3">
+                        <!--Bank 1 Details-->
+                        <div class="accordion-group">                            
+                            <div id="collapsebk1" class="accordion-body collapse in">
+                                <div class="accordion-inner">
+                                    <div class="span10 pad">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Bank Name</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankname
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span1"></div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Branch Name</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankbranch
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Row5-->
+                                    <div class="span10 pad">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Account Type</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankacctype
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span1"></div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Account Number</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankaccno
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Row6-->
+                                    <div class="span10 pad">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">RTGS/NEFT IFSC Code </label>
+                                                <div class="controls">
+                                                    @ViewBag.bankifsc
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span1"></div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Bank Address Line-1</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankaddress
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Row7-->
+                                    <div class="span10 pad">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Bank Address Line-2</label>
+                                                <div class="controls">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span1"></div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Bank Address Line-3</label>
+                                                <div class="controls">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Row8-->
+                                    <div class="span10 pad">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">City</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankcity
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span1"></div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Pin Code</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankpincode
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Row9-->
+                                    <div class="span10 pad">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">State</label>
+                                                 <div class="controls">
+                                                     @ViewBag.bankstate
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span1"></div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Country</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankcountry
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Row10-->
+                                    <div class="span13 pad">
+                                        <div class="span4">
+                                            <label class="fntst">Phone-1</label>
+                                             <div class="controls">
+                                                 @ViewBag.bankphone1
+                                                </div>
+                                        </div>
+
+                                        <div class="span4">
+                                            <label class="fntst">Phone-2</label>
+                                             <div class="controls">
+                                                 @ViewBag.bankphone2
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <!--Row11-->
+                                    <div class="span10 pad">
+                                        <div class="span4">
+                                            <label class="fntst">FAX</label>
+                                             <div class="controls">
+                                                 @ViewBag.bankfax
+                                                </div>
+                                        </div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">E-mail</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankemail
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Row12-->
+                                    <div class="span12 pad">
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Website</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankwebsite
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span1"></div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label fntst">Cheque In favour of</label>
+                                                <div class="controls">
+                                                    @ViewBag.bankchequeof
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Bank 2 Details-->
+                </div>
+            </div>
+        </div>
+@*End Of Rows*@	
+    }
+    <div>
+        @*@Html.ActionLink("Back to List", "CPMDB")*@
+        <button class="btn btn-success btn-large glyphicon glyphicon-arrow-left" style="margin-top:10px;margin-left:20%">@Html.ActionLink(" Back_to_List", "CPMDB","MDB", new { @Style="color:white;text-decoration:none"})</button>
+        
+    </div>
+    <div style="min-height:5%">
+        &nbsp
+    </div>
+</div>
+

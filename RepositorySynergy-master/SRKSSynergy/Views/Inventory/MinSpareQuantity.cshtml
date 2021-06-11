@@ -1,0 +1,139 @@
+﻿@model IList<SRKSSynergy.Models.MinSpareEquipQuantity>
+@using SRKSSynergy.Helpers
+@{
+	
+	ViewBag.Title = "Minimum Spare Quantity";
+}
+
+@{int slno = 1;}
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+
+<div class="bcgr" style="min-width: 1000px">
+	<div style="background: gray; padding-bottom: 15px">
+		<p class="txtft">Spare Stock Management</p>
+	</div>
+	<div style="float: right;padding-right:20px">
+		<label class="fntst1">LastUpdated on :&nbsp;&nbsp;@ViewBag.last</label>
+	</div>
+	@*Data saved successfully*@
+	@if (TempData["Yes"] != null)
+	{
+		<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["Yes"]</p>
+	}
+	
+	@if (TempData["yesavail"] != null)
+	{
+		<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["yesavail"]</p>
+	}
+	@if (TempData["NOModel"] != null)
+	{
+		<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["NOModel"]</p>
+	}
+	@using (Html.BeginForm("MinSpareQuantity", "Inventory", FormMethod.Get))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		@*Channel Partner Name & Month*@
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span12 pad">
+					<div class="span3 ">
+						<div class="control-group ">
+							<label class="control-label fntst ">Equipment Name</label>
+							<div class="controls">
+								@Html.DropDownList("ProductModelID",(IEnumerable<SelectListItem>)ViewBag.ProductModelID, "--Select--", new {@required ="required" })
+							</div>
+						</div>
+					</div>
+					@* Button for Search *@
+						<div class="span3" style="padding-top: 20px">
+							<input type="submit" style="width: 100px; height: 35px" name="wrngoanum" value="Get Details" class="btn btn-info existingcustomer printButtonClass" />
+						</div>
+					@* End of buttons *@
+				</div>
+			</div>
+		</div>
+	}
+	@using (Html.BeginForm("MinSpareQuantity", "Inventory", Model, FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+	 <input type="hidden" id="ProductModelID", name="ProductModelID" value="@ViewBag.Prod" />
+	 @*<div style="float: right;padding-right:15px">
+		<label class="fntst1">&nbsp;&nbsp;&nbsp;&nbsp;Date :&nbsp;&nbsp;@ViewBag.last</label>
+	</div>*@
+	@*Table Data Starts Here*@
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div style="padding-top: 10px; padding-left: 100px">
+					<table class="table-hover">
+						<thead>
+							<tr style="background: #BBBEBD">
+								<th style="width: 50px; text-align: center" class="fntst cal botbor">Serial No</th>
+								<th style="width: 230px; text-align: center" class="fntst cal botbor">Part Number</th>
+								<th style="width: 110px; text-align: center" class="fntst cal botbor">Description</th>
+								<th style="width: 100px; text-align: center" class="fntst cal botbor">Minimum Stock</th>
+								<th style="width: 100px; text-align: center" class="fntst cal botbor">Present Stock</th>
+                                <th style="width: 100px; text-align: center" class="fntst cal botbor">CPMin Stock</th>
+							</tr>
+						</thead>
+						@*@foreach (var item in Model)*@
+						@if (Model != null)
+						{
+							for (int i = 0; i < Model.Count; i++)
+							{
+							<tr>
+								<td style="width: 50px; text-align: center;">
+									@slno
+								</td>
+								<td style="width: 100px; text-align: center;">
+									<label class="fntst">@Html.DisplayFor(m => m[i].ProductModelSpare.ProductModelSparesName)</label>
+								</td>
+								<td style="width: 250px;">
+									<label class="fntst">@Html.DisplayFor(m => m[i].ProductModelSpare.ProductModelSparesDesc)</label>
+								</td>
+								<td style="width: 100px; text-align: center;">
+									@Html.TextBoxFor(m => m[i].Minimumstock, new { id = "minsto" + slno, @style = "width:60px", @class = "fntst", @placeholder = "Minimum Stock" })
+								</td>
+								<td style="width: 100px; text-align: center;">
+									@Html.TextBoxFor(m => m[i].PresentStock, new { id = "presto" + slno, @style = "width:60px", @class = "fntst", @placeholder = "Present Stock" })
+								</td>
+                                <td style="width: 100px; text-align: center;">
+									@Html.TextBoxFor(m => m[i].CPMinStock, new { id = "presto" + slno, @style = "width:60px", @class = "fntst", @placeholder = "CPMin Stock" })
+								</td>
+								<td style="text-align: center;">
+									@Html.TextBoxFor(m => m[i].MSID, new { @style = "display:none;" })
+									@Html.TextBoxFor(m => m[i].ProductModelID, new { @style = "display:none;" })
+									@Html.TextBoxFor(m => m[i].ProductModelSparesID, new { @style = "display:none;" })
+									@Html.TextBoxFor(m => m[i].ModifiedOn, new { id = "lastupdate", @class = "fntst",Value = @System.DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss tt"), @style = "display:none;" })
+								</td>
+							</tr>
+								slno++;
+							}
+						}
+					</table>
+					<input type="text" id="getslno" value="@slno" style="display:none;" />
+				</div>
+				<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+					<div class=" row show-grid">
+						<div class="span10">
+							<div class="span3 cent">
+								<input type="submit" value="Submit" class="btn btn-large btn-success" />
+								<div></div>
+								@*<button class="btn btn-large btn-success" type="button">Generate Report</button>*@
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>

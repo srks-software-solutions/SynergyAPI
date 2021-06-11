@@ -1,0 +1,1426 @@
+﻿@model SRKSSynergy.Models.RepModel
+@{
+	Layout = null;
+	ViewBag.Title = Model.QuotationNumber;
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title - Synergy Application</title>
+	<meta name="viewport" content="width=device-width" />
+	<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+	<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+	<script src="~/Content/bootstrap/js/jquery-1.9.1.min.js"></script>
+	<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+	@Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+	@if (ViewBag.IsOne)
+	{
+	<div class="container" id="content" style="width: 1000px">
+		<div style="height: 150px">
+			<div style="width: 700px; float: left; height: 140px"></div>
+			<div style="width: 300px; height: 140px; float: right">
+			</div>
+		</div>
+		<div style="text-align: right;height: 45px;padding-top:5px;padding-left:60px">
+			<table>
+			   <tr>
+				 <td>
+					<label class="fntstrep" style="font-size:22px"><strong>Order Confirmation Number</strong></label>
+				 </td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+				 <td>
+					<label class="fntstrep" style="font-size:22px"><strong>@Model.OANmber</strong></label>
+				 </td>
+				</tr>
+			</table>
+		</div>
+				<div style="text-align: right; height: 190px; padding-top: 5px; padding-left: 20px">
+					<table>
+						<tr>
+							<td style="width: 900px; float: right">
+								<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;Date :&nbsp;&nbsp;@Model.Approvaldate</label>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep"><strong>M/s @Model.OrganizationName</strong></label></td>
+							<td style="width: 100px"></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine1</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine2</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine3</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.City</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.Pincode</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.State</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; padding-top: 15px">
+					<table>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Customer Unique ID </label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.CompanyUniqueID</label></td>
+						</tr>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Channel Partner Quotation No </label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.CPQuotationNumber</label></td>
+						</tr>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Ref Quotation Number</label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.QuotationNumber</label></td>
+						</tr>
+						@*<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep" style="font-size:16px"><strong>Order Acknowledgement Number</strong></label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep" style="font-size:16px"><strong>@Model.OANmber</strong></label></td>
+						</tr>*@
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">GST Number</label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.Tinnumber</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 20px; padding-top: 7px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><strong>Kind Attention :</strong></label></td>
+							<td>
+								<label class="fntstrep"><strong>@Model.ContactPersonName </strong></label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 5px; padding-bottom: 5px; padding-top: 10px">
+					<table>
+						<tr>
+							<td style="padding-bottom: 5px">
+								<label class="fntstrep">Dear &nbsp;@ViewBag.dear,</label></td>
+
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 10px; padding-bottom: 5px; padding-top: 5px">
+					<table style="padding-top: 10px">
+						<tr>
+							<td>
+								<label class="fntstrep">Subject :</label></td>
+							<td>
+								<label class="fntstrep">&nbsp; @Model.Subjectinfo</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 35px; padding-bottom: 25px; padding-top: 10px">
+					<table>
+						<tr style="padding-left: 100px">
+							<td>
+								@*<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Model.KindAttention</label>*@
+								@if (ViewBag.Apstat == 1)
+								{
+									<br />
+									<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Please find below our Order Confirmation for Buhler Sortex Machines</label>
+								}
+							</td>
+
+						</tr>
+					</table>
+				</div>
+				@*<hr style="border: 1px  dashed black; width: 1000px" />*@
+				<div style="padding-left: 60px; width: 1000px;">
+					<table style="width: 900px">
+						<tr style="height: 40px">
+							<th align="center" style="width: 60px" class="fntst2"><strong>Sl. No</strong></th>
+							<th align="center" style="width: 300px" class="fntst2"><strong>Description</strong></th>
+							<th align="center" style="width: 130px" class="fntst2"><strong>Quantity</strong></th>
+							<th align="center" style="width: 140px;text-align:right" class="fntst2"><strong>Unit Price (INR)</strong></th>
+							<th align="center" style="width: 140px;text-align:right" class="fntst2"><strong>Total Price (INR)</strong></th>
+						</tr>
+					</table>
+				</div>
+				<hr style="border: 1px solid black; width: 1000px" />
+				<div style="padding-left: 60px; width: 1000px;">
+					@{int slno = 0;}
+					@foreach (var item in Model.OAEquipTableData)
+					{
+						slno++;
+						<table style="width: 900px">
+							<tr>
+								<td align="center" style="width: 60px" class="fntstrep"><strong>@slno</strong></td>
+								<td align="center" style="width: 300px">
+									<label class="fntstrep" style="width: 300px"><strong>@item.ProductModel.ProductModelName</strong></label></td>
+								<td align="center" style="width: 130px;">
+									<label class="fntstrep"><strong>@item.Quantity</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@item.UnitPrice</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@item.TotalPrice</strong></label></td>
+							</tr>
+						</table>
+						<div style="padding-bottom: 35px; padding-left: 100px">
+							<table>
+								<tr>
+									<td style="width: 900px; padding-top: 7px">
+										<label class="fntstrep">@item.ModelDesc</label></td>
+								</tr>
+								<tr>
+									<td style="width: 900px; padding-top: 7px">
+										<label class="fntstrep">Exclusion : @item.Exclusion</label></td>
+								</tr>
+							</table>
+						</div>
+					}
+					<table style="width: 900px">
+							<tr>
+								<td align="center" style="width: 60px" class="fntstrep"></td>
+								<td align="center" style="width: 300px">
+									</td>
+								<td align="center" style="width: 130px;">
+									</td>
+								<td align="Right" style="width: 140px">
+									<label style="font-family:Calibri;font-size:18px;text-align:right"><strong>Total Price in INR :</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@Model.overallprice</strong></label></td>
+							</tr>
+						</table>
+				</div>
+				<hr style="border: 1px solid black; width: 1000px" />
+				<div style="padding-left: 60px; height: 240px; padding-top: 15px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><u><strong>Terms & Conditions of Sale :</strong></u></label>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Payment Terms</label></td>
+							<td align="left">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.PaymentTerms</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Delivery</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Delivery</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Date of Dispatch</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.DateofDispatch</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Mode of Transport</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Transport</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Freight</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Freight</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">GST</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.CST</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Transit Insurance</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.TransitInsu</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Commodity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Commodity</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Validity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Validity</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 150px; padding-top: 10px">
+					<label class="fntstrep">@Model.annexure</label>
+				</div>
+				<div style="padding-left: 60px; padding-top: 20px">
+						<table>
+							<tr>
+								<td>
+									<label class="fntstrep"><strong>Thanking You</strong></label>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label class="fntstrep">With Regards,</label>
+								</td>
+							</tr>
+							<tr>
+								<td style="padding-top: 50px">
+									<label class="fntstrep">Rakesh Kaul</label></td>
+							</tr>
+							<tr>
+								<td>
+									<label style="font-size: 16px; font-family: Calibri;">Channel Partner Business</label></td></tr>
+								<tr>
+									<td>
+										<label style="font-size: 16px; font-family: Calibri;"><strong>Buhler India Pvt Ltd</strong></label>
+									</td>
+								</tr>
+						   <tr>
+								<td>
+									<label style="font-size: 12px; font-family: Calibri;"><strong>This is a Computer Generated Quotation Signature not required.</strong> </label>
+								</td>
+							</tr>
+						</table>
+				  </div>
+			</div>
+	}
+	else if (ViewBag.IsTwo)
+	{
+	<div class="container" id="content3" style="width: 1000px">
+		<div style="height: 150px">
+			<div style="width: 700px; float: left; height: 150px"></div>
+			<div style="width: 300px; height: 150px; float: right">
+			</div>
+		</div>
+
+		<div style="text-align: right;height: 45px;padding-top:5px;padding-left:60px">
+			<table>
+			   <tr>
+				 <td>
+					<label class="fntstrep" style="font-size:22px"><strong>Order Confirmation Number</strong></label>
+				 </td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+				 <td>
+					<label class="fntstrep" style="font-size:22px"><strong>@Model.OANmber</strong></label>
+				 </td>
+				</tr>
+			</table>
+		</div>
+
+				<div style="text-align: right; height: 190px; padding-top: 5px; padding-left: 20px">
+					<table>
+						<tr>
+							<td style="width: 900px; float: right">
+								<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;Date :&nbsp;&nbsp;@Model.Approvaldate</label>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep"><strong>M/s @Model.OrganizationName</strong></label></td>
+							<td style="width: 100px"></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine1</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine2</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine3</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.City</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.Pincode</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.State</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; padding-top: 20px">
+					<table>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Customer Unique ID </label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.CompanyUniqueID</label></td>
+						</tr>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Channel Partner Quotation No </label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.CPQuotationNumber</label></td>
+						</tr>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Ref Quotation Number</label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.QuotationNumber</label></td>
+						</tr>
+						@*<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep" style="font-size:16px"><strong>Order Acknowledgement Number</strong></label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep" style="font-size:16px"><strong>@Model.OANmber</strong></label></td>
+						</tr>*@
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 20px; padding-top: 10px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><strong>Kind Attention :</strong></label></td>
+							<td>
+								<label class="fntstrep"><strong>@Model.ContactPersonName </strong></label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 5px; padding-bottom: 7px; padding-top: 10px">
+					<table>
+						<tr>
+							<td style="padding-bottom: 5px">
+								<label class="fntstrep">Dear &nbsp;@ViewBag.dear,</label></td>
+
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 10px; padding-bottom: 5px; padding-top: 10px">
+					<table style="padding-top: 10px">
+						<tr>
+							<td>
+								<label class="fntstrep">Subject :</label></td>
+							<td>
+								<label class="fntstrep">&nbsp; @Model.Subjectinfo</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 35px; padding-bottom: 25px; padding-top: 10px">
+					<table>
+						<tr style="padding-left: 100px">
+							<td>
+								@*<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Model.KindAttention</label>*@
+								@if (ViewBag.Apstat == 1)
+								{
+									<br />
+									<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Please find below our Order Confirmation for Buhler Sortex Machines</label>
+								}
+							</td>
+						</tr>
+					</table>
+				</div>
+				@*<hr style="border: 1px  dashed black; width: 1000px" />*@
+				<div style="padding-left: 60px; width: 1000px;">
+					<table style="width: 900px">
+						<tr style="height: 40px">
+							<th align="center" style="width: 60px" class="fntst2"><strong>Sl. No</strong></th>
+							<th align="center" style="width: 300px" class="fntst2"><strong>Description</strong></th>
+							<th align="center" style="width: 130px" class="fntst2"><strong>Quantity</strong></th>
+							<th align="center" style="width: 140px;text-align:right" class="fntst2"><strong>Unit Price (INR)</strong></th>
+							<th align="center" style="width: 140px;text-align:right" class="fntst2"><strong>Total Price (INR)</strong></th>
+						</tr>
+					</table>
+				</div>
+				<hr style="border: 1px solid black; width: 1000px" />
+				<div style="padding-left: 60px; width: 1000px;">
+					@{int slno = 0;}
+					@foreach (var item in Model.OAEquipTableData)
+					{
+						slno++;
+						<table style="width: 900px">
+							<tr>
+								<td align="center" style="width: 60px" class="fntstrep"><strong>@slno</strong></td>
+								<td align="center" style="width: 300px">
+									<label class="fntstrep" style="width: 300px"><strong>@item.ProductModel.ProductModelName</strong></label></td>
+								<td align="center" style="width: 130px;">
+									<label class="fntstrep"><strong>@item.Quantity</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@item.UnitPrice</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@item.TotalPrice</strong></label></td>
+							</tr>
+						</table>
+						<div style="padding-bottom: 35px; padding-left: 100px">
+							<table>
+								<tr>
+									<td style="width: 900px; padding-top: 7px">
+										<label class="fntstrep">@item.ModelDesc</label></td>
+								</tr>
+								<tr>
+									<td style="width: 900px; padding-top: 7px">
+										<label class="fntstrep">Exclusion : @item.Exclusion</label></td>
+								</tr>
+							</table>
+						</div>
+					}
+					<table style="width: 900px">
+							<tr>
+								<td align="center" style="width: 60px" class="fntstrep"></td>
+								<td align="center" style="width: 300px">
+									</td>
+								<td align="center" style="width: 130px;">
+									</td>
+								<td align="Right" style="width: 140px">
+									<label style="font-family:Calibri;font-size:18px;text-align:right"><strong>Total Price in INR :</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@Model.overallprice</strong></label></td>
+							</tr>
+						</table>
+				</div>
+				<hr style="border: 1px solid black; width: 1000px" />
+				<div style="padding-left: 60px; height: 240px; padding-top: 15px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><u><strong>Terms & Conditions of Sale :</strong></u></label>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Payment Terms</label></td>
+							<td align="left">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.PaymentTerms</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Delivery</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Delivery</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Date of Dispatch</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.DateofDispatch</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Mode of Transport</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Transport</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Freight</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Freight</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">CST</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.CST</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Transit Insurance</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.TransitInsu</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Commodity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Commodity</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Validity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Validity</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 150px; padding-top: 10px">
+					<label class="fntstrep">@Model.annexure</label>
+				</div>
+				<div style="padding-left: 60px; padding-top: 20px">
+						<table>
+							<tr>
+								<td>
+									<label class="fntstrep"><strong>Thanking You</strong></label>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label class="fntstrep">With Regards,</label>
+								</td>
+							</tr>
+							<tr>
+								<td style="padding-top: 50px">
+									<label class="fntstrep">Rakesh Kaul</label></td>
+							</tr>
+							<tr>
+								<td>
+									<label style="font-size: 16px; font-family: Calibri;">Channel Partner Business</label></td></tr>
+								<tr>
+									<td>
+										<label style="font-size: 16px; font-family: Calibri;"><strong>Buhler India Pvt Ltd</strong></label>
+									</td>
+								</tr>
+						   <tr>
+								<td>
+									<label style="font-size: 12px; font-family: Calibri;"><strong>This is a Computer Generated Quotation Signature not required.</strong> </label>
+								</td>
+							</tr>
+						</table>
+				  </div>
+			</div>
+	}
+	else if (ViewBag.IsThree)
+	{
+	<div class="container" id="content6" style="width: 1000px">
+		<div style="height: 150px">
+				<div style="width: 700px; float: left; height: 150px"></div>
+				<div style="width: 300px; height: 150px; float: right">
+				</div>
+		</div>
+
+		<div style="text-align: right;height: 45px;padding-top:5px;padding-left:60px">
+			<table>
+			   <tr>
+				 <td>
+					<label class="fntstrep" style="font-size:22px"><strong>Order Confirmation Number</strong></label>
+				 </td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+				 <td>
+					<label class="fntstrep" style="font-size:22px"><strong>@Model.OANmber</strong></label>
+				 </td>
+				</tr>
+			</table>
+		</div>
+
+				<div style="text-align: right; height: 160px; padding-top: 5px; padding-left: 20px">
+					<table>
+						<tr>
+							<td style="width: 900px; float: right">
+								<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;Date :&nbsp;&nbsp;@Model.Approvaldate</label>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep"><strong>M/s @Model.OrganizationName</strong></label></td>
+							<td style="width: 100px"></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine1</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine2</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine3</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.City</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.Pincode</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.State</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; padding-top: 20px">
+					<table>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Customer Unique ID </label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.CompanyUniqueID</label></td>
+						</tr>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Channel Partner Quotation No </label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.CPQuotationNumber</label></td>
+						</tr>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Ref Quotation Number</label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.QuotationNumber</label></td>
+						</tr>
+						@*<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep" style="font-size:16px"><strong>Order Acknowledgement Number</strong></label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep" style="font-size:16px"><strong>@Model.OANmber</strong></label></td>
+						</tr>*@
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 20px; padding-top: 10px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><strong>Kind Attention :</strong></label></td>
+							<td>
+								<label class="fntstrep"><strong>@Model.ContactPersonName </strong></label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 5px; padding-bottom: 7px; padding-top: 10px">
+					<table>
+						<tr>
+							<td style="padding-bottom: 5px">
+								<label class="fntstrep">Dear &nbsp;@ViewBag.dear,</label></td>
+
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 10px; padding-bottom: 5px; padding-top: 10px">
+					<table style="padding-top: 10px">
+						<tr>
+							<td>
+								<label class="fntstrep">Subject :</label></td>
+							<td>
+								<label class="fntstrep">&nbsp; @Model.Subjectinfo</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 35px; padding-bottom: 25px; padding-top: 10px">
+					<table>
+						<tr style="padding-left: 100px">
+							<td>
+								@*<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Model.KindAttention</label>*@
+								@if (ViewBag.Apstat == 1)
+								{
+									<br />
+									<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Please find below our Order Confirmation for Buhler Sortex Machines</label>
+								}
+							</td>
+						</tr>
+					</table>
+				</div>
+				@*<hr style="border: 1px  dashed black; width: 1000px" />*@
+				<div style="padding-left: 60px; width: 1000px;">
+					<table style="width: 900px">
+						<tr style="height: 40px">
+							<th align="center" style="width: 60px" class="fntst2"><strong>Sl. No</strong></th>
+							<th align="center" style="width: 300px" class="fntst2"><strong>Description</strong></th>
+							<th align="center" style="width: 130px" class="fntst2"><strong>Quantity</strong></th>
+							<th align="center" style="width: 140px;text-align:right" class="fntst2"><strong>Unit Price (INR)</strong></th>
+							<th align="center" style="width: 140px;text-align:right" class="fntst2"><strong>Total Price (INR)</strong></th>
+						</tr>
+					</table>
+				</div>
+				<hr style="border: 1px solid black; width: 1000px" />
+				<div style="padding-left: 60px; width: 1000px;">
+					@{int slno = 0;}
+					@foreach (var item in Model.OAEquipTableData)
+					{
+						slno++;
+						<table style="width: 900px">
+							<tr>
+								<td align="center" style="width: 60px" class="fntstrep"><strong>@slno</strong></td>
+								<td align="center" style="width: 300px">
+									<label class="fntstrep" style="width: 300px"><strong>@item.ProductModel.ProductModelName</strong></label></td>
+								<td align="center" style="width: 130px;">
+									<label class="fntstrep"><strong>@item.Quantity</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@item.UnitPrice</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@item.TotalPrice</strong></label></td>
+							</tr>
+						</table>
+						<div style="padding-bottom: 35px; padding-left: 100px">
+							<table>
+								<tr>
+									<td style="width: 900px; padding-top: 7px">
+										<label class="fntstrep">@item.ModelDesc
+										</label></td>
+								</tr>
+								<tr>
+									<td style="width: 900px; padding-top: 7px">
+										<label class="fntstrep">Exclusion : @item.Exclusion</label></td>
+								</tr>
+							</table>
+						</div>
+					}
+					<table style="width: 900px">
+							<tr>
+								<td align="center" style="width: 60px" class="fntstrep"></td>
+								<td align="center" style="width: 300px">
+									</td>
+								<td align="center" style="width: 130px;">
+									</td>
+								<td align="Right" style="width: 140px">
+									<label style="font-family:Calibri;font-size:18px;text-align:right"><strong>Total Price in INR :</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@Model.overallprice</strong></label></td>
+							</tr>
+						</table>
+				</div>
+				<hr style="border: 1px solid black; width: 1000px" />
+				@*<div style="padding-left: 60px; height: 240px; padding-top: 15px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><u><strong>Terms & Conditions of Sale :</strong></u></label>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Payment Terms</label></td>
+							<td align="left">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.PaymentTerms</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Delivery</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Delivery</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Date of Dispatch</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.DateofDispatch</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Mode of Transport</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Transport</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Freight</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Freight</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">CST</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.CST</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Transit Insurance</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.TransitInsu</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Commodity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Commodity</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Validity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Validity</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 150px; padding-top: 10px">
+					<label class="fntstrep">@Model.annexure</label>
+				</div>
+				<div style="padding-left: 60px; padding-top: 20px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><strong>Thanking You</strong></label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="fntstrep">With Regards,</label>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-top: 50px">
+								<label class="fntstrep">@Model.LoginName</label></td>
+						</tr>
+						<tr>
+							<td>
+								<label style="font-size: 16px; font-family: Calibri;">@Model.Designation</label></td>
+						</tr>
+					</table>
+				</div>*@
+	</div>
+	<div style="padding-top:490px"></div>
+	<div class="container" id="content61" style="width: 1000px">
+		<div style="height: 150px">
+			<div style="width: 700px; float: left; height: 150px"></div>
+			<div style="width: 300px; height: 150px; float: right">
+			</div>
+		</div>
+		<div style="padding-left: 60px; height: 240px; padding-top: 15px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><u><strong>Terms & Conditions of Sale :</strong></u></label>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Payment Terms</label></td>
+							<td align="left">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.PaymentTerms</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Delivery</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Delivery</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Date of Dispatch</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.DateofDispatch</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Mode of Transport</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Transport</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Freight</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Freight</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">CST</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.CST</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Transit Insurance</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.TransitInsu</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Commodity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Commodity</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Validity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Validity</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 150px; padding-top: 10px">
+					<label class="fntstrep">@Model.annexure</label>
+				</div>
+				<div style="padding-left: 60px; padding-top: 20px">
+						<table>
+							<tr>
+								<td>
+									<label class="fntstrep"><strong>Thanking You</strong></label>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label class="fntstrep">With Regards,</label>
+								</td>
+							</tr>
+							<tr>
+								<td style="padding-top: 50px">
+									<label class="fntstrep">Rakesh Kaul</label></td>
+							</tr>
+							<tr>
+								<td>
+									<label style="font-size: 16px; font-family: Calibri;">Channel Partner Business</label></td></tr>
+								<tr>
+									<td>
+										<label style="font-size: 16px; font-family: Calibri;"><strong>Buhler India Pvt Ltd</strong></label>
+									</td>
+								</tr>
+						   <tr>
+								<td>
+									<label style="font-size: 12px; font-family: Calibri;"><strong>This is a Computer Generated Quotation Signature not required.</strong> </label>
+								</td>
+							</tr>
+						</table>
+				  </div>
+	</div>
+	}
+	else if (ViewBag.IsFour)
+	{
+	<div class="container" id="content9" style="width: 1000px">
+				<div style="height: 150px">
+			<div style="width: 700px; float: left; height: 150px"></div>
+			<div style="width: 300px; height: 150px; float: right">
+			</div>
+		</div>
+
+		<div style="text-align: right;height: 45px;padding-top:5px;padding-left:60px">
+			<table>
+			   <tr>
+				 <td>
+					<label class="fntstrep" style="font-size:22px"><strong>Order Confirmation Number</strong></label>
+				 </td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+				 <td>
+					<label class="fntstrep" style="font-size:22px"><strong>@Model.OANmber</strong></label>
+				 </td>
+				</tr>
+			</table>
+		</div>
+
+				<div style="text-align: right; height: 160px; padding-top: 5px; padding-left: 20px">
+					<table>
+						<tr>
+							<td style="width: 900px; float: right">
+								<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;Date :&nbsp;&nbsp;@Model.Approvaldate</label>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep"><strong>M/s @Model.OrganizationName</strong></label></td>
+							<td style="width: 100px"></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine1</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine2</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.AddressLine3</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.City</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.Pincode</label></td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 40px">
+								<label class="fntstrep">@Model.State</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; padding-top: 20px">
+					<table>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Customer Unique ID </label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.CompanyUniqueID</label></td>
+						</tr>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Channel Partner Quotation No </label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.CPQuotationNumber</label></td>
+						</tr>
+						<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep">Ref Quotation Number</label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep">@Model.QuotationNumber</label></td>
+						</tr>
+						@*<tr>
+							<td style="padding-right:20px">
+								<label class="fntstrep" style="font-size:16px"><strong>Order Acknowledgement Number</strong></label></td>
+							<td style="width:40px">:</td>
+							<td>
+								<label class="fntstrep" style="font-size:16px"><strong>@Model.OANmber</strong></label></td>
+						</tr>*@
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 20px; padding-top: 10px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><strong>Kind Attention :</strong></label></td>
+							<td>
+								<label class="fntstrep"><strong>@Model.ContactPersonName </strong></label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 5px; padding-bottom: 7px; padding-top: 10px">
+					<table>
+						<tr>
+							<td style="padding-bottom: 5px">
+								<label class="fntstrep">Dear &nbsp;@ViewBag.dear,</label></td>
+
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 10px; padding-bottom: 5px; padding-top: 10px">
+					<table style="padding-top: 10px">
+						<tr>
+							<td>
+								<label class="fntstrep">Subject :</label></td>
+							<td>
+								<label class="fntstrep">&nbsp; @Model.Subjectinfo</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 60px; height: 35px; padding-bottom: 25px; padding-top: 10px">
+					<table>
+						<tr style="padding-left: 100px">
+							<td>
+								@*<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Model.KindAttention</label>*@
+								@if (ViewBag.Apstat == 1)
+								{
+									<br />
+									<label class="fntstrep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Please find below our Order Confirmation for Buhler Sortex Machines</label>
+								}
+							</td>
+						</tr>
+					</table>
+				</div>
+				@*<hr style="border: 1px  dashed black; width: 1000px" />*@
+				<div style="padding-left: 60px; width: 1000px;">
+					<table style="width: 900px">
+						<tr style="height: 40px">
+							<th align="center" style="width: 60px" class="fntst2"><strong>Sl. No</strong></th>
+							<th align="center" style="width: 300px" class="fntst2"><strong>Description</strong></th>
+							<th align="center" style="width: 130px" class="fntst2"><strong>Quantity</strong></th>
+							<th align="center" style="width: 140px;text-align:right" class="fntst2"><strong>Unit Price (INR)</strong></th>
+							<th align="center" style="width: 140px;text-align:right" class="fntst2"><strong>Total Price (INR)</strong></th>
+						</tr>
+					</table>
+				</div>
+				<hr style="border: 1px solid black; width: 1000px" />
+				<div style="padding-left: 60px; width: 1000px;">
+					@{int slno = 0;}
+					@foreach (var item in Model.OAEquipTableData)
+					{
+						slno++;
+						<table style="width: 900px">
+							<tr>
+								<td align="center" style="width: 60px" class="fntstrep"><strong>@slno</strong></td>
+								<td align="center" style="width: 300px">
+									<label class="fntstrep" style="width: 300px"><strong>@item.ProductModel.ProductModelName</strong></label></td>
+								<td align="center" style="width: 130px;">
+									<label class="fntstrep"><strong>@item.Quantity</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@item.UnitPrice</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@item.TotalPrice</strong></label></td>
+							</tr>
+						</table>
+						<div style="padding-bottom: 35px; padding-left: 100px">
+							<table>
+								<tr>
+									<td style="width: 900px; padding-top: 7px">
+										<label class="fntstrep">@item.ModelDesc
+										</label></td>
+								</tr>
+								<tr>
+									<td style="width: 900px; padding-top: 7px">
+										<label class="fntstrep">Exclusion : @item.Exclusion</label></td>
+								</tr>
+							</table>
+						</div>
+					}
+					<table style="width: 900px">
+							<tr>
+								<td align="center" style="width: 60px" class="fntstrep"></td>
+								<td align="center" style="width: 300px">
+									</td>
+								<td align="center" style="width: 130px;">
+									</td>
+								<td align="Right" style="width: 140px">
+									<label style="font-family:Calibri;font-size:18px;text-align:right"><strong>Total Price in INR :</strong></label></td>
+								<td align="Right" style="width: 140px">
+									<label class="fntstrep" style="text-align:right"><strong>@Model.overallprice</strong></label></td>
+							</tr>
+						</table>
+				</div>
+				<hr style="border: 1px solid black; width: 1000px" />
+	</div>
+	<div style="padding-top:350px"></div>
+	<div class="container" id="content91" style="width: 1000px">
+		<div style="height: 150px">
+			<div style="width: 700px; float: left; height: 150px"></div>
+			<div style="width: 300px; height: 150px; float: right">
+			</div>
+		</div>
+		 <div style="padding-left: 60px; height: 240px; padding-top: 15px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><u><strong>Terms & Conditions of Sale :</strong></u></label>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Payment Terms</label></td>
+							<td align="left">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.PaymentTerms</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Delivery</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Delivery</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Date of Dispatch</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.DateofDispatch</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Mode of Transport</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Transport</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Freight</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Freight</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">CST</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.CST</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Transit Insurance</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.TransitInsu</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Commodity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Commodity</label></td>
+						</tr>
+						<tr>
+							<td align="left" style="width: 250px">
+								<label class="fntstrep">Validity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntstrep">:</label></td>
+							<td align="left" style="width: 900px">
+								<label class="fntstrep">@Model.Validity</label></td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 150px; padding-top: 10px">
+					<label class="fntstrep">@Model.annexure</label>
+				</div>
+				<div style="padding-left: 60px; padding-top: 20px">
+						<table>
+							<tr>
+								<td>
+									<label class="fntstrep"><strong>Thanking You</strong></label>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label class="fntstrep">With Regards,</label>
+								</td>
+							</tr>
+							<tr>
+								<td style="padding-top: 50px">
+									<label class="fntstrep">Rakesh Kaul</label></td>
+							</tr>
+							<tr>
+								<td>
+									<label style="font-size: 16px; font-family: Calibri;">Channel Partner Business</label></td></tr>
+								<tr>
+									<td>
+										<label style="font-size: 16px; font-family: Calibri;"><strong>Buhler India Pvt Ltd</strong></label>
+									</td>
+								</tr>
+						   <tr>
+								<td>
+									<label style="font-size: 12px; font-family: Calibri;"><strong>This is a Computer Generated Quotation Signature not required.</strong> </label>
+								</td>
+							</tr>
+						</table>
+				  </div>
+	 </div>
+	}
+</body>
+</html>
+

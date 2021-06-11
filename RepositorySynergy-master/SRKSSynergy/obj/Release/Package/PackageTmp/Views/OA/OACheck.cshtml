@@ -1,0 +1,833 @@
+﻿@model SRKSSynergy.Models.OA
+
+@{
+	ViewBag.Title = "Check OA";
+}
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+
+
+<style>
+	.validation-summary-valid {
+		display: none;
+	}
+</style>
+
+@{
+	List<SelectListItem> listItems1 = new List<SelectListItem>();
+	List<SelectListItem> listItems2 = new List<SelectListItem>();
+	List<SelectListItem> listItems3 = new List<SelectListItem>();
+	List<SelectListItem> listItems4 = new List<SelectListItem>();
+	listItems1.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems2
+	listItems2.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems2.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems3
+	listItems3.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems3.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+	//ListItems4
+	listItems4.Add(new SelectListItem
+	{
+		Text = "1",
+		Value = "1"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "2",
+		Value = "2",
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "3",
+		Value = "3"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "4",
+		Value = "4"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "5",
+		Value = "5"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "6",
+		Value = "6"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "7",
+		Value = "7"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "8",
+		Value = "8"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "9",
+		Value = "9"
+	});
+	listItems4.Add(new SelectListItem
+	{
+		Text = "10",
+		Value = "10"
+	});
+
+}
+@using (Html.BeginForm("OACheck", "OA", new { mdbid = @ViewBag.MDBID }, FormMethod.Post))
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true)
+	<div>
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Order Acknowledgement</p>
+		</div>
+		@*@Html.TextBoxFor(model => model.OAEquipGeneralData.OADate, new { id = "quotdate", @class = "fntst", @placeholder = "Quotation Number", Value = @System.DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss tt"), @readonly = "readonly", @style = "display:none;" })*@
+        @Html.HiddenFor(model => model.OAEquipGeneralData.OADate)
+		@Html.HiddenFor(model => model.OAEquipGeneralData.OAID)
+		@Html.HiddenFor(model => model.OAEquipGeneralData.MDBID)
+		@Html.HiddenFor(model => model.OAEquipGeneralData.QGID)
+		@Html.HiddenFor(model => model.OAEquipGeneralData.CPID)
+		@Html.HiddenFor(model => model.OAEquipPayment.OAPID)
+		@Html.HiddenFor(model => model.OAEquipPayment.OAID)
+
+		<div class="container" style="width: 1000px; padding-top: 3px">
+			<div style="background: #e5e5e5">
+				<div style="float: right; padding-right: 15px">
+					<label class="fntst1">&nbsp;&nbsp;&nbsp;&nbsp;Date :&nbsp;&nbsp;@ViewBag.ShowQuoteDate</label>
+				</div>
+				@*<div style="border: 1px solid black;">*@
+				<div style="text-align: right; height: 160px; padding-top: 30px; padding-left: 50px">
+					<table>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">
+									M/s @ViewBag.OrganizationName
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.AddressLine1</label>
+								@*@ViewBag.AddressLine1*@
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.AddressLine2</label>
+								@*@Html.DisplayFor(model => model.QGEquipGeneralData.MDBGeneralData.AddressLine2, new { value = @ViewBag.AddressLine2 })*@
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.AddressLine3</label>
+								@*@Html.DisplayFor(model => model.QGEquipGeneralData.MDBGeneralData.AddressLine3, new { @value = @ViewBag.AddressLine3 })*@
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.City</label>
+								@*@Html.DisplayFor(model => model.QGEquipGeneralData.MDBGeneralData.City, new { @value = @ViewBag.City })*@
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.Pincode</label>
+								@*@Html.DisplayFor(model => model.QGEquipGeneralData.MDBGeneralData.Pincode, new { @value = @ViewBag.Pincode })*@
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left; padding-left: 70px">
+								<label class="fntst1">@ViewBag.State</label>
+								@*@Html.DisplayFor(model => model.QGEquipGeneralData.MDBGeneralData.State, new { @value = @ViewBag.State })*@
+							</td>
+						</tr>
+					</table>
+				</div>
+				@* Customer Unique Id , Quotation Number and Channel Partner Unique ID  *@
+				<div class="row" style="padding-top: 40px; padding-left: 90px">
+					<div class=" row show-grid">
+						<div class="span10 pad">
+							<div class="span3">
+								<div class="control-group">
+									<label class="control-label fntst">Customer Unique ID</label>
+									<div class="controls">
+										@*<input type="text" class="fntst" id="address" placeholder="Customer Unique ID" readonly="readonly">*@
+										@Html.TextBoxFor(model => model.OAEquipGeneralData.CompanyUniqueID, new { id = "custuid", Value = @ViewBag.CompanyUniqueID, @class = "fntst", @placeholder = "Customer Unique ID", @readonly = "readonly" })
+										@Html.ValidationMessageFor(model => model.OAEquipGeneralData.CompanyUniqueID)
+									</div>
+								</div>
+							</div>
+							<div class="span3">
+								<div class="control-group">
+									<label class="control-label fntst">Quotation Number</label>
+									<div class="controls">
+										@*<input type="text" class="fntst" id="address" placeholder="Quotation Number" readonly="readonly">*@
+										@Html.TextBoxFor(model => model.OAEquipGeneralData.QuotationNumber, new { id = "quotno", Value = @ViewBag.QuotationNumber, @class = "fntst", @placeholder = "Quotation Number", @readonly = "readonly" })
+										@Html.ValidationMessageFor(model => model.OAEquipGeneralData.QuotationNumber)
+									</div>
+								</div>
+							</div>
+							</div>
+							<div class="span12 pad">
+							<div class="span3">
+								<div class="control-group">
+									<label class="control-label fntst">Order Acknowledgement Number</label>
+									<div class="controls">
+										@*<input type="text" class="fntst" id="address" placeholder="Quotation Number" readonly="readonly">*@
+										@Html.TextBoxFor(model => model.OAEquipGeneralData.OANumber, new { id = "quotno", Value = @ViewBag.OANumber, @class = "fntst", @placeholder = "Quotation Number", @readonly = "readonly" })
+										@Html.ValidationMessageFor(model => model.OAEquipGeneralData.OANumber)
+									</div>
+								</div>
+							</div>
+							<div class="span3">
+								<div class="control-group">
+									<label class="control-label fntst">Channel Partner Quotation Number</label>
+									<div class="controls">
+										@*<input type="text" class="fntst" id="address" placeholder="Channel Partner Quotation number">*@
+										@Html.TextBoxFor(model => model.OAEquipGeneralData.CPQuotationNumber, new { id = "cpqn", @class = "fntst", @readonly = "readonly", @placeholder = "Channel Partner Quotation number" })
+										@Html.ValidationMessageFor(model => model.OAEquipGeneralData.CPQuotationNumber)
+									</div>
+								</div>
+							</div>
+							<div class="span3">
+								<div class="control-group">
+									<label class="control-label fntst">GST Number</label>
+									<div class="controls">
+										@Html.TextBoxFor(model => model.OAEquipGeneralData.TinNumber, new { id = "tin", Value = @ViewBag.TinNumber, @class = "fntst", @placeholder = "Tin number",@readonly="readonly" })
+										@*@Html.ValidationMessageFor(model => model.OAEquipGeneralData.CPQuotationNumber)*@
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				@* Kind Attention *@
+				<div style="padding-left: 120px; height: 40px; padding-top: 10px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntst1"><strong>Kind Attention</strong></label></td>
+							<td>
+								<label class="fntst1">
+									<strong>&nbsp;@ViewBag.ContactPersonName,
+									</strong>
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				@* Salutation and Subject *@
+				<div style="padding-left: 120px; height: 40px; padding-bottom: 70px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntst1">Dear &nbsp;@ViewBag.dear,</label>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td>
+								<label class="fntst1">Subject :</label></td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;@*<input type="text" class="input-xxxlarge fntst" id="dearsir" value="">*@
+								@Html.TextBoxFor(model => model.OAEquipGeneralData.Subjectinfo, new { id = "sub", @readonly = "readonly", @class = "input-xxxlarge fntst", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipGeneralData.Subjectinfo)
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td>
+								@*<input type="text" class="input-xxxlarge fntst" id="dearsir" value="">*@
+								@Html.TextBoxFor(model => model.OAEquipGeneralData.KindAttention, new { id = "salu", @readonly = "readonly", @class = "input-xxxlarge fntst", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipGeneralData.KindAttention)
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div style="background: gray; height: 2px; width: 1000px"></div>
+				<br />
+				<div class="row" style="padding-top: 5px; padding-left: 30px">
+					<div class=" row show-grid" style="padding-left: 32px">
+						<table class="table" style="width: 995px; padding-left: 300px">
+							<tr style="background: #BBBEBD; padding-left: 300px">
+								<th class="fntst1" style="width: 75px; text-align: center">Sl No.</th>
+								<th class="fntst1" style="width: 225px; text-align: center">Equipment Model Number</th>
+								<th class="fntst1" style="width: 200px; text-align: center">Quantity</th>
+								<th class="fntst1" style="width: 200px; text-align: center">Unit Price (INR)</th>
+								<th class="fntst1" style="width: 200px; text-align: center">Total Price (INR)</th>
+								<th class="fntst1" style="width: 70px; text-align: center"></th>
+							</tr>
+							@* 1st Row *@
+							@Html.HiddenFor(model => model.OAEquipTableData1.OATBID)
+							@Html.HiddenFor(model => model.OAEquipTableData1.ProductModelID)
+							@Html.HiddenFor(model => model.OAEquipTableData1.OAID)
+							@Html.HiddenFor(model => model.OAEquipTableData1.Quantity)
+							<tr>
+								<td style="width: 75px; text-align: center">
+									<input type="text" name="serialno" class="input-xxsmall fntst" id="slno" value="1" readonly="readonly" />
+								</td>
+								<td style="width: 225px; text-align: center">
+									@Html.DropDownListFor(m => m.OAEquipTableData1.ProductModelID, (SelectList)ViewData["ProductModelID1"], "--Select Model--", new { id = "ProductModelID1", @readonly = "readonly", @required = "required", @disabled="disabled" })
+								</td>
+								<td style="width: 200px; text-align: center">
+									@Html.DropDownListFor(model => model.OAEquipTableData1.Quantity, listItems1, "-- Select Status --", new { @id = "qty", @name = "qty", @readonly = "readonly", @required = "required",@disabled="disabled"})
+									@Html.TextBoxFor(model => model.OAEquipTableData1.Quantity, new { id = "qty", Value = ViewBag.ModelQty1, @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;"  })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 8px">
+									@Html.TextBoxFor(model => model.OAEquipTableData1.UnitPrice, new { id = "unitpr", @class = "input-medium fntst", @placeholder = "Unit Price", @readonly = "readonly", @required = "required", @style = "text-align:right" })
+								</td>
+								<td style="width: 200px; text-align: center; padding-left: 8px">
+									@Html.TextBoxFor(model => model.OAEquipTableData1.TotalPrice, new { id = "totpr", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @required = "required", @style = "text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center;">
+									@*<button type="button" id="addButton" class="btn btn-info" style="width: 50px">Add</button>*@
+								</td>
+							</tr>
+						</table>
+						<div style="padding-left: 100px; height: 40px; padding-bottom: 50px; display: block">
+							<table>
+								<tr>
+									<td style="width: 100px;">Description :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.OAEquipTableData1.ModelDesc, new { id = "moddes", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 100px;">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+									<td style="width: 750px;">
+										@Html.TextBoxFor(model => model.OAEquipTableData1.Exclusion, new { id = "exclusions", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+									</td>
+								</tr>
+							</table>
+						</div>
+						@* 2nd Row Table *@
+						<div>
+							<table class="table" style="width: 900px; margin: 0 auto; display: none" id="modelrow2">
+								@Html.HiddenFor(model => model.OAEquipTableData2.OATBID)
+								@Html.HiddenFor(model => model.OAEquipTableData2.ProductModelID)
+								@Html.HiddenFor(model => model.OAEquipTableData2.OAID)
+								@Html.HiddenFor(model => model.OAEquipTableData2.Quantity)
+								<tr style="padding-left: 20px">
+									<td style="width: 75px; text-align: center; padding-left: 11px">
+										<input type="text" name="serialno" class="input-xxsmall fntst" id="slno1" value="2" readonly="readonly" />
+									</td>
+									<td style="width: 225px; text-align: center; padding-left: 2px">
+										@Html.DropDownListFor(m => m.OAEquipTableData2.ProductModelID, (SelectList)ViewData["ProductModelID2"], "--Select Model--", new { id = "ProductModelID2", @readonly = "readonly", @required = "required", @disabled="disabled"})
+									</td>
+									<td style="width: 200px; text-align: center; padding-left: 3px">
+										@Html.DropDownListFor(model => model.OAEquipTableData2.Quantity, listItems2, "-- Select Status --", new { @id = "qty1", @name = "qty1", @readonly = "readonly", @required = "required", @disabled="disabled" })
+										@*@Html.TextBoxFor(model => model.QGEquipTableData2.Quantity, new { id = "qty1", Value = ViewBag.ModelQty2, @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })*@
+									</td>
+									<td style="width: 200px; text-align: center; padding-left: 1px">
+										@Html.TextBoxFor(model => model.OAEquipTableData2.UnitPrice, new { id = "unitpr1", @class = "input-medium fntst", @placeholder = "Unit Price", @readonly = "readonly", @required = "required", @style = "text-align:right" })
+									</td>
+									<td style="width: 200px; text-align: center; padding-left: 4px">
+										@Html.TextBoxFor(model => model.OAEquipTableData2.TotalPrice, new { id = "totpr1", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @required = "required", @style = "text-align:right" })
+									</td>
+									<td style="width: 70px; text-align: center; padding-left: 3px">
+										@*<button type="button" id="addButton2" class="btn btn-info" style="width: 50px">Add</button>*@
+									</td>
+								</tr>
+							</table>
+							<div style="padding-left: 100px; height: 40px; padding-bottom: 50px; display: none" id="modelrow21">
+								<table>
+									<tr>
+										<td style="width: 100px; padding-left: 100px">Description :</td>
+										<td style="width: 750px;">
+											@Html.TextBoxFor(model => model.OAEquipTableData2.ModelDesc, new { id = "moddes1", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly", @required = "required" })
+										</td>
+									</tr>
+									<tr>
+										<td style="width: 100px; padding-left: 100px">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+										<td style="width: 750px;">
+											@Html.TextBoxFor(model => model.OAEquipTableData2.Exclusion, new { id = "exclusions1", @class = "input-xxxlarge fntst", @readonly = "readonly", @required = "required" })
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div class="span9"></div>
+							<div class="span"></div>
+							@*<a style="text-decoration:none;display:none" id="delete_input1"><i class="icon-remove"></i></a>*@
+						</div>
+						@* 3rd Row Table *@
+						<div>
+							<table class="table" style="width: 900px; margin: 0 auto; display: none" id="modelrow3">
+								@Html.HiddenFor(model => model.OAEquipTableData3.OATBID)
+								@Html.HiddenFor(model => model.OAEquipTableData3.ProductModelID)
+								@Html.HiddenFor(model => model.OAEquipTableData3.OAID)
+								@Html.HiddenFor(model => model.OAEquipTableData3.Quantity)
+								<tr>
+									<td style="width: 75px; text-align: center; padding-left: 11px">
+										<input type="text" name="serialno" class="input-xxsmall fntst" id="slno2" value="3" readonly="readonly" />
+									</td>
+									<td style="width: 225px; text-align: center">
+										@Html.DropDownListFor(m => m.OAEquipTableData3.ProductModelID, (SelectList)ViewData["ProductModelID3"], "--Select Model--", new { id = "ProductModelID3", @readonly = "readonly", @required = "required" , @disabled="disabled"})
+									</td>
+									<td style="width: 200px; text-align: center">
+										@Html.DropDownListFor(model => model.OAEquipTableData3.Quantity, listItems3, "-- Select Status --", new { @id = "qty2", @readonly = "readonly", @name = "qty2", @required = "required" , @disabled="disabled"})
+										@*@Html.TextBoxFor(model => model.QGEquipTableData3.Quantity, new { id = "qty2", Value = ViewBag.ModelQty3, @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })*@
+									</td>
+									<td style="width: 200px; text-align: center">
+										@Html.TextBoxFor(model => model.OAEquipTableData3.UnitPrice, new { id = "unitpr2", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Unit Price", @required = "required", @style = "text-align:right" })
+									</td>
+									<td style="width: 200px; text-align: center">
+										@Html.TextBoxFor(model => model.OAEquipTableData3.TotalPrice, new { id = "totpr2", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @required = "required", @style = "text-align:right" })
+									</td>
+									<td style="width: 70px; text-align: center">
+										@*<button type="button" id="addButton3" class="btn btn-info" style="width: 50px">Add</button>*@
+									</td>
+								</tr>
+							</table>
+							<div style="padding-left: 100px; height: 40px; padding-bottom: 50px; display: none" id="modelrow31">
+								<table>
+									<tr>
+										<td style="width: 100px; padding-left: 100px">Description :</td>
+										<td style="width: 750px;">
+											@Html.TextBoxFor(model => model.OAEquipTableData3.ModelDesc, new { id = "moddes2", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+										</td>
+									</tr>
+									<tr>
+										<td style="width: 100px; padding-left: 100px">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+										<td style="width: 750px;">
+											@Html.TextBoxFor(model => model.OAEquipTableData3.Exclusion, new { id = "exclusions2", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div class="span9"></div>
+							<div class="span"></div>
+							@*<a style="text-decoration:none;display:none" id="delete_input2"><i class="icon-remove"></i></a>*@
+						</div>
+						@* 4th Row Table *@
+						<div>
+							<table class="table" style="width: 900px; margin: 0 auto; display: none" id="modelrow4">
+								@Html.HiddenFor(model => model.OAEquipTableData4.OATBID)
+								@Html.HiddenFor(model => model.OAEquipTableData4.ProductModelID)
+								@Html.HiddenFor(model => model.OAEquipTableData4.OAID)
+								@Html.HiddenFor(model => model.OAEquipTableData4.Quantity)
+								<tr>
+									<td style="width: 75px; text-align: center; padding-left: 11px">
+										<input type="text" name="serialno" class="input-xxsmall fntst" id="slno3" value="4" readonly="readonly" />
+									</td>
+									<td style="width: 225px; text-align: center">
+										@Html.DropDownListFor(m => m.OAEquipTableData4.ProductModelID, (SelectList)ViewData["ProductModelID4"], "--Select Model--", new { id = "ProductModelID4", @readonly = "readonly", @required = "required" , @disabled="disabled"})
+									</td>
+									<td style="width: 200px; text-align: center">
+
+										@Html.DropDownListFor(model => model.OAEquipTableData4.Quantity, listItems4, "-- Select Status --", new { @id = "qty3", @name = "qty3", @readonly = "readonly", @required = "required", @disabled="disabled" })
+										@*@Html.TextBoxFor(model => model.QGEquipTableData4.Quantity, new { id = "qty3", Value = ViewBag.ModelQty4, @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })*@
+									</td>
+									<td style="width: 200px; text-align: center">
+										@Html.TextBoxFor(model => model.OAEquipTableData4.UnitPrice, new { id = "unitpr3", @class = "input-medium fntst", @placeholder = "Unit Price", @readonly = "readonly", @required = "required", @style = "text-align:right" })
+									</td>
+									<td style="width: 200px; text-align: center">
+										@Html.TextBoxFor(model => model.OAEquipTableData4.TotalPrice, new { id = "totpr3", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @required = "required", @style = "text-align:right" })
+									</td>
+									<td style="width: 70px; text-align: center">
+										@*<button type="button" id="addButton4" class="btn btn-info" style="width: 50px">Add</button>*@
+									</td>
+								</tr>
+							</table>
+							<div style="padding-left: 100px; height: 40px; padding-bottom: 50px; display: none" id="modelrow41">
+								<table>
+									<tr>
+										<td style="width: 100px; padding-left: 100px">Description :</td>
+										<td style="width: 750px;">
+											@Html.TextBoxFor(model => model.OAEquipTableData4.ModelDesc, new { id = "moddes3", @Value = "", @type = "text", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+										</td>
+									</tr>
+									<tr>
+										<td style="width: 100px; padding-left: 100px">Exclusion&nbsp;&nbsp;&nbsp; :</td>
+										<td style="width: 750px;">
+											@Html.TextBoxFor(model => model.OAEquipTableData4.Exclusion, new { id = "exclusions3", @class = "input-xxxlarge fntst", @readonly = "readonly" })
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div class="span9"></div>
+							<div class="span"></div>
+							@*<a style="text-decoration:none;display:none"  id="delete_input3"><i class="icon-remove"></i></a>*@
+						</div>
+						@* End of Row Table *@
+
+						@*Total in Words*@
+						<table>
+							<tr>
+								<td style="width: 75px; text-align: center; padding-left: 11px">
+								</td>
+								<td style="width: 225px; text-align: center">
+								</td>
+								<td style="width: 200px; text-align: center">
+
+								</td>
+								<td style="width: 200px; text-align: right">
+									<label style="font-family:Calibri;font-size:20px;text-align:right"><strong>Total Price in INR :</strong></label>
+								</td>
+								<td style="width: 200px; text-align: center">
+									@Html.TextBoxFor(model => model.OAEquipPayment.overallprice, new { id = "total", @class = "input-medium fntst", @readonly = "readonly", @placeholder = "Total Price", @style = "text-align:right" })
+								</td>
+								<td style="width: 70px; text-align: center">
+								</td>
+							</tr>
+							</table>
+					</div>
+				</div>
+				<br />
+				<br />
+				<div style="background: gray; height: 2px; width: 1000px"></div>
+				<div style="padding-left: 150px; height: 270px; padding-top: 30px">
+					<table>
+						<tr>
+							<td>
+								<label class="fntstrep"><u><strong>Terms & Conditions of Sale :</strong></u></label>
+							</td>
+						</tr>
+					</table>
+					<table>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Payment Terms</label></td>
+							<td align="left">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="input-xxlarge fntst" id="unitpr4" placeholder="30% advance & balance 70% against pro-forma invoice before dispatch " value="30% advance & balance 70% against pro-forma invoice before dispatch">*@
+								@Html.TextBoxFor(model => model.OAEquipPayment.PaymentTerms, new { id = "payterms", @readonly = "readonly", @class = "input-xxlarge fntst", @placeholder = "30% advance & balance 70% against pro-forma invoice before dispatch", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipPayment.PaymentTerms)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Delivery</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="FCA, Bangalore" value="FCA, Bangalore">*@
+								@Html.TextBoxFor(model => model.OAEquipPayment.Delivery, new { id = "delivery", @readonly = "readonly", @class = "fntst", @placeholder = "FCA, Bangalore", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipPayment.Delivery)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Date of Dispatch</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="input-xxlarge fntst" id="unitpr4" placeholder="8 - 10 weeks after receipt of advance payment" value="8 - 10 weeks after receipt of advance payment">*@
+								@Html.TextBoxFor(model => model.OAEquipPayment.DateofDispatch, new { id = "dodis", @readonly = "readonly", @class = "input-xxlarge fntst", @placeholder = "8 - 10 weeks after receipt of advance payment", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipPayment.DateofDispatch)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Mode of Transport</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="By Road" value="By Road">*@
+								@Html.TextBoxFor(model => model.OAEquipPayment.Transport, new { id = "transport", @readonly = "readonly", @class = "fntst", @placeholder = "By Road", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipPayment.Transport)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Freight</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="To Pay basis" value="To Pay basis">*@
+								@Html.TextBoxFor(model => model.OAEquipPayment.Freight, new { id = "freight", @readonly = "readonly", @class = "fntst", @placeholder = "To Pay basis", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipPayment.Freight)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">GST</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="input-xxlarge fntst" id="unitpr4" placeholder="2% extra against FORM C or 5.5% without FORM C" value="2% extra against FORM C or 5.5% without FORM C">*@
+								@Html.TextBoxFor(model => model.OAEquipPayment.CST, new { id = "cstpay", @readonly = "readonly", @class = "input-xxlarge fntst", @placeholder = "2% extra against FORM C or 5.5% without FORM C", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipPayment.CST)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Transit Insurance</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="Extra as applicable" value="Extra as applicable">*@
+								@Html.TextBoxFor(model => model.OAEquipPayment.TransitInsu, new { id = "transinsu", @readonly = "readonly", @class = "fntst", @placeholder = "Extra as applicable", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipPayment.TransitInsu)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Commodity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="Rice" value="Rice">*@
+								@Html.TextBoxFor(model => model.OAEquipPayment.Commodity, new { id = "rice", @readonly = "readonly", @class = "fntst", @placeholder = "Rice", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipPayment.Commodity)
+							</td>
+						</tr>
+						<tr style="padding-bottom: 15px">
+							<td align="left" style="width: 250px">
+								<label class="fntst1">Validity</label></td>
+							<td align="left" style="width: 100px">
+								<label class="fntst1">:</label></td>
+							<td align="left" style="width: 900px">
+								@*<input type="text" class="fntst" id="unitpr4" placeholder="2 months from the date of this offer" value="2 months from the date of this offer">*@
+								@Html.TextBoxFor(model => model.OAEquipPayment.Validity, new { id = "validit", @readonly = "readonly", @class = "fntst", @placeholder = "2 months from the date of this offer", @required = "required" })
+								@Html.ValidationMessageFor(model => model.OAEquipPayment.Validity)
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left: 150px; padding-top: 140px">
+					@Html.TextAreaFor(model => model.OAEquipPayment.annexure, new { id = "annex", @readonly = "readonly", @Value = "For the General terms & conditions of sales from Buhler India Pvt Ltd, Please refer to the Annexure attached, which is an integral part of this offer.An order confirmation will be issued by Buhler India Pvt Ltd on acceptance of this order", rows = 2, columns = 2, @class = "input-xxxlarge fntst", @placeholder = "Additional Comments" })
+				</div>
+				<div style="padding-left: 100px; padding-top: 10px">
+					<label class="fntst1">Thanking You</label>
+					<label class="fntst1">With Regards,</label>
+					<label class="fntst1" style="padding-top: 35px">@ViewBag.LoginName</label>
+					<label style="font-size: 16px; font-family: Calibri;">@ViewBag.Designation</label>
+				</div>
+				<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+					<div class=" row show-grid">
+						<div class="span10">
+							<div class="span3 cent1">
+								<input type="submit" name="btnapproval" value="Approve" class="btn btn-large btn-success glyphicon glyphicon-ok-circle" onclick="javascript: return updateparent();"  />
+								<input type="submit" name="btnrejected" value="Reject" class="btn btn-large btn-success" />
+							</div>
+						</div>
+					</div>
+				</div>
+				@*</div>*@
+			</div>
+		</div>
+	</div>
+}
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+
+@if (Model.OAEquipTableData2 != null)
+{
+	@Html.HiddenFor(model => model.OAEquipTableData2.OATBID);
+	@Html.HiddenFor(model => model.OAEquipTableData2.ProductModelID);
+	@Html.HiddenFor(model => model.OAEquipTableData2.OAID)
+	<script>
+		$(document).ready(function () {
+			var counter;
+			$("#modelrow2").attr("style", "display:block");
+			$("#modelrow21").attr("style", "display:block");
+			$("#delete_input1").attr("style", "display:block");
+			$("#addButton").attr("style", "display:none");
+			if (counter == 1) {
+				$("#modelrow2").attr("style", "display:block");
+				$("#modelrow21").attr("style", "display:block");
+				$("#delete_input1").attr("style", "display:block");
+			}
+			$("#slno1").val(2);
+			$("#slno2").val(3);
+			$("#slno3").val(4);
+		});
+	</script>
+}
+@if (Model.OAEquipTableData3 != null)
+{
+	@Html.HiddenFor(model => model.OAEquipTableData3.OATBID);
+	@Html.HiddenFor(model => model.OAEquipTableData3.ProductModelID);
+	@Html.HiddenFor(model => model.OAEquipTableData3.OAID)
+	<script>
+		$(document).ready(function () {
+			var counter;
+			$("#modelrow3").attr("style", "display:block");
+			$("#modelrow31").attr("style", "display:block");
+			$("#delete_input2").attr("style", "display:block");
+			$("#addButton2").attr("style", "display:none");
+			if (counter == 2) {
+				$("#modelrow3").attr("style", "display:block");
+				$("#modelrow31").attr("style", "display:block");
+				$("#delete_input2").attr("style", "display:block");
+			}
+			$("#slno2").val(3);
+			$("#slno3").val(4);
+		});
+	</script>
+}
+@if (Model.OAEquipTableData4 != null)
+{
+	@Html.HiddenFor(model => model.OAEquipTableData4.OATBID);
+	@Html.HiddenFor(model => model.OAEquipTableData4.ProductModelID);
+	@Html.HiddenFor(model => model.OAEquipTableData4.OAID)
+	<script>
+		$(document).ready(function () {
+			var counter;
+			$("#modelrow4").attr("style", "display:block");
+			$("#modelrow41").attr("style", "display:block");
+			$("#delete_input3").attr("style", "display:block");
+			$("#addButton3").attr("style", "display:none");
+			if (counter == 2) {
+				$("#modelrow4").attr("style", "display:block");
+				$("#modelrow41").attr("style", "display:block");
+				$("#delete_input3").attr("style", "display:block");
+			}
+			$("#slno3").val(4);
+		});
+	</script>
+}
+

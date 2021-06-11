@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Synergy</title>
+    <meta name="viewport" content="width=device-width" />
+    @*@Styles.Render("~/Content/css")*@
+    <link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+    <script src="~/Content/bootstrap/js/jquery.js"></script>
+    <script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+    <script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+    <script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+    @*<script src="~/Content/bootstrap/js/jquery-1.9.1.min.js"></script>*@
+    @*<script src="~/Content/bootstrap/js/bootstrap.min.js"></script>*@
+
+    <link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery-2.1.4.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="~/Content/bootstrap/js/jValidations.js"></script>
+
+    @Scripts.Render("~/bundles/modernizr")
+    @{
+        string cqid = null;
+        string cname = null;
+        
+        var CustUniID = cqid;
+        var CusName = cname;
+    }
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".newcustomer").hide();
+            $(".existingcustomer").hide();
+            $("#ecus").click(function () {
+                $(".existingcustomer").show();
+                $(".newcustomer").hide();
+            });
+            $("#ncus").click(function () {
+                $(".newcustomer").show();
+                $(".existingcustomer").hide();
+            });
+        });
+    </script>
+    @*@{
+        <script>
+        function updateparent() {
+            CustUniID = document.getElementById("custunid").value;
+            CusName = document.getElementById("custnam").value;
+            return true;
+        }
+            </script>
+        }*@
+    @* Auto Complete for customer unique id *@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#custunid").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Quotation/Autocomplete1",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.CompanyUniqueID, value: item.CompanyUniqueID };
+                            }))
+                        }
+                    })
+                },
+                messages: {
+                    noResults: null, results: null
+                }
+            });
+        });
+    </script>
+    @* Auto Complete for Customer Name *@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#custnam").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Quotation/Autocomplete",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.OrganizationName + "-" + item.City + "-" + item.Pincode, value: item.OrganizationName + "-" + item.City + "-" + item.Pincode };
+                            }))
+                        }
+                    })
+                },
+                messages: {
+                    noResults: null, results: null
+                }
+            });
+        });
+    </script>   
+</head>
+<body>
+    @model SRKSSynergy.Models.MDBGeneralData
+
+    @{
+        Layout = null;
+        ViewBag.Title = "NewQuotation";
+    }
+
+    @using (Html.BeginForm("NewQuotation", "Quotation", new { custnam = CusName, custunid = CustUniID }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+        <div style="background: #e5e5e5; min-height: 620px;">
+            <div style="background: gray; padding-bottom: 15px;">
+                <p class="txtft">New Quotation</p>
+            </div>
+            <div class="row" style="padding-top: 10px">
+                <div class=" row show-grid">
+                    @if (TempData["DBE"] != null)
+                    {
+                        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["DBE"]</p>
+                    }
+@* Selection For New Customer or Existing Customer *@
+                    <div style="padding-left: 100px">
+                        <table class="table" style="width: 650px">
+                            <tr>
+                                <td style="width: 150px">
+                                    <label class="radio ">
+                                        <input type="radio" name="optionsRadios" class="nwcus" id="ncus" value="nwquo">
+                                        New Customer
+                                    </label>
+                                </td>
+                                <td style="width: 50px; text-align: left">
+                                    <label>(or)</label>
+                                </td>
+                                <td style="width: 300px">
+                                    <label class="radio ">
+                                        <input type="radio" name="optionsRadios" class="nwcus" id="ecus" value="esquo">
+                                        Existing Customer
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    @* End of Selection *@
+                    @* Existing Customer *@
+                    <div class="span12 pad ">
+                        <div class="span3">
+                            <div class="control-group ">
+                                <label class="control-label fntst existingcustomer">Customer Unique ID</label>
+                                <div class="controls ">
+                                    @Html.TextBox("custunid", null, new {@id="custunid",@name="custunid", @class = "fntst existingcustomer", @placeholder = "Customer Unique ID" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span existingcustomer">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(or)
+                        </div>
+                        <div class="span3 ">
+                            <div class="control-group ">
+                                <label class="control-label fntst existingcustomer">Customer Name</label>
+                                <div class="controls ">
+                                    @Html.TextBox("custnam", null, new {@id="custnam",@name="custnam", @class = "fntst existingcustomer", @placeholder = "Customer Name" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span10">
+                        <div class="span3">
+                            <div style="padding-left: 30px">
+                                <input type="submit" id="existgetdetails" name="existgetdetails" value="Get Details" class="btn btn-info existingcustomer" style="width: 150px; height: 45px; text-decoration: none;" />
+                            </div>
+                        </div>
+                    </div>
+                    @* End of Existing Customer *@
+                    @* New Customer Entry Form *@
+                    <div class="span12 pad ">
+                        <div class="span3">
+                            <div class="control-group ">
+                                <label class="control-label fntst newcustomer">Create Customer</label>
+                                <div class="controls ">
+                                    @Html.ActionLink("Detailed Entry Form", "Create", "MDB", null, new { @class = "btn btn-info newcustomer", @style = "width: 150px; height: 45px; text-decoration:none;" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span newcustomer">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                	        (or)
+                        </div>
+                        <div class="span3 ">
+                            <div class="control-group ">
+                                <label class="control-label fntst newcustomer">Create Customer</label>
+                                <div class="controls ">
+                                    @Html.ActionLink("Quick Entry Form (Lead Form)", "LECreateRevised","LeadEnquiry", null, new { @class = "btn btn-info newcustomer", @style = "width: 150px; height: 45px; text-decoration:none;" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @* End of New Customer Entry Form *@
+                    @* Customer Added *@
+                </div>
+            </div>
+        </div>
+    }
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>
+
+@*<script>
+    $(document).ready(function () {
+        $("#ecus").change(function () {
+            //alert('1.0');
+            if ($(this).is(':checked')) {
+                //alert('1.1');
+                $("#custnam").attr("required", "required");
+                $("#custunid").attr("required", "required");
+
+            }           
+        });
+    });
+</script>*@
+
+@*<script>
+    $(document).ready(function () {
+        $("#custnam").text(function () {
+            var custname = $('#custnam').val();
+            alert('1.0');
+            if (custname!=null) {
+                alert('1.1');
+                $("#custunid").removeAttr("required", "required");
+
+            }
+        });
+    });
+</script>*@
+
+@*<script>
+    $(document).ready(function () {
+        $("#existgetdetails").click(function (e) {
+            alert('1');
+
+            var custname = $('#custnam').val();
+            var custuniqueid =$("custunid").val();
+            alert(custname);
+            //custname = document.getElementById('custnam').val;
+            //custuniqueid = document.getElementById("custunid").value;
+            //alert(custname);
+
+            if (custname == null && custuniqueid == null || custname==" " && custuniqueid== " ") {
+                alert('qqqq');
+                e.preventDefault();
+                alert('Please Enter Any of the Field with valid data...!');                
+            }
+        });
+    });
+</script>*@

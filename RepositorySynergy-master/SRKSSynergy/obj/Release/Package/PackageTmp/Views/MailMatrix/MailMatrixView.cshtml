@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "MailMatrixView";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Synergy - Dashboard</title>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var tabs = $('.tabsm > li');
+			tabs.on("click", function () {
+				tabs.removeClass('active');
+				$(this).addClass('active');
+			});
+		});
+	</script>
+</head>
+<body style="margin: 0 auto">
+	@{
+		ViewBag.Title = "Synergy";
+	}
+	<div class="bcgr" style="margin: 0 auto;min-height:700px">
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Mail Matrix</p>
+		</div>
+		<div style="padding-top: 80px; padding-bottom: 100px; margin: 0 auto">
+			<table style="text-align: center; margin: 0 auto; width: 900px; height:200px;">
+				<tr style="padding-bottom: 10px">
+					<td align="center" style="background: #fff8dc; width: 225px; height: 30px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/MailSendCredentials/Index" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/mailsend2.png" alt='missing' />
+								<figcaption><strong>From Mail Id</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>					
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/BuhlerAdminCC/Index" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/mailreceive1.png" alt='missing' />
+								<figcaption><strong>Buhlers Admin/Zone Mail Id's</strong></figcaption>
+							</figure>
+						</a>
+					</td>					
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/CPEmailID/Index" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/mailcc1.png" alt='missing' />
+								<figcaption><strong>Channel Partner Mail Id's</strong></figcaption>
+							</figure>
+						</a>
+					</td>									
+				</tr>				
+			</table>
+		</div>
+	</div>
+</body>
+</html>

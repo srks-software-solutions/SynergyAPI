@@ -1,0 +1,177 @@
+﻿@model IEnumerable<SRKSSynergy.Models.LeadEnquiry>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Lead Search";
+    int slno = 1;
+        //Layout = null;    
+}
+
+@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("LESearch", "LeadEnquiry", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a> 
+    if (id == ViewBag.sortBy)
+    {
+    <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}
+
+@* End Of Paging & Sorting Code *@
+
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#custnm").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/LeadEnquiry/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    function leadcreate() {
+        window.opener.location.href = "LECreate";
+        self.close();
+    }
+</script>
+
+<div style="background: #e5e5e5;">
+   @* <div style="background: gray; padding-bottom: 3px">
+         <p style="font-size:30px;text-align:center"> <strong>Search Lead</strong></p>
+    </div>*@
+    <div style="background: gray; padding-bottom: 15px">
+		<p class="txtft">Search BSOH Lead Enquiry Lead</p>
+	</div>
+
+    <form action="@Url.Action("LESearch", "LeadEnquiry")" method="post">
+        @* Create Equipment Link *@
+       @* <div style="padding-top: 10px; padding-left: 1200px">
+            @Html.ActionLink("Create New Lead", "LECreate", "LeadEnquiry", new { @id = "cnlead", @name = "cnlead", @class = "btn btn-success", @Style = "text-decoration:none" })
+            <button id="cnlead" name="cnlead" onclick="leadcreate();" style="width:120px;height:28px;background:#5BB75B">Create New Lead</button>
+        </div>*@
+
+        <div class="row">
+            <div class=" row show-grid">
+                @* Text Box for search *@
+                <div class="span12 pad ">
+                    <div class="span12">
+                        <div class="control-group ">
+                            @*<label class="control-label fntst ">Customer Name</label>*@
+                            <div style="padding-left: 70px; padding-top: 23px;">
+                                @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="custnm" name="custnm" placeholder="ChannelPartner Name">*@
+                                @Html.TextBox("custnm", null, new { @class = "fntst", @placeholder = " Search Customer Name", @style="display:inline"})
+
+                                <input type="submit" style="background: #5BB75B; width: 150px; height: 30px;display:inline;padding-left:5px" value="Search Lead" class="btn btn-info" />
+
+                                @Html.ActionLink("Create New Lead", "LECreate", "LeadEnquiry", new { @id = "cnlead", @name = "cnlead", @class = "btn btn-success", @style = "text-decoration:none;float:right;display:inline; width: 150px" })
+
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="span"></div>*@
+                    @* Button for Search *@
+
+                    @* End of buttons *@
+                </div>
+            </div>
+        </div>
+
+
+
+        @* Table for ChannelPartner *@
+        <table class=" table table-hover" style="width: 1335px">
+            <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <th style="width: 60px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No</span>
+                </th>
+                <th style="width: 60px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Organization Name</span>
+                </th>
+                <th style="width: 200px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Organization Type</span>
+                </th>
+                <th style="width: 130px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Contact No</span>
+                </th>
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Email ID</span>
+                </th>
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Suggested Model</span>
+                </th>
+                <th style="width: 100px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">State</span>
+                </th>
+                <th style="width: 150px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">City</span>
+                </th>
+                <th style="width: 1px; text-align: center"></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td>
+                    <td style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.OrganizationName)
+                    </td>
+                    <td style="width: 200px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.OrganizationType)
+                    </td>
+                    <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">                       
+                        +@Html.DisplayFor(modelItem => item.Isdm1): @Html.DisplayFor(modelItem => item.Mobile1)
+                    </td>
+                    <td style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.EmailID)
+                    </td>
+                    <td style="width: 130px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.SuggestedModel)
+                    </td>
+
+                    <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td style="width: 150px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                </tr>
+                slno++;
+            }
+
+        </table>
+        @*        <div class="pagination" style="font-size: 18px; font-family: Calibri; float: right; padding-right: 70px">
+            Page: 
+            @pageLinks()
+        </div>*@
+    </form>
+</div>

@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Synergy - Dashboard</title>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var tabs = $('.tabsm > li');
+			tabs.on("click", function () {
+				tabs.removeClass('active');
+				$(this).addClass('active');
+			});
+		});
+	</script>
+</head>
+<body style="margin: 0 auto">
+	@{
+		ViewBag.Title = "Synergy";
+	}
+	<div class="bcgr" style="margin: 0 auto;min-height:700px">
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">OCM Module Dashboard</p>
+		</div>
+		<div style="padding-top: 80px; padding-bottom: 100px; margin: 0 auto">
+			<table style="text-align: center; margin: 0 auto; width: 1200px; height: 400px;">
+				<tr style="padding-bottom: 10px">
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/Configuration/OCMSetting" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/channel_partner_icon.png" alt='missing' />
+								<figcaption><strong>OCM Settings</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>					
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMPolisher/Index" style="text-decoration: none">
+							<figure>                                
+								<img src="~/Content/bootstrap/img/ricepolisher.jpg" alt='missing' />
+								<figcaption><strong>OCM Polisher</strong></figcaption>
+							</figure>
+						</a>
+					</td>					
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/OCMWhitner/Index" style="text-decoration: none">
+							<figure>                                
+								<img src="~/Content/bootstrap/img/ricewhitener.jpg" alt='missing' />
+								<figcaption><strong>OCM Whitener</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>
+					@*<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/Account/UserView" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/user-remove-icon.png" alt='missing' />
+								<figcaption><strong>Deactivate Users</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+                    <td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/MailMatrix/MailMatrixView" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/mailmatrix3.png" alt='missing' />
+								<figcaption><strong>Mail Matrix</strong></figcaption>
+							</figure>
+						</a>
+					</td>*@					
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+
+				@*<tr style="padding-bottom: 10px">
+
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/MasterProduct/Index" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/services icon.png" alt='missing' />
+								<figcaption><strong>Master Product Plus</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+
+					<td></td>
+					<td></td>
+
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/Products/Index" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/update.png" alt='missing' />
+								<figcaption><strong>Machine Plus</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/Equipment/Index" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/equipment_icon.png" alt='missing' />
+								<figcaption><strong>Equipment Plus</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+
+					<td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/Spare/Index" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/spares.png" alt='missing' />
+								<figcaption><strong>Spares Plus</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+
+                    <td></td>
+					<td></td>
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/Configuration/Setting1" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/ts2.png" alt='missing' />
+								<figcaption><strong>Setting</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+
+				</tr>*@
+			</table>
+		</div>
+	</div>
+</body>
+</html>

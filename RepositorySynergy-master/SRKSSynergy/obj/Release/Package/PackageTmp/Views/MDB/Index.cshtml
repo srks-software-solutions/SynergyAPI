@@ -1,0 +1,275 @@
+﻿@model IEnumerable<SRKSSynergy.Models.MDBGeneralData>
+
+@{
+    ViewBag.Title = "MDB";
+    int slno = 1;
+}
+
+@* Paging & Sorting Code  *@
+
+@*@helper buildLinks(int start, int end, string innerContent)
+{
+    for (int i = start; i <= end; i++)
+    {
+    <a class="@(i == ViewBag.CurrentPage ? "current" : "")"  href="@Url.Action("Index", "MDB", new { page = i, sortBy = ViewBag.sortBy, isAsc = ViewBag.isAsc.ToString().ToLower(), search = ViewBag.Search })">@(innerContent ?? i.ToString())</a>      
+    }
+    
+}
+*@
+
+@*@helper pageLinks()
+{
+    const int maxPages = 11;
+
+    if (ViewBag.TotalPages <= maxPages)
+    {
+    @buildLinks(1, (int)ViewBag.TotalPages, null)
+        return;
+    }
+
+    int pagesAfter = ViewBag.TotalPages - ViewBag.CurrentPage; // Number of pages after current
+    int pagesBefore = ViewBag.CurrentPage - 1; // Number of pages before current
+
+    if (pagesAfter <= 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st page
+
+        int pageSubset = ViewBag.TotalPages - maxPages - 1 > 1 ? ViewBag.TotalPages - maxPages - 1 : 2;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages - maxPages + 3, ViewBag.TotalPages, null) // Show last pages
+
+        return; // Exit
+    }
+
+    if (pagesBefore <= 4)
+    {
+    @buildLinks(1, maxPages - 2, null) // Show 1st pages
+
+
+        int pageSubset = maxPages + 2 < ViewBag.TotalPages ? maxPages + 2 : ViewBag.TotalPages - 1;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }
+
+    if (pagesAfter > 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st pages
+
+        int pageSubset1 = ViewBag.CurrentPage - 7 > 1 ? ViewBag.CurrentPage - 7 : 2;
+        int pageSubset2 = ViewBag.CurrentPage + 7 < ViewBag.TotalPages ? ViewBag.CurrentPage + 7 : ViewBag.TotalPages - 1;
+
+    @buildLinks(pageSubset1, pageSubset1, pageSubset1 == ViewBag.CurrentPage - 4 ? null : "...") // Show 1st page subset (...)
+
+    @buildLinks(ViewBag.CurrentPage - 3, ViewBag.CurrentPage + 3, null) // Show middle pages
+
+        // Show 2nd page subset (...)
+        // only show ... if page is contigous to the previous one.
+    @buildLinks(pageSubset2, pageSubset2, pageSubset2 == ViewBag.CurrentPage + 4 ? null : "...")
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }    
+}*@
+
+@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("Index", "MDB", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a> 
+    if (id == ViewBag.sortBy)
+    {
+    <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}
+
+@* End Of Paging & Sorting Code *@
+@*<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />*@
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+@*script src="~/Content/bootstrap/js/jquery.js"></script>*@
+@*<script src="~/Content/bootstrap/js/jquery-ui.js"></script>*@
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+@*<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>*@
+ <script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#custnm").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/MDB/AutocompleteIndex",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<div class="bcgr" id="mrefresh" style="min-height: 620px">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Master Data Base</p>
+    </div>
+    <form action="@Url.Action("Index", "MDB")" method="post">
+        @* Create Equipment Link *@
+        @*<div style="padding-left: 20px; padding-top: 10px">
+            @Html.ActionLink("Add", "Create", "MDB", new { @class = "btn btn-primary glyphicon glyphicon-plus", @Style = "text-decoration:none" })
+        </div>*@
+
+
+        <div class="row">
+            <div class=" row show-grid">
+                @* Text Box for search *@
+                <div class="span12 pad ">
+                     <div class="span3" style="padding-top:20px">
+                        @Html.ActionLink(" Add", "Create", "MDB", new { @class = "btn btn-primary glyphicon glyphicon-plus", @Style = "text-decoration:none" })
+                    </div>
+                    <div class="span3 ">
+                        <div class="control-group ">
+                            @*<label class="control-label fntst ">Customer Name</label>*@
+                            <div class="controls" style="padding-left: 70px; padding-top: 20px">
+                                @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="custnm" name="custnm" placeholder="ChannelPartner Name">*@
+                                @Html.TextBox("custnm", null, new { @placeholder = " Search Customer Name" ,@style="height:35px;width:200px;" })
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="span"></div>*@
+                    @* Button for Search *@
+                    <div class="span3" style="padding-top:20px">
+                            @*<input type="submit" value="Search" class="btn btn-primary glyphicon glyphicon-search" />*@
+                        <button class="btn btn-primary glyphicon glyphicon-search " value="Search" type="Submit"> Search</button>
+                    </div>
+                    @* End of buttons *@
+                </div>
+            </div>
+        </div>
+
+
+
+        @* Table for ChannelPartner *@
+        <table class=" table table-hover" style="width: 96%; margin-left:1%">
+            <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <th style="width: 60px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No</span>
+                </th>
+                <th style="width: 60px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Unique ID</span>
+                </th>
+                <th style="width: 200px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Company Name</span>
+                </th>
+                <th style="width: 100px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Company Type</span>
+                </th>
+                <th style="width: 130px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Address</span>
+                </th>
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">City</span>
+                </th>
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">State</span>
+                </th>
+                <th style="width: 100px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Phone 1</span>
+                </th>
+                <th style="width: 150px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Email-ID</span>
+                </th>
+                <th style="width: 150px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Postal/Courier</span>
+                </th>
+                <th style="width: 150px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Visit History</span>
+                </th>
+                <th style="width: 60px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Edit</span>
+                </th>
+            </tr>
+
+            @{
+                SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();                   
+            }
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px">
+                @slno
+            </td>
+            <td style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px">
+                @Html.DisplayFor(modelItem => item.CompanyUniqueID)
+            </td>
+            <td style="width: 200px; text-align: center; font-family: Calibri; font-size: 18px">
+                @Html.DisplayFor(modelItem => item.OrganizationName)
+            </td>
+            <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                @if (item.OrganizationType != "others1")
+                {
+                    @Html.DisplayFor(modelItem => item.OrganizationType)
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.OrganizationTypeothers)
+                }
+            </td>
+            <td style="width: 130px; text-align: center; font-family: Calibri; font-size: 18px">
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                @{
+                    var phno = db.MDBContactPersonData.Where(m => m.MDBID == item.MDBID).Select(m => m.Mobile1).FirstOrDefault();
+                    ViewBag.phno = phno;
+                }
+
+                @ViewBag.phno
+            </td>
+            <td style="width: 150px; text-align: center; font-family: Calibri; font-size: 18px">
+                @Html.DisplayFor(modelItem => item.EmailID)
+            </td>
+            <td style="width: 150px; text-align: center; font-family: Calibri; font-size: 18px">
+                @Html.DisplayFor(modelItem => item.PostalCourier)
+            </td>
+            <td style="width: 150px; text-align: center; font-family: Calibri; font-size: 18px">
+                @*Html.DisplayFor(modelItem => item.CompanyUniqueID)*@
+                <a href="http://13.233.129.21:8031/dashboard/visithistory?uid=@Session["userID"].ToString()&cid=@item.CompanyUniqueID&cname=@item.OrganizationName" target="_blank">Visits</a>
+            </td>
+            <td style="width: 60px; text-align: center; font-family: Calibri; font-size: 18px">
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.MDBID })*@
+                @Html.ActionLink(" ", "Edit", "MDB", new { id = item.MDBID }, new { @class = "btn btn-primary glyphicon glyphicon-pencil", @Style = "text-decoration:none" })
+            </td>
+        </tr>
+                slno++;
+            }
+
+        </table>
+@*        <div class="pagination" style="font-size: 18px; font-family: Calibri; float: right; padding-right: 70px">
+            Page: 
+            @pageLinks()
+        </div>*@
+    </form>
+</div>

@@ -1,0 +1,166 @@
+﻿@model IList<SRKSSynergy.Models.AvailSpareQuantity>
+@using SRKSSynergy.Helpers
+@{
+	
+	ViewBag.Title = "Minimum Spare Quantity";
+}
+
+@{int slno = 1;}
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#cpnam").autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					url: "/Inventory/Autocomplete",
+					type: "POST",
+					dataType: "json",
+					data: { term: request.term },
+					success: function (data) {
+						response($.map(data, function (item) {
+							return { label: item.CPName, value: item.CPName };
+						}))
+					}
+				})
+			},
+			messages: {
+				noResults: "", results: ""
+			}
+		});
+	});
+</script>
+
+<div class="bcgr" style="min-width: 1450px; min-height: 580px">
+	@using (Html.BeginForm("InventoryMonthRep", "Inventory", Model, FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+@*<hr style="border: 1px  dashed" />*@
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Spare Stock Tracker</p>
+		</div>
+@*<p class="pad txtal">General Data</p>*@
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad" style="padding-left:60px">
+					<div class="span3 ">
+						<div class="control-group ">
+							<label class="control-label fntst ">Channel Partner Name</label>
+							<div class="controls">
+								@Html.TextBox("cpnam", null, new { @placeholder = " Search Channel Partner Name" })
+							</div>
+						</div>
+					</div>
+					<div class="span3" style="padding-top:24px">
+						<input type="submit" value="Get Details" class="btn btn-success" />
+					</div>
+				</div>
+			</div>
+		</div>
+@*Table Data Starts Here*@
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div style="padding-top: 10px; padding-left: 100px">
+					<table class="table-hover" style="float: left;">
+						<thead>
+							<tr style="background: #BBBEBD">
+								<th style="width: 50px; text-align: center" class="fntst cal botbor">Serial No</th>
+								<th style="width: 230px; text-align: center" class="fntst cal botbor">Part Number</th>
+								<th style="width: 110px;" class="fntst cal botbor">Description</th>
+								<th style="width: 100px; text-align: center" class="fntst cal botbor">Minimum Stock</th>
+								@{ string prevmonth = null;
+								   int moncount = 0;}
+								@if (Model != null)
+								{
+									foreach (var rows in Model)
+									{
+										if (prevmonth != rows.month)
+										{
+											moncount++;
+										}
+										prevmonth = rows.month;
+									}
+								}
+							</tr>
+						</thead>
+						@*@foreach (var item in Model)*@
+						@if (Model != null)
+						{
+							for (int i = 0; i < (Model.Count / (moncount + 1)); i++)
+							{
+							<tr>
+								<td style="width: 50px; text-align: center;">
+									@slno
+								</td>
+								<td style="width: 100px; text-align: center;">
+									<label class="fntst">@Html.DisplayFor(m => m[i].ProductModelSpare.ProductModelSparesName)</label>
+								</td>
+								<td style="width: 250px;">
+									<label class="fntst">@Html.DisplayFor(m => m[i].ProductModelSpare.ProductModelSparesDesc)</label>
+								</td>
+								<td style="width: 50px; text-align: center;">
+									<label class="fntst">@Html.DisplayFor(m => m[i].MinCpStock)</label>
+								</td>
+							</tr>
+							@Html.TextBoxFor(m => m[i].ASID, new { @style = "display:none;" })
+							@Html.TextBoxFor(m => m[i].CPID, new { @style = "display:none;" })
+								slno++;
+							}
+						}
+					</table>
+					@{ string prevmonth1 = null;
+					   int moncount1 = 0;
+					}
+					@if (Model != null)
+					{
+						int nexmon = Model.Count / (moncount + 1);
+						foreach (var rows in Model)
+						{
+							if (prevmonth1 != rows.month)
+							{ 
+						<table class="table-hover" style="float: left;">
+							<thead>
+								<tr style="background: #BBBEBD">
+									<th style="width: 100px; text-align: center; height: 40px" class="fntst cal botbor">
+										<label class="fntst">@rows.month</label>
+									</th>
+								</tr>
+							</thead>
+							@*@foreach (var item in Model)*@
+							@if (Model != null)
+							{
+
+								for (int k = nexmon; k < ((Model.Count / (moncount + 1)) + nexmon); k++)
+								{
+									{ 
+								<tr>
+									<td style="width: 100px; text-align: center">
+										<label class="fntst">@Model[k].AvailableStock</label>
+									</td>
+								</tr>
+									}
+								}
+								nexmon += Model.Count / (moncount + 1);
+							}
+						</table>
+							moncount1++;
+							}
+							prevmonth1 = rows.month;
+						}
+					}
+				</div>
+
+			</div>
+		</div>
+	}
+</div>
+

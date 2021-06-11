@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SRKSSynergy.Models.CPMailIdTO>
+@{
+    ViewBag.Title = "Index";
+    int slno = 1;
+}
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<div class="bcgr">
+    <div style="background: gray;height:60px">
+        <p class="txtft">Channel Partner Email's List (To Mail)</p>
+    </div>
+    <p>
+        @Html.ActionLink("Add New", "Create", new { }, new { @class = "btn btn-primary glyphicon glyphicon-plus", @style = "color:white" })
+    </p>
+    
+    <table class="table table-hover table-condensed">
+        <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px;">
+            <th style="width: inherit; text-align: center; font-family: Calibri; font-size: 17px; padding-bottom: 5px; padding-top: 5px">
+                <span style="font-family: Calibri; font-size: 17px; padding-bottom: 10px; padding-top: 10px">Sl No.</span>
+            </th>
+            <th style="width: auto; text-align: center; font-family: Calibri; font-size: 17px; padding-bottom: 5px; padding-top: 5px">
+                <span style="font-family: Calibri; font-size: 17px; padding-bottom: 10px; padding-top: 10px">Channel Partner Name</span>
+            </th> 
+             <th style="width: auto; text-align: center; font-family: Calibri; font-size: 17px; padding-bottom: 5px; padding-top: 5px">
+                <span style="font-family: Calibri; font-size: 17px; padding-bottom: 10px; padding-top: 10px">Email ID</span>
+            </th> 
+             <th style="width: auto; text-align: center; font-family: Calibri; font-size: 17px; padding-bottom: 5px; padding-top: 5px">
+                <span style="font-family: Calibri; font-size: 17px; padding-bottom: 10px; padding-top: 10px">Designation</span>
+            </th> 
+             <th style="width: auto; text-align: center; font-family: Calibri; font-size: 17px; padding-bottom: 5px; padding-top: 5px">
+                <span style="font-family: Calibri; font-size: 17px; padding-bottom: 10px; padding-top: 10px">Zonal Manager</span>
+            </th>            
+        </tr>
+         @{
+                        DateTime now = DateTime.Now;
+                        DateTime fm = new DateTime(now.Year, now.Month, 1);
+                        DateTime td = System.DateTime.Now;
+                        SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+             }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: auto; text-align: center; font-family: Calibri; font-size: 16px">
+                    @slno
+                </td>
+                <td style="width: auto; text-align: center; font-family: Calibri; font-size: 16px">
+                @{
+            int cpid = Convert.ToInt32(item.CPID);
+            string cpname = db.ChannelPartners.Where(m => m.CPID == cpid).Select(m => m.CPName).SingleOrDefault();
+            ViewBag.cpname = cpname;
+                    }@ViewBag.cpname
+                </td>
+                <td style="width: auto; text-align: center; font-family: Calibri; font-size: 16px">
+                    @Html.DisplayFor(modelItem => item.EmailId)
+                </td>
+                <td style="width: auto; text-align: center; font-family: Calibri; font-size: 16px">
+                    @Html.DisplayFor(modelItem => item.Designation)
+                </td>
+                @if(item.ZonalManagerID!=0)
+                {
+                <td style="width: auto; text-align: center; font-family: Calibri; font-size: 16px">
+                   @{
+            var tll = db.Zone.Find(item.ZonalManagerID);// (m => m.ZoneID == item.ZonalManager).Select(m => m.ZonalMangerName).SingleOrDefault();
+            ViewBag.tll = tll.ZonalMangerName;
+                    }
+                        @ViewBag.tll
+                </td>  
+                }              
+                <td style="width: auto; text-align: center; font-family: Calibri; font-size: 16px">
+                      @Html.ActionLink("Edit", "Edit", new { id = item.CEID }, new { @id = "Deselect", @class = "btn btn-primary glyphicon glyphicon-pencil", @style = "color:white" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CEID }, new { @id = "Deselect", @class = "btn btn-danger glyphicon glyphicon-trash", @style = "color:white" })
+                                        
+                </td>
+            </tr>
+            slno = slno + 1;
+        }
+    </table>
+</div>
+
+

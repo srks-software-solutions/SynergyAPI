@@ -1,0 +1,198 @@
+﻿@model IList<SRKSSynergy.Models.AvailSpareQuantity>
+@using SRKSSynergy.Helpers
+@{
+	
+	ViewBag.Title = "Available Stock";
+}
+
+@{int slno = 1;}
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+
+<div class="bcgr" style="min-width: 1100px">
+	<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Available Stock</p>
+		</div>
+	 <div style="float: right;padding-right:20px">
+		<label class="fntst1">LastUpdated on :&nbsp;&nbsp;@ViewBag.last</label>
+	</div>
+	@using (Html.BeginForm("ChannelAvailQuantity", "Inventory", FormMethod.Get))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		@*Channel Partner Name & Month*@
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span12 pad">
+					<div class="span3" style="padding-left: 80px">
+					<div class="control-group">
+						<label class="control-label fntst">Available Quantity For the Month</label>
+						<div class="controls">
+							<select id="availmonth" name="availmonth" class="input-medium fntst" required="required">
+								<option value="">--Select Month--</option>
+								<option value="Jan,2014">Jan,2014</option>
+								<option value="Feb,2014">Feb,2014</option>
+								<option value="Mar,2014">Mar,2014</option>
+								<option value="Apr,2014">Apr,2014</option>
+								<option value="May,2014">May,2014</option>
+								<option value="Jun,2014">Jun,2014</option>
+								<option value="Jul,2014">Jul,2014</option>
+								<option value="Aug,2014">Aug,2014</option>
+								<option value="Sep,2014">Sep,2014</option>
+								<option value="Oct,2014">Oct,2014</option>
+								<option value="Nov,2014">Nov,2014</option>
+								<option value="Dec,2014">Dec,2014</option>
+								<option value="Jan,2015">Jan,2015</option>
+								<option value="Feb,2015">Feb,2015</option>
+								<option value="Mar,2015">Mar,2015</option>
+								<option value="Apr,2015">Apr,2015</option>
+								<option value="May,2015">May,2015</option>
+								<option value="Jun,2015">Jun,2015</option>
+								<option value="Jul,2015">Jul,2015</option>
+								<option value="Aug,2015">Aug,2015</option>
+								<option value="Sep,2015">Sep,2015</option>
+								<option value="Oct,2015">Oct,2015</option>
+								<option value="Nov,2015">Nov,2015</option>
+								<option value="Dec,2015">Dec,2015</option>
+							</select>
+						</div>
+					</div>
+				</div>
+					@* Button for Search *@
+						<div class="span3" style="padding-top: 20px">
+							<input type="submit" style="width: 100px; height: 35px" name="wrngoanum" value="Get Details" class="btn btn-info" />
+						</div>
+					@* End of buttons *@
+				</div>
+			</div>
+		</div>
+	}
+
+	@using (Html.BeginForm("ChannelAvailQuantity", "Inventory", Model, FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+	 <input type="hidden" id="availmonth", name="availmonth" value="@ViewBag.month" />
+		@*<hr style="border: 1px  dashed" />*@
+		@*<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				@*<div class="span3" style="padding-left: 80px">
+					<div class="control-group">
+						<label class="control-label fntst">Available Quantity For the Month</label>
+						<div class="controls">
+							<select id="availmonth" name="availmonth" class="input-medium fntst" required="required">
+								<option value="">--Select Month--</option>
+								<option value="Jan,2014">Jan,2014</option>
+								<option value="Feb,2014">Feb,2014</option>
+								<option value="Mar,2014">Mar,2014</option>
+								<option value="Apr,2014">Apr,2014</option>
+								<option value="May,2014">May,2014</option>
+								<option value="Jun,2014">Jun,2014</option>
+								<option value="Jul,2014">Jul,2014</option>
+								<option value="Aug,2014">Aug,2014</option>
+								<option value="Sep,2014">Sep,2014</option>
+								<option value="Oct,2014">Oct,2014</option>
+								<option value="Nov,2014">Nov,2014</option>
+								<option value="Dec,2014">Dec,2014</option>
+								<option value="Jan,2015">Jan,2015</option>
+								<option value="Feb,2015">Feb,2015</option>
+								<option value="Mar,2015">Mar,2015</option>
+								<option value="Apr,2015">Apr,2015</option>
+								<option value="May,2015">May,2015</option>
+								<option value="Jun,2015">Jun,2015</option>
+								<option value="Jul,2015">Jul,2015</option>
+								<option value="Aug,2015">Aug,2015</option>
+								<option value="Sep,2015">Sep,2015</option>
+								<option value="Oct,2015">Oct,2015</option>
+								<option value="Nov,2015">Nov,2015</option>
+								<option value="Dec,2015">Dec,2015</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>*@
+	 //Data already exists 
+	 
+if (TempData["avail"] != null)
+	{
+		<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["avail"]</p>
+	}
+	//Data saved successfully
+		if (TempData["yesavail"] != null)
+	{
+		<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["yesavail"]</p>
+	}
+@*Table Data Starts Here*@
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div style="padding-top: 10px; padding-left: 100px">
+					<table class="table-hover">
+						<thead>
+							<tr style="background: #BBBEBD">
+								<th style="width: 50px; text-align: center" class="fntst cal botbor">Serial No</th>
+								<th style="width: 230px; text-align: center" class="fntst cal botbor">Part Number</th>
+								<th style="width: 110px;" class="fntst cal botbor">Description</th>
+								<th style="width: 100px; text-align: center" class="fntst cal botbor">Minimum Stock</th>
+								<th style="width: 100px; text-align: center" class="fntst cal botbor">Available Stock</th>
+							</tr>
+						</thead>
+						@*@foreach (var item in Model)*@
+						@if (Model != null)
+						{
+							for (int i = 0; i < Model.Count; i++)
+							{
+			  
+							<tr>
+								<td style="width: 50px; text-align: center;">
+									@slno
+								</td>
+								<td style="width: 100px; text-align: center;">
+									<label class="fntst">@Html.DisplayFor(m => m[i].ProductModelSpare.ProductModelSparesName)</label>
+								</td>
+								<td style="width: 250px;">
+									<label class="fntst">@Html.DisplayFor(m => m[i].ProductModelSpare.ProductModelSparesDesc)</label>
+								</td>
+								<td style="width: 50px;text-align: center;">
+									<label class="fntst">@Html.DisplayFor(m => m[i].MinCpStock)</label>
+								</td>
+								<td style="width: 100px; text-align: center;">
+									@Html.TextBoxFor(m => m[i].AvailableStock, new { id = "avilst" + slno, @style = "width:60px", @class = "fntst", @placeholder = "Available Stock",@required ="required" })
+								</td>
+								<td style="text-align: center;">
+									@Html.TextBoxFor(m => m[i].ASID, new { @style = "display:none;" })
+									@*@Html.TextBoxFor(m => m[i].ProductModelID, new { @style = "display:none;" })*@
+									@Html.TextBoxFor(m => m[i].ProductModelSparesID, new { @style = "display:none;" })
+									@Html.TextBoxFor(m => m[i].CPID, new { @style = "display:none;" })
+									@Html.TextBoxFor(m => m[i].MinCpStock, new { @style = "display:none;" })
+									@Html.TextBoxFor(m => m[i].ModifiedOn, new { id = "lastupdate", @class = "fntst",Value = @System.DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss tt"), @style = "display:none;" })
+								</td>
+							</tr>
+								slno++;
+							}
+						}
+					</table>
+					<input type="text" id="getslno" value=@slno style="display:none;" />
+				</div>
+				<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+					<div class=" row show-grid">
+						<div class="span10">
+							<div class="span3 cent">
+								<input type="submit" value="Submit" class="btn btn-large btn-success" />
+								<div></div>
+								@*<button class="btn btn-large btn-success" type="button">Generate Report</button>*@
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>

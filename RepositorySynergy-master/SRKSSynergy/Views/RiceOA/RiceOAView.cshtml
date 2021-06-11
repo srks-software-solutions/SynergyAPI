@@ -1,0 +1,251 @@
+﻿@model IList<SRKSSynergy.Models.QGEquipGeneralData>
+
+@{
+    ViewBag.Title = "Existing Quotation";
+    //string qtno = null, cunam = null;
+}
+
+@* Paging & Sorting Code  *@
+
+@*@helper buildLinks(int start, int end, string innerContent)
+{
+    for (int i = start; i <= end; i++)
+    {
+    <a class="@(i == ViewBag.CurrentPage ? "current" : "")"  href="@Url.Action("RiceOAView", "RiceOA", new { page = i, sortBy = ViewBag.sortBy, isAsc = ViewBag.isAsc.ToString().ToLower(), search = ViewBag.Search, cunam = ViewBag.CUNAM })">@(innerContent ?? i.ToString())</a>      
+    }    
+}
+
+
+@helper pageLinks()
+{
+    const int maxPages = 11;
+
+    if (ViewBag.TotalPages <= maxPages)
+    {
+    @buildLinks(1, (int)ViewBag.TotalPages, null)
+        return;
+    }
+
+    int pagesAfter = ViewBag.TotalPages - ViewBag.CurrentPage; // Number of pages after current
+    int pagesBefore = ViewBag.CurrentPage - 1; // Number of pages before current
+
+    if (pagesAfter <= 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st page
+
+        int pageSubset = ViewBag.TotalPages - maxPages - 1 > 1 ? ViewBag.TotalPages - maxPages - 1 : 2;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages - maxPages + 3, ViewBag.TotalPages, null) // Show last pages
+
+        return; // Exit
+    }
+
+    if (pagesBefore <= 4)
+    {
+    @buildLinks(1, maxPages - 2, null) // Show 1st pages
+
+
+        int pageSubset = maxPages + 2 < ViewBag.TotalPages ? maxPages + 2 : ViewBag.TotalPages - 1;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }
+
+    if (pagesAfter > 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st pages
+
+        int pageSubset1 = ViewBag.CurrentPage - 7 > 1 ? ViewBag.CurrentPage - 7 : 2;
+        int pageSubset2 = ViewBag.CurrentPage + 7 < ViewBag.TotalPages ? ViewBag.CurrentPage + 7 : ViewBag.TotalPages - 1;
+
+    @buildLinks(pageSubset1, pageSubset1, pageSubset1 == ViewBag.CurrentPage - 4 ? null : "...") // Show 1st page subset (...)
+
+    @buildLinks(ViewBag.CurrentPage - 3, ViewBag.CurrentPage + 3, null) // Show middle pages
+
+        // Show 2nd page subset (...)
+        // only show ... if page is contigous to the previous one.
+    @buildLinks(pageSubset2, pageSubset2, pageSubset2 == ViewBag.CurrentPage + 4 ? null : "...")
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }    
+}*@
+
+@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("RiceOAView", "RiceOA", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a> 
+    if (id == ViewBag.sortBy)
+    {
+    <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}
+@* End Of Paging & Sorting Code *@
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+@Scripts.Render("~/bundles/modernizr")
+<script>
+    $(document).ready(function () {
+
+        //Enabling only Quotation Number on Value Change
+        $("#qtno").change(function () {
+            var quotnam = $("#qtno").val();
+            if (quotnam.length != 0) {
+                $("#cunam").attr("readonly", true);
+                qtno = $("#qtno").val();
+            }
+            else {
+                $("#cunam").attr("readonly", false);
+            }
+        });
+        //Enabling only Customer Name on Value Change
+        $("#cunam").change(function () {
+            var custnam = $("#cunam").val();
+            if (custnam.length != 0) {
+                $("#qtno").attr("readonly", true);
+                cunam = $("#cunam").val();
+            }
+            else {
+                $("#qtno").attr("readonly", false);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cunam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/RiceOA/Autocomplete3",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<input type="text" id="success" value="false" style="display: none;" />
+<form action="@Url.Action("RiceOAView", "RiceOA")" method="get">
+    <div style="background: #e5e5e5; min-height: 200px">
+        <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">Generate New Order Acknowledgement</p>
+        </div>
+         @*To Display Warning about miss matched Model*@
+            <div id="Error" style="background-color: red">
+                @if (Session["NoModel"] != null)
+                {
+                    <pre>
+<span style="font-family:Calibri;color:red">@Session["NoModel"]</span>
+                    </pre>
+                }
+            </div>
+            @{
+                Session["NoModel"] = null;
+            }
+        <div class="row" style="padding-top: 10px">
+            <div class=" row show-grid">
+                <div class="span12 pad ">
+                    <div class="span3 ">
+                        <div class="control-group ">
+                            <label class="control-label fntst ">Customer Name</label>
+                            <div class="controls ">
+                                @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="cunam" name="cunam" placeholder="Customer Name">*@
+                                @Html.TextBox("cunam", null, new { @class = "printButtonClass noPrint", @placeholder = " Search Customer Name" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="cent3">
+                            @*<input type="submit" value="Get Details" class="btn btn-info existingcustomer" onclick="javascript: return updateparent();" />*@
+                            <input type="submit" value="Get Details" id="gd" class="btn btn-info existingcustomer" />
+                            @*onclick="javascript: return updateparent();"*@
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+@* Wrong Channel Partner *@
+@if (TempData["oagen"] != null)
+{
+    <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["oagen"]</p>
+}
+	@* Status Chances *@
+	@if (TempData["byjt"] != null)
+ {
+		<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["byjt"]</p>
+ }
+	@* Wrong Channel Partner *@
+	@if (TempData["cp&byjt"] != null)
+ {
+		<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["cp&byjt"]</p>
+ }
+@if (ViewBag.IsSearch == true)
+{
+    <div id="getquotations">
+        <table class="table table-striped " style="width: 1300px">
+            @* header *@
+            <tr align="center">
+                <th align="center" style="width: 50px; text-align: center">@sortLink("SL.No", 1)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Quotation No", 2)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Customer Name", 3)</th>
+                <th align="center" style="width: 150px; text-align: center">@sortLink("Subject", 4)</th>
+                <th align="center" style="width: 100px; text-align: center">@sortLink("Channel Partner Quotation No", 5)</th>
+                <th align="center" style="width: 60px; text-align: center">@sortLink("Date", 6)</th>
+                <th align="center" style="width: 120px; text-align: center">Generate RiceOA</th>
+            </tr>
+            @{int i = 1;
+              int slno = 1;}
+            @foreach (var p in Model)
+            {    
+                <tr class="@(i++ % 2 == 0 ? "highlighted" : "")">
+                    <td align="center" style="width: 50px; text-align: center">@slno</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.QuotationNumber</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.MDBGeneralData.OrganizationName</td>
+                    <td align="center" style="width: 150px; text-align: center">@p.Subjectinfo</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.CPQuotationNumber</td>
+                    <td align="center" style="width: 60px; text-align: center">@Html.DisplayFor(modelitem => p.QuotationDate)</td>
+                    <td align="center" style="width: 120px; text-align: center">
+                        @Html.ActionLink("GenerateRiceOA", "RiceOAGenerate", new { qgid = p.QGID }, new { @align = "center", @style = "width:50px;text-align:center", @class = "btn btn-info existingcustomer" })
+                        @*<span></span>
+                                @Html.ActionLink("Reprint", "ReportGeneration", new { qgid = p.QGID }, new { @align = "center", @style = "width:50px;text-align:center", @class = "btn btn-info existingcustomer" })*@
+                    </td>
+                </tr>
+                slno++;
+            }
+
+        </table>
+
+        @*<div class="pagination" style="font-size: 18px; font-family: Calibri; float: right; padding-right: 70px">
+            Page: 
+            @pageLinks()
+        </div>*@
+    </div>
+}
+
+
+@*Hide the Error Message*@
+<script>
+    setTimeout(function () {
+        $('#Error').fadeOut('slow');
+    }, 9000); // <-- time in milliseconds
+</script>

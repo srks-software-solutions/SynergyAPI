@@ -1,0 +1,121 @@
+﻿
+@model IEnumerable<SRKSSynergy.Models.SOT_Temp_tbl>
+
+
+@using SRKSSynergy.Helpers
+@{
+    ViewBag.Title = "SOTTempList";
+}
+
+@{int slno = 1;}
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-min.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.sss').monthpicker();
+    });
+</script>
+
+<div class="bcgr" style="min-width:1450px">
+    @using (Html.BeginForm("SOTTempList", "SOT", Model, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">Sales Opportunity Tracker</p>
+        </div>
+        <div class="row" style="padding-top: 10px">
+            <div class=" row show-grid">
+                <div style="padding-top: 30px;padding-left:70px">
+                    <table class="table-hover">
+                        <thead>
+                            <tr style="background: #BBBEBD">
+                                <th style="width: 50px; text-align: center" class="fntst cal botbor">Serial No</th>
+                                <th style="width: 200px; text-align: center" class="fntst cal botbor">Company Name</th>
+                                <th style="width: 130px; text-align: center" class="fntst cal botbor">Sales Engg Name</th>
+                                 <th style="width: 200px; text-align: center" class="fntst cal botbor">Quotation No</th>
+                                <th style="width: 100px; text-align: center" class="fntst cal botbor">Model</th>
+                                <th style="width: 130px; text-align: center" class="fntst cal botbor">Quantity</th>
+                                <th style="width: 110px; text-align: center" class="fntst cal botbor">BYJT Chnaces</th>                                                               
+                                <th style="width: 110px; text-align: center" class="fntst cal botbor">Order Active</th>
+                                <th style="width: 100px; text-align: center" class="fntst cal botbor"></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @{
+                             SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();   
+                        }
+                        @foreach (var item in Model )
+                        {
+                            <tr>
+                                <td style="width: 50px; text-align: center;">
+                                    @slno
+                                </td>
+                                <td style="width: 50px; text-align: center;">
+                                    @{
+                            var list = db.QGEquipGeneralData.Where(m => m.QGID == item.QGID).SingleOrDefault();
+                                 ViewBag.quono = list.QuotationNumber;
+                                 ViewBag.salesenggname = list.SalesName;
+
+                                 var custname = db.MDBGeneralData.Where(m => m.MDBID == list.MDBID).SingleOrDefault();
+                                 ViewBag.custname = custname.OrganizationName;
+                                    }
+                                    @ViewBag.custname
+
+                                </td>
+                                <td style="width: 60px; text-align: center;">
+                                    @ViewBag.salesenggname
+                                </td>
+                                <td style="width: 100px; text-align: center;">
+                                    @ViewBag.quono
+                                </td>
+                                <td style="width: 100px; text-align: center;">
+                                    @item.Equipment
+                                </td>
+                                <td style="width: 150px; text-align: center;">
+                                    @item.Quantity
+                                </td>
+                                <td style="width: 150px; text-align: center;">
+                                    @item.BYJTChances
+                                </td>
+                                <td style="width: 150px; text-align: center;">
+                                    @item.Orderactive
+                                </td>
+                                <td style="text-align: center; width: 120px">
+                                    @if (item.BYJTChances == 0)
+                                    {
+                                        @Html.ActionLink("Generate LOA", "LOA", "LostOrder", new { qgid = item.QGID }, new { @class = "btn btn-success", @Style = "text-decoration:none" }) 
+                                    }
+                                    else if (item.BYJTChances == 100)
+                                    {
+                                        @Html.ActionLink("Generate OA", "OAGenerate", "OA", new { qgid = item.QGID }, new { @class = "btn btn-success", @Style = "text-decoration:none" }) 
+                                    }
+                                </td>
+                            </tr>
+                                    slno++;
+                             }
+                    </table>
+                    <input type="text" id="getslno" value=@slno style="display:none;" />
+                </div>
+                @*<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+                    <div class=" row show-grid">
+                        <div class="span10">
+                            <div class="span3 cent">
+                                <input type="submit" value="Submit" class="btn btn-large btn-success" />
+                                <div></div>                               
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    }
+</div>
+

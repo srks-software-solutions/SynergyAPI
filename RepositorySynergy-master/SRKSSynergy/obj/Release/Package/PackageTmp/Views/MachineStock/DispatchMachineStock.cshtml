@@ -1,0 +1,265 @@
+﻿
+@model SRKSSynergy.Models.MachineInventory
+
+@{
+	ViewBag.Title = "Edit Machine Inventory";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<style>
+	.validation-summary-valid {
+		display: none;
+	}
+</style>
+<script type="text/javascript">
+	$(document).ready(function () {
+	    $("#Customer").autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					url: "/MachineStock/Autocompletec",
+					type: "POST",
+					dataType: "json",
+					data: { term: request.term },
+					success: function (data) {
+						response($.map(data, function (item) {
+							return { label: item.OrganizationName, value: item.OrganizationName };
+						}))
+
+					}
+				})
+			},
+			messages: {
+				noResults: "", results: ""
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#OANumber").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/MachineStock/AutocompleteOA",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OANumber, value: item.OANumber };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+<div class="bcgr" style="min-height: 590px">
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Dispatch Machine Inventory</p>
+		</div>
+@* No Success *@
+		if (TempData["Success"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["Success"]</p>
+		}
+@* Customer Added *@
+		if (TempData["customer"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["customer"]</p>
+		}
+@* Customer Added *@
+		if (TempData["NoOA"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["NoOA"]</p>
+		}
+		@* Customer Added *@
+		if (TempData["fail"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["fail"]</p>
+		}
+
+@*<div class="bcgr">*@
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Product Type</label>
+							<div class="controls">
+								<input type="text" class="fntst" id="brnm" placeholder="Product Name" value="@ViewBag.pnm" readonly="readonly">
+								@*@Html.TextBoxFor(model => model.ProductModelID, new { @id = "pid", @class = "fntst", @required = "required",@readonly="readonly" })*@
+								@Html.HiddenFor(m => m.ProductModelID)
+								@Html.HiddenFor(m => m.MachineInventoryID)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Machine Serial Number</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+								@Html.TextBoxFor(model => model.MachineSerialNo, new { @id = "srlno", @class = "fntst", @placeholder = "Machine Serial No",@readonly="readonly" })
+								@Html.ValidationMessageFor(model => model.MachineSerialNo)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Type</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.Type, new { @id = "type", @class = "fntst", @placeholder = "Type" ,@readonly="readonly"})
+								@Html.ValidationMessageFor(model => model.Type)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Place Stocked</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.PlaceStocked, new { @id = "placestocked", @class = "fntst", @placeholder = "Place Stocked",@readonly="readonly" })
+								@Html.ValidationMessageFor(model => model.PlaceStocked)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Remarks</label>
+							<div class="controls">
+								@Html.TextBoxFor(model => model.Remarks, new { id = "remarks", @class = "fntst", @placeholder = "Additional Information",@readonly="readonly" })
+								@Html.ValidationMessageFor(model => model.Remarks)
+							</div>
+						</div>
+					</div>
+
+					<div class="span1"></div>
+
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">OA Number</label>
+							<div class="controls">
+                                	@*<input type="text" class="fntst" id="OANumber" value ="OANumber" placeholder="OANumber">*@
+                                	@Html.TextBox("OANumber",null, new { @id = "OANumber", @class = "fntst", @placeholder = "OANumber",@required="required"})
+							</div>
+						</div>
+					</div>
+
+                <div class="span1"></div>
+
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Customer Name</label>
+							<div class="controls">
+								@Html.TextBoxFor(model => model.CustomerName, new { @id = "Customer", @class = "fntst", @placeholder = "Customer Name" ,@readonly="readonly" })
+								@Html.ValidationMessageFor(model => model.CustomerName)
+							</div>
+						</div>
+					</div>
+
+                     <div class="span1"></div>
+
+                    <div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst" id="lblProdModel"></label>
+							<div class="controls">
+								<div id="txtOrDrpDwn"></div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+				<div class="span10 pad ">
+					<div class="span3 cent" style="padding-left: 300px">
+						<input type="submit" name="btnsave" value="Save" class="btn btn-large btn-success" />
+						@*<input type="submit" name="btndispatch" value="Dispatch" class="btn btn-large btn-success" />*@
+					</div>
+					<p style="color: red; font-family: Calibri; font-size: 18px; font-weight: 900">
+						@Html.Label("", Convert.ToString((string)ViewBag.Duplicate))
+					</p>
+				</div>
+
+			</div>
+		</div>
+
+	}
+
+	<div>
+		@Html.ActionLink("Back to List", "Index")
+	</div>
+</div>
+@*@section Scripts {
+		@Scripts.Render("~/bundles/jqueryval")
+	}*@
+<script>
+    $(document).ready(function () {
+        $("#OANumber").focusout(function (evt) {
+            {
+               // alert('s');
+                var selectedID = $("#OANumber").val();
+
+                $.getJSON("/MachineStock/GetOANumber", { ID: selectedID }, function (data) {
+                    $("#Customer").val(data);  //(data.OrganizationName);
+
+                    $.getJSON("/MachineStock/GetProductModels", { ID: selectedID }, function (data) {
+
+                        $('#txtOrDrpDwn').empty();
+                        $('#lblProdModel').empty();
+
+
+                        $('#txtOrDrpDwn').append('<select id="prodModel">' + '</select>' + '<input type="text" id="hiddnProdVal" name="hiddnProdVal" style="visibility:hidden">')//style="visibility:hidden"
+                        var datlen=data.length;
+                        if (datlen > 0)
+                        {
+                            $('#lblProdModel').html("Product Model");
+                        }
+
+                        if (data != null) {
+                            //alert(data);
+                            $.each(data, function (index, optdata) {
+                                $('#prodModel').append('<option value ="' + optdata.ProductModelID + '">' + optdata.ProductModelName + '</option>');
+                                //$('#txtOrDrpDwn').append($('<input/>', { 'type': 'text', 'id': 'prodModel', 'value': optdata.ProductModelName, 'name': optdata.ProductModelID, 'readonly': 'readonly' }))
+                            });
+                            if (datlen > 0) {
+                                $("#hiddnProdVal").val($("#prodModel option:first-child").val());
+                            }
+                        }
+                    });
+                });
+            }
+        })
+    });
+
+    //$('#elemId').length
+
+    $(document).on('change', "#prodModel", function () {
+        var prodVal = this.value;
+        $("#hiddnProdVal").val(prodVal);
+    });
+
+    </script>

@@ -1,0 +1,284 @@
+﻿@model IEnumerable<SRKSSynergy.Models.MachineDispatch>
+@using SRKSSynergy.Helpers
+@{
+    ViewBag.Title = "Machine Dispatch";
+    int slno = 1;
+}
+@* End Of Paging & Sorting Code *@
+
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<script type="text/javascript">    
+    $(document).ready(function () {
+        $("#custnm").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/MachineDispatchDetails/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });    
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#macslno").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/MachineDispatchDetails/AutocompleteMacSlNo",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.MachineSerialNo, value: item.MachineSerialNo };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#printbutton").click(function () {
+            //$("#form2").attr("hidden", "true");
+            $("#printbutton").visible = false;
+            $("#savebutton").visible = false;
+            self.focus()
+            self.print()
+
+        });
+    });
+</script>
+
+<div class="bcgr" style="min-height:590px;min-width:1300px">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Machine Dispatch View</p>
+    </div>
+    
+    <form action="@Url.Action("MachineDispatchView", "MachineDispatchDetails")" method="post">
+        @* Create Equipment Link *@
+        @*<div style="padding-left: 20px;padding-top:10px">
+            @Html.ActionLink("Add New Machine", "AddMachineStock", "MachineStock", new { @class = "btn btn-success", @Style = "text-decoration:none" })
+        </div>*@
+
+        @* Searching for particular module *@
+
+        <div style="background: #e5e5e5; min-height: 30px; min-width: 690px">
+            <div class="row" style="padding-top: 10px">
+                <div class=" row show-grid">
+                    @* Text Box for search *@
+                    <div class="span12 pad">
+                        <div class="span3 ">
+                            <div class="control-group ">
+                                <label class="control-label fntst ">Customer Name</label>
+                                <div class="controls">
+                                     @Html.TextBox("custnm", null, new { @placeholder = " Search Customer Name", @style="height:30px" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span1">OR</div>
+                        <div class="span3 ">
+                            <div class="control-group ">
+                                <label class="control-label fntst ">Machine Serial No</label>
+                                <div class="controls">
+                                  @Html.TextBox("macslno", null, new { @placeholder="Search for Machine Serial No", @style="height:30px"})
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span2" style="padding-top: 20px;">
+                            @*<input type="submit" style="width: 150px; height: 35px" value="Search" class="btn btn-info existingcustomer printButtonClass" />*@
+                            <button type="submit" id="gd" class="btn btn-info btn-large existingcustomer glyphicon glyphicon-search"> Search</button>
+                        </div>   
+                     </div>                    
+                    
+                    @*<div class="span12 pad">
+                        <div class="span1"></div>                       
+                        <div class="span3" style="padding-top: 20px;padding-left:130px;">
+                            <input type="submit" style="width: 150px; height: 35px" value="Search" class="btn btn-info existingcustomer printButtonClass" />
+                        </div>                                               
+                    </div>*@
+                </div>
+            </div>
+        </div>
+
+        @* Searching for a particular Model view *@
+        <div class="row noPrint" id="form2">
+            <div class=" row show-grid">
+                <div class="span12 pad ">
+                    <div class="span3 ">
+                        <div class="control-group ">
+                            <div class="span3" style="padding-top: 20px">
+                                
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <span id="rData"></span>
+                </div>
+            </div>
+        </div>
+        
+
+        @* Table for Equipment *@
+        <table class="table table-hover" style="width: auto;">
+            <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No.</span>
+                </th>
+                <th style="width: 170px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Machine Serial No</span>
+                </th>
+                <th style="width: 170px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Model No</span>
+                </th>
+                <th style="width: 170px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Customer Name</span>
+                </th>
+                <th style="width: 200px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Order Number</span>
+                </th>
+                <th style="width: 250px; text-align: center;">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Invoice Number</span>
+                </th>
+                <th style="width: 100px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Invoice Date</span>
+                </th>
+                <th style="width: 250px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">LR Number</span>
+                </th>
+                 <th style="width: 100px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Dispatch Date</span>
+                </th>
+                 <th style="width: 250px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Transporter</span>
+                </th>
+                 <th style="width: 100px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px" >Commission Date</span>
+                </th>
+               @* <th style="width: 100px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px" >Channel Partner</span>
+                </th>*@
+                <th></th>
+            </tr>
+            @{
+                SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td>
+                    <td style="width: 170px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.MachineInventory.MachineSerialNo)
+                    </td>
+                    <td style="width: 170px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.MachineInventory.ProductModel.ProductModelName)
+                    </td>
+                    <td style="width: 170px;"text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.MDBGeneralData.OrganizationName, new { id = "custnm" })
+                    </td>
+                    <td style="width: 200px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.OANumber)
+                    </td>
+                    <td style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                    </td>
+                    <td style="width: 10px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.InvoiceDate)
+                    </td>
+                    <td style="width: 230px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.LRNumber)
+                    </td>
+                    <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.DispatchDate)
+                    </td>
+                     <td style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.Transporter)
+                    </td>
+                     <td style="width: 100px; text-align: center; font-family: Calibri; font-size: 18px">
+                         @{
+                var oanum = db.MachineDispatch.Where(m => m.MachineDispatchID == item.MachineDispatchID).Select(m => m.OANumber).SingleOrDefault();
+                var handeddate = db.Handover.Where(m => m.OAnum == oanum).Select(m => m.Handeddate).SingleOrDefault();
+                 DateTime dd = Convert.ToDateTime(handeddate);
+                 string dd1 = dd.ToString("dd-MM-yyyy");
+                 ViewBag.handeddate = dd1;
+                         }
+                        @ViewBag.handeddate 
+                         @*@Html.DisplayFor(modelItem => item.CommissionDate)*@
+                    </td>
+                     @*<td style="width: 150px; text-align: center; font-family: Calibri; font-size: 18px">
+				        <label class="fntst1"> @ViewBag.OrganizationName</label>
+					</td>	*@	
+                </tr>
+                slno++;
+            }
+
+        </table>
+        			
+        @*<div class="pagination" style="font-size: 18px; font-family: Calibri;float:right;padding-right:70px">
+            Page: 
+            @pageLinks()
+        </div>*@
+    </form>
+     @using (Html.BeginForm("ExportData", "MachineDispatchDetails", FormMethod.Post, new { enctype = "multipart/form-data" }))
+			 {	        	 
+			<input type="text" name="custnm" class="input-xxsmall fntst" id="custnm" value="@ViewBag.OrganizationName" style="display:none" >		    
+			<div class="row" style="padding-top: 20px; padding-left: 300px; padding-bottom: 20px">
+				<div class=" row show-grid">
+					<div class="span12">
+						<div class="span3 ">                         						
+							@*<input type="submit" style="width: 100px; height: 35px" value="Export" class="btn btn-info existingcustomer printButtonClass" />*@
+                            <button class="btn btn-success glyphicon glyphicon-download " value="post" type="Submit"> Export</button>
+                            </div>
+                        <div class="span3">
+                        <button class="btn btn-info printButtonClass glyphicon glyphicon-print " id="printbutton" style="width:100px;height:35px" type="button"> Print</button>
+						</div>
+					</div>
+				</div>
+			</div>
+         
+         @*<div class="row" style="padding-top: 10px; padding-left: 300px; padding-bottom: 1px">
+		<div class=" row show-grid">
+			<div class="span10">
+				<div class="span3 cent">
+					<button class="btn btn-info printButtonClass" id="printbutton" style="width:100px;height:35px" type="button">Print</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+			</div>
+		</div>
+    </div>*@
+             }     
+</div>

@@ -1,0 +1,409 @@
+﻿@model SRKSSynergy.Models.OCMWhitner
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@*grain type*@
+@{
+    List<SelectListItem> listItems40 = new List<SelectListItem>();
+    listItems40.Add(new SelectListItem
+    {
+        Text = "Medium",
+        Value = "Medium",
+    });
+    listItems40.Add(new SelectListItem
+    {
+        Text = "Long",
+        Value = "Long",
+    });
+    listItems40.Add(new SelectListItem
+    {
+        Text = "Long/Medium",
+        Value = "Long/Medium"
+    });
+}
+
+@* Motor Type Question *@
+@{
+    List<SelectListItem> motortypelistsItems = new List<SelectListItem>();
+    motortypelistsItems.Add(new SelectListItem
+    {
+        Text = "Foot Motor Only",
+        Value = "Foot Motor Only"
+    });
+    motortypelistsItems.Add(new SelectListItem
+    {
+        Text = "Flanged Motor Only",
+        Value = "Flanged Motor Only"
+    });    
+}
+
+
+@*process*@
+@{
+    List<SelectListItem> listItems41 = new List<SelectListItem>();
+    listItems41.Add(new SelectListItem
+    {
+        Text = "Raw",
+        Value = "Raw"
+    });
+    listItems41.Add(new SelectListItem
+    {
+        Text = "Steam",
+        Value = "Steam",
+    });
+    listItems41.Add(new SelectListItem
+    {
+        Text = "Parboiled",
+        Value = "Parboiled",
+    });
+    listItems41.Add(new SelectListItem
+    {
+        Text = "Raw/Steam",
+        Value = "Raw/Steam",
+    });
+    listItems41.Add(new SelectListItem
+    {
+        Text = "Raw,Steam/Parboiled",
+        Value = "Raw,Steam/Parboiled",
+    });
+}
+
+@*Pass*@
+@{
+    List<SelectListItem> listItemsPass = new List<SelectListItem>();
+    listItemsPass.Add(new SelectListItem
+    {
+        Text = "1",
+        Value = "1"
+    });
+    listItemsPass.Add(new SelectListItem
+    {
+        Text = "2",
+        Value = "2",
+    });
+    listItemsPass.Add(new SelectListItem
+    {
+        Text = "3",
+        Value = "3",
+    });
+    listItemsPass.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4",
+    });
+    listItemsPass.Add(new SelectListItem
+    {
+        Text = "1/2",
+        Value = "1/2",
+    });
+    listItemsPass.Add(new SelectListItem
+    {
+        Text = "2/3",
+        Value = "2/3",
+    });
+    listItemsPass.Add(new SelectListItem
+    {
+        Text = "3/4",
+        Value = "3/4",
+    });
+}
+
+@*Capacity*@
+@{
+    List<SelectListItem> listItemscapacity = new List<SelectListItem>();
+    listItemscapacity.Add(new SelectListItem
+    {
+        Text = "3",
+        Value = "3"
+    });
+    listItemscapacity.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4",
+    });
+    listItemscapacity.Add(new SelectListItem
+    {
+        Text = "3/4",
+        Value = "3/4",
+    });
+}
+
+@*Polish Requirement*@
+@{
+    List<SelectListItem> listItemspolishreq = new List<SelectListItem>();
+    listItemspolishreq.Add(new SelectListItem
+    {
+        Text = "Silky",
+        Value = "Silky"
+    });
+    listItemspolishreq.Add(new SelectListItem
+    {
+        Text = "Highly Silky",
+        Value = "Highly Silky",
+    });
+}
+
+@*Motor Type*@
+@{
+    List<SelectListItem> listItemsmotortype = new List<SelectListItem>();
+    listItemsmotortype.Add(new SelectListItem
+    {
+        Text = "With-Motor",
+        Value = "With-Motor"
+    });
+    listItemsmotortype.Add(new SelectListItem
+    {
+        Text = "WithOut-Motor",
+        Value = "WithOut-Motor",
+    });
+}
+
+@*Motor rating*@
+@{
+    List<SelectListItem> listItemsmotorrating = new List<SelectListItem>();
+    listItemsmotorrating.Add(new SelectListItem
+    {
+        Text = "30kW, 4p",
+        Value = "30kW, 4p"
+    });
+    listItemsmotorrating.Add(new SelectListItem
+    {
+        Text = "30kW, 6p",
+        Value = "30kW, 6p",
+    });
+    listItemsmotorrating.Add(new SelectListItem
+    {
+        Text = "37kW, 4p",
+        Value = "37kW, 4p"
+    });
+    listItemsmotorrating.Add(new SelectListItem
+    {
+        Text = "37kW, 6p",
+        Value = "37kW, 6p",
+    });
+    listItemsmotorrating.Add(new SelectListItem
+    {
+        Text = "45kW, 4p",
+        Value = "45kW, 4p",
+    });
+}
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<div class="bcgr ">
+@using (Html.BeginForm())
+{
+	<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">OCM Whiting</p>
+		</div>
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true)
+
+    @Html.HiddenFor(m => m.OWID)
+    @Html.HiddenFor(m => m.CreatedBy)
+    @Html.HiddenFor(m => m.CreatedOn)
+
+	<div class="row">
+		<div class=" row show-grid">
+			<div class="span12 pad">
+                <p class="pad txtal">Input's</p>
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Model Name</label>
+						<div class="controls">
+							@Html.TextBoxFor(model => model.ModelName, new { @id = "ModelName", @class = "fntst", @placeholder = "ModelName", @required = "required",@style="height:30px" })
+							@*@Html.ValidationMessageFor(model => model.UserLogin.MiddleName)*@
+						</div>
+					</div>
+				</div>
+			</div>
+            <div class="span14 pad">
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Grain Type</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.GrainType, listItems40, "-- Select --", new { @id = "GrainType", @name = "GrainType", @class = "input-xlarge fntst" })
+						</div>
+					</div>
+				</div>
+				<div class="sapn1"></div>
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Process</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.Process, listItems41, "-- Select --", new { @id = "Process", @name = "Process", @class = "input-xlarge fntst" })
+						</div>
+					</div>
+				</div>
+
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Pass</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.Pass, listItemsPass, "-- Select --", new { @id = "Pass", @name = "Pass", @class = "input-xlarge fntst" })
+						</div>
+					</div>
+				</div>
+
+                <div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Capacity</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.Capacity, listItemscapacity, "-- Select --", new { @id = "Capacity", @name = "Capacity", @class = "input-xlarge fntst" })
+						</div>
+					</div>
+				</div>
+			</div>
+
+            <div class="span14 pad">
+				
+
+
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Motor</label>
+                        <div class="controls">
+							@Html.DropDownListFor(model => model.MotorQ, listItemsmotortype, "-- Select --", new { @id = "MotorQ", @name = "MotorQ", @class = "input-xlarge fntst" })
+						</div>
+					</div>
+				</div>
+
+                <div id="mtrtype" class="span3" style="display: none">
+					<div class="control-group">
+						<label class="control-label fntst">Motor Type</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.MotorType, motortypelistsItems, "-- Select --", new { @id = "MotorType", @name = "MotorType", @class = "input-xlarge fntst" })                                                                                
+						</div>
+					</div>
+				</div>
+
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Motor Rating</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.MotorRating, listItemsmotorrating, "-- Select --", new { @id = "MotorRating", @name = "MotorRating", @class = "input-xlarge fntst" })
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="span12 pad">
+				<p class="pad txtal">Most Commonly Used / Recommended Motor & Drive</p>
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Motor</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.Motor, (SelectList)ViewData["MotorDescription"], "--Select Motor--", new { @id = "motor", @class = "input-xlarge fntst" })
+						</div>
+					</div>
+				</div>                
+				<div class="sapn1"></div>
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Drive</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.Drive, (SelectList)ViewData["DriveDescription"], "--Select Drive--", new { @id = "drive", @class = " input-xlarge fntst" })
+						</div>
+					</div>
+				</div>
+			</div>
+
+            <div class="span12 pad">
+				<p class="pad txtal">Most Commonly Used / Recommended Options</p>
+				<div class="span3">
+                    <div class="control-group">
+						<label class="control-label fntst">Stone</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.Stone, (SelectList)ViewData["StoneDescription"], "--Select Stone--", new { @id = "stone", @class = " input-xlarge fntst", @required = "required" })
+						</div>
+					</div>
+				</div>
+				<div class="sapn1"></div>
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Sieve</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.Sieve, (SelectList)ViewData["SieveDescription"], "--Select Sieve--", new { @id = "sieve", @class = " input-xlarge fntst", @required = "required" })
+						</div>
+					</div>
+				</div>
+                <div class="sapn1"></div>
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Brake</label>
+						<div class="controls">
+							@Html.DropDownListFor(model => model.Brake, (SelectList)ViewData["BrakeDescription"], "--Select Brake--", new { @id = "brake", @class = " input-xlarge fntst", @required = "required" })
+						</div>
+					</div>
+				</div>
+			</div>
+            <div class="span12 pad">
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">CT Coil</label>
+						<div class="controls">
+                            @Html.DropDownListFor(model => model.CTCoil, (SelectList)ViewData["CTCoilDescription"], "--Select CTCoil--", new { @id = "CTCoil", @class = " input-xlarge fntst", @required = "required" })
+						</div>
+					</div>
+				</div>
+				<div class="sapn1"></div>
+				<div class="span3">
+					<div class="control-group">
+						<label class="control-label fntst">Accessories Tool Box</label>
+						<div class="controls">
+                            @Html.DropDownListFor(model => model.AccessoriesToolBox, (SelectList)ViewData["AccessoriesDescription"], "--Select Accessories--", new { @id = "AccessoriesToolBox", @class = " input-xlarge fntst", @required = "required" })
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+				@*Buttons*@
+				<div class="span10 pad ">
+            <div class="span3 cent" style="padding-left: 2%">
+			    <button class="btn btn-success btn-large glyphicon glyphicon-arrow-left" style="display: inline;">@Html.ActionLink(" Back_to_List", "Index","OCMWhitner", new { @Style="color:white;text-decoration:none"})</button>
+            </div>
+            <div class="span3 cent" style="padding-left: 10%">
+				<button class="btn btn-success glyphicon glyphicon-cloud-upload" value="post" type="Submit"> Update</button>
+            </div>
+		</div>
+				@*End Of Buttons*@
+			</div>
+		</div>
+
+}
+ </div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/Javascript">
+    $(document).ready(function () {
+        $("#MotorQ").change(function () {
+            var counter = document.getElementById("MotorQ").value;
+            if (counter == 'WithOut-Motor') {
+                $("#mtrtype").attr("style", "display:block");
+            }
+            else {
+
+                $("#mtrtype").attr("style", "display:none");
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $("#MotorQ").ready(function () {
+            var counter = document.getElementById("MotorQ").value;
+            if (counter == 'WithOut-Motor') {
+                $("#mtrtype").attr("style", "display:block");
+            }
+            else {
+
+                $("#mtrtype").attr("style", "display:none");
+            }
+        });
+    });
+</script>

@@ -1,0 +1,268 @@
+﻿@model IEnumerable<SRKSSynergy.Models.LeadEnquiry>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Synergy - Dashboard</title>
+    @*<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/MDB.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/menu.css">
+        <script type="text/javascript" src="bootstrap/js/jquery-1.9.1.min.js"></script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var tabs = $('.tabsm > li');
+            tabs.on("click", function () {
+                tabs.removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+
+    </script>
+
+    @* FOr panel *@
+    <!-- Bootstrap Core CSS -->
+    @*<link href="../bower_components/bootstrap/js/dist/css/bootstrap.min.css" rel="stylesheet">*@
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        .auto-style1 {
+            font-size: xx-large;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .ScrollStyle {
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+
+        .auto-style2 {
+            float: left;
+            height: 30px;
+            padding: 15px 15px;
+            font-size: xx-large;
+            line-height: 20px;
+        }
+
+        .tp {
+            background: #FAFAFA;
+        }
+    </style>
+    @* ENd panel *@
+
+    @* Autoscroll the Division *@
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var interval = setInterval(function () {
+                if ($("#div1").scrollTop() != $('#div1')[0].scrollHeight) {
+                    $("#div1").scrollTop($("#div1").scrollTop() + 2);
+                }
+                else {
+                    clearInterval(interval);
+                }
+            }, 500);
+        });
+    </script>
+</head>
+
+@*This code will use for Automatic Page refresh*@
+<script type="text/javascript">
+        function timedRefresh(timeoutPeriod) {
+            setTimeout(function () {
+                location.reload(true);
+            }, timeoutPeriod);
+        }
+</script>
+
+<body onload="JavaScript:timedRefresh(90000);" style="margin: 0 auto">
+    @{
+        ViewBag.Title = "Synergy";
+        int slno = 1;
+    }
+    <div class="bcgr" style="margin: 0 auto; min-height: 650px">
+        <div style="padding-top: 80px; padding-bottom: 100px; margin: 0 auto">
+            <table style="text-align: center; margin: 0 auto; width: 1300px; height: 220px;">
+
+                <tr style="padding-bottom: 10px">
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/LeadEnquiry/LEIndexRevised" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/leadg.png" alt='missing' />
+                                <figcaption><strong>RC Single Machine Leads Generator</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/Quotation/RiceMillGenerate" style="text-decoration: none">
+                            <figure>
+
+                                <img src="~/Content/bootstrap/img/mark_quote.png" alt='missing' />
+                                <figcaption><strong>Rice Quote Generator</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/QuotationSpares/Create" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/quotations1_icon.png" alt='missing' />
+                                <figcaption><strong>Spares Quote Generator</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/SOTRM/SOTRMList" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/SOT_icon.png" alt='missing' />
+                                <figcaption><strong>Sales Opportunity Tracker</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="4" style="background: #fff8dc; width: 400px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        @*extra for notification*@
+                        <i class="fa fa-bell fa-fw">&nbsp; </i>Notifications Panel
+                        <div id="div1" class="panel panel-default ScrollStyle" style="height: 400px;height:450px">
+                            <table id="table1" class="table table-hover " style="width: 400px; height: 100px;">
+                                @{
+                                    DateTime now = DateTime.Now;
+                                    var startDate = new DateTime(now.Year, now.Month, 1);
+                                    var enddate = System.DateTime.Now;
+                                    var enddate1 = startDate.AddMonths(1).AddDays(-1);
+                                    var yesterday = DateTime.Today.AddDays(-1);
+                                    SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @if (item.IsStatus == 0)
+                                        {
+                                            <td>
+                                                @{
+                                                    var name = db.ChannelPartners.Where(m => m.CPID == item.CPID).Select(m => m.CPName).SingleOrDefault();
+                                                    ViewBag.drp1 = name;
+                                                }
+                                                @ViewBag.drp1 Lead Generated on @Html.DisplayFor(modelItem => item.NotifyDate)
+                                            </td>
+                                                    }
+                                                    else if (item.IsStatus == 1)
+                                                    {
+                                                        <td>
+                                                            @{
+                                                                var name = db.ChannelPartners.Where(m => m.CPID == item.CPID).Select(m => m.CPName).SingleOrDefault();
+                                                                ViewBag.drp1 = name;
+                                                            }
+                                                            @ViewBag.drp1 Lead Closed(Moved to MDB) @Html.DisplayFor(modelItem => item.NotifyDate)
+                                                        </td>
+                                                                }
+                                                                else if (item.IsStatus == 2)
+                                                                {
+                                                                    <td>
+                                                                        @{
+                                                                            var name = db.ChannelPartners.Where(m => m.CPID == item.CPID).Select(m => m.CPName).SingleOrDefault();
+                                                                            ViewBag.drp1 = name;
+                                                                        }
+                                                                        @ViewBag.drp1 Lead Dropped @Html.DisplayFor(modelItem => item.NotifyDate)
+                                                                    </td>
+                                                                            }
+                                                                            else if (item.IsStatus == 3)
+                                                                            {
+                                                                                <td>
+                                                                                    @{
+                                                                                        var name = db.ChannelPartners.Where(m => m.CPID == item.CPID).Select(m => m.CPName).SingleOrDefault();
+                                                                                        ViewBag.drp1 = name;
+                                                                                    }
+                                                                                    @ViewBag.drp1  Quotation Generated @Html.DisplayFor(modelItem => item.NotifyDate)
+                                                                                </td>
+                                                                                        }
+
+                                    </tr>
+                                                                                            slno++;
+                                                                                        }
+                            </table>
+                        </div>
+                        @*end*@
+                    </td>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/RiceOA/RiceOAChannelStatus" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/reportsstatus.png" alt='missing' />
+                                <figcaption><strong> Order Status Tracker</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/RiceOA/RiceOAExisting" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/report_check.png" alt='missing' />
+                                <figcaption><strong> Revise Existing Orders</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/HOD/HODView" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/Orderack.png" alt='missing' />
+                                <figcaption><strong>Generate HOD</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/Inventory/ChannelAvailQuantity" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/inventory.png" alt='missing' />
+                                <figcaption><strong>Spare Stock Management</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

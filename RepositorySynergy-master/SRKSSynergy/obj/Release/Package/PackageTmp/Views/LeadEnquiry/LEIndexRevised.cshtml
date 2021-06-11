@@ -1,0 +1,274 @@
+﻿@model IEnumerable<SRKSSynergy.Models.LeadEnquiryRevised>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Lead Search Revised";
+    int slno = 1;
+            //Layout = null;    
+}
+
+@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("LEIndexRevised", "LeadEnquiry", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a> 
+    if (id == ViewBag.sortBy)
+    {
+    <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}
+
+@* End Of Paging & Sorting Code *@
+
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+@*<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>*@
+<script src="~/Content/bootstrap/js/jquery-2.1.4.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+
+@*<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>*@
+@*<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>*@
+@*<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>*@
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#custname").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/LeadEnquiry/Autocomplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.MillName, value: item.MillName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    function leadcreate() {
+        window.opener.location.href = "LECreateRevised";
+        self.close();
+    }
+</script>
+
+<div class="bcgr" style="min-height: 700px; min-width: 1300px">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Single Machine Business Leads</p>
+    </div>
+
+    <form method="post">
+
+
+        <br />
+        @*Success Message*@
+        @if (TempData["Success"] != null)
+        {
+            <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["Success"]</p>
+        }
+
+        @if (TempData["fail"] != null)
+        {
+            <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["fail"]</p>
+        }
+
+        @if (TempData["message"] != null)
+        {
+            <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["message"]</p>
+        }
+
+
+
+        <div class="row">
+            <div class=" row show-grid">
+                @* Text Box for search *@
+                <div class="span18">
+                    <div class="span3">
+                        @Html.ActionLink(" Add", "LECreateRevised", "LeadEnquiry", new { @class = "btn btn-primary glyphicon glyphicon-plus", @Style = "text-decoration:none" })
+                    </div>
+                    <div class="span3 ">
+                        <div class="control-group ">
+                            <div class="controls" style="padding-left: 70px">
+                                @Html.TextBox("custnm", null, new { @placeholder = " Search Customer Name", @style = "height:35px;width:200px;",@id="custname"})
+                            </div>
+                        </div>
+                    </div>
+
+                    @* Button for Search *@
+                    <div class="span6">
+                        @*<input type="submit" value="Search" class="btn btn-primary glyphicon glyphicon-search" />*@
+                        <button class="btn btn-success glyphicon glyphicon-search " value="Search" type="Submit">Search</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+                        @Html.ActionLink("Existing Leads Details", "LeadFollowUpIndex", "LeadEnquiry", new { @class = "btn btn-primary glyphicon", @Style = "text-decoration:none" })
+                    </div>
+                    @* End of buttons *@
+
+                </div>
+            </div>
+        </div>
+
+        @* Table for Equipment *@
+        <table class="table table-hover">
+            @* style="width: 1350px;"*@
+            <tr style="background: #BBBEBD;">
+                <th style="width: 60px; text-align: left">
+                    <span style="font-family: Calibri; font-size: 16px;">Sl No.</span>
+                </th>
+                <th style="width: 120px; text-align: left">
+                    <span style="font-family: Calibri; font-size: 16px;">Mill Name</span>
+                </th>
+                <th style="width: 80px; text-align: left">
+                    <span style="font-family: Calibri; font-size: 16px;">Mobile No</span>
+                </th>
+                <th style="width: 80px; text-align: left;">
+                    <span style="font-family: Calibri; font-size: 16px;">Email ID</span>
+                </th>
+                <th style="width: 70px; text-align: left;">
+                    <span style="font-family: Calibri; font-size: 16px;">Owner Name</span>
+                </th>
+                <th style="width: 60px; text-align: left">
+                    <span style="font-family: Calibri; font-size: 16px;">Pin Code</span>
+                </th>
+                <th style="width: 50px; text-align: left">
+                    <span style="font-family: Calibri; font-size: 16px;">City</span>
+                </th>
+                <th style="width: 350px;" class="noPrint">Quote || Drop/Enable || Edit|| Delete</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 40px; text-align: left; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td>
+                    <td style="width: 120px; text-align: left; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.MillName)
+                    </td>
+                    <td style="width: 80px; text-align: left; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.MobNo)
+                    </td>
+
+                    <td style="width: 70px; text-align: left; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.EmailId)
+                    </td>
+                    <td style="width: 50px; text-align: left; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.OwnerName)
+                    </td>
+                    <td style="width: 50px; text-align: left; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.Pincode)
+                    </td>
+                    <td style="width: 50px; text-align: left; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td class="noPrint" style="width: 350px">
+                        @*  @Html.ActionLink("Convert", "ConvertToMDB","LeadEnquiry", new { id=item.LEID }, new { @class = "btn btn-success", @Style = "text-decoration:none" }) |*@
+
+                        @if (item.IsStatus == 1)
+                        {
+                            <span style="color: red">Lead Qualified and Moved to Master Database</span>
+                        }
+                        else if (item.IsStatus == 3)
+                        {
+                            <span style="color: red">Quotation Generated</span>
+                        }
+                        else if (item.IsStatus == 4)
+                        {
+                            <span style="color: red">Order Generated</span>
+                        }
+                        else
+                        {
+                            <span>&nbsp</span>  
+                            if (item.IsStatus == 2)
+                            {
+                            @Html.ActionLink(" ", "EnableEnquiryRevised", "LeadEnquiry", new { id = item.LERID }, new { @class = "btn btn-warning glyphicon glyphicon-ok", @title = "Enable", @Style = "text-decoration:none" })
+                            }
+                            else
+                            {  
+                                                    
+                            <!-- @Html.ActionLink(" ", "ConvertToMDBRevised", "LeadEnquiry", new { id = item.LERID }, new { @class = "btn btn-primary glyphicon glyphicon-file", @title = "Quotation", @Style = "text-decoration:none" })-->                                  
+                            @*<a data-toggle="modal" data-id='@item.LERID' title="Quotation" class="open-AddBookDialog btn btn-primary glyphicon glyphicon-file" href="#addBookDialog"></a>*@
+                            <a data-id='@item.LERID' class="btn btn-primary glyphicon glyphicon-file procQuot" Style = "text-decoration:none" title="Quotation"></a>
+                            <span>&nbsp</span>
+                            
+                            @Html.ActionLink(" ", "DropEnquiryRevised", "LeadEnquiry", new { id = item.LERID }, new { @class = "btn btn-warning glyphicon glyphicon-remove", @title = "Drop", @Style = "text-decoration:none" })                         
+                            }                       
+                            <span>&nbsp</span>
+                            @Html.ActionLink(" ", "LEEditRevised", "LeadEnquiry", new { id = item.LERID }, new { @class = "btn btn-primary glyphicon glyphicon-pencil", @title = "Edit", @Style = "text-decoration:none" })
+                            <span>&nbsp</span>				
+                            @Html.ActionLink(" ", "LEDeleteRevised", "LeadEnquiry", new { id = item.LERID }, new { @class = "btn btn-danger glyphicon glyphicon-trash", @title = "Delete", @Style = "text-decoration:none" })
+                        }
+                    </td>
+                </tr>
+                        slno++;
+            }
+        </table>
+    </form>
+</div>
+
+<!--Modal Window-->
+<div class="modal fade modal-header" id="exampleModalLong" aria-hidden="true"
+    style="overflow: hidden; width: 50%; height: 30%; margin: 0 auto; position: fixed;">
+
+    <h5 class="modal-title" id="exampleModalLongTitle">Please Select Quotation Type</h5>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+    <div class="modal-body">
+
+        <div class="modal-footer">
+            <div class="col-md-6">
+                @*@Html.ActionLink("Sorter", "ConvertToMDBRevised", "LeadEnquiry" new {type="Sorter"}, new { @name="mwbookId1" ,@id="mwbookId1",@class = "btn btn-primary",value=""})*@
+                <button id="mwbookId1" name="mwbookId1" class="btn btn-primary">Sorter</button>
+            </div>
+            <div class="col-md-6">
+                @* @Html.ActionLink("Rice Mill", "ConvertToMDBRevised", "LeadEnquiry", new {type="RiceMill"}, new { @name="mwbookId" ,@id="mwbookId",@class = "btn btn-primary" })*@
+                <button id="mwbookId" name="mwbookId" class="btn btn-primary">Rice Mill</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<script src="~/Content/bootstrap/js/jquery-1.9.1.min.js"></script>
+<link href="~/Content/bootstrap/css/bootstrap-3.0.0.min.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/bootstrap.min.js"></script>*@
+@*<link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />*@
+
+<script type="text/javascript">
+
+    var targetid;
+    $(".procQuot").click(function (e) {
+        $('#exampleModalLong').modal('show');
+        targetid = $(this).data('id');
+        //alert(targetid);
+    });
+
+    $("#mwbookId1,#mwbookId").click(function () {
+
+        //alert("hi");
+        var checkDiv = $(this).parent();
+        //alert(this.id);
+        if (this.id == 'mwbookId1') {
+            window.location = "/LeadEnquiry/ConvertToMDBRevised" + "?type=Sorter" + "&id=" + targetid;
+        }
+        if (this.id == 'mwbookId') {
+            window.location = "/LeadEnquiry/ConvertToMDBRevised" + "?type=RiceMill" + "&id=" + targetid;
+        }
+    });
+
+</script>

@@ -1,0 +1,312 @@
+﻿@model SRKSSynergy.Models.Handover
+@{
+	ViewBag.Title = "HODReport";
+	Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title - Synergy Application</title>
+	<meta name="viewport" content="width=device-width" />
+	<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+	<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+	<script src="~/Content/bootstrap/js/jquery-1.9.1.min.js"></script>
+	<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+	@Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+<div class="container" id="content" style="width: 1000px">
+		<div style="height: 100px">
+			<div style="width: 700px; float: left; height: 100px"></div>
+			<div style="width: 300px; height: 100px; float: right">
+			</div>
+		</div>
+	<!--Handing over Protocol-->
+		<div class="row" style="padding-top: 20px">
+				<div class=" row show-grid">
+					<div class="span10" style="padding-left:60px">
+						<label class="checkbox inline">
+                        <strong>Protocol of</strong></label>
+						<label class="checkbox inline" style="padding-left:20px">
+							@Html.CheckBoxFor(m => m.Handing, new { id = "handing", @name = "handing", @class = "inline", @type = "checkbox" })
+							<strong>Handing over</strong>
+						</label>
+						<label class="checkbox inline" style="padding-left:20px">
+							@Html.CheckBoxFor(m => m.Commis, new { id = "commis", @name = "commis", @class = "inline", @type = "checkbox" })
+							<strong>Commissioning</strong>
+						</label>
+						<label class="checkbox inline" style="padding-left:20px">
+							@Html.CheckBoxFor(m => m.Termi, new { id = "termi", @name = "termi", @class = "inline", @type = "checkbox" })
+							<strong>Termination of Erection</strong>
+						</label>
+					</div>
+				</div>
+			</div>
+	<!--Table data-->
+		<div class="row" style="padding-top: 10px">
+				<div class=" row show-grid">
+					<div class="span10" style="padding-left:60px; padding-top:40px;padding-bottom:40px">
+						<div class="span5">
+							<table class="table table-bordered" style="min-width: 800px;border:1px solid black">
+								<tbody>
+									<tr >
+										<td style="width:270px">
+											<label class="control-label "><strong>HOD Number</strong></label></td>
+										<td ><strong>:</strong></td>
+										<td style="width:350px">
+											<label class="fntstrep" style="padding-left:30px"><strong>@Model.HODNumber</strong></label>
+										</td>
+									</tr>
+									<tr >
+										<td style="width:270px">
+											<label class="control-label "><strong>Customer Name</strong></label></td>
+										<td ><strong>:</strong></td>
+										<td style="width:350px">
+											<label class="fntstrep" style="padding-left:30px">@ViewBag.cust</label>
+										</td>
+									</tr>
+									<tr style="border-bottom:1px solid black">
+										<td style="width:270px">
+											<label class="control-label "><strong>Place / Country</strong></label></td>
+										<td><strong>:</strong></td>
+										<td style="width:350px">
+											<label class="fntstrep" style="padding-left:30px">@ViewBag.city</label>
+										</td>
+									</tr>
+									<tr style="border-bottom:1px solid black">
+										<td style="width:270px">
+											<label class="control-label "><strong>Customer Purchase Order No.</strong></label></td>
+										<td><strong>:</strong></td>
+										<td style="width:350px">
+											<label class="fntstrep" style="padding-left:30px">@Model.Custpurorderno</label>
+										</td>
+									</tr>
+									<tr style="border-bottom:1px solid">
+										<td style="width:270px">
+											<label class="control-label "><strong>Buhler Customer No. / Order No.</strong></label></td>
+										<td><strong>:</strong></td>
+										<td style="width:350px">
+											<label class="fntstrep" style="padding-left:30px">@Model.Buhlercustorderno</label>
+										</td>
+									</tr>
+									<tr style="border-bottom:1px solid">
+										<td style="width:270px">
+											<label class="control-label "><strong>Project</strong></label></td>
+										<td><strong>:</strong></td>
+										<td style="width:350px">
+											<label class="fntstrep" style="padding-left:30px">@Model.Project</label>
+										</td>
+									</tr>
+									<tr style="border-bottom:1px solid">
+										<td style="width:270px">
+											<label class="control-label "><strong>Buhler Representative</strong></label></td>
+										<td><strong>:</strong></td>
+										<td style="width:350px">
+											<label class="fntstrep" style="padding-left:30px">@Model.Buhlerrep</label>
+										</td>
+									</tr>
+									<tr>
+										<td style="width:270px">
+											<label class="control-label "><strong>Customer Representative</strong></label></td>
+										<td><strong>:</strong></td>
+										<td style="width:350px">
+											<label class="fntstrep" style="padding-left:30px">@Model.Custrep</label>
+										</td>
+									</tr>
+									<tr>
+										<td style="width:270px">
+											<label class="control-label "><strong>Machine Serial No</strong></label></td>
+										<td><strong>:</strong></td>
+										<td style="width:350px">
+											<label class="fntstrep" style="padding-left:30px">@Model.MacSlNo</label>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+	<!--Row3-->
+		<div class="row" style="padding-top: 10px">
+				<div class=" row show-grid">
+					<div class="span10" style="padding-left:60px;padding-bottom:20px">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Erection, new { id = "erection", @name = "erection", @class = "inline", @type = "checkbox" })
+								@*<input type="checkbox" value="">*@
+								<span class="span"></span>
+								The erection / delivery was (were) duly executed and 
+								<span class="span"></span>
+								The machine(s) / plant is (are) ready for operation
+							</label>
+						</div>
+					</div>
+					<!--Row4-->
+					<div class="span10" style="padding-left:60px;padding-bottom:20px">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Trail, new { id = "trail", @name = "trail", @class = "inline", @type = "checkbox" })
+								@*<input type="checkbox" value="">*@
+								<label class="checkbox inline">A trial run</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Wimaterial, new { id = "wimat", @name = "wimat", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox1" type="checkbox" class="inline">*@with material
+								</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Womaterial, new { id = "womat", @name = "womat", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox2" type="checkbox" class="inline">*@without material
+								</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Wcarr, new { id = "wcarr", @name = "wcarr", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox3" type="checkbox" class="inline">*@was carried out
+								</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Wnotcarr, new { id = "wnocarr", @name = "wnocarr", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox3" type="checkbox" class="inline">*@was not carried out
+								</label>
+							</label>
+						</div>
+					</div>
+					<!--Row5-->
+					<div class="span12" style="padding-left:60px;padding-bottom:20px">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Completionerection, new { id = "cmplerec", @name = "cmplerec", @class = "inline", @type = "checkbox" })
+								<span class="span"></span>
+								After completion of erection work a trial run / commissioning could not take place for reasons beyond the responsibility of Buhler
+							</label>
+						</div>
+					</div>
+					<!--Row6-->
+					<div class="span10 " style="padding-left:60px;padding-bottom:20px">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Capacity, new { id = "cap", @name = "cap", @class = "inline", @type = "checkbox" })
+								@*<input type="checkbox" value="">*@
+								<label class="checkbox inline">The capacity agreed upon was</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Reached, new { id = "reached", @name = "reached", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox1" type="checkbox" class="inline">*@reached
+								</label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Notreached, new { id = "ntreac", @name = "ntreac", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox2" type="checkbox" class="inline">*@not reached
+								</label>
+							</label>
+						</div>
+					</div>
+					<!--Row7-->
+					<div class="span12" style="padding-left:60px;padding-bottom:20px">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Machinehanded, new { id = "mchan", @name = "mchan", @class = "inline", @type = "checkbox" })
+								@*<input type="checkbox" value="">*@
+								<span class="span"></span>
+								The machine(s) / plant were handed over by Buhler (India) limited to the customer on: Date <label class="fntstrep">@Convert.ToDateTime(Model.Handeddate).ToString("dd-MM-yyyy")</label>
+								@*@Html.TextBoxFor(model => model.Handeddate, new { id = "datePicker2", @class = "input-medium fntst sss", @placeholder = "Select Date", @readonly = "readonly" })*@
+										@*<input type="date" class="fntst" id="orme" placeholder="select the date">*@
+							</label>
+						</div>
+					</div>
+					<!--Row8-->
+					<div class="span10" style="padding-left:60px;padding-bottom:20px">
+						<div class="span">
+							<label class="checkbox">
+								@*<input type="checkbox" value="">*@
+								@Html.CheckBoxFor(m => m.Buyer, new { id = "buy", @name = "buy", @class = "inline", @type = "checkbox" })
+								<span class="fntst">
+								The buyer takes full responsibility of the operation and maintenance of the plant.</span>
+							</label>
+						</div>
+					</div>
+					<!--Row9-->
+					<div class="span10" style="padding-left:60px;padding-bottom:20px">
+						<div class="span">
+							<label class="checkbox">
+								@Html.CheckBoxFor(m => m.Followcomm, new { id = "follow", @name = "follow", @class = "inline", @type = "checkbox" })
+								@*<input type="checkbox" value="">*@
+								<label class="checkbox inline">The following comments (if any) were established : </label>
+								<label class="checkbox inline">
+									@Html.CheckBoxFor(m => m.Seperate, new { id = "sep", @name = "sep", @class = "inline", @type = "checkbox" })
+									@*<input name="Checkbox1" type="checkbox" class="inline">*@See separate list
+								</label>
+							</label>
+						</div>
+					</div>
+					<!--Row10-->
+					<div class="span10" style="padding-left: 60px;padding-bottom:40px;padding-top:20px">
+						<label>
+							<strong>Comments :</strong>
+						</label>
+						<div class="span">
+							<label class="fntstrep">@Model.Comments</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="row" style="padding-top: 10px">
+				<div class=" row show-grid">
+					<!-- Row 11 -->
+					<div class="span10" style="padding-left: 60px">
+						<table>
+							<tr>
+								<td>
+									<label class="control-label "><strong>Signatures:</strong></label></td>
+								<td style="padding-left: 200px"></td>
+								<td>
+									<label class="control-label "><strong>Customer:</strong></label></td>
+								<td style="padding-left: 250px"></td>
+								<td>
+									<label class="control-label "><strong>Authorized Channel Partner For Buhler (India) Pvt. Ltd.</strong></label></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		<div class="row" style="padding-top: 50px">
+				<div class=" row show-grid">
+					<!--Row 12-->
+					<div class="span10" style="padding-left: 60px">
+						<label><strong>Place :</strong></label>
+					</div>
+					<!--Row 13-->
+					<div class="span10" style="padding-left: 60px">
+						<label><strong>Date :</strong></label>
+					</div>
+					<!-- Row 14 -->
+					<div class=" span10" style="padding-left: 55px">
+						<table>
+							<tr>
+								<td>
+								<label class="checkbox inline"><strong>Copies For :</strong></label>
+								</td>
+								<td style="width: 400px;"></td>
+								<td>
+									<label class="checkbox inline">Enclosure</label>
+									<label class="checkbox inline">
+										@Html.CheckBoxFor(m => m.Yes, new { id = "yes", @name = "yes", @class = "inline", @type = "checkbox" })
+										Yes
+									</label>
+									<label class="checkbox inline">
+										@Html.CheckBoxFor(m => m.No, new { id = "no", @name = "no", @class = "inline", @type = "checkbox" })
+										No
+									</label>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!--Row 15 -->
+					<div class="span10" style="padding-left: 60px">
+						<label><strong>Please tick the applicable boxes</strong></label>
+					</div>
+				</div>
+				<!--End Of Rows-->
+			</div>
+		
+</div>
+</body>
+</html>

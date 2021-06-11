@@ -1,0 +1,393 @@
+﻿@model SRKSSynergy.Models.LOABarReport
+@{
+	ViewBag.Title = "Lost Order Report";
+}
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+
+@{
+	List<SelectListItem> listItems1 = new List<SelectListItem>();
+	listItems1.Add(new SelectListItem
+	{
+		Text = "-- Select --",
+		Value = ""
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "ANCOO",
+		Value = "ANCOO"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "ANZAI",
+		Value = "ANZAI"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "APPLE",
+		Value = "APPLE"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "ASM",
+		Value = "ASM"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "ATS",
+		Value = "ATS"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "DAEWON",
+		Value = "DAEWON"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "DELTA",
+		Value = "DELTA"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "FASO",
+		Value = "FASO"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "FOWLER WESTRUP",
+		Value = "FOWLER WESTRUP"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "MARK",
+		Value = "MARK"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "MILLTECH-PIXEL",
+		Value = "MILLTECH-PIXEL"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "ORANGE",
+		Value = "ORANGE"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "OED",
+		Value = "OED"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "SATAKE",
+		Value = "SATAKE"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "SPECTRUM",
+		Value = "SPECTRUM"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "TAIHE-PRECISION",
+		Value = "TAIHE-PRECISION"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "UNIQUE",
+		Value = "UNIQUE"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "VETAL",
+		Value = "VETAL"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "WEILAI",
+		Value = "WEILAI"
+	});
+	listItems1.Add(new SelectListItem
+	{
+		Text = "ZEN",
+		Value = "ZEN"
+	});
+}
+<div style="background: gray; padding-bottom: 15px">
+	<p class="txtft">Lost Order Analysis</p>
+</div>
+<div class="container" style="width: 1050px; padding-top: 3px">
+	<div style="background: #e5e5e5">
+		@using (Html.BeginForm("LOA", "LostOrder", FormMethod.Post))
+		{
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(true)
+			@Html.HiddenFor(m => m.QGID)
+            
+      <input hidden="hidden" id="tsotid" name="tsotid" value="@ViewBag.tsotid" />
+			<div class="row" style="padding-top: 10px">
+				<div >
+					<!-- Row1 -->
+					<div style="padding-left:40px">
+					<table class="table" style="width: 1030px; padding-left: 160px;">
+						<div class="controls-row">
+							<tr>
+								<td class="span2">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Quotation Number :</strong></label></div>
+								</td>
+								<td class="span3">
+									<div>
+										<input type="text" class="fntst" id="quotum" name="quotum" readonly="readonly" placeholder="Quotation Number" value="@ViewBag.Qutonum"></div>
+								</td>
+								<td class="span2">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Channel Partner :</strong></label></div>
+								</td>
+								<td class="span3">
+									<div>
+										<input type="text" class="fntst" id="channel_partner" readonly="readonly" name="channelpartnum" placeholder="Channel Partner" value="@ViewData["Channelname"]"></div>
+								</td>
+							</tr>
+							<tr>
+								<td class="span2">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Customer Name :</strong></label></div>
+								</td>
+								<td class="span3">
+									<div>
+										<input type="text" class="fntst" id="cust_name" readonly="readonly" name="customername" placeholder="Customer Name" value="@ViewBag.OragName"></div>
+								</td>
+								<td class="span2">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Model :</strong></label></div>
+								</td>
+								<td class="span3">
+									<div>
+										@*<input type="text" class="fntst" id="model" readonly="readonly" placeholder="modelname" value="@ViewBag.Modl"></div>*@
+										@Html.TextBoxFor(model => model.EquipModel, new { id = "emodl", Value = @ViewBag.Modl, @class = "fntst", @readonly = "readonly", @placeholder = "Model"})
+								</td>
+							</tr>
+
+                            <tr>
+								<td class="span2">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Section :</strong></label></div>
+								</td>
+								<td class="span3">
+									<div>
+										<input type="text" class="fntst" id="section" readonly="readonly" name="section" placeholder="Sectino" value="@ViewBag.section"></div>
+								</td>
+								<td class="span2">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Machine :</strong></label></div>
+								</td>
+								<td class="span3">
+									<div>
+										<input type="text" class="fntst" readonly="readonly" id="machine" name="machine" placeholder="Machine" value="@ViewBag.machine"></div>
+								</td>
+							</tr>
+
+
+							<tr>
+								<td class="span2">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Customer Number :</strong></label></div>
+								</td>
+								<td class="span3">
+									<div>
+										<input type="text" class="fntst" id="cust_no" readonly="readonly" name="customernum" placeholder="Customer Number" value="@ViewBag.Number"></div>
+								</td>
+								<td class="span2">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Quantity :</strong></label></div>
+								</td>
+								<td class="span3">
+									<div>
+										<input type="text" class="fntst" readonly="readonly" id="quantity" name="quantity" placeholder="Quantity" value="@ViewBag.Qty"></div>
+								</td>
+							</tr>
+							<tr>
+								<td class="span2">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Order Won by :</strong></label></div>
+								</td>
+								<td class="span3">
+									<div>
+									@Html.DropDownListFor(model => model.Competitor, listItems1, null, new { @id = "comp", @name = "comp", @required = "required"})
+									@Html.TextBoxFor(model => model.Competitor, new { id = "comp", Value = "", @class = "fntst", @readonly = "readonly", @placeholder = "Quantity", @style = "display:none;" })
+								</td>
+								<td class="span2">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Date :</strong></label></div>
+								</td>
+								<td class="span3">
+									<div>
+										@Html.TextBoxFor(model => model.LOADate, new { id = "Loadate", @class = "fntst", @placeholder = "Quotation Number", Value = @System.DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss tt"), @readonly = "readonly", @style = "display:none;" })
+										<input type="text" class="fntst" id="dat" value="@ViewBag.ShowQuoteDate" readonly="readonly">
+										@*@Html.TextBoxFor(model => model.LOADate, new { id = "Loadate", @class = "fntst", @placeholder = "LOA Date",@readonly="readonly", @Value= @ViewBag.ShowQuoteDate, })*@
+										</div>
+								</td>
+							</tr>
+						</div>
+					</table>
+					</div>
+					<!-- Row2 -->
+					<div style="padding-left:40px">
+					<table class="table " style="width: 1030px; padding-left: 60px;">
+						<div class="controls-row">
+							<tr>
+								<td class="span5" colspan="4">
+									<div style="text-align: left; vertical-align: middle;">
+										<label><strong>Reasons for loosing the Order : </strong></label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="span5">
+									<div>
+										<label class="radio">
+											@*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">*@
+											@Html.RadioButtonFor(m => m.ReasonForLosing, "Expensive by about 5%", new { @id="expby5pert"})
+											Expensive by about 5%
+										</label>
+									</div>
+								</td>
+								<td class="span5">
+									<div>
+										<label class="radio">
+											 @Html.RadioButtonFor(m => m.ReasonForLosing, "Unable to match the expected delivery times", new { @id="Unabletomeetdeltime"})
+											@*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">*@
+											Unable to match the expected delivery times
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="span5">
+									<div>
+										<label class="radio">
+											@Html.RadioButtonFor(m => m.ReasonForLosing, "Expensive by about 6% to 10%", new { @id="Expensiveby6to10per"})
+											@*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">*@
+											Expensive by about 6% to 10%
+										</label>
+									</div>
+								</td>
+								<td class="span5">
+									<div>
+										<label class="radio">
+											@Html.RadioButtonFor(m => m.ReasonForLosing, "Unable to fulfill the Technical Requirements", new { @id="Unabletofullfilltechnicalreq"})
+											@*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">*@
+											Unable to fulfill the Technical Requirements
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="span5">
+									<div>
+										<label class="radio">
+											 @Html.RadioButtonFor(m => m.ReasonForLosing, "Expensive by about 11% to 15%", new { @id="Expensiveby11to15per"})
+											@*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">*@
+											Expensive by about 11% to 15%
+										</label>
+									</div>
+								</td>
+								<td class="span5">
+									<div>
+										<label class="radio">
+											@Html.RadioButtonFor(m => m.ReasonForLosing, "Unable to match the expected Payment Terms", new { @id="Unabletomeetpayment"})
+											@*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">*@
+											Unable to match the expected Payment Terms
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="span5">
+									<div>
+										<label class="radio">
+											 @Html.RadioButtonFor(m => m.ReasonForLosing, "Expensive by about 16% to 20%", new { @id="Expensiveby16to20per"})
+											@*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">*@
+											Expensive by about 16% to 20%
+										</label>
+									</div>
+								</td>
+								<td class="span5">
+									<div>
+										<label class="radio">
+											@Html.RadioButtonFor(m => m.ReasonForLosing, "Other Reasons", new { @id="othersreason"})
+@*											<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">*@
+											Other Reasons
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="span5" colspan="2">
+									<div>
+										<label class="radio">
+											@Html.RadioButtonFor(m => m.ReasonForLosing, "Expensive by about 21% to 25%", new { @id="Expensiveby21to25per"})
+											@*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">*@
+											Expensive by about 21% to 25%
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="span5" colspan="2">
+									<div>
+										<label class="radio">
+											@Html.RadioButtonFor(m => m.ReasonForLosing, "Expensive greater than 25%", new { @id="Expensivegreat25per"})
+											@*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">*@
+											Expensive greater than 25%										
+										</label>
+									</div>
+								</td>
+							</tr>
+						</div>
+					</table>
+						 </div>
+					<!-- Row4 -->
+					<div style="padding-left:40px">
+					<table class="table " style="width: 1030px; padding-left: 60px;">
+						<div class="controls-row">
+							<tr>
+								<td class="span10">
+									<div style="text-align: left; vertical-align: middle;">
+										<label>
+											<strong>Additional Comments : </strong>
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="span10">
+									@Html.TextAreaFor(m => m.comments, new { @id = "comm", @name = "comm", rows = 4, columns = 20, @style = "width:900px",@required="required", @placeholder = "Additional Comments" })
+									@*<textarea rows="3" class="span10" type="text" maxlength="360" name="additionalcomments"></textarea>*@</td>
+							</tr>
+						</div>
+					</table>
+						</div>
+					<div class="span10" style="padding-left:60px">
+						<div class="span3 cent">
+							@*<button class="btn btn-large btn-success" type="button">Generate</button>*@
+							<input type="submit" value="Submit" class="btn btn-large btn-success" />
+						</div>
+					</div>
+					<!--End Of Buttons-->
+				</div>
+			</div>
+
+		}
+	</div>
+</div>

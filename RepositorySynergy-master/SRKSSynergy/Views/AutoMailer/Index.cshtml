@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SRKSSynergy.Models.AutoMailer>
+@{
+    ViewBag.Title = "Index";
+    int slno = 1;
+}
+
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+
+<div class="bcgr" style="min-height:700px;min-width:1410px">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">AutoMailer Index</p>
+    </div>
+    <form action="@Url.Action("Index", "AutoMailer")" method="post">
+        @* Create Equipment Link *@
+        <div style="padding-left: 20px;padding-top:10px">
+            @Html.ActionLink("Create New Plan", "Create", "AutoMailer", new { @class = "btn btn-success", @Style = "text-decoration:none" })
+        </div>
+              
+        @* Table for Equipment *@
+        <table class="table table-hover" style="width: 1410px;">
+            <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Serial No</span>
+                </th>
+                <th style="width: 80px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Module</span>
+                </th>
+                <th style="width: 130px; text-align: center">
+                    <span style="font-family: Calibri; font-size: 18px; padding-bottom: 10px; padding-top: 10px">Period (In Days)</span>
+                </th>             
+             <th></th>
+            </tr>
+             @{
+                DateTime now = DateTime.Now;
+                var startDate = new DateTime(now.Year, now.Month, 1);
+                var enddate = System.DateTime.Now;
+                var enddate1 = startDate.AddMonths(1).AddDays(-1);
+                var yesterday = DateTime.Today.AddDays(-1);
+                SRKSSynergy.Models.SRKS_Synergy db = new SRKSSynergy.Models.SRKS_Synergy();
+             }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 80px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @slno
+                    </td>
+                    <td style="width: 250px; text-align: center; font-family: Calibri; font-size: 18px">
+                        @Html.DisplayFor(modelItem => item.Module)
+                    </td>
+                    <td style="width: 160px; text-align: center; font-family: Calibri; font-size: 18px">
+                         @Html.DisplayFor(modelItem => item.OTPeriod)
+                    </td>                                     
+                    <td>                       
+                        @Html.ActionLink("Edit", "Edit", "AutoMailer", new { id = item.AMID }, new { @class = "btn btn-success", @Style = "text-decoration:none" }) |                       
+                        @Html.ActionLink("Delete", "Delete","AutoMailer", new { id=item.AMID }, new { @class = "btn btn-success", @Style = "text-decoration:none" })
+                    </td>
+                </tr>
+                slno++;
+            }
+        </table>        
+    </form>
+</div>

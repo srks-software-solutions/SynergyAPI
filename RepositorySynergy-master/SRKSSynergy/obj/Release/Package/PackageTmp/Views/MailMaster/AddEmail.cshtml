@@ -1,0 +1,75 @@
+﻿@model SRKSSynergy.Models.MailMasters
+
+@{
+    ViewBag.Title = "AddEmail";
+}
+
+@*Working*@
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+<style>
+    .validation-summary-valid {
+        display: none;
+    }
+</style>
+
+
+<div class="bcgr" style="min-height:550px">
+	<h2 style="padding-left: 50px;"><span class="label label-warning">Add Email </span></h2>
+	<hr />
+	<div class="divider"></div>
+
+	<div class="container">
+
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(true)
+
+			if (TempData["SameData"] != null)
+			{
+			<p style="color: red; padding-left: 170px">@TempData["SameData"]</p>
+			}
+
+			<br />				
+			<div class="row">
+				<div class="col-xs-2">
+					<div class="form-group">
+							<label class="col-sm-12 control-label">Email Address</label>
+							@Html.TextBoxFor(model => model.EmailAddress, new { @id = "emailadd", @placeholder = "Email Address", @class = "form-control", @required = "required" })
+							@Html.ValidationMessageFor(model => model.EmailAddress)
+						</div>
+					</div>
+				   <div class="col-xs-2">
+					<div class="form-group">
+							<label class="col-sm-12 control-label">Email Type</label>
+							<select class="form-control" required="required" id="emailtyp" name="emailtyp">
+							  <option value="To">TO</option>
+							  <option value="CC">CC</option>
+							  <option value="BCC">BCC</option>
+							</select>
+						</div>
+					</div>
+			</div>
+			<br />
+			<br />
+			<p>
+				<button type="submit" class="btn btn-primary " id="sit">Create</button>				
+			</p>
+		}
+		<form action="/MailMaster/Index">
+			<button type="submit" class="btn btn-primary" id="sit1">Back To List</button>
+		</form>
+	</div>
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

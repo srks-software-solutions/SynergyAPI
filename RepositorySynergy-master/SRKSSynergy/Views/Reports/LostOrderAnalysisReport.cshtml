@@ -1,0 +1,106 @@
+﻿@{
+	ViewBag.Title = "Lost Order Analysis - Report";
+}
+
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<div class="bcgr" style="min-height: 580px">
+	@using (Html.BeginForm("LostOrderAnalysisReport", "Reports", FormMethod.Get))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Lost Order Analysis Report</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad">
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">From Date :</label>
+							<div class="controls">
+								<input style="height:30px" type="text" class="fntst sss" id="fromdat" name="fromdat" value="" placeholder="Select From Date" required="required">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3" style="padding-left: 70px">
+						<div class="control-group">
+							<label class="control-label fntst">To Date :</label>
+							<div class="controls">
+								<input style="height:30px" type="text" class="fntst sss" id="todat" name="todat" value="" placeholder="Select To Date">
+							</div>
+						</div>
+					</div>
+				</div>
+
+                @{
+                if(User.IsInRole("ZonalManager"))
+                {
+                    var logcpid = Convert.ToInt32(Session["Zoneid"]);
+				    <div class="span10 pad">
+					    <div class="span3" style="padding-left: 70px">
+						    <div class="control-group">
+							    <label class="control-label fntst">Channel Partner</label>
+							    <div class="controls">
+                                    @*@Html.DropDownList("CPID", null, "--Select--", new { @class = "fntst" })*@
+                                    @Html.DropDownList("CPID", null, "--Select--", new {@style="width:100%", @class = "fntst" })
+							    </div>
+						    </div>
+					    </div>
+				    </div>
+                }
+                else
+                {
+                 var logcpid = Session["logincpid"];
+                    if (Convert.ToInt32(logcpid) == 0)
+                    {
+				    <div class="span10 pad">
+					    <div class="span3" style="padding-left: 70px">
+						    <div class="control-group">
+							    <label class="control-label fntst">Channel Partner</label>
+							    <div class="controls">
+								    @*<input type="text" class="fntst sss" id="todat" name="todat" value="" placeholder="Select To Date">*@
+                                    @Html.DropDownList("CPID", null, "--Select--", new {@style="width:100%", @class = "fntst" })
+							    </div>
+						    </div>
+					    </div>
+				    </div>
+                    }   
+                }             
+                }
+			</div>
+		</div>
+		<div class="span10 pad ">
+			<div class="span3 cent" style="padding-left: 70px">
+				@*<button class="btn btn-success" value="Create" type="Submit">Generate Report</button>*@
+                <button class="btn btn-success glyphicon glyphicon-copy" value="post" type="Submit"> Generate_Report</button>
+			</div>
+		</div>
+	}
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var now = new Date();
+		var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+		$('.sss').datepicker({
+			format: 'dd/mm/yyyy',
+			onRender: function (date) {
+				return date.valueOf() > now.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function (ev) {
+			$(this).datepicker('hide');
+		});
+	});
+</script>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+
+

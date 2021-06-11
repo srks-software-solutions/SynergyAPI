@@ -1,0 +1,282 @@
+﻿@model IList<SRKSSynergy.Models.LeadEnquiryRevised>
+@using SRKSSynergy.Helpers
+@{    
+    ViewBag.Title = "YJTLeadReport";
+    int slno = 1;
+    ViewBag.last = "is";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery-min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/print.css" media="print" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jQuery%20UI%201.9.2.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/jquery.mtz.monthpicker.js"></script>
+
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+
+@*<script>
+    $(document).ready(function () {
+        $('#frommonth').monthpicker();
+    });
+    $(document).ready(function () {
+        $('#tomonth').monthpicker();
+    });
+</script>*@
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+        $('.sss').datepicker({
+            format: 'yyyy-mm-dd',
+            //onRender: function (date) {
+            //	return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            //}
+
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    });
+</script>
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+        $('.sss').datepicker({
+            format: 'dd/mm/yyyy',
+            onRender: function (date) {
+                //return date.valueOf() > now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    });
+</script>*@
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cpnam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/OA/Autocompleteview",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CPName, value: item.CPName };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#equip").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/OA/AutocompleteEquipModel",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.ProductModelName, value: item.ProductModelName};
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#printbutton").click(function () {
+            //$("#form1").attr("hidden", "true");
+            $("#printbutton").visible = false;
+            $("#savebutton").visible = false;
+            self.focus()
+            self.print()
+
+        });
+    });
+</script>
+
+<div style="min-height: 1000px; min-width: 900px; background: #e5e5e5;">
+    <div style="background: gray; padding-bottom: 15px">
+        <p class="txtft">Order Status Tracker</p>
+    </div>
+    <form action="@Url.Action("YJTLeadReport", "Reports")" method="get">
+        <div class="row noPrint" style="padding-top: 10px">
+            <div class=" row show-grid">
+                <div class="span12 pad">
+                    <div class="span3">
+                        <div class="control-group ">
+                            <label class="control-label fntst ">Channel Partner Name</label>
+                            <div class="controls">
+                                @*<input type="text" class="fntst excus" value="@ViewBag.Search" id="cpnam" name="cpnam" placeholder="Channel Partner Name">*@
+                                @Html.TextBox("cpnam", null, new { @class = "printButtonClass noPrint", @placeholder = " Search Channel Partner Name", @autocomplete = "off" })
+                            </div>
+                        </div>
+                    </div>                                       
+                </div>                
+                <div class="span12 pad">
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">From Date</label>
+                            <div class="controls">
+                                <input  type="text" class="printButtonClass noPrint fntst sss" id="frommonth" name="frommonth" placeholder="Select From Date" />
+                            </div>
+                        </div>
+                    </div>
+                       <div class="span1"></div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label fntst">To Date</label>
+                            <div class="controls">
+                                <input type="text" class="printButtonClass noPrint fntst sss" id="tomonth" name="tomonth" placeholder="Select To Date" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12 pad">
+                    <div class="span1"></div>
+                    @* Button for Search *@
+                    <div class="span3" style="padding-top: 20px">
+                        <input type="submit" style="width: 100px; height: 35px" value="Get Details" class="btn btn-info existingcustomer printButtonClass" />
+                    </div>
+                    @* End of buttons *@
+                </div>
+            </div>
+        </div>
+    </form>
+    @* Wrong Channel Partner *@
+    @if (TempData["wrong"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["wrong"]</p>
+    }
+@* Status Chances *@
+    @if (TempData["byjt"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["byjt"]</p>
+    }
+@* Wrong Channel Partner *@
+    @if (TempData["cp&byjt"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["cp&byjt"]</p>
+    }
+@* Expected Month *@
+    @if (TempData["expmonth"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["expmonth"] @ViewBag.expmon @ViewBag.last </p>
+    }
+@* No Expected Month *@
+    @if (TempData["noexpmonth"] != null)
+    {
+        <p style="color: red; font-weight: 900; padding-left: 170px">@TempData["noexpmonth"]</p>
+    }
+   
+    <div class="row">
+        <div class=" row show-grid">
+            <div style="padding-top: 30px; padding-left: 65px">
+                <table class="table-hover" style="width:95%;margin-left:1%">
+                    <thead>
+                        <tr style="background: #BBBEBD">
+                            <th style="width: 70px; text-align: center" class="fntst cal botbor">Serial No</th>
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">Mill Name</th>
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">Owner Name</th>
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">Owner Mobile No</th>                            
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">Name of Collector</th>
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">Date</th>
+                            <th style="width: 80px; text-align: center" class="fntst cal botbor">Address</th>
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">City</th>
+                            <th style="width: 100px; text-align: center" class="fntst cal botbor">State</th>
+                            
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align: center;">
+                                @slno
+                            </td>
+                             <td style="text-align: center;">
+                                <label class="fntst">@item.MillName</label>
+                            </td>
+
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.OwnerName</label>
+                            </td>
+
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.MobNo</label>
+                            </td> 
+
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.NameofCollector</label>
+                            </td>
+                            <td style="text-align: center;">
+                                @{
+                        DateTime dd = Convert.ToDateTime(item.LeadDate);
+                        string dd1 = dd.ToString("dd-MM-yyyy");
+                        ViewBag.dr = dd1;
+                                }
+                                @ViewBag.dr
+
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.AddressLine1 , @item.AddressLine2</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.City</label>
+                            </td>                           
+
+                            <td style="text-align: center;">
+                                <label class="fntst">@item.State</label>
+                            </td>
+
+                                                       
+                        </tr>
+                                slno = slno + 1;
+                    }
+                </table>
+            </div>
+        </div>
+        @using (Html.BeginForm("ExportDataYJTLead", "Reports", FormMethod.Get, new { enctype = "multipart/form-data" }))
+        {
+            <input type="text" name="cpnam" class="input-xxsmall fntst" id="cpnam" value="@ViewBag.OrganizationName" style="display:none" >	            
+            <input type="text" name="frommonth" class="input-xxsmall fntst" id="frommonth" value="@ViewBag.fromdte" style="display:none" >
+            <input type="text" name="tomonth" class="input-xxsmall fntst" id="tomonth" value="@ViewBag.todate" style="display:none">                 
+            	
+            
+            
+            <div class="row" style="padding-top: 20px; padding-left: 630px; padding-bottom: 20px">
+                <div class=" row show-grid">
+                    <div class="span10">
+                        <div class="span2">
+                            <input type="submit" style="width: 100px; height: 35px" value="Export" class="btn btn-info existingcustomer printButtonClass" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

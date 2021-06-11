@@ -1,0 +1,238 @@
+﻿
+@model IList<SRKSSynergy.Models.OAEquipGeneralData>
+@{
+    ViewBag.Title = "HOD View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.senapp = "Sent for Approval";
+    ViewBag.pen = "Pending";
+    ViewBag.app = "Approved";
+    ViewBag.rej = "Rejected";
+}
+
+@* Paging & Sorting Code  *@
+
+@*@helper buildLinks(int start, int end, string innerContent)
+{
+    for (int i = start; i <= end; i++)
+    {
+    <a class="@(i == ViewBag.CurrentPage ? "current" : "")"  href="@Url.Action("HODView", "HOD", new { page = i, sortBy = ViewBag.sortBy, isAsc = ViewBag.isAsc.ToString().ToLower(), search = ViewBag.Search, cunam = ViewBag.CUNAM })">@(innerContent ?? i.ToString())</a>      
+    }
+    
+}
+
+
+@helper pageLinks()
+{
+    const int maxPages = 11;
+
+    if (ViewBag.TotalPages <= maxPages)
+    {
+    @buildLinks(1, (int)ViewBag.TotalPages, null)
+        return;
+    }
+
+    int pagesAfter = ViewBag.TotalPages - ViewBag.CurrentPage; // Number of pages after current
+    int pagesBefore = ViewBag.CurrentPage - 1; // Number of pages before current
+
+    if (pagesAfter <= 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st page
+
+        int pageSubset = ViewBag.TotalPages - maxPages - 1 > 1 ? ViewBag.TotalPages - maxPages - 1 : 2;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages - maxPages + 3, ViewBag.TotalPages, null) // Show last pages
+
+        return; // Exit
+    }
+
+    if (pagesBefore <= 4)
+    {
+    @buildLinks(1, maxPages - 2, null) // Show 1st pages
+
+
+        int pageSubset = maxPages + 2 < ViewBag.TotalPages ? maxPages + 2 : ViewBag.TotalPages - 1;
+    @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }
+
+    if (pagesAfter > 4)
+    {
+    @buildLinks(1, 1, null) // Show 1st pages
+
+        int pageSubset1 = ViewBag.CurrentPage - 7 > 1 ? ViewBag.CurrentPage - 7 : 2;
+        int pageSubset2 = ViewBag.CurrentPage + 7 < ViewBag.TotalPages ? ViewBag.CurrentPage + 7 : ViewBag.TotalPages - 1;
+
+    @buildLinks(pageSubset1, pageSubset1, pageSubset1 == ViewBag.CurrentPage - 4 ? null : "...") // Show 1st page subset (...)
+
+    @buildLinks(ViewBag.CurrentPage - 3, ViewBag.CurrentPage + 3, null) // Show middle pages
+
+        // Show 2nd page subset (...)
+        // only show ... if page is contigous to the previous one.
+    @buildLinks(pageSubset2, pageSubset2, pageSubset2 == ViewBag.CurrentPage + 4 ? null : "...")
+    @buildLinks(ViewBag.TotalPages, ViewBag.TotalPages, null) // Show last page
+
+        return; // Exit
+
+    }    
+}*@
+
+@*@helper sortLink(string name, int id)
+{
+    <a href="@Url.Action("HODView", "HOD", new { sortby = id, isasc = (id == ViewBag.sortBy ? (!@ViewBag.isAsc).ToString().ToLower() : true) })">@name</a> 
+    if (id == ViewBag.sortBy)
+    {
+    <span class="arrow @(ViewBag.isAsc ? "up" : "down")"></span>
+    }
+}*@
+@* End Of Paging & Sorting Code *@
+<link href="~/Content/bootstrap/css/jquery.ui.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery-1.9.1.js"></script>
+<script src="~/Content/bootstrap/js/jquery1.8.2.min.js"></script>
+<script src="~/Content/bootstrap/js/jquery-ui-1.10.3.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+@Scripts.Render("~/bundles/modernizr")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#qtno").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/OA/Autocompleteexisoanum",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.QuotationNumber, value: item.QuotationNumber };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cunam").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/OA/Autocompleteexiscust",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.OrganizationName, value: item.OrganizationName };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    });
+</script>
+
+<input type="text" id="success" value="false" style="display: none;" />
+<form action="@Url.Action("HODView", "HOD")" method="get">
+    <div style="background: #e5e5e5; min-height: 100px">
+        <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">HOD View</p>
+        </div>
+        <div class="row" style="padding-top: 10px">
+            <div class=" row show-grid">
+                <div class="span12 pad ">
+                    <div class="span3 ">
+                        <div class="control-group ">
+                            <label class="control-label fntst ">Customer Name</label>
+                            <div class="controls ">
+                                <input type="text" class="fntst excus" value="@ViewBag.Search" id="cunam" name="cunam" placeholder="Customer Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="cent3">
+                            @*<input type="submit" value="Get Details" class="btn btn-info existingcustomer" onclick="javascript: return updateparent();" />*@
+                            <input type="submit" value="Get Details" id="gd" class="btn btn-info existingcustomer" />
+                            @*onclick="javascript: return updateparent();"*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@*@if (ViewBag.IsSearch == true)
+{
+    *@<div id="getquotations">
+        <table class="table table-striped" style="width: 1300px">
+            @* header *@
+            <tr align="center">
+                <th align="center" style="width: 50px; text-align: center">SL.No</th>
+                <th align="center" style="width: 100px; text-align: center">Order Acknowledgement No</th>
+                <th align="center" style="width: 100px; text-align: center">Customer Name</th>
+                <th align="center" style="width: 150px; text-align: center">Subject</th>
+                <th align="center" style="width: 100px; text-align: center">Channel Partner Quotation No</th>
+                <th align="center" style="width: 60px; text-align: center">Date</th>
+                @*<th align="center" style="width: 60px; text-align: center">@sortLink("Status", 7)</th>
+                <th align="center" style="width: 60px; text-align: center">Comments</th>*@
+                <th align="center" style="width: 120px; text-align: center"></th>
+            </tr>
+            @{int i = 1;
+              int slno = 1;}
+            @foreach (var p in Model)
+            {    
+                <tr class="@(i++ % 2 == 0 ? "highlighted" : "")">
+                    <td align="center" style="width: 50px; text-align: center">@slno</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.OANumber</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.MDBGeneralData.OrganizationName</td>
+                    <td align="center" style="width: 150px; text-align: center">@p.Subjectinfo</td>
+                    <td align="center" style="width: 100px; text-align: center">@p.CPQuotationNumber</td>
+                    <td align="center" style="width: 60px; text-align: center">@Html.DisplayFor(modelitem => p.OADate)</td>
+                    @*<td align="center" style="width: 60px; text-align: center">
+                        @if (p.ApprovalStatus == 0)
+                        { 
+                           @ViewBag.pen                        
+                        }
+                        @if (p.ApprovalStatus ==1)
+                        {
+                            @ViewBag.app
+                        }
+                        @if (p.ApprovalStatus == 2)
+                        { 
+                            @ViewBag.rej 
+                        }
+                    </td>
+                    <td style="width: 60px; text-align: center">
+                         @if (p.ApprovalStatus == 2)
+                        {
+                            @p.OARejectComm; 
+                        }
+                    </td>*@
+                    <td align="center" style="width: 120px; text-align: center">
+                           @Html.ActionLink("Generate HOD", "HOD", new { oanum = p.OANumber }, new { @align = "center", @style = "width:50px;text-align:center", @class = "btn btn-info existingcustomer" })                        
+                    </td>
+                </tr>
+                slno++;
+            }
+
+        </table>
+
+@*        <div class="pagination" style="font-size: 18px; font-family: Calibri; float: right; padding-right: 70px">
+            Page: 
+            @pageLinks()
+        </div>*@
+    </div>
+@*}*@
+

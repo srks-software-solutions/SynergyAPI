@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Synergy - Dashboard</title>
+    @*<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/MDB.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/menu.css">
+    <script type="text/javascript" src="bootstrap/js/jquery-1.9.1.min.js"></script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var tabs = $('.tabsm > li');
+            tabs.on("click", function () {
+                tabs.removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
+</head>
+<body style="margin: 0 auto">
+    @{
+        ViewBag.Title = "Synergy";
+    }
+    <div class="bcgr" style="margin: 0 auto;min-height:400px">
+        <div style="padding-top: 80px; padding-bottom: 80px; margin: 0 auto">
+            <table style="text-align: center; margin: 0 auto; width: 900px; height: 220px;">
+                <tr style="padding-bottom: 10px">
+
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/Quotation/Create" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/mark_quote.png" alt='missing' />
+                                <figcaption><strong>Equipment Quote Generator</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/QuotationSpares/Create" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/quotations1_icon.png" alt='missing' />
+                                <figcaption><strong>Spares Quote Generator</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/MDB/Index" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/customers_icon.png" alt='missing' />
+                                <figcaption><strong>Master Data Base</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/SOT/Index" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/SOT_icon.png" alt='missing' />
+                                <figcaption><strong>Sales Opportunity Tracker</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr style="padding-bottom: 10px">
+
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/OA/OAApproval" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/Orderack.png" alt='missing' />
+                                <figcaption><strong>Approve New Orders</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/OA/OAAllView" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/report_check.png" alt='missing' />
+                                <figcaption><strong>Order status Tracker</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/Configuration/Configuration" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/Config.png" alt='missing' />
+                                <figcaption><strong>Configuration</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                    <td></td>
+                    <td></td>
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+                        <a href="/Inventory/MinSpareQuantity" style="text-decoration: none">
+                            <figure>
+                                <img src="~/Content/bootstrap/img/inventory.png" alt='missing' />
+                                <figcaption><strong>Spares Stock Management</strong></figcaption>
+                            </figure>
+                        </a>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

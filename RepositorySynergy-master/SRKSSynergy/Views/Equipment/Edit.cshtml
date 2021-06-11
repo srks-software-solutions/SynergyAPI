@@ -1,0 +1,171 @@
+﻿@model SRKSSynergy.Models.ProductModel
+
+@{
+	ViewBag.Title = "Update-Equipment Plus";
+}
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<style>
+	.validation-summary-valid {
+		display: none;
+	}
+</style>
+<script>
+	$(document).ready(function () {
+		$("#untpr").keyup(function () {
+			var value = accounting.unformat($("#untpr").val());
+			$("#untpr").val(accounting.formatMoney(value));
+		});
+	});
+</script>
+<div class="bcgr" style="min-height: 590px">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(false)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Edit-Equipment Master Page</p>
+		</div>
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Product Type</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@*@Html.DropDownList("ProductID", String.Empty)*@
+								@*@Html.DropDownListFor(model => model.Products.ProductID, (SelectList)ViewBag.ProductID)*@
+								@Html.DropDownList("ProductID", null, "--Select--", new { @required = "required" })
+								@Html.HiddenFor(model => model.ProductID)
+								@Html.HiddenFor(model => model.ProductModelID)
+                                @Html.HiddenFor(model => model.Products.ProductID)
+                             
+
+
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Equipment Name</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+								@Html.TextBoxFor(model => model.ProductModelName, new { @id = "equip",@maxlength="80", @class = "fntst", @placeholder = "Equipment Name",@style="height:30px" })
+								@Html.ValidationMessageFor(model => model.ProductModelName)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Equipment Description</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.ProductModelDesc, new { @id = "desc",@maxlength="160", @class = "input-xxxlarge fntst", @placeholder = "Equipment Description" ,@style="height:30px" })
+								@Html.ValidationMessageFor(model => model.ProductModelDesc)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Equipment Exclusions</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.ProductModelExclusion, new { @id = "exclu",@maxlength="160", @class = "input-xxxlarge fntst", @placeholder = "Equipment Exclusions" ,@style="height:30px" })
+								@Html.ValidationMessageFor(model => model.ProductModelExclusion)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Quote Valid Till</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+								@*@Html.TextBoxFor(model => model.QuoteVaildTill, new { @id = "quovati", @class = "fntst", @placeholder = "Quote Valid Till" })*@
+								@Html.TextBoxFor(model => model.QuoteVaildTill, new { id = "datePicker2", @class = "input-medium fntst sss", @placeholder = "Select Date",@readonly="readonly" ,@style="height:30px"})
+								@Html.ValidationMessageFor(model => model.QuoteVaildTill)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Delivery Time</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.DeliveryTime, new { @id = "deltm",@maxlength="40", @class = "fntst", @placeholder = "Delivery Time",@style="height:30px" })
+								@Html.ValidationMessageFor(model => model.DeliveryTime)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Unit Price in INR</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+								@Html.TextBoxFor(model => model.UnitPrice, new { @id = "untpr", @pattern=".{4,7}", @class = "fntst", @placeholder = "Unit Price in INR",@style="height:30px" })
+								@Html.ValidationMessageFor(model => model.UnitPrice)
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	 <p style="color: red;font-family:Calibri;font-size:18px;font-weight:900;padding-left:150px">
+			@Html.Label("", Convert.ToString((string)ViewBag.Duplicate))
+		</p>
+		<div class="span10 pad ">
+            <div class="span3 cent" style="padding-left: 2%">
+			    <button class="btn btn-success btn-large glyphicon glyphicon-arrow-left" style="display: inline;">@Html.ActionLink(" Back_to_List", "Index","Equipment", new { @Style="color:white;text-decoration:none"})</button>
+            </div>
+            <div class="span3 cent" style="padding-left: 10%">
+				<button class="btn btn-success glyphicon glyphicon-cloud-upload" value="post" type="Submit"> Update</button>
+            </div>
+		</div>		
+	}
+
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+	//$(document).ready(function () {
+	//  var now = new Date();
+	//var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+	//$('#datePicker').datepicker({format: 'dd/mm/yyyy'}).val(today);
+	// $('.input-mini1').val(today);
+	//});
+	$(document).ready(function () {
+		var now = new Date();
+		var today = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+		$('.sss').datepicker({
+			format: 'dd/mm/yyyy',
+			onRender: function (date) {
+				return date.valueOf() < now.valueOf() ? 'disabled' : '';
+			}
+
+		}).on('changeDate', function (ev) {
+			$(this).datepicker('hide');
+		});
+	});
+</script>

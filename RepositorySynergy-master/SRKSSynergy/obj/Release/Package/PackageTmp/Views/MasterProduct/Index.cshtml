@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SRKSSynergy.Models.MasterProducts>
+
+@{
+    ViewBag.Title = "Section Master Page";
+    int slno = 1;
+}
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<div class="bcgr" style="min-height:580px">
+    @*<h4>Products Master Page</h4>*@
+    <div style="background: gray; padding-bottom: 15px">
+            <p class="txtft">Section Master Page</p>
+        </div>
+    <div style="padding-top:20px;padding-left:20px;padding-bottom:20px">
+        @Html.ActionLink("Add", "AddSection", "MasterProduct", new { @class = "btn btn-primary glyphicon glyphicon-plus", @Style = "text-decoration:none" })
+    </div>
+
+    <table class="table table-hover" style="width: 800px;">
+        <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px">
+            <th style="width: 100px; text-align: center">
+                <span style="font-family: Calibri; font-size: 20px; padding-bottom: 10px; padding-top: 10px">Serial No.</span>
+            </th>
+            <th style="width: 200px; text-align: center; font-family: Calibri; font-size: 20px; padding-bottom: 5px; padding-top: 5px">
+                <span style="font-family: Calibri; font-size: 20px; padding-bottom: 10px; padding-top: 10px">Section Name</span>
+            </th>
+            <th style="width: 500px; text-align: center; font-family: Calibri; font-size: 20px; padding-bottom: 5px; padding-top: 5px">
+                <span style="font-family: Calibri; font-size: 20px; padding-bottom: 10px; padding-top: 10px">Section Description</span>
+            </th>
+            <th style="width: 300px; text-align: center; font-family: Calibri; font-size: 20px; padding-bottom: 5px; padding-top: 5px"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: 70px; text-align: center; font-family: Calibri; font-size: 18px">
+                    @slno
+                </td>
+                <td style="width: 150px; text-align: center; font-family: Calibri; font-size: 18px">
+                    @Html.DisplayFor(modelItem => item.MasterProductName)
+                </td>
+                <td style="width: 500px; text-align: center; font-family: Calibri; font-size: 18px">
+                    @Html.DisplayFor(modelItem => item.MasterProductDescriptor)
+                </td>
+                <td style="width: 300px; text-align: center; font-family: Calibri; font-size: 18px">
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.ProductID })*@
+                    @Html.ActionLink("Edit", "EditSection", "MasterProduct",new { id = item.MasterProductID }, new { @class = "btn btn-primary glyphicon glyphicon-pencil", @Style = "text-decoration:none" })|
+                    @Html.ActionLink("Discontinue", "DiscontinueSection","MasterProduct", new { id=item.MasterProductID }, new { @class = "btn btn-danger glyphicon glyphicon-remove", @Style = "text-decoration:none" })
+                    @*@Html.ActionLink("Delete", "Delete", new { id=item.ProductID })*@
+                </td>
+            </tr>
+            slno = slno + 1;
+        }
+
+    </table>
+</div>
+

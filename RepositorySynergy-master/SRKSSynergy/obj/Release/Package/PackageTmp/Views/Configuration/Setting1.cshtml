@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Setting1";
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Synergy - Dashboard</title>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var tabs = $('.tabsm > li');
+			tabs.on("click", function () {
+				tabs.removeClass('active');
+				$(this).addClass('active');
+			});
+		});
+	</script>
+</head>
+<body style="margin: 0 auto">
+	@{
+		ViewBag.Title = "Synergy";
+	}
+	<div class="bcgr" style="margin: 0 auto;min-height:700px">
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Mail Matrix</p>
+		</div>
+		<div style="padding-top: 80px; padding-bottom: 100px; margin: 0 auto">
+			<table style="text-align: center; margin: 0 auto; width: 900px; height:200px;">
+				<tr style="padding-bottom: 10px">
+					<td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/TargetSetting/Index" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/ts2.png" alt='missing' />
+								<figcaption><strong>Target Setting</strong></figcaption>
+							</figure>
+						</a>
+					</td>
+					<td></td>
+					<td></td>					
+                    <td align="center" style="background: #fff8dc; width: 225px; height: 100px; font-family: Calibri; font-size: 16px; border-radius: 31px">
+						<a href="/AutoMailer/Index" style="text-decoration: none">
+							<figure>
+								<img src="~/Content/bootstrap/img/mailsend2.png" alt='missing' />
+								<figcaption><strong>Lead & SOT Auto mail</strong></figcaption>
+							</figure>
+						</a>
+					</td>					
+														
+				</tr>				
+			</table>
+		</div>
+	</div>
+</body>
+</html>

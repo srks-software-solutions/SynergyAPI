@@ -1,0 +1,48 @@
+﻿@model IEnumerable<SRKSSynergy.Models.MailMasters>
+
+@{
+    ViewBag.Title = "Index";
+    int slno = 1;
+}
+
+<div class="bcgr">
+    <p>
+        @Html.ActionLink("Add New", "AddEmail", new { }, new { @class = "btn btn-primary del", @style = "color:white" })
+    </p>
+    <h2 style="padding-left: 70px;"><span class="label label-warning">Email's List</span></h2>
+
+    <table class="table table-hover table-condensed">
+        <tr style="background: #BBBEBD; padding-bottom: 10px; padding-top: 10px;">
+            <th style="width: auto; text-align: center; font-family: Calibri; font-size: 17px; padding-bottom: 5px; padding-top: 5px">
+                <span style="font-family: Calibri; font-size: 17px; padding-bottom: 10px; padding-top: 10px">Sl No.</span>
+            </th>
+            <th style="width: auto; text-align: center; font-family: Calibri; font-size: 17px; padding-bottom: 5px; padding-top: 5px">
+                <span style="font-family: Calibri; font-size: 17px; padding-bottom: 10px; padding-top: 10px">Email Address</span>
+            </th>
+            <th style="width: auto; text-align: center; font-family: Calibri; font-size: 17px; padding-bottom: 5px; padding-top: 5px">
+                <span style="font-family: Calibri; font-size: 17px; padding-bottom: 10px; padding-top: 10px">Email Type</span>
+            </th>
+            <th style="width: auto; text-align: center">
+                <span style="font-family: Calibri; font-size: 17px; padding-bottom: 10px; padding-top: 10px">Delete</span>
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: auto; text-align: center; font-family: Calibri; font-size: 16px">
+                    @slno
+                </td>
+                <td style="width: auto; text-align: center; font-family: Calibri; font-size: 16px">
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>
+                <td style="width: auto; text-align: center; font-family: Calibri; font-size: 16px">
+                    @Html.DisplayFor(modelItem => item.MailType)
+                </td>
+                <td style="width: auto; text-align: center; font-family: Calibri; font-size: 16px">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MailID }, new { @id = "Deselect", @class = "btn btn-primary del", @style = "color:white" })
+                </td>
+            </tr>
+            slno = slno + 1;
+        }
+    </table>
+</div>

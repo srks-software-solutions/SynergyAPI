@@ -1,0 +1,138 @@
+﻿
+@model SRKSSynergy.Models.MachineInventory
+
+@{
+	ViewBag.Title = "Edit Machine Inventory";
+}
+
+<link href="~/Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/MDB.css" rel="stylesheet" />
+<link href="~/Content/bootstrap/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/bootstrap/js/jquery.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap-datepicker.js"></script>
+<script src="~/Content/bootstrap/js/bootstrap.js"></script>
+<script src="~/Content/bootstrap/js/accounting.js"></script>
+
+<!-- glyphicons help -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+<style>
+	.validation-summary-valid {
+		display: none;
+	}
+</style>
+<div class="bcgr" style="min-height: 590px">
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<div style="background: gray; padding-bottom: 15px">
+			<p class="txtft">Edit Machine Inventory</p>
+		</div>
+@* No Success *@
+		if (TempData["Success"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["Success"]</p>
+		}
+@* Customer Added *@
+		if (TempData["customer"] != null)
+		{
+			<p style="color: red; font-weight: 900; padding-left: 170px">@TempData["customer"]</p>
+		}      
+@*<div class="bcgr">*@ 
+		<div class="row" style="padding-top: 10px">
+			<div class=" row show-grid">
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Product Type</label>
+							<div class="controls">
+								@*@Html.DropDownListFor(m => m.ProductModelID, (SelectList)ViewData["ProductModelID"], "--Select Model--", new { id = "ProductModelID", @required = "required" })*@
+								@Html.DropDownList("ProductModelID", null, "--Select--", new { @required = "required" })
+								@Html.HiddenFor(m =>m.ProductModelID)
+								@Html.HiddenFor(m=>m.MachineInventoryID)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Machine Serial Number</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="brnm" placeholder="Branch Name">*@
+								@Html.TextBoxFor(model => model.MachineSerialNo, new {@style="height:30px", @id = "srlno", @class = "fntst", @placeholder = "Machine Serial No" })
+								@Html.ValidationMessageFor(model => model.MachineSerialNo)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Type</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.Type, new {@style="height:30px", @id = "type", @class = "fntst", @placeholder = "Type" })
+								@Html.ValidationMessageFor(model => model.Type)
+							</div>
+						</div>
+					</div>
+					<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Place Stocked</label>
+							<div class="controls">
+								@*<input type="text" class="fntst" id="banm" placeholder="Bank Name">*@
+								@Html.TextBoxFor(model => model.PlaceStocked, new {@style="height:30px", @id = "placestocked", @class = "fntst", @placeholder = "Place Stocked" })
+								@Html.ValidationMessageFor(model => model.PlaceStocked)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span10 pad">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Remarks</label>
+							<div class="controls">
+								@Html.TextBoxFor(model => model.Remarks, new {@style="height:30px", id = "remarks", @class = "fntst", @placeholder = "Additional Information" })
+								@Html.ValidationMessageFor(model => model.Remarks)
+							</div>
+						</div>
+					</div>
+					@*<div class="span1"></div>
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label fntst">Customer Name</label>
+							<div class="controls">
+								@Html.TextBoxFor(model => model.CustomerName, new { @id = "Customer", @class = "fntst", @placeholder = "Customer Name" })
+								@Html.ValidationMessageFor(model => model.CustomerName)
+							</div>
+						</div>
+					</div>*@
+				</div>
+				<div class="span10 pad ">
+                    <div class="span3 cent" style="padding-left: 2%">
+                        <button class="btn btn-success btn-large glyphicon glyphicon-arrow-left" style="display: inline;">@Html.ActionLink(" Back_to_List", "Index","MachineStock", new { @Style="color:white;text-decoration:none"})</button>
+					</div>
+					<div class="span3 cent" style="padding-left: 20%">
+						@*<input type="submit" name="btnsave" value="Update" class="btn btn-large btn-success" />*@
+                        <button class="btn btn-success btn-large glyphicon glyphicon-open" value="update" type="submit" style="display: inline"> Update</button> 
+
+					</div>
+					<p style="color: red; font-family: Calibri; font-size: 18px; font-weight: 900">
+						@Html.Label("", Convert.ToString((string)ViewBag.Duplicate))
+					</p>
+				</div>
+
+			</div>
+		</div>
+	
+	}
+
+</div>
+@*@section Scripts {
+		@Scripts.Render("~/bundles/jqueryval")
+	}*@
